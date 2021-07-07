@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+  <meta charset='utf-8'>
+  <title>TestNG reports</title>
+
+    <link type="text/css" href="testng-reports1.css" rel="stylesheet" id="ultra" />
+    <link type="text/css" href="testng-reports.css" rel="stylesheet" id="retro" disabled="false"/>
+    <script type="text/javascript" src="jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="testng-reports.js"></script>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type='text/javascript'>
+      google.load('visualization', '1', {packages:['table']});
+      google.setOnLoadCallback(drawTable);
+      var suiteTableInitFunctions = new Array();
+      var suiteTableData = new Array();
+    </script>
+    <!--
+      <script type="text/javascript" src="jquery-ui/js/jquery-ui-1.8.16.custom.min.js"></script>
+     -->
+  </head>
+
+  <body>
+    <div class="top-banner-root">
+      <span class="top-banner-title-font">Test results</span>
+      <button class="button" id="button">Switch Retro Theme</button> <!-- button -->
+      <br/>
+      <span class="top-banner-font-1">1 suite</span>
+    </div> <!-- top-banner-root -->
+    <div class="navigator-root">
+      <div class="navigator-suite-header">
+        <span>All suites</span>
+        <a href="#" class="collapse-all-link" title="Collapse/expand all the suites">
+          <img class="collapse-all-icon" src="collapseall.gif">
+          </img> <!-- collapse-all-icon -->
+        </a> <!-- collapse-all-link -->
+      </div> <!-- navigator-suite-header -->
+      <div class="suite">
+        <div class="rounded-window">
+          <div class="suite-header light-rounded-window-top">
+            <a href="#" class="navigator-link" panel-name="suite-MCMP_Functional_Testing">
+              <span class="suite-name border-skipped">MCMP Functional Testing</span>
+            </a> <!-- navigator-link -->
+          </div> <!-- suite-header light-rounded-window-top -->
+          <div class="navigator-suite-content">
+            <div class="suite-section-title">
+              <span>Info</span>
+            </div> <!-- suite-section-title -->
+            <div class="suite-section-content">
+              <ul>
+                <li>
+                  <a href="#" class="navigator-link " panel-name="test-xml-MCMP_Functional_Testing">
+                    <span>C:\Users\RamaBisht\java-selenium-poc\automacent-fwk-core\src\test\resources\testng.xml</span>
+                  </a> <!-- navigator-link  -->
+                </li>
+                <li>
+                  <a href="#" class="navigator-link " panel-name="testlist-MCMP_Functional_Testing">
+                    <span class="test-stats">2 tests</span>
+                  </a> <!-- navigator-link  -->
+                </li>
+                <li>
+                  <a href="#" class="navigator-link " panel-name="group-MCMP_Functional_Testing">
+                    <span>0 groups</span>
+                  </a> <!-- navigator-link  -->
+                </li>
+                <li>
+                  <a href="#" class="navigator-link " panel-name="times-MCMP_Functional_Testing">
+                    <span>Times</span>
+                  </a> <!-- navigator-link  -->
+                </li>
+                <li>
+                  <a href="#" class="navigator-link " panel-name="reporter-MCMP_Functional_Testing">
+                    <span>Reporter output</span>
+                  </a> <!-- navigator-link  -->
+                </li>
+                <li>
+                  <a href="#" class="navigator-link " panel-name="ignored-methods-MCMP_Functional_Testing">
+                    <span>Ignored methods</span>
+                  </a> <!-- navigator-link  -->
+                </li>
+                <li>
+                  <a href="#" class="navigator-link " panel-name="chronological-MCMP_Functional_Testing">
+                    <span>Chronological view</span>
+                  </a> <!-- navigator-link  -->
+                </li>
+              </ul>
+            </div> <!-- suite-section-content -->
+            <div class="result-section">
+              <div class="suite-section-title">
+                <span>Results</span>
+              </div> <!-- suite-section-title -->
+              <div class="suite-section-content">
+                <ul>
+                  <li>
+                    <span class="method-stats">4 methods,  4 skipped,  </span>
+                  </li>
+                  <li>
+                    <span class="method-list-title skipped">Skipped methods</span>
+                    <span class="show-or-hide-methods skipped">
+                      <a href="#" panel-name="suite-MCMP_Functional_Testing" class="hide-methods skipped suite-MCMP_Functional_Testing"> (hide)</a> <!-- hide-methods skipped suite-MCMP_Functional_Testing -->
+                      <a href="#" panel-name="suite-MCMP_Functional_Testing" class="show-methods skipped suite-MCMP_Functional_Testing"> (show)</a> <!-- show-methods skipped suite-MCMP_Functional_Testing -->
+                    </span>
+                    <div class="method-list-content skipped suite-MCMP_Functional_Testing">
+                      <span>
+                        <img width="3%" src="skipped.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-MCMP_Functional_Testing" title="com.mcmp.tests.LoginTest" hash-for-method="loginTest(uiautomcmpuser@outlook.com, Automcmpuser@000)">loginTest(uiautomcmpuser@outlook.com, Automcmpuser@000)</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="skipped.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-MCMP_Functional_Testing" title="com.mcmp.tests.orderIntegration.vra.e2e.e2eCentOS77CompositeVRA82" hash-for-method="loginTest(uiautomcmpuser@outlook.com, Automcmpuser@000)">loginTest(uiautomcmpuser@outlook.com, Automcmpuser@000)</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="skipped.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-MCMP_Functional_Testing" title="com.mcmp.tests.orderIntegration.vra.e2e.e2eCentOS77CompositeVRA82" hash-for-method="verifyAdditionalParameters">verifyAdditionalParameters</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="skipped.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-MCMP_Functional_Testing" title="com.mcmp.tests.orderIntegration.vra.e2e.e2eCentOS77CompositeVRA82" hash-for-method="verifyMainParameters">verifyMainParameters</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                    </div> <!-- method-list-content skipped suite-MCMP_Functional_Testing -->
+                  </li>
+                </ul>
+              </div> <!-- suite-section-content -->
+            </div> <!-- result-section -->
+          </div> <!-- navigator-suite-content -->
+        </div> <!-- rounded-window -->
+      </div> <!-- suite -->
+    </div> <!-- navigator-root -->
+    <div class="wrapper">
+      <div class="main-panel-root">
+        <div panel-name="suite-MCMP_Functional_Testing" class="panel MCMP_Functional_Testing">
+          <div class="suite-MCMP_Functional_Testing-class-skipped">
+            <div class="main-panel-header rounded-window-top">
+              <img src="skipped.png"/>
+              <span class="class-name">com.mcmp.tests.LoginTest</span>
+            </div> <!-- main-panel-header rounded-window-top -->
+            <div class="main-panel-content rounded-window-bottom">
+              <div class="method">
+                <div class="method-content">
+                  <a name="loginTest(uiautomcmpuser@outlook.com, Automcmpuser@000)">
+                  </a> <!-- loginTest(uiautomcmpuser@outlook.com, Automcmpuser@000) -->
+                  <span class="method-name">loginTest</span>
+                  <span class="parameters">(uiautomcmpuser@outlook.com, Automcmpuser@000)</span>
+                  <div class="stack-trace">com.automacent.fwk.exceptions.StepExecutionException: [@Step check for login errors] Login Error message found - Incorrect IBMid or password. Please try again!
+	at com.automacent.fwk.execution.StepAndActionCompiler.aroundStepCompilerAspect(StepAndActionCompiler.java:119)
+	at com.pom.steps.login.LoginSteps.checkForLoginErrors(LoginSteps.java:46)
+	at com.mcmp.tests.LoginTest.login_aroundBody0(LoginTest.java:28)
+	at com.mcmp.tests.LoginTest$AjcClosure1.run(LoginTest.java:1)
+	at org.aspectj.runtime.reflect.JoinPointImpl.proceed(JoinPointImpl.java:167)
+	at com.automacent.fwk.execution.TestNgCompiler.aroundBeforeCompilerAspect(TestNgCompiler.java:55)
+	at com.mcmp.tests.LoginTest.login(LoginTest.java:25)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:132)
+	at org.testng.internal.MethodInvocationHelper.invokeMethodConsideringTimeout(MethodInvocationHelper.java:61)
+	at org.testng.internal.ConfigInvoker.invokeConfigurationMethod(ConfigInvoker.java:366)
+	at org.testng.internal.ConfigInvoker.invokeConfigurations(ConfigInvoker.java:320)
+	at org.testng.internal.TestMethodWorker.invokeBeforeClassMethods(TestMethodWorker.java:176)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:122)
+	at java.util.ArrayList.forEach(ArrayList.java:1259)
+	at org.testng.TestRunner.privateRun(TestRunner.java:764)
+	at org.testng.TestRunner.run(TestRunner.java:585)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:384)
+	at org.testng.SuiteRunner.access$000(SuiteRunner.java:28)
+	at org.testng.SuiteRunner$SuiteWorker.run(SuiteRunner.java:425)
+	at org.testng.internal.thread.ThreadUtil.lambda$execute$0(ThreadUtil.java:66)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:748)
+Caused by: java.lang.AssertionError: Login Error message found - Incorrect IBMid or password. Please try again!
+	at org.testng.Assert.fail(Assert.java:99)
+	at com.pom.steps.login.LoginSteps.checkForLoginErrors_aroundBody8(LoginSteps.java:51)
+	at com.pom.steps.login.LoginSteps$AjcClosure9.run(LoginSteps.java:1)
+	at org.aspectj.runtime.reflect.JoinPointImpl.proceed(JoinPointImpl.java:167)
+	at com.automacent.fwk.execution.StepAndActionCompiler.aroundStepCompilerAspect(StepAndActionCompiler.java:115)
+	... 27 more
+
+</div> <!-- stack-trace -->
+                  <em>
+(Login user case with username and password.)                  </em>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+            </div> <!-- main-panel-content rounded-window-bottom -->
+          </div> <!-- suite-MCMP_Functional_Testing-class-skipped -->
+          <div class="suite-MCMP_Functional_Testing-class-skipped">
+            <div class="main-panel-header rounded-window-top">
+              <img src="skipped.png"/>
+              <span class="class-name">com.mcmp.tests.orderIntegration.vra.e2e.e2eCentOS77CompositeVRA82</span>
+            </div> <!-- main-panel-header rounded-window-top -->
+            <div class="main-panel-content rounded-window-bottom">
+              <div class="method">
+                <div class="method-content">
+                  <a name="loginTest(uiautomcmpuser@outlook.com, Automcmpuser@000)">
+                  </a> <!-- loginTest(uiautomcmpuser@outlook.com, Automcmpuser@000) -->
+                  <span class="method-name">loginTest</span>
+                  <span class="parameters">(uiautomcmpuser@outlook.com, Automcmpuser@000)</span>
+                  <div class="stack-trace">com.automacent.fwk.exceptions.StepExecutionException: [@Step check for login errors] Login Error message found - Incorrect IBMid or password. Please try again!
+	at com.automacent.fwk.execution.StepAndActionCompiler.aroundStepCompilerAspect(StepAndActionCompiler.java:119)
+	at com.pom.steps.login.LoginSteps.checkForLoginErrors(LoginSteps.java:46)
+	at com.mcmp.tests.LoginTest.login_aroundBody0(LoginTest.java:28)
+	at com.mcmp.tests.LoginTest$AjcClosure1.run(LoginTest.java:1)
+	at org.aspectj.runtime.reflect.JoinPointImpl.proceed(JoinPointImpl.java:167)
+	at com.automacent.fwk.execution.TestNgCompiler.aroundBeforeCompilerAspect(TestNgCompiler.java:55)
+	at com.mcmp.tests.LoginTest.login(LoginTest.java:25)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:132)
+	at org.testng.internal.MethodInvocationHelper.invokeMethodConsideringTimeout(MethodInvocationHelper.java:61)
+	at org.testng.internal.ConfigInvoker.invokeConfigurationMethod(ConfigInvoker.java:366)
+	at org.testng.internal.ConfigInvoker.invokeConfigurations(ConfigInvoker.java:320)
+	at org.testng.internal.TestMethodWorker.invokeBeforeClassMethods(TestMethodWorker.java:176)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:122)
+	at java.util.ArrayList.forEach(ArrayList.java:1259)
+	at org.testng.TestRunner.privateRun(TestRunner.java:764)
+	at org.testng.TestRunner.run(TestRunner.java:585)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:384)
+	at org.testng.SuiteRunner.access$000(SuiteRunner.java:28)
+	at org.testng.SuiteRunner$SuiteWorker.run(SuiteRunner.java:425)
+	at org.testng.internal.thread.ThreadUtil.lambda$execute$0(ThreadUtil.java:66)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:748)
+Caused by: java.lang.AssertionError: Login Error message found - Incorrect IBMid or password. Please try again!
+	at org.testng.Assert.fail(Assert.java:99)
+	at com.pom.steps.login.LoginSteps.checkForLoginErrors_aroundBody8(LoginSteps.java:51)
+	at com.pom.steps.login.LoginSteps$AjcClosure9.run(LoginSteps.java:1)
+	at org.aspectj.runtime.reflect.JoinPointImpl.proceed(JoinPointImpl.java:167)
+	at com.automacent.fwk.execution.StepAndActionCompiler.aroundStepCompilerAspect(StepAndActionCompiler.java:115)
+	... 27 more
+
+</div> <!-- stack-trace -->
+                  <em>
+(Login user case with username and password.)                  </em>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="verifyAdditionalParameters">
+                  </a> <!-- verifyAdditionalParameters -->
+                  <span class="method-name">verifyAdditionalParameters</span>
+                  <div class="stack-trace">com.automacent.fwk.exceptions.StepExecutionException: [@Step check for login errors] Login Error message found - Incorrect IBMid or password. Please try again!
+	at com.automacent.fwk.execution.StepAndActionCompiler.aroundStepCompilerAspect(StepAndActionCompiler.java:119)
+	at com.pom.steps.login.LoginSteps.checkForLoginErrors(LoginSteps.java:46)
+	at com.mcmp.tests.LoginTest.login_aroundBody0(LoginTest.java:28)
+	at com.mcmp.tests.LoginTest$AjcClosure1.run(LoginTest.java:1)
+	at org.aspectj.runtime.reflect.JoinPointImpl.proceed(JoinPointImpl.java:167)
+	at com.automacent.fwk.execution.TestNgCompiler.aroundBeforeCompilerAspect(TestNgCompiler.java:55)
+	at com.mcmp.tests.LoginTest.login(LoginTest.java:25)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:132)
+	at org.testng.internal.MethodInvocationHelper.invokeMethodConsideringTimeout(MethodInvocationHelper.java:61)
+	at org.testng.internal.ConfigInvoker.invokeConfigurationMethod(ConfigInvoker.java:366)
+	at org.testng.internal.ConfigInvoker.invokeConfigurations(ConfigInvoker.java:320)
+	at org.testng.internal.TestMethodWorker.invokeBeforeClassMethods(TestMethodWorker.java:176)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:122)
+	at java.util.ArrayList.forEach(ArrayList.java:1259)
+	at org.testng.TestRunner.privateRun(TestRunner.java:764)
+	at org.testng.TestRunner.run(TestRunner.java:585)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:384)
+	at org.testng.SuiteRunner.access$000(SuiteRunner.java:28)
+	at org.testng.SuiteRunner$SuiteWorker.run(SuiteRunner.java:425)
+	at org.testng.internal.thread.ThreadUtil.lambda$execute$0(ThreadUtil.java:66)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:748)
+Caused by: java.lang.AssertionError: Login Error message found - Incorrect IBMid or password. Please try again!
+	at org.testng.Assert.fail(Assert.java:99)
+	at com.pom.steps.login.LoginSteps.checkForLoginErrors_aroundBody8(LoginSteps.java:51)
+	at com.pom.steps.login.LoginSteps$AjcClosure9.run(LoginSteps.java:1)
+	at org.aspectj.runtime.reflect.JoinPointImpl.proceed(JoinPointImpl.java:167)
+	at com.automacent.fwk.execution.StepAndActionCompiler.aroundStepCompilerAspect(StepAndActionCompiler.java:115)
+	... 27 more
+
+</div> <!-- stack-trace -->
+                  <em>
+(Verify Summary details and Additional Details are listed in review Order page.)                  </em>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="verifyMainParameters">
+                  </a> <!-- verifyMainParameters -->
+                  <span class="method-name">verifyMainParameters</span>
+                  <div class="stack-trace">com.automacent.fwk.exceptions.StepExecutionException: [@Step check for login errors] Login Error message found - Incorrect IBMid or password. Please try again!
+	at com.automacent.fwk.execution.StepAndActionCompiler.aroundStepCompilerAspect(StepAndActionCompiler.java:119)
+	at com.pom.steps.login.LoginSteps.checkForLoginErrors(LoginSteps.java:46)
+	at com.mcmp.tests.LoginTest.login_aroundBody0(LoginTest.java:28)
+	at com.mcmp.tests.LoginTest$AjcClosure1.run(LoginTest.java:1)
+	at org.aspectj.runtime.reflect.JoinPointImpl.proceed(JoinPointImpl.java:167)
+	at com.automacent.fwk.execution.TestNgCompiler.aroundBeforeCompilerAspect(TestNgCompiler.java:55)
+	at com.mcmp.tests.LoginTest.login(LoginTest.java:25)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:132)
+	at org.testng.internal.MethodInvocationHelper.invokeMethodConsideringTimeout(MethodInvocationHelper.java:61)
+	at org.testng.internal.ConfigInvoker.invokeConfigurationMethod(ConfigInvoker.java:366)
+	at org.testng.internal.ConfigInvoker.invokeConfigurations(ConfigInvoker.java:320)
+	at org.testng.internal.TestMethodWorker.invokeBeforeClassMethods(TestMethodWorker.java:176)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:122)
+	at java.util.ArrayList.forEach(ArrayList.java:1259)
+	at org.testng.TestRunner.privateRun(TestRunner.java:764)
+	at org.testng.TestRunner.run(TestRunner.java:585)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:384)
+	at org.testng.SuiteRunner.access$000(SuiteRunner.java:28)
+	at org.testng.SuiteRunner$SuiteWorker.run(SuiteRunner.java:425)
+	at org.testng.internal.thread.ThreadUtil.lambda$execute$0(ThreadUtil.java:66)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:748)
+Caused by: java.lang.AssertionError: Login Error message found - Incorrect IBMid or password. Please try again!
+	at org.testng.Assert.fail(Assert.java:99)
+	at com.pom.steps.login.LoginSteps.checkForLoginErrors_aroundBody8(LoginSteps.java:51)
+	at com.pom.steps.login.LoginSteps$AjcClosure9.run(LoginSteps.java:1)
+	at org.aspectj.runtime.reflect.JoinPointImpl.proceed(JoinPointImpl.java:167)
+	at com.automacent.fwk.execution.StepAndActionCompiler.aroundStepCompilerAspect(StepAndActionCompiler.java:115)
+	... 27 more
+
+</div> <!-- stack-trace -->
+                  <em>
+(Verify fields on Main Parameters page.)                  </em>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+            </div> <!-- main-panel-content rounded-window-bottom -->
+          </div> <!-- suite-MCMP_Functional_Testing-class-skipped -->
+        </div> <!-- panel MCMP_Functional_Testing -->
+        <div panel-name="test-xml-MCMP_Functional_Testing" class="panel">
+          <div class="main-panel-header rounded-window-top">
+            <span class="header-content">C:\Users\RamaBisht\java-selenium-poc\automacent-fwk-core\src\test\resources\testng.xml</span>
+          </div> <!-- main-panel-header rounded-window-top -->
+          <div class="main-panel-content rounded-window-bottom">
+            <pre>
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;!DOCTYPE suite SYSTEM &quot;https://testng.org/testng-1.0.dtd&quot;&gt;
+&lt;suite thread-count=&quot;11&quot; guice-stage=&quot;DEVELOPMENT&quot; verbose=&quot;0&quot; name=&quot;MCMP Functional Testing&quot; parallel=&quot;tests&quot;&gt;
+  &lt;parameter name=&quot;repeatMode&quot; value=&quot;OFF&quot;/&gt;
+  &lt;parameter name=&quot;pageLoadTimeoutInSeconds&quot; value=&quot;900&quot;/&gt;
+  &lt;parameter name=&quot;testDurationInSeconds&quot; value=&quot;0&quot;/&gt;
+  &lt;parameter name=&quot;geckoDriverLocation&quot; value=&quot;&quot;/&gt;
+  &lt;parameter name=&quot;screenshotMode&quot; value=&quot;AFTER_ACTION&quot;/&gt;
+  &lt;parameter name=&quot;delayBetweenIterationInSeconds&quot; value=&quot;0&quot;/&gt;
+  &lt;parameter name=&quot;timeoutInSeconds&quot; value=&quot;10&quot;/&gt;
+  &lt;parameter name=&quot;retryMode&quot; value=&quot;ON&quot;/&gt;
+  &lt;parameter name=&quot;runName&quot; value=&quot;&quot;/&gt;
+  &lt;parameter name=&quot;scriptTimeoutInSeconds&quot; value=&quot;900&quot;/&gt;
+  &lt;parameter name=&quot;browser&quot; value=&quot;CHROME&quot;/&gt;
+  &lt;parameter name=&quot;invocationCount&quot; value=&quot;0&quot;/&gt;
+  &lt;parameter name=&quot;recoveryClasses&quot; value=&quot;&quot;/&gt;
+  &lt;parameter name=&quot;Password&quot; value=&quot;Automcmpuser@000&quot;/&gt;
+  &lt;parameter name=&quot;batchNumber&quot; value=&quot;&quot;/&gt;
+  &lt;parameter name=&quot;debuggerAddress&quot; value=&quot;&quot;/&gt;
+  &lt;parameter name=&quot;screenshotType&quot; value=&quot;BROWSER_SCREENSHOT&quot;/&gt;
+  &lt;parameter name=&quot;chromeDriverLocation&quot; value=&quot;&quot;/&gt;
+  &lt;parameter name=&quot;launcherClients&quot; value=&quot;&quot;/&gt;
+  &lt;parameter name=&quot;screenshotModeForIteration&quot; value=&quot;LAST_ITERATION&quot;/&gt;
+  &lt;parameter name=&quot;ieDriverLocation&quot; value=&quot;&quot;/&gt;
+  &lt;parameter name=&quot;baseUrl&quot; value=&quot;https://mcmp-stagedal-master-autoui.multicloud-ibm.com&quot;/&gt;
+  &lt;parameter name=&quot;Username&quot; value=&quot;uiautomcmpuser@outlook.com&quot;/&gt;
+  &lt;parameter name=&quot;slowdownDurationInSeconds&quot; value=&quot;0&quot;/&gt;
+  &lt;parameter name=&quot;socketTimeoutInSeconds&quot; value=&quot;300&quot;/&gt;
+  &lt;test thread-count=&quot;11&quot; verbose=&quot;2&quot; name=&quot;com.mcmp.tests.orderIntegration.vra.e2e.e2eCentOS77CompositeVRA82&quot; parallel=&quot;tests&quot;&gt;
+    &lt;classes&gt;
+      &lt;class name=&quot;com.mcmp.tests.orderIntegration.vra.e2e.e2eCentOS77CompositeVRA82&quot;/&gt;
+    &lt;/classes&gt;
+  &lt;/test&gt; &lt;!-- com.mcmp.tests.orderIntegration.vra.e2e.e2eCentOS77CompositeVRA82 --&gt;
+  &lt;test thread-count=&quot;11&quot; verbose=&quot;2&quot; name=&quot;com.mcmp.tests.LoginTest&quot; parallel=&quot;tests&quot;&gt;
+    &lt;classes&gt;
+      &lt;class name=&quot;com.mcmp.tests.LoginTest&quot;/&gt;
+    &lt;/classes&gt;
+  &lt;/test&gt; &lt;!-- com.mcmp.tests.LoginTest --&gt;
+&lt;/suite&gt; &lt;!-- MCMP Functional Testing --&gt;
+            </pre>
+          </div> <!-- main-panel-content rounded-window-bottom -->
+        </div> <!-- panel -->
+        <div panel-name="testlist-MCMP_Functional_Testing" class="panel">
+          <div class="main-panel-header rounded-window-top">
+            <span class="header-content">Tests for MCMP Functional Testing</span>
+          </div> <!-- main-panel-header rounded-window-top -->
+          <div class="main-panel-content rounded-window-bottom">
+            <ul>
+              <li>
+                <span class="test-name">com.mcmp.tests.orderIntegration.vra.e2e.e2eCentOS77CompositeVRA82 (1 class)</span>
+              </li>
+              <li>
+                <span class="test-name">com.mcmp.tests.LoginTest (1 class)</span>
+              </li>
+            </ul>
+          </div> <!-- main-panel-content rounded-window-bottom -->
+        </div> <!-- panel -->
+        <div panel-name="group-MCMP_Functional_Testing" class="panel">
+          <div class="main-panel-header rounded-window-top">
+            <span class="header-content">Groups for MCMP Functional Testing</span>
+          </div> <!-- main-panel-header rounded-window-top -->
+          <div class="main-panel-content rounded-window-bottom">
+          </div> <!-- main-panel-content rounded-window-bottom -->
+        </div> <!-- panel -->
+        <div panel-name="times-MCMP_Functional_Testing" class="panel">
+          <div class="main-panel-header rounded-window-top">
+            <span class="header-content">Times for MCMP Functional Testing</span>
+          </div> <!-- main-panel-header rounded-window-top -->
+          <div class="main-panel-content rounded-window-bottom">
+            <div class="times-div">
+              <script type="text/javascript">
+suiteTableInitFunctions.push('tableData_MCMP_Functional_Testing');
+function tableData_MCMP_Functional_Testing() {
+var data = new google.visualization.DataTable();
+data.addColumn('number', 'Number');
+data.addColumn('string', 'Method');
+data.addColumn('string', 'Class');
+data.addColumn('number', 'Time (ms)');
+data.addRows(4);
+data.setCell(0, 0, 0)
+data.setCell(0, 1, 'loginTest')
+data.setCell(0, 2, 'com.mcmp.tests.LoginTest')
+data.setCell(0, 3, 0);
+data.setCell(1, 0, 1)
+data.setCell(1, 1, 'loginTest')
+data.setCell(1, 2, 'com.mcmp.tests.orderIntegration.vra.e2e.e2eCentOS77CompositeVRA82')
+data.setCell(1, 3, 0);
+data.setCell(2, 0, 2)
+data.setCell(2, 1, 'verifyAdditionalParameters')
+data.setCell(2, 2, 'com.mcmp.tests.orderIntegration.vra.e2e.e2eCentOS77CompositeVRA82')
+data.setCell(2, 3, 0);
+data.setCell(3, 0, 3)
+data.setCell(3, 1, 'verifyMainParameters')
+data.setCell(3, 2, 'com.mcmp.tests.orderIntegration.vra.e2e.e2eCentOS77CompositeVRA82')
+data.setCell(3, 3, 0);
+window.suiteTableData['MCMP_Functional_Testing']= { tableData: data, tableDiv: 'times-div-MCMP_Functional_Testing'}
+return data;
+}
+              </script>
+              <span class="suite-total-time">Total running time: 31 seconds</span>
+              <div id="times-div-MCMP_Functional_Testing">
+              </div> <!-- times-div-MCMP_Functional_Testing -->
+            </div> <!-- times-div -->
+          </div> <!-- main-panel-content rounded-window-bottom -->
+        </div> <!-- panel -->
+        <div panel-name="reporter-MCMP_Functional_Testing" class="panel">
+          <div class="main-panel-header rounded-window-top">
+            <span class="header-content">Reporter output for MCMP Functional Testing</span>
+          </div> <!-- main-panel-header rounded-window-top -->
+          <div class="main-panel-content rounded-window-bottom">
+            <div class="reporter-method-div">
+              <span class="reporter-method-name">loginTest(uiautomcmpuser@outlook.com, Automcmpuser@000)</span>
+              <div class="reporter-method-output-div">
+                <span class="reporter-method-output"><div style='color: #D20000; font-size: small; border-botton: none;'>2021-Jul-05 14:57:59,356 : &nbsp;Execution skipped for TEST method loginTest<br/>[@Step check for login errors] Login Error message found - Incorrect IBMid or password. Please try again!</div></span>
+              </div> <!-- reporter-method-output-div -->
+            </div> <!-- reporter-method-div -->
+            <div class="reporter-method-div">
+              <span class="reporter-method-name">loginTest(uiautomcmpuser@outlook.com, Automcmpuser@000)</span>
+              <div class="reporter-method-output-div">
+                <span class="reporter-method-output"><div style='color: #D20000; font-size: small; border-botton: none;'>2021-Jul-05 14:57:59,806 : &nbsp;Execution skipped for TEST method loginTest<br/>[@Step check for login errors] Login Error message found - Incorrect IBMid or password. Please try again!</div></span>
+              </div> <!-- reporter-method-output-div -->
+            </div> <!-- reporter-method-div -->
+            <div class="reporter-method-div">
+              <span class="reporter-method-name">verifyAdditionalParameters</span>
+              <div class="reporter-method-output-div">
+                <span class="reporter-method-output"><div style='color: #D20000; font-size: small; border-botton: none;'>2021-Jul-05 14:58:00,620 : &nbsp;Execution skipped for TEST method verifyAdditionalParameters<br/>[@Step check for login errors] Login Error message found - Incorrect IBMid or password. Please try again!</div></span>
+              </div> <!-- reporter-method-output-div -->
+            </div> <!-- reporter-method-div -->
+            <div class="reporter-method-div">
+              <span class="reporter-method-name">verifyMainParameters</span>
+              <div class="reporter-method-output-div">
+                <span class="reporter-method-output"><div style='color: #D20000; font-size: small; border-botton: none;'>2021-Jul-05 14:58:01,337 : &nbsp;Execution skipped for TEST method verifyMainParameters<br/>[@Step check for login errors] Login Error message found - Incorrect IBMid or password. Please try again!</div></span>
+              </div> <!-- reporter-method-output-div -->
+            </div> <!-- reporter-method-div -->
+          </div> <!-- main-panel-content rounded-window-bottom -->
+        </div> <!-- panel -->
+        <div panel-name="ignored-methods-MCMP_Functional_Testing" class="panel">
+          <div class="main-panel-header rounded-window-top">
+            <span class="header-content">0 ignored methods</span>
+          </div> <!-- main-panel-header rounded-window-top -->
+          <div class="main-panel-content rounded-window-bottom">
+          </div> <!-- main-panel-content rounded-window-bottom -->
+        </div> <!-- panel -->
+        <div panel-name="chronological-MCMP_Functional_Testing" class="panel">
+          <div class="main-panel-header rounded-window-top">
+            <span class="header-content">Methods in chronological order</span>
+          </div> <!-- main-panel-header rounded-window-top -->
+          <div class="main-panel-content rounded-window-bottom">
+            <div class="chronological-class">
+              <div class="chronological-class-name">com.mcmp.tests.LoginTest</div> <!-- chronological-class-name -->
+              <div class="configuration-suite before">
+                <span class="method-name">automacentInternalSetLauncherClients(, , )</span>
+                <span class="method-start">0 ms</span>
+              </div> <!-- configuration-suite before -->
+              <div class="configuration-suite before">
+                <span class="method-name">automacentInternalSetDriverParameters(, , , 900, 900, 300)</span>
+                <span class="method-start">36 ms</span>
+              </div> <!-- configuration-suite before -->
+            </div> <!-- chronological-class -->
+            <div class="chronological-class">
+              <div class="chronological-class-name">com.mcmp.tests.orderIntegration.vra.e2e.e2eCentOS77CompositeVRA82</div> <!-- chronological-class-name -->
+              <div class="configuration-test before">
+                <span class="method-name">automacentInternalSetParameters(OFF, 0, 0, 0, 10, 0, ON, , org.testng.TestRunner@359810b2)</span>
+                <span class="method-start">70 ms</span>
+              </div> <!-- configuration-test before -->
+            </div> <!-- chronological-class -->
+            <div class="chronological-class">
+              <div class="chronological-class-name">com.mcmp.tests.LoginTest</div> <!-- chronological-class-name -->
+              <div class="configuration-test before">
+                <span class="method-name">automacentInternalSetParameters(OFF, 0, 0, 0, 10, 0, ON, , org.testng.TestRunner@1f518e29)</span>
+                <span class="method-start">70 ms</span>
+              </div> <!-- configuration-test before -->
+            </div> <!-- chronological-class -->
+            <div class="chronological-class">
+              <div class="chronological-class-name">com.mcmp.tests.orderIntegration.vra.e2e.e2eCentOS77CompositeVRA82</div> <!-- chronological-class-name -->
+              <div class="configuration-test before">
+                <span class="method-name">automacentInternalSetWebTestParameters(Google Chrome, , BROWSER_SCREENSHOT, AFTER_ACTION, LAST_ITERATION, https://mcmp-stagedal-master-auto...)</span>
+                <span class="method-start">83 ms</span>
+              </div> <!-- configuration-test before -->
+            </div> <!-- chronological-class -->
+            <div class="chronological-class">
+              <div class="chronological-class-name">com.mcmp.tests.LoginTest</div> <!-- chronological-class-name -->
+              <div class="configuration-test before">
+                <span class="method-name">automacentInternalSetWebTestParameters(Google Chrome, , BROWSER_SCREENSHOT, AFTER_ACTION, LAST_ITERATION, https://mcmp-stagedal-master-auto...)</span>
+                <span class="method-start">83 ms</span>
+              </div> <!-- configuration-test before -->
+            </div> <!-- chronological-class -->
+            <div class="chronological-class">
+              <div class="chronological-class-name">com.mcmp.tests.orderIntegration.vra.e2e.e2eCentOS77CompositeVRA82</div> <!-- chronological-class-name -->
+              <div class="configuration-class before">
+                <span class="method-name">automacentInternalSetParameters(OFF, 0, 0, 0, 10, 0, ON, , org.testng.TestRunner@359810b2)</span>
+                <span class="method-start">112 ms</span>
+              </div> <!-- configuration-class before -->
+            </div> <!-- chronological-class -->
+            <div class="chronological-class">
+              <div class="chronological-class-name">com.mcmp.tests.LoginTest</div> <!-- chronological-class-name -->
+              <div class="configuration-class before">
+                <span class="method-name">automacentInternalSetParameters(OFF, 0, 0, 0, 10, 0, ON, , org.testng.TestRunner@1f518e29)</span>
+                <span class="method-start">112 ms</span>
+              </div> <!-- configuration-class before -->
+            </div> <!-- chronological-class -->
+            <div class="chronological-class">
+              <div class="chronological-class-name">com.mcmp.tests.orderIntegration.vra.e2e.e2eCentOS77CompositeVRA82</div> <!-- chronological-class-name -->
+              <div class="configuration-class before">
+                <span class="method-name">setupBrowserAndLoadUrl</span>
+                <span class="method-start">118 ms</span>
+              </div> <!-- configuration-class before -->
+            </div> <!-- chronological-class -->
+            <div class="chronological-class">
+              <div class="chronological-class-name">com.mcmp.tests.LoginTest</div> <!-- chronological-class-name -->
+              <div class="configuration-class before">
+                <span class="method-name">setupBrowserAndLoadUrl</span>
+                <span class="method-start">118 ms</span>
+              </div> <!-- configuration-class before -->
+              <div class="configuration-class before">
+                <img src="failed.png">
+                </img>
+                <span class="method-name">login(uiautomcmpuser@outlook.com, Automcmpuser@000)</span>
+                <span class="method-start">11449 ms</span>
+              </div> <!-- configuration-class before -->
+            </div> <!-- chronological-class -->
+            <div class="chronological-class">
+              <div class="chronological-class-name">com.mcmp.tests.orderIntegration.vra.e2e.e2eCentOS77CompositeVRA82</div> <!-- chronological-class-name -->
+              <div class="configuration-class before">
+                <img src="failed.png">
+                </img>
+                <span class="method-name">login(uiautomcmpuser@outlook.com, Automcmpuser@000)</span>
+                <span class="method-start">11469 ms</span>
+              </div> <!-- configuration-class before -->
+            </div> <!-- chronological-class -->
+            <div class="chronological-class">
+              <div class="chronological-class-name">com.mcmp.tests.LoginTest</div> <!-- chronological-class-name -->
+              <div class="test-method">
+                <span class="method-name">loginTest(uiautomcmpuser@outlook.com, Automcmpuser@000)</span>
+                <span class="method-start">27155 ms</span>
+              </div> <!-- test-method -->
+            </div> <!-- chronological-class -->
+            <div class="chronological-class">
+              <div class="chronological-class-name">com.mcmp.tests.orderIntegration.vra.e2e.e2eCentOS77CompositeVRA82</div> <!-- chronological-class-name -->
+              <div class="configuration-class before">
+                <span class="method-name">verifyLaunchpadPage</span>
+                <span class="method-start">27175 ms</span>
+              </div> <!-- configuration-class before -->
+            </div> <!-- chronological-class -->
+            <div class="chronological-class">
+              <div class="chronological-class-name">com.mcmp.tests.LoginTest</div> <!-- chronological-class-name -->
+              <div class="configuration-method after">
+                <span class="method-name">logout</span>
+                <span class="method-start">27438 ms</span>
+              </div> <!-- configuration-method after -->
+            </div> <!-- chronological-class -->
+            <div class="chronological-class">
+              <div class="chronological-class-name">com.mcmp.tests.orderIntegration.vra.e2e.e2eCentOS77CompositeVRA82</div> <!-- chronological-class-name -->
+              <div class="test-method">
+                <span class="method-name">loginTest(uiautomcmpuser@outlook.com, Automcmpuser@000)</span>
+                <span class="method-start">27529 ms</span>
+              </div> <!-- test-method -->
+            </div> <!-- chronological-class -->
+            <div class="chronological-class">
+              <div class="chronological-class-name">com.mcmp.tests.LoginTest</div> <!-- chronological-class-name -->
+              <div class="configuration-class after">
+                <span class="method-name">quitBrowser</span>
+                <span class="method-start">27693 ms</span>
+              </div> <!-- configuration-class after -->
+            </div> <!-- chronological-class -->
+            <div class="chronological-class">
+              <div class="chronological-class-name">com.mcmp.tests.orderIntegration.vra.e2e.e2eCentOS77CompositeVRA82</div> <!-- chronological-class-name -->
+              <div class="configuration-method after">
+                <span class="method-name">logout</span>
+                <span class="method-start">27886 ms</span>
+              </div> <!-- configuration-method after -->
+              <div class="test-method">
+                <span class="method-name">verifyAdditionalParameters</span>
+                <span class="method-start">28343 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method after">
+                <span class="method-name">logout</span>
+                <span class="method-start">28699 ms</span>
+              </div> <!-- configuration-method after -->
+              <div class="test-method">
+                <span class="method-name">verifyMainParameters</span>
+                <span class="method-start">29057 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method after">
+                <span class="method-name">logout</span>
+                <span class="method-start">29416 ms</span>
+              </div> <!-- configuration-method after -->
+              <div class="configuration-class after">
+                <span class="method-name">logoutFromApplication</span>
+                <span class="method-start">29769 ms</span>
+              </div> <!-- configuration-class after -->
+              <div class="configuration-class after">
+                <span class="method-name">quitBrowser</span>
+                <span class="method-start">30125 ms</span>
+              </div> <!-- configuration-class after -->
+          </div> <!-- main-panel-content rounded-window-bottom -->
+        </div> <!-- panel -->
+      </div> <!-- main-panel-root -->
+    </div> <!-- wrapper -->
+  </body>
+<script type="text/javascript" src="testng-reports2.js"></script>
+</html>

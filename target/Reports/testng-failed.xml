@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite thread-count="11" guice-stage="DEVELOPMENT" verbose="0" name="Failed suite [MCMP Functional Testing]" parallel="tests">
+  <parameter name="repeatMode" value="OFF"/>
+  <parameter name="pageLoadTimeoutInSeconds" value="900"/>
+  <parameter name="testDurationInSeconds" value="0"/>
+  <parameter name="geckoDriverLocation" value=""/>
+  <parameter name="screenshotMode" value="AFTER_ACTION"/>
+  <parameter name="delayBetweenIterationInSeconds" value="0"/>
+  <parameter name="timeoutInSeconds" value="10"/>
+  <parameter name="retryMode" value="ON"/>
+  <parameter name="runName" value=""/>
+  <parameter name="scriptTimeoutInSeconds" value="900"/>
+  <parameter name="browser" value="CHROME"/>
+  <parameter name="invocationCount" value="0"/>
+  <parameter name="recoveryClasses" value=""/>
+  <parameter name="Password" value="Automcmpuser@000"/>
+  <parameter name="batchNumber" value=""/>
+  <parameter name="debuggerAddress" value=""/>
+  <parameter name="screenshotType" value="BROWSER_SCREENSHOT"/>
+  <parameter name="chromeDriverLocation" value=""/>
+  <parameter name="launcherClients" value=""/>
+  <parameter name="screenshotModeForIteration" value="LAST_ITERATION"/>
+  <parameter name="ieDriverLocation" value=""/>
+  <parameter name="baseUrl" value="https://mcmp-stagedal-master-autoui.multicloud-ibm.com"/>
+  <parameter name="Username" value="uiautomcmpuser@outlook.com"/>
+  <parameter name="slowdownDurationInSeconds" value="0"/>
+  <parameter name="socketTimeoutInSeconds" value="300"/>
+  <test thread-count="11" verbose="0" name="com.mcmp.tests.LoginTest(failed)" parallel="tests">
+    <classes>
+      <class name="com.mcmp.tests.LoginTest">
+        <methods>
+          <include name="automacentInternalSetWebTestParameters"/>
+          <include name="automacentInternalSetDriverParameters"/>
+          <include name="automacentInternalSetLauncherClients"/>
+          <include name="logout"/>
+          <include name="login"/>
+          <include name="quitBrowser"/>
+          <include name="automacentInternalSetParameters"/>
+          <include name="setupBrowserAndLoadUrl"/>
+          <include name="loginTest"/>
+        </methods>
+      </class> <!-- com.mcmp.tests.LoginTest -->
+    </classes>
+  </test> <!-- com.mcmp.tests.LoginTest(failed) -->
+  <test thread-count="11" verbose="0" name="com.mcmp.tests.orderIntegration.vra.e2e.e2eCentOS77CompositeVRA82(failed)" parallel="tests">
+    <classes>
+      <class name="com.mcmp.tests.orderIntegration.vra.e2e.e2eCentOS77CompositeVRA82">
+        <methods>
+          <include name="automacentInternalSetWebTestParameters"/>
+          <include name="automacentInternalSetDriverParameters"/>
+          <include name="verifyMainParameters"/>
+          <include name="logoutFromApplication"/>
+          <include name="automacentInternalSetParameters"/>
+          <include name="setupBrowserAndLoadUrl"/>
+          <include name="verifyLaunchpadPage"/>
+          <include name="automacentInternalSetLauncherClients"/>
+          <include name="logout"/>
+          <include name="login"/>
+          <include name="verifyAdditionalParameters"/>
+          <include name="quitBrowser"/>
+          <include name="loginTest"/>
+        </methods>
+      </class> <!-- com.mcmp.tests.orderIntegration.vra.e2e.e2eCentOS77CompositeVRA82 -->
+    </classes>
+  </test> <!-- com.mcmp.tests.orderIntegration.vra.e2e.e2eCentOS77CompositeVRA82(failed) -->
+</suite> <!-- Failed suite [MCMP Functional Testing] -->

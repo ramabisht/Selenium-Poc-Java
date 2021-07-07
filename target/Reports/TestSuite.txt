@@ -1,0 +1,16 @@
+-------------------------------------------------------------------------------
+Test set: TestSuite
+-------------------------------------------------------------------------------
+Tests run: 8, Failures: 2, Errors: 0, Skipped: 6, Time elapsed: 33.26 sec <<< FAILURE! - in TestSuite
+login(com.mcmp.tests.LoginTest)  Time elapsed: 28.771 sec  <<< FAILURE!
+com.automacent.fwk.exceptions.StepExecutionException: [@Step check for login errors] Login Error message found - Incorrect IBMid or password. Please try again!
+	at com.mcmp.tests.LoginTest.login_aroundBody0(LoginTest.java:28)
+	at com.mcmp.tests.LoginTest.login(LoginTest.java:25)
+Caused by: java.lang.AssertionError: Login Error message found - Incorrect IBMid or password. Please try again!
+	at com.mcmp.tests.LoginTest.login_aroundBody0(LoginTest.java:28)
+	at com.mcmp.tests.LoginTest.login(LoginTest.java:25)
+
+login(com.mcmp.tests.orderIntegration.vra.e2e.e2eCentOS77CompositeVRA82)  Time elapsed: 28.798 sec  <<< FAILURE!
+com.automacent.fwk.exceptions.StepExecutionException: [@Step check for login errors] Login Error message found - Incorrect IBMid or password. Please try again!
+Caused by: java.lang.AssertionError: Login Error message found - Incorrect IBMid or password. Please try again!
+
