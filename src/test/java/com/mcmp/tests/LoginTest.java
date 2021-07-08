@@ -2,6 +2,8 @@ package com.mcmp.tests;
 
 
 import com.automacent.fwk.annotations.Repeat;
+import com.automacent.fwk.annotations.Step;
+import com.pom.steps.home.HomePageSteps;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
 import org.testng.annotations.*;
@@ -14,26 +16,31 @@ public class LoginTest extends BaseTest {
     @Steps
     private LoginSteps loginSteps;
 
-    @BeforeClass
+    @Steps
+    private HomePageSteps homePageSteps;
+
+    //@BeforeClass
+    @BeforeClass(alwaysRun = true)
     @Parameters({ "Username", "Password" })
     public void login(String Username, String Password) {
         loginSteps.confirmLoginPageIsLoaded();
         loginSteps.performLogin(Username, Password);
         loginSteps.checkForLoginErrors();
         loginSteps.acceptPrivacy();
-        loginSteps.checkWhetherHomePageIsLoaded();
+        homePageSteps.confirmHomePageIsLoaded();
     }
 
     @Test (priority = 0, description="Login user case with username and password.", testName = "loginTest")
+
     @Severity(SeverityLevel.BLOCKER)
     @Parameters({ "Username", "Password" })
-    @Repeat
+    //@Repeat
     public void loginTest(String Username, String Password){
-        loginSteps.checkWhetherHomePageIsLoaded();
+        System.out.println("login invokes");
     }
 
     //We can invoke few cleaning up methods and activities here
-    @AfterClass
+    @AfterMethod(alwaysRun = true)
     public void logout() {
         //loginSteps.performsLogout();
     }

@@ -1,9 +1,7 @@
 package com.pom.steps.login;
-
-
 import java.util.Date;
 
-import com.automacent.fwk.annotations.Steps;
+import com.automacent.fwk.core.WebTestSteps;
 import org.testng.Assert;
 import com.automacent.fwk.annotations.Pages;
 import com.automacent.fwk.annotations.Step;
@@ -11,9 +9,8 @@ import com.automacent.fwk.core.BaseTest;
 import com.automacent.fwk.reporting.Logger;
 import com.automacent.fwk.utils.ThreadUtils;
 import com.pom.pages.login.LoginPage;
-import com.pom.steps.AbstractHomeSteps;
 
-public final class LoginSteps extends AbstractHomeSteps {
+public final class LoginSteps extends WebTestSteps {
 
     private static Logger _logger = Logger.getLogger(LoginSteps.class);
 
@@ -100,12 +97,6 @@ public final class LoginSteps extends AbstractHomeSteps {
         }
     }
 */
-
-    @Step
-    public void checkWhetherHomePageIsLoaded() {
-        homePage.pageValidation().validate();
-    }
-
 
     //Need to add code for performing the logout
     /*

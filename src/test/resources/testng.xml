@@ -4,20 +4,15 @@
 <suite name="MCMP Functional Testing" parallel="tests" thread-count="11">
     <!-- Common to all tests -->
     <!-- Scope: suite -->
-    <parameter name="launcherClients" value="com.fwk.restclients.SPARC3RestClient" />
-    <parameter name="runName" value="" />
-    <parameter name="batchNumber" value="" />
-
-    <!-- scope: test -->
     <parameter name="retryMode" value="ON" />
-    <parameter name="recoveryClasses" value="com.mcmp.tests.recovery.GeneralRecoverySteps" />
-    <parameter name="timeoutInSeconds" value="60" />
-    <parameter name="slowdownDurationInSeconds" value="2" />
+    <parameter name="timeoutInSeconds" value="10" />
+    <!--
+    <parameter name="slowdownDurationInSeconds" value="1" />
     <parameter name="repeatMode" value="INVOCATION_COUNT" />
     <parameter name="testDurationInSeconds" value="900" />
-    <parameter name="invocationCount" value="5" />
+    <parameter name="invocationCount" value="0" />
     <parameter name="delayBetweenIterationInSeconds" value="10" />
-    <parameter name="debuggerAddress" value=""/>
+    <parameter name="debuggerAddress" value=""/> -->
 
     <!-- Selenium based tests -->
     <!-- Scope: suite -->
@@ -30,8 +25,6 @@
     <parameter name="scriptTimeoutInSeconds" value="900" />
     <parameter name="pageLoadTimeoutInSeconds" value="900" />
     <parameter name="socketTimeoutInSeconds" value="300" />
-    <parameter name="runInHeadlessMode" value="false" />
-    <parameter name="enableHarCollection" value="true" />
 
     <!-- scope: test -->
     <parameter name="screenshotType" value="BROWSER_SCREENSHOT" />
@@ -49,9 +42,14 @@
     <parameter name="Password" value="Automcmpuser@00" />
 
     <!-- Test configuration below -->
+    <test verbose="2" name="com.mcmp.tests.orderIntegration.vra.e2e.e2eCentOS77CompositeVRA82" enabled="true">
+        <classes>
+            <class name="com.mcmp.tests.orderIntegration.vra.e2e.e2eCentOS77CompositeVRA82"/>
+        </classes>
+    </test>
     <test verbose="2" name="com.mcmp.tests.LoginTest" enabled="true">
         <classes>
-            <class name="com.mcmp.tests.LoginTest" />
+          <class name="com.mcmp.tests.LoginTest" />
         </classes>
     </test>
 </suite>
