@@ -25,6 +25,8 @@
     <parameter name="scriptTimeoutInSeconds" value="900" />
     <parameter name="pageLoadTimeoutInSeconds" value="900" />
     <parameter name="socketTimeoutInSeconds" value="300" />
+    <parameter name="runInHeadlessMode" value="true" />
+    <parameter name="enableHarCollection" value="false" />
 
     <!-- scope: test -->
     <parameter name="screenshotType" value="BROWSER_SCREENSHOT" />
