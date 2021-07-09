@@ -519,6 +519,7 @@
                                         <versionRange>[1.8,)</versionRange>
                                         <goals>
                                             <goal>compile</goal>
+                                            <goal>test-compile</goal>
                                         </goals>
                                     </pluginExecutionFilter>
                                     <action>

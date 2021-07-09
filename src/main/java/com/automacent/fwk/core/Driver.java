@@ -380,11 +380,11 @@ public class Driver {
                     browserMobProxyServer = new BrowserMobProxyServer();
                     browserMobProxyServer.setTrustAllServers(true);
                     browserMobProxyServer.start(0);
-                    browserMobProxyServer.enableHarCaptureTypes(CaptureType.REQUEST_CONTENT, CaptureType.RESPONSE_CONTENT);
+                    //browserMobProxyServer.enableHarCaptureTypes(CaptureType.REQUEST_CONTENT, CaptureType.RESPONSE_CONTENT);
                     seleniumProxy = ClientUtil.createSeleniumProxy(browserMobProxyServer);
                     String hostIp = Inet4Address.getLocalHost().getHostAddress();
-                    seleniumProxy.setHttpProxy(hostIp + ":" + browserMobProxyServer.getPort());
-                    seleniumProxy.setSslProxy(hostIp + ":" + browserMobProxyServer.getPort());
+                    //seleniumProxy.setHttpProxy(hostIp + ":" + browserMobProxyServer.getPort());
+                   // seleniumProxy.setSslProxy(hostIp + ":" + browserMobProxyServer.getPort());
                     capabilities.setCapability(CapabilityType.PROXY, seleniumProxy);
                     _logger.info("Setting Browser proxy server to :" + browserMobProxyServer.toString() + " at port:" + browserMobProxyServer.getPort());
                     _logger.info("Setting Selenium proxy server to :" + seleniumProxy.toString());

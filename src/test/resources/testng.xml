@@ -3,16 +3,22 @@
 
 <suite name="MCMP Functional Testing" parallel="tests" thread-count="11">
     <!-- Common to all tests -->
+
+    <parameter name="launcherClients" value="" />
+    <parameter name="runName" value="" />
+    <parameter name="batchNumber" value="" />
+
+
     <!-- Scope: suite -->
     <parameter name="retryMode" value="ON" />
     <parameter name="timeoutInSeconds" value="10" />
-    <!--
+    <parameter name="recoveryClasses" value="" />
     <parameter name="slowdownDurationInSeconds" value="1" />
     <parameter name="repeatMode" value="INVOCATION_COUNT" />
     <parameter name="testDurationInSeconds" value="900" />
     <parameter name="invocationCount" value="0" />
     <parameter name="delayBetweenIterationInSeconds" value="10" />
-    <parameter name="debuggerAddress" value=""/> -->
+    <parameter name="debuggerAddress" value=""/>
 
     <!-- Selenium based tests -->
     <!-- Scope: suite -->
@@ -25,8 +31,8 @@
     <parameter name="scriptTimeoutInSeconds" value="900" />
     <parameter name="pageLoadTimeoutInSeconds" value="900" />
     <parameter name="socketTimeoutInSeconds" value="300" />
-    <parameter name="runInHeadlessMode" value="true" />
-    <parameter name="enableHarCollection" value="false" />
+    <parameter name="runInHeadlessMode" value="false" />
+    <parameter name="enableHarCollection" value="true" />
 
     <!-- scope: test -->
     <parameter name="screenshotType" value="BROWSER_SCREENSHOT" />
@@ -44,7 +50,7 @@
     <parameter name="Password" value="Automcmpuser@00" />
 
     <!-- Test configuration below -->
-    <test verbose="2" name="com.mcmp.tests.orderIntegration.vra.e2e.e2eCentOS77CompositeVRA82" enabled="true">
+    <test verbose="2" name="com.mcmp.tests.orderIntegration.vra.e2e.e2eCentOS77CompositeVRA82" enabled="false">
         <classes>
             <class name="com.mcmp.tests.orderIntegration.vra.e2e.e2eCentOS77CompositeVRA82"/>
         </classes>
