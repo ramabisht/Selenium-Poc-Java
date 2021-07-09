@@ -380,14 +380,14 @@ public class Driver {
                     browserMobProxyServer = new BrowserMobProxyServer();
                     browserMobProxyServer.setTrustAllServers(true);
                     browserMobProxyServer.start(0);
-                    //browserMobProxyServer.enableHarCaptureTypes(CaptureType.REQUEST_CONTENT, CaptureType.RESPONSE_CONTENT);
+                    browserMobProxyServer.enableHarCaptureTypes(CaptureType.REQUEST_CONTENT, CaptureType.RESPONSE_CONTENT);
                     seleniumProxy = ClientUtil.createSeleniumProxy(browserMobProxyServer);
                     String hostIp = Inet4Address.getLocalHost().getHostAddress();
-                    //seleniumProxy.setHttpProxy(hostIp + ":" + browserMobProxyServer.getPort());
-                   // seleniumProxy.setSslProxy(hostIp + ":" + browserMobProxyServer.getPort());
+                    seleniumProxy.setHttpProxy(hostIp + ":" + browserMobProxyServer.getPort());
+                    seleniumProxy.setSslProxy(hostIp + ":" + browserMobProxyServer.getPort());
                     capabilities.setCapability(CapabilityType.PROXY, seleniumProxy);
                     _logger.info("Setting Browser proxy server to :" + browserMobProxyServer.toString() + " at port:" + browserMobProxyServer.getPort());
-                    _logger.info("Setting Selenium proxy server to :" + seleniumProxy.toString());
+                   _logger.info("Setting Selenium proxy server to :" + seleniumProxy.toString());
                 } catch (Exception ex) {
                     _logger.error("Setting up browser proxy failed " + ex);
                 }
@@ -425,6 +425,8 @@ public class Driver {
                     chromeOptions.addArguments("--no-sandbox");
                     chromeOptions.addArguments("--disable-dev-shm-usage");
                     chromeOptions.addArguments("--safebrowsing-disable-download-protection");
+                    chromeOptions.addArguments(" --ignore-certificate-errors");
+
                     if (runInHeadlessMode) {
                         _logger.info("Setting headless mode --headless");
                         chromeOptions.addArguments("--headless");
@@ -474,8 +476,8 @@ public class Driver {
         }
 
         if (enableHarCollection && browserMobProxyServer != null && seleniumProxy != null) {
-            browserMobProxyServer.newHar();
-            _logger.info("Started the Har capturing");
+              browserMobProxyServer.newHar();
+            _logger.info("Started the Har capturing with proxy : {}".format(String.valueOf(browserMobProxyServer)));
         }
     }
 
@@ -492,11 +494,6 @@ public class Driver {
                 String harfileName = String.format("Har_%s.har", fileName);
                 String harFile = String.format("%s%s%s", screenShotDirectoryPath, File.separator, harfileName);
                 _logger.info("Har log :" + gethar.getLog().getVersion() + ", writing to file at:" + harFile);
-            /*
-            for (int i = 0; i < gethar.getLog().getEntries().size(); i++) {
-                _logger.info("Iterating from Har");
-                _logger.info(gethar.getLog().getEntries().get(i).getRequest().getUrl());
-            }*/
                 FileOutputStream harOutputStream = new FileOutputStream(harFile);
                 gethar.writeTo(harOutputStream);
                 _logger.info("Har Collected Successfully");
