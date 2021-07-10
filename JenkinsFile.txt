@@ -1,0 +1,6 @@
+node('auto-ui-slave-1') {
+    stage('Clone sources'){
+		deleteDir()
+        git branch: env.Branch, credentialsId: 'nikitha-kyndryl', poll: false, url: 'git@github.kyndryl.net:Rama-Bisht1/Selenium-Java-Poc.git'
+    }
+    }
