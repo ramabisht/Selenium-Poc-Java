@@ -34,7 +34,7 @@ public class HomePage extends PageObject {
 
             @Step
             public void validateHamburgerButton() {
-                Assert.assertTrue(isHamburgerButtonFound(), "Hamburger button is dispalyed");
+                Assert.assertTrue(isHamburgerButtonFound(), "Hamburger button is displayed");
             }
         };
     }
