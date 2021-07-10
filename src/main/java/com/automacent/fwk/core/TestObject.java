@@ -4,17 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import com.automacent.fwk.enums.*;
 import org.testng.ITestContext;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import com.automacent.fwk.annotations.Action;
-import com.automacent.fwk.enums.ErrorCode;
-import com.automacent.fwk.enums.RepeatMode;
-import com.automacent.fwk.enums.RetryMode;
-import com.automacent.fwk.enums.ScreenshotMode;
-import com.automacent.fwk.enums.ScreenshotModeForIteration;
-import com.automacent.fwk.enums.ScreenshotType;
 import com.automacent.fwk.exceptions.SetupFailedFatalException;
 import com.automacent.fwk.recovery.RecoveryManager;
 import com.automacent.fwk.reporting.Logger;
@@ -479,5 +474,32 @@ public class TestObject {
     public void setBaseUrl(String baseUrl) {
         this.baseUrl = baseUrl;
     }
+
+
+    // HarType ---------------------------------------------------
+
+    private HarType harType;
+
+    /**
+     * Get {@link HarType}. This Parameter determines the type of screenshot
+     * taken in case of web based tests
+     *
+     * @return {@link HarType}
+     */
+    public HarType getHarType() {
+        return harType;
+    }
+
+    /**
+     * Set {@link HarType}. This Parameter determines the type of screenshot
+     * taken in case of web based tests
+     *
+     * @param harType {@link HarType}
+     */
+    public void setHarType(HarType harType) {
+        this.harType = harType;
+        _logger.info(String.format("HarType set to %s", getHarType()));
+    }
+
 
 }
