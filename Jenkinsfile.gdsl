@@ -1,0 +1,35 @@
+pipeline {
+
+    options { disableConcurrentBuilds() }
+
+    agent { node { label 'auto-ui-slave-1' } }
+    environment {
+        TESTBED_BUSY_TXT = 'busy.txt'
+    }
+    parameters {
+        string(name: 'vcCln', defaultValue: 'ob-1234', description: 'Cln to use for .')
+        booleanParam(name: 'SKIP_B2B_UPGRADE', defaultValue: true, description: 'Boolean flag for skipping B2B Upgrade.')
+    }
+
+    stages {
+		stage('Install Maven'){
+			sh 'wget -o https://mirrors.estointernet.in/apache/maven/maven-3/3.8.1/binaries/apache-maven-3.8.1-bin.tar.gz'
+			sh 'tar xzvf apache-maven-3.8.1-bin.tar.gz'
+			sh 'echo $JAVA_HOME'
+			sh 'export PATH=/opt/apache-maven-3.8.1/bin:$PATH'
+		}
+        stage('Clone sources') {
+            deleteDir()
+            print "java version:"
+            sh 'java -version'
+            sh 'mvn --version'
+            git branch: env.Branch, credentialsId: 'nikitha-kyndryl', poll: false, url: 'git@github.kyndryl.net:Rama-Bisht1/Selenium-Java-Poc.git'
+        }
+    }
+
+	post {
+		failure{ }
+		success{ }
+		aborted{ }
+	}
+}

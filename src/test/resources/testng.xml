@@ -4,12 +4,11 @@
 <suite name="MCMP Functional Testing" parallel="tests" thread-count="11">
     <!-- Common to all tests -->
 
-    <parameter name="launcherClients" value="" />
+    <!-- Scope: suite -->
+    <parameter name="launcherClients"
+               value="com.vmware.st.sparc.fwk.restclients.SPARC3RestClient" />
     <parameter name="runName" value="" />
     <parameter name="batchNumber" value="" />
-
-
-    <!-- Scope: suite -->
     <parameter name="retryMode" value="ON" />
     <parameter name="timeoutInSeconds" value="10" />
     <parameter name="recoveryClasses" value="" />
