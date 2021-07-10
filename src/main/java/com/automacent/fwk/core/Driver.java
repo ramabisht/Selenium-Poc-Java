@@ -13,6 +13,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
+import com.automacent.fwk.enums.HarType;
 import com.automacent.fwk.execution.IterationManager;
 import io.github.bonigarcia.wdm.DriverManagerType;
 import io.github.bonigarcia.wdm.WebDriverManager;
@@ -51,14 +52,14 @@ public class Driver {
 
     protected Driver(String ieDriverLocation, String chromeDriverLocation, String geckoDriverLocation,
                      long scriptTimeoutInSeconds, long pageLoadTimeoutInSeconds, long socketTimeoutInSeconds,
-                     boolean runInHeadlessMode, boolean enableHarCollection) {
+                     boolean runInHeadlessMode) {
         this(ieDriverLocation, chromeDriverLocation, geckoDriverLocation, scriptTimeoutInSeconds,
-                pageLoadTimeoutInSeconds, socketTimeoutInSeconds, null, runInHeadlessMode, enableHarCollection);
+                pageLoadTimeoutInSeconds, socketTimeoutInSeconds, null, runInHeadlessMode);
     }
 
     protected Driver(String ieDriverLocation, String chromeDriverLocation, String geckoDriverLocation,
                      long scriptTimeoutInSeconds, long pageLoadTimeoutInSeconds, long socketTimeoutInSeconds,
-                     BrowserId browserId, boolean runInHeadlessMode, boolean enableHarCollection) {
+                     BrowserId browserId, boolean runInHeadlessMode) {
 
         setIeDriverLocation(ieDriverLocation);
         setChromeDriverLocation(chromeDriverLocation);
@@ -68,8 +69,6 @@ public class Driver {
         setSocketTimeoutInSeconds(socketTimeoutInSeconds);
         setBrowserId(browserId);
         setRunInHeadlessMode(runInHeadlessMode);
-        setHarCollectionEnabled(enableHarCollection);
-
     }
 
     // Default Driver -------------------------------------
@@ -90,11 +89,11 @@ public class Driver {
      */
     public static void setupDefaultDriver(String ieDriverLocation, String chromeDriverLocation,
                                           String geckoDriverLocation, long scriptTimeoutInSeconds, long pageLoadTimeoutInSeconds,
-                                          long socketTimeoutInSeconds, boolean runInHeadlessMode, boolean enableHarCollection) {
+                                          long socketTimeoutInSeconds, boolean runInHeadlessMode) {
         _logger.info("Setting up default driver");
         defaultDriver = new Driver(ieDriverLocation, chromeDriverLocation, geckoDriverLocation,
                 scriptTimeoutInSeconds, pageLoadTimeoutInSeconds, socketTimeoutInSeconds,
-                runInHeadlessMode, enableHarCollection);
+                runInHeadlessMode);
     }
 
     /**
@@ -112,7 +111,7 @@ public class Driver {
         return new Driver(getDefaultDriver().getIeDriverLocation(), getDefaultDriver().getChromeDriverLocation(),
                 getDefaultDriver().getGeckoDriverLocation(), getDefaultDriver().getScriptTimeoutInSeconds(),
                 getDefaultDriver().getPageLoadTimeoutInSeconds(), getDefaultDriver().getSocketTimeoutInSeconds(),
-                browserId, getDefaultDriver().getRunInHeadlessMode(), getDefaultDriver().getHarCollectionEnabled());
+                browserId, getDefaultDriver().getRunInHeadlessMode());
     }
 
     // Variables ------------------------------------------
@@ -130,7 +129,6 @@ public class Driver {
 
     private static BrowserMobProxy browserMobProxyServer;
     private static Proxy seleniumProxy;
-    //private static Har har;
 
     // Executables --------------------------------------------------
 
@@ -344,28 +342,6 @@ public class Driver {
     }
 
 
-    // Har Collection mode ----------------------------------------
-
-    private boolean enableHarCollection;
-
-    /**
-     * Get the base URL String
-     *
-     * @return base URL String
-     */
-    public boolean getHarCollectionEnabled() {
-        return enableHarCollection;
-    }
-
-    /**
-     * Set base URL String
-     *
-     * @param enableHarCollection Base URL String
-     */
-    private void setHarCollectionEnabled(boolean enableHarCollection) {
-        this.enableHarCollection = enableHarCollection;
-    }
-
     /**
      * This method initializes the driver (opens browser), maximizes browser window,
      * sets timeouts and deletes the cookies.
@@ -375,7 +351,8 @@ public class Driver {
     public void startDriver(DriverManagerType driverManagerType) {
         try {
             DesiredCapabilities capabilities = new DesiredCapabilities();
-            if (enableHarCollection) {
+            if (BaseTest.getTestObject().getHarType() != null &&
+            !BaseTest.getTestObject().getHarType().equals(HarType.NOT_ENABLED)) {
                 try {
                     browserMobProxyServer = new BrowserMobProxyServer();
                     browserMobProxyServer.setTrustAllServers(true);
@@ -387,7 +364,7 @@ public class Driver {
                     seleniumProxy.setSslProxy(hostIp + ":" + browserMobProxyServer.getPort());
                     capabilities.setCapability(CapabilityType.PROXY, seleniumProxy);
                     _logger.info("Setting Browser proxy server to :" + browserMobProxyServer.toString() + " at port:" + browserMobProxyServer.getPort());
-                   _logger.info("Setting Selenium proxy server to :" + seleniumProxy.toString());
+                    _logger.info("Setting Selenium proxy server to :" + seleniumProxy.toString());
                 } catch (Exception ex) {
                     _logger.error("Setting up browser proxy failed " + ex);
                 }
@@ -410,7 +387,8 @@ public class Driver {
                     _logger.info("Using chromeDriver from framework");
                 }
                 ChromeOptions chromeOptions = new ChromeOptions();
-                if (enableHarCollection) {
+                if  (BaseTest.getTestObject().getHarType() != null &&
+                        !BaseTest.getTestObject().getHarType().equals(HarType.NOT_ENABLED)) {
                     chromeOptions.merge(capabilities);
                 }
                 String debuggerAddress = BaseTest.getTestObject().getDebuggerAddress();
@@ -440,7 +418,8 @@ public class Driver {
                     _logger.debug("Setting chrome pref {safebrowsing.enabled : true}");
                 }
 
-                if (enableHarCollection) {
+                if (BaseTest.getTestObject().getHarType() != null &&
+                        !BaseTest.getTestObject().getHarType().equals(HarType.NOT_ENABLED)) {
                     capabilities.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
                     webDriver = new ChromeDriver(capabilities);
                 } else {
@@ -475,16 +454,20 @@ public class Driver {
             _logger.info("Cookies deleted");
         }
 
+        /*
         if (enableHarCollection && browserMobProxyServer != null && seleniumProxy != null) {
-              browserMobProxyServer.newHar();
+            browserMobProxyServer.newHar();
             _logger.info("Started the Har capturing with proxy : {}".format(String.valueOf(browserMobProxyServer)));
         }
+        */
     }
 
     /**
      * Close and quit driver
      */
     public void terminateDriver() throws IOException {
+
+        /*
         if (enableHarCollection && browserMobProxyServer != null) {
             try {
                 _logger.info("Collecting Har before closing the browser");
@@ -505,7 +488,17 @@ public class Driver {
             } catch (Exception ex) {
                 _logger.error("Failed to stop the proxy server running on port " + browserMobProxyServer.getPort() + " reason " + ex.getMessage());
             }
+        }*/
+
+        if(browserMobProxyServer != null){
+            try {
+                browserMobProxyServer.stop();
+                _logger.info("Stopped the BMP server");
+            } catch (Exception ex) {
+                _logger.error("Failed to stop the proxy server running on port " + browserMobProxyServer.getPort() + " reason " + ex.getMessage());
+            }
         }
+
         if (webDriver != null) {
             _logger.info(String.format("Quiting driver %s", webDriver));
             webDriver.close();

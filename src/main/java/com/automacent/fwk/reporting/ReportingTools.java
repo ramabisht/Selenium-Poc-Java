@@ -6,18 +6,23 @@ import java.awt.Robot;
 import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.ListIterator;
 
 import javax.imageio.ImageIO;
 
+import com.automacent.fwk.enums.*;
+import net.lightbody.bmp.core.har.Har;
 import org.apache.commons.io.FileUtils;
 import io.qameta.allure.Attachment;
 import org.openqa.selenium.OutputType;
@@ -27,13 +32,6 @@ import org.openqa.selenium.logging.LogEntry;
 import org.testng.Reporter;
 
 import com.automacent.fwk.core.BaseTest;
-import com.automacent.fwk.enums.Color;
-import com.automacent.fwk.enums.Css;
-import com.automacent.fwk.enums.LogType;
-import com.automacent.fwk.enums.RetryMode;
-import com.automacent.fwk.enums.ScreenshotModeForIteration;
-import com.automacent.fwk.enums.ScreenshotType;
-import com.automacent.fwk.enums.TestStatus;
 import com.automacent.fwk.execution.IterationManager;
 import com.automacent.fwk.listeners.AutomacentListener;
 import com.automacent.fwk.utils.DateUtils;
@@ -301,6 +299,7 @@ public class ReportingTools {
 				} catch (Exception e) {
 					_logger.warn("Error wiping screenshot directory", e);
 				}
+
 		}
 	}
 
@@ -308,11 +307,8 @@ public class ReportingTools {
 
 	/**
 	 * This method prints the message to the report
-	 * 
-	 * @param bgColor
 	 * @param textColor
 	 * @param message
-	 * @param messageType
 	 */
 	private static void log(Color textColor, Css underline, String message) {
 		Reporter.log("<div style='color: " + textColor.getColorValue() + "; font-size: small; "
@@ -363,7 +359,7 @@ public class ReportingTools {
 	 * 
 	 * @param logType {@link LogType}
 	 */
-	public static void captureSeleniumLogs1(String logType) {
+	public static void captureSeleniumLogs(String logType) {
 		try {
 			if (BaseTest.getTestObject().getDriverManager().getActiveDriver().getWebDriver() != null) {
 				File parentDir = new File(System.getProperty("automacent.reportdir") + File.separator + "logs");
@@ -393,6 +389,56 @@ public class ReportingTools {
 			}
 		} catch (Exception e) {
 			_logger.warn("Error while capturing Selenium Logs LogType - " + logType.toUpperCase(), e);
+		}
+	}
+
+
+	/*------------------------ Har Actions ----------------------------------------*/
+
+	public static void startHarCapture(){
+		BaseTest.getTestObject().getDriverManager().getBrowserMobProxy().newHar(String.format("Har_%s_for_%s",
+				IterationManager.getManager().getIteration(), MethodType.TEST.name()));
+	}
+
+	public static void dumpCurrentHarLogs(){
+		try {
+     		_logger.info("Dumping Collecting Har......");
+			int iteration = IterationManager.getManager().getIteration();
+			Har gethar = BaseTest.getTestObject().getDriverManager().getBrowserMobProxy().getHar();
+			String harDirectory = String.format("screenshots%sitr_%s_%s", File.separator,
+					BaseTest.getTestObject().getTestName(), iteration);
+			String harDirectoryPath = String.format("%s%s%s", System.getProperty("automacent.reportdir"),
+					File.separator, harDirectory);
+			String fileName = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
+			String harFileName = String.format("Har_%s.har", fileName);
+			String harFile = String.format("%s%s%s", harDirectoryPath, File.separator, harFileName);
+			_logger.info("Har log :" + gethar.getLog().getVersion() + ", writing to file at:" + harFile);
+			FileOutputStream harOutputStream = new FileOutputStream(harFile);
+			gethar.writeTo(harOutputStream);
+			_logger.info("Har Collected Successfully");
+		} catch (Exception harCollection) {
+			_logger.error("Har collection failed because:" + harCollection);
+		}
+	}
+
+	public static void endHarCollection(){
+		try {
+			_logger.info("Ending and Collecting Har......");
+			int iteration = IterationManager.getManager().getIteration();
+			Har gethar = BaseTest.getTestObject().getDriverManager().getBrowserMobProxy().getHar();
+			String harDirectory = String.format("screenshots%sitr_%s_%s", File.separator,
+					BaseTest.getTestObject().getTestName(), iteration);
+			String harDirectoryPath = String.format("%s%s%s", System.getProperty("automacent.reportdir"),
+					File.separator, harDirectory);
+			String fileName = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
+			String harFileName = String.format("Har_%s.har", fileName);
+			String harFile = String.format("%s%s%s", harDirectoryPath, File.separator, harFileName);
+			_logger.info("Har log :" + gethar.getLog().getVersion() + ", writing to file at:" + harFile);
+			FileOutputStream harOutputStream = new FileOutputStream(harFile);
+			gethar.writeTo(harOutputStream);
+			_logger.info("Har Collected Successfully");
+		} catch (Exception harCollection) {
+			_logger.error("Har collection failed because:" + harCollection);
 		}
 	}
 }

@@ -10,12 +10,12 @@
     <parameter name="runName" value="" />
     <parameter name="batchNumber" value="" />
     <parameter name="retryMode" value="ON" />
-    <parameter name="timeoutInSeconds" value="10" />
+    <parameter name="timeoutInSeconds" value="30" />
     <parameter name="recoveryClasses" value="" />
-    <parameter name="slowdownDurationInSeconds" value="1" />
+    <parameter name="slowdownDurationInSeconds" value="2" />
     <parameter name="repeatMode" value="INVOCATION_COUNT" />
     <parameter name="testDurationInSeconds" value="900" />
-    <parameter name="invocationCount" value="0" />
+    <parameter name="invocationCount" value="1" />
     <parameter name="delayBetweenIterationInSeconds" value="10" />
     <parameter name="debuggerAddress" value=""/>
 
@@ -31,7 +31,7 @@
     <parameter name="pageLoadTimeoutInSeconds" value="900" />
     <parameter name="socketTimeoutInSeconds" value="300" />
     <parameter name="runInHeadlessMode" value="false" />
-    <parameter name="enableHarCollection" value="true" />
+    <parameter name="harCollectionType" value="" />
 
     <!-- scope: test -->
     <parameter name="screenshotType" value="BROWSER_SCREENSHOT" />

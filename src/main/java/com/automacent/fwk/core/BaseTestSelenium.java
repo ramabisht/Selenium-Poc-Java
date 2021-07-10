@@ -1,5 +1,6 @@
 package com.automacent.fwk.core;
 
+import com.automacent.fwk.enums.*;
 import net.lightbody.bmp.BrowserMobProxy;
 import org.openqa.selenium.Proxy;
 import org.openqa.selenium.WebDriver;
@@ -8,10 +9,6 @@ import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
 
-import com.automacent.fwk.enums.BrowserId;
-import com.automacent.fwk.enums.ScreenshotMode;
-import com.automacent.fwk.enums.ScreenshotModeForIteration;
-import com.automacent.fwk.enums.ScreenshotType;
 import com.automacent.fwk.exceptions.SetupFailedFatalException;
 
 import io.github.bonigarcia.wdm.DriverManagerType;
@@ -50,8 +47,7 @@ public abstract class BaseTestSelenium extends BaseTest {
             "scriptTimeoutInSeconds",
             "pageLoadTimeoutInSeconds",
             "socketTimeoutInSeconds",
-            "runInHeadlessMode",
-            "enableHarCollection"
+            "runInHeadlessMode"
     })
     public void automacentInternalSetDriverParameters(
             String ieDriverLocation,
@@ -60,11 +56,10 @@ public abstract class BaseTestSelenium extends BaseTest {
             long scriptTimeoutInSeconds,
             long pageLoadTimeoutInSeconds,
             long socketTimeoutInSeconds,
-            boolean runInHeadlessMode,
-            boolean enableHarCollection) {
+            boolean runInHeadlessMode) {
         Driver.setupDefaultDriver(ieDriverLocation, chromeDriverLocation, geckoDriverLocation,
                 scriptTimeoutInSeconds, pageLoadTimeoutInSeconds, socketTimeoutInSeconds,
-                runInHeadlessMode, enableHarCollection);
+                runInHeadlessMode);
     }
 
     /**
@@ -79,6 +74,7 @@ public abstract class BaseTestSelenium extends BaseTest {
      * @param screenshotModeForIteration {@link ScreenshotModeForIteration}
      * @param baseUrl                    Base URL of the application
      * @param testContext                testNg {@link ITestContext}
+     * @param harType                  {@link HarType}
      */
     @BeforeTest
     @Parameters({
@@ -87,7 +83,8 @@ public abstract class BaseTestSelenium extends BaseTest {
             "screenshotType",
             "screenshotMode",
             "screenshotModeForIteration",
-            "baseUrl"
+            "baseUrl",
+            "harCollectionType"
     })
     public void automacentInternalSetWebTestParameters(
             DriverManagerType browser,
@@ -96,9 +93,10 @@ public abstract class BaseTestSelenium extends BaseTest {
             String screenshotMode,
             ScreenshotModeForIteration screenshotModeForIteration,
             String baseUrl,
-            ITestContext testContext) {
+            ITestContext testContext,
+            String harType) {
         if (baseUrl.trim().isEmpty())
-            throw new SetupFailedFatalException("Parameter, baseUrl, is empty");
+            throw new SetupFailedFatalException("Please provide baseUrl Parameter, baseUrl, is empty");
 
         TestObject testObject = BaseTest.getTestObject();
         testObject.setDriverManager(new DriverManager());
@@ -108,7 +106,7 @@ public abstract class BaseTestSelenium extends BaseTest {
         testObject.setScreenshotModes(screenshotMode);
         testObject.setScreenshotModeForIteration(screenshotModeForIteration);
         testObject.setBaseUrl(baseUrl);
-
+        testObject.setHarType(harType);
     }
 
     /**
@@ -198,18 +196,4 @@ public abstract class BaseTestSelenium extends BaseTest {
         BaseTest.getTestObject().getDriverManager().killDriverManager(browserId);
     }
 
-
-    /**
-     * Get the current active {@link BrowserMobProxy}
-     */
-    protected BrowserMobProxy getBrowserMobProxy() {
-        return BaseTest.getTestObject().getDriverManager().getBrowserMobProxy();
-    }
-
-    /**
-     * Get the current active {@link Proxy}
-     */
-    protected Proxy getSeleniumProxy() {
-        return BaseTest.getTestObject().getDriverManager().getSeleniumProxy();
-    }
 }

@@ -1,7 +1,10 @@
 package com.automacent.fwk.reporting;
 
+
 import java.util.concurrent.TimeUnit;
 
+
+import com.automacent.fwk.enums.*;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.testng.ITestNGMethod;
@@ -12,10 +15,6 @@ import com.automacent.fwk.annotations.Action;
 import com.automacent.fwk.annotations.Repeat;
 import com.automacent.fwk.annotations.Step;
 import com.automacent.fwk.core.BaseTest;
-import com.automacent.fwk.enums.MethodType;
-import com.automacent.fwk.enums.RepeatMode;
-import com.automacent.fwk.enums.ScreenshotMode;
-import com.automacent.fwk.enums.TestStatus;
 import com.automacent.fwk.execution.ExceptionManager;
 import com.automacent.fwk.execution.IterationManager;
 import com.automacent.fwk.launcher.LauncherClientManager;
@@ -82,6 +81,7 @@ public class ExecutionLogManager {
      * @param methodType {@link MethodType}
      */
     public static void logTestStart(ProceedingJoinPoint point, MethodType methodType) {
+        _logger.info("logTestStart");
         String methodName = MethodSignature.class.cast(point.getSignature()).getMethod().getName();
         Logger.getLogger(MethodSignature.class.cast(point.getSignature()).getDeclaringType())
                 .infoHeading(
@@ -92,6 +92,14 @@ public class ExecutionLogManager {
                 .logStart(String.format("%s%s",
                         LoggingUtils.addGrammer(LoggingUtils.addSpaceToCamelCaseString(methodName)),
                         AspectJUtils.getArguments(point)), methodType);
+
+        try {
+            if (!BaseTest.getTestObject().getHarType().equals(HarType.NOT_ENABLED))
+                ReportingTools.startHarCapture();
+        } catch (Exception ex) {
+            _logger.error("Har capturing enablement failed reason " + ex);
+        }
+
     }
 
     /**
@@ -102,6 +110,7 @@ public class ExecutionLogManager {
      * @param duration   Execution duration for method in milliseconds
      */
     public static void logTestSuccess(ProceedingJoinPoint point, MethodType methodType, long duration) {
+        _logger.info("logTestSuccess");
         String methodName = MethodSignature.class.cast(point.getSignature()).getMethod().getName();
         Logger.getLogger(MethodSignature.class.cast(point.getSignature()).getDeclaringType())
                 .infoHeading(String.format("%s completed successfully",
@@ -110,6 +119,15 @@ public class ExecutionLogManager {
                 .logEnd(String.format("%s%s",
                         LoggingUtils.addGrammer(LoggingUtils.addSpaceToCamelCaseString(methodName)),
                         AspectJUtils.getArguments(point)), methodType, TestStatus.PASS, duration, null);
+
+        try {
+            if (!BaseTest.getTestObject().getHarType().equals(HarType.NOT_ENABLED))
+                ReportingTools.dumpCurrentHarLogs();
+        } catch (Exception ex) {
+            _logger.error("Har capturing dump failed reason " + ex);
+        }
+
+
         if (methodType.equals(MethodType.TEST) && !BaseTest.getTestObject().getRepeatMode().equals(RepeatMode.OFF))
             return;
         LauncherClientManager.getManager().logSuccess(methodName, methodType, 0, duration);
@@ -124,6 +142,7 @@ public class ExecutionLogManager {
      * @param duration   Duration of Execution of method
      */
     public static void logTestFailure(ProceedingJoinPoint point, MethodType methodType, Throwable e, long duration) {
+        _logger.info("logTestFailure");
         String methodName = MethodSignature.class.cast(point.getSignature()).getMethod().getName();
         Logger.getLogger(MethodSignature.class.cast(point.getSignature()).getDeclaringType()).error(
                 String.format("%s failed", LoggingUtils.addSpaceToCamelCaseString(LoggingUtils.addGrammer(methodName))),
@@ -139,6 +158,18 @@ public class ExecutionLogManager {
                 .logEnd(String.format("%s%s",
                         LoggingUtils.addGrammer(LoggingUtils.addSpaceToCamelCaseString(methodName)),
                         AspectJUtils.getArguments(point)), methodType, TestStatus.FAIL, duration, e);
+
+        try {
+            if (BaseTest.getTestObject().getHarType().equals(HarType.ON_FAILURE) ||
+                    !BaseTest.getTestObject().getHarType().equals(HarType.NOT_ENABLED)) {
+                ReportingTools.endHarCollection();
+            }
+        } catch (Exception ex) {
+            _logger.error("Har capturing dump and stop failed reason " + ex);
+        }
+ /*
+        ReportingTools.captureSeleniumLogs("TEXT");
+         */
 
         if (methodType.equals(MethodType.TEST) && !BaseTest.getTestObject().getRepeatMode().equals(RepeatMode.OFF))
             return;
@@ -192,6 +223,9 @@ public class ExecutionLogManager {
 
         LauncherClientManager.getManager().logStart(
                 String.format("Iteration %s", IterationManager.getManager().getIteration()), MethodType.ITERATION);
+
+        //if (!BaseTest.getTestObject().getHarType().equals(HarType.NOT_ENABLED))
+         //   ReportingTools.startHarCapture();
     }
 
     /**
@@ -240,6 +274,10 @@ public class ExecutionLogManager {
         LauncherClientManager.getManager().logEnd(
                 String.format("Iteration %s", IterationManager.getManager().getIteration()), MethodType.ITERATION,
                 TestStatus.FAIL, duration, e);
+
+       // if (BaseTest.getTestObject().getHarType().equals(HarType.ON_FAILURE)) {
+        //    ReportingTools.endHarCollection();
+       // }
     }
 
     /**

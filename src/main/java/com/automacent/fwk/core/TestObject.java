@@ -496,10 +496,18 @@ public class TestObject {
      *
      * @param harType {@link HarType}
      */
-    public void setHarType(HarType harType) {
-        this.harType = harType;
-        _logger.info(String.format("HarType set to %s", getHarType()));
+    public void setHarType(String harType) {
+        try {
+            _logger.info(String.format("HarType set to %s", harType));
+            if (harType.isEmpty()) {
+                this.harType = HarType.getDefault();
+            } else {
+                this.harType = HarType.valueOf(harType);
+                _logger.info(String.format("HarType set to %s", getHarType()));
+            }
+        } catch (Exception ex) {
+            _logger.error("Error in setting Har type setting to default value");
+            this.harType = HarType.getDefault();
+        }
     }
-
-
 }
