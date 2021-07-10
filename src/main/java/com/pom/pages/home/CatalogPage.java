@@ -2,6 +2,8 @@ package com.pom.pages.home;
 import com.automacent.fwk.annotations.Action;
 import com.automacent.fwk.annotations.Step;
 import com.automacent.fwk.core.PageObject;
+import com.automacent.fwk.reporting.Logger;
+import com.pom.steps.login.LoginSteps;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -20,7 +22,7 @@ public class CatalogPage extends PageObject {
     private static final String PROVIDERLISTCSS = ".provider-internal-container";
     private static final String PROVIDERTOBECLICKED = "//span[@class = 'bx--checkbox-label-text";
     private static final String CARDSERVICETITLE  = ".card-service-title" ;
-
+    private static Logger _logger = Logger.getLogger(LoginSteps.class);
     @Override
     public PageValidation pageValidation() {
         return new PageValidation() {
@@ -31,24 +33,29 @@ public class CatalogPage extends PageObject {
 
             @Step
             public void validateCatalogPageLoaded() {
-                Assert.assertTrue(isCatalogTilePresent(), "UserName Field on Login Page is loaded");
+                try {
+                    switchIframe();
+                    Assert.assertTrue(isCatalogTilePresent(), "Is Catalog heading has been displayed");
+                }
+                catch(Exception ex){_logger.info("Exception:"+ ex);}
             }
         };
     }
 
     //---------------------------------- validate heading ------------------------------------
+    @Action
+    public void switchIframe() {
+        _logger.info("Switching iframe");
+        driver.switchTo().frame(IFRAME);
+    }
     @FindBy(css = CATALOGPAGETITLE)
     private WebElement catalogPageTile;
 
     @Action
     public boolean isCatalogTilePresent() {
+
         isElementFound(catalogPageTile);
         return catalogPageTile.isDisplayed();
-    }
-
-    @Action
-    public void switchIframe() {
-        driver.switchTo().frame(IFRAME);
     }
 
     //---------------------------------- Select required category ------------------------------------
@@ -65,12 +72,18 @@ public class CatalogPage extends PageObject {
     private List<WebElement> categoryCount;
 
     @Action
-    public Integer VerifyCategoryIsloaded(Integer expectedNumberOfCatogary) { //fill allCatagory value is page steps
-        return categoryCount.size();
+    public Boolean verifyCategoriesLoaded() {
+        Boolean catogaryListSize = false;
+        if (categoryCount.size()>0){
+            catogaryListSize=true;
+        }
+        return catogaryListSize;
     }
 
+    //---------------------------------- Click on the required catagory ------------------------------------
     @FindBy(xpath = GETCATEGORYVALUEXPATH)
     private List<WebElement> categoryList;
+
 
     //----- to do action //put logic here for clickable
     @Action
@@ -88,29 +101,35 @@ public class CatalogPage extends PageObject {
     private WebElement providerContainer;
 
     @Action
-    public boolean verifyProviderListDisplayed(){
-        return (providerContainer.isEnabled() && providerContainer.isDisplayed());
+    public boolean isProviderListDisplayed(){
+        //return (providerContainer.isEnabled() && providerContainer.isDisplayed());
+        return (providerContainer.isEnabled());
     }
 
-    @FindBy(xpath = PROVIDERLISTCSS )
+    @FindBy(css = PROVIDERLISTCSS )
     private List<WebElement> allProviderList;
 
     @Action
-    public WebElement VerifyProviderPresent(String providerName){ //fill value is steps page : provider value is test case level
+    public WebElement verifyProviderPresent(String providerName){ //fill value is steps page : provider value is test case level
         WebElement providerToBeClicked = null;
         for (WebElement element : allProviderList) {
+            _logger.info("element.getText()"+ element.getText());
             if (element.getText().equals(providerName)) {
                 providerToBeClicked=element;
             }
 
         }
+        _logger.info("providerToBeClicked:"+ providerToBeClicked);
         return providerToBeClicked;
     }
 
     @Action
-    public void clickOnProvider(String providerName){
-        if(isElementFound(driver.findElement(By.xpath(PROVIDERTOBECLICKED+ " and text() ='" + VerifyProviderPresent(providerName).getText()+ "']")))){ //-- check if providerName can be made as instance varriable
-            driver.findElement(By.xpath(PROVIDERTOBECLICKED+ " and text() ='" + VerifyProviderPresent(providerName).getText()+ "']")).click();
+    public void clickOnTheProvider(String providerName){
+        _logger.info("click on the provider name:"+ providerName);
+        WebElement providerToClick = verifyProviderPresent(providerName);
+        if(isElementFound(driver.findElement(By.xpath(PROVIDERTOBECLICKED+ " and text() ='" + providerToClick.getText()+ "']")))){
+            _logger.info("provider is present");
+            driver.findElement(By.xpath(PROVIDERTOBECLICKED+ " and text() ='" + providerToClick.getText()+ "']")).click();
         }
     }
 
@@ -119,7 +138,7 @@ public class CatalogPage extends PageObject {
     private List<WebElement> cardIndexValue;
 
     @Action
-    public Integer VerifyServicePresent(String bluePrintName){
+    public Integer verifyServicePresent(String bluePrintName){
         int indexValue = 0;
         for (WebElement element:cardIndexValue){
             if(element.getText().equals(bluePrintName)){
@@ -131,9 +150,11 @@ public class CatalogPage extends PageObject {
     }
 
     @Action
-    public void ClickOnService(String bluePrintName){ // check for calling the function again and again
-        if ((cardIndexValue.get(VerifyServicePresent(bluePrintName)).isEnabled())){
-            cardIndexValue.get(VerifyServicePresent(bluePrintName)).click();
+    public void clickOnService(String bluePrintName){ // check for calling the function again and again
+        int indexValue = verifyServicePresent(bluePrintName);
+        if (isClickableElementFound(cardIndexValue.get(indexValue))){
+            cardIndexValue.get(indexValue).click();
+
         }
 
     }

@@ -11,7 +11,7 @@ import org.testng.Assert;
 public class HomePageSteps extends WebTestSteps {
 
     // XPath Constants
-    String ExpectedURL = "https://mcmp-dev2fra-release-autoui.multicloud-ibm.com/launchpad";
+    String ExpectedURL = "https://mcmp-stagedal-master-autoui.multicloud-ibm.com/launchpad";
     String ExpectedPageTitle = "IBM Services for Multicloud Management";
 
     private static Logger _logger = Logger.getLogger(HomePageSteps.class);
@@ -21,7 +21,6 @@ public class HomePageSteps extends WebTestSteps {
 
     @Pages
     private AbstractHomePage abstractHomePageView;
-
     @Pages
     private HomePage homePageView;
 
