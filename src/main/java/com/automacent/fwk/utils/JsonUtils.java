@@ -16,7 +16,7 @@ import java.util.*;
 
 public class JsonUtils {
 
-    private static final Logger _logger = Logger.getLogger(JacksonUtils.class);
+    private static final Logger _logger = Logger.getLogger(JsonUtils.class);
     private static JSONObject jsonObject = new JSONObject();
 
     /**
