@@ -189,6 +189,14 @@ public class DriverManager {
     }
 
     /**
+     * @return active {@link BrowserMobProxy} object
+     */
+    public BrowserMobProxy getBrowserMobProxy(BrowserId browserId) {
+        Driver driver = getDriver(browserId);
+        return driver.getBrowserMobProxy();
+    }
+
+    /**
      * @return active {@link Proxy} object
      */
     public Proxy getSeleniumProxy() {

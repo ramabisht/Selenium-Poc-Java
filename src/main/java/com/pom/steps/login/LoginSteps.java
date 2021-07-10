@@ -1,7 +1,9 @@
 package com.pom.steps.login;
 import java.util.Date;
 
+import com.automacent.fwk.annotations.Steps;
 import com.automacent.fwk.core.WebTestSteps;
+import com.pom.utils.LoadData;
 import org.testng.Assert;
 import com.automacent.fwk.annotations.Pages;
 import com.automacent.fwk.annotations.Step;
@@ -20,6 +22,9 @@ public final class LoginSteps extends WebTestSteps {
     private LoginPage loginView;
 
     // Steps ----------------------------------------------
+
+    @Steps
+    private LoadData loadData;
 
     @Step
     public void confirmLoginPageIsLoaded() {
@@ -60,6 +65,7 @@ public final class LoginSteps extends WebTestSteps {
 
     @Step
     public void performLogin(String username, String password) {
+        loadData.loadApplicationUrl();
         loginView.enterUserName(username);
         validateUserNameCredentials(username);
         loginView.clickContinueButton();

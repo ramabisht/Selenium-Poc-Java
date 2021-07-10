@@ -4,6 +4,7 @@ import java.util.Set;
 
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
 
@@ -160,6 +161,40 @@ public abstract class BrowserControls {
 	public void switchToDefaultContent() {
 		driver.switchTo().defaultContent();
 	}
+
+	/**
+	 * Switch to the default or top level frame
+	 */
+	@Step
+	public void switchToIFrame(String iframeName) {
+		driver.switchTo().frame(iframeName);
+	}
+
+	/**
+	 * Switch to the default or top level frame
+	 */
+	@Step
+	public void switchToIFrame(WebElement iFrameElement) {
+		driver.switchTo().frame(iFrameElement);
+	}
+
+	/**
+	 * Switch to the default or top level frame
+	 */
+	@Step
+	public void switchToIFrame(int iFrameId) {
+		driver.switchTo().frame(iFrameId);
+	}
+
+	/**
+	 * Switch to the default or top level frame
+	 */
+	@Step
+	public void switchToParentFrame() {
+		driver.switchTo().parentFrame();
+	}
+
+
 
 	// ----------------------------------------------------
 

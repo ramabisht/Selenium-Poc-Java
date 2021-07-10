@@ -1,0 +1,81 @@
+{
+  "bluePrintName": "[IaaSC-8.2] - CentOS77 - Composite",
+  "provider": "VRA",
+  "Category": "Compute",
+  "orderSubmittedConfirmationMessage": "Order Submitted !",
+  "estimatedCost": "USD 30.000391",
+  "providerAccount": "VRA82 / VRA82",
+  "EstimatedPrice": "USD 90.00/ SIZE / MONTH + USD 30.00",
+  "estimatedPriceReview": "USD 30.000391",
+  "approvalState": "Approval In Progress",
+  "provInProgressState": "Provisioning in Progress",
+  "completedState": "Completed",
+  "orderTypeEdit": "EditSOI",
+  "orderTypeDel": "Delete",
+  "urlOrders": "orders",
+  "VMComponentType": "Cloud.vSphere.Machine",
+  "Order Parameters": {
+    "Main Parameters": {
+      "Service Instance Name": {
+        "type": "Textbox",
+        "id": "text-input-main_params-serviceName",
+        "value": "centOsComposite"
+      },
+      "Team": {
+        "type": "RadioButton",
+        "id": "radio-button-team_TEAM1",
+        "value": "TEAM1"
+      },
+      "Environment":{
+        "type": "Dropdown",
+        "id": "env",
+        "value":"NONE"
+      },
+      "Application": {
+        "type": "Dropdown",
+        "id": "app",
+        "value": "NONE"
+      },
+      "Provider Account": {
+        "type": "RadioButton",
+        "id": "radio-button-providerAccount_VRA82_/ VRA82",
+        "value": "VRA82 / VRA82"
+      }
+    },
+    "Additional Configuration": {
+      "Project": {
+        "type": "Dropdown",
+        "id": "bx--dropdown-single-parent_$projectId",
+        "value":"MCMP Development"
+      }
+    },
+    "[IaaSC-8.2] - CentOS77 - Composite": {
+      "CPU Value": {
+        "type": "Textbox",
+        "id": "slider-input-box-cpu",
+        "value": "1"
+      },
+
+      "Memory": {
+        "type": "Textbox",
+        "id": "slider-input-box-memory",
+        "value": "2048"
+      },
+      "VM Name": {
+        "type": "Textbox",
+        "id": "text-input-vm_name",
+        "value": "Mcmpdevelopment"
+      },
+      "Disk label": {
+        "type": "Textbox",
+        "id": "text-input-disks_label-fixed1",
+        "value": "Disk0"
+      },
+      "Disk Size": {
+        "type": "Textbox",
+        "id": "text-input-disks_size-fixed1",
+        "value":  "30"
+      }
+    }
+  }
+}
