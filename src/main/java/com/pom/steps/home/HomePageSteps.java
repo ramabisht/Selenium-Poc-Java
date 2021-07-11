@@ -2,6 +2,7 @@ package com.pom.steps.home;
 
 import com.automacent.fwk.annotations.Pages;
 import com.automacent.fwk.annotations.Step;
+import com.automacent.fwk.core.BaseTest;
 import com.automacent.fwk.core.WebTestSteps;
 import com.automacent.fwk.reporting.Logger;
 import com.pom.pages.AbstractHomePage;
@@ -16,11 +17,11 @@ public class HomePageSteps extends WebTestSteps {
 
     private static Logger _logger = Logger.getLogger(HomePageSteps.class);
 
-
     // Pages ----------------------------------------------
 
     @Pages
     private AbstractHomePage abstractHomePageView;
+
     @Pages
     private HomePage homePageView;
 

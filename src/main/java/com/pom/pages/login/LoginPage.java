@@ -127,13 +127,11 @@ public final class LoginPage extends PageObject {
 
     @Action
     public boolean isLoginErrorFound(){
-
         return isElementFound(loginErrorMessage, 5);
     }
 
     @Action
     public String getLoginErrorMessage(){
-
         return loginErrorMessage.getText().trim();
     }
 
