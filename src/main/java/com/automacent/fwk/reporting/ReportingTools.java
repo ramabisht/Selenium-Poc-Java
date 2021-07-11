@@ -60,6 +60,9 @@ public class ReportingTools {
 			screenshotFrame = new Rectangle(1024, 768);
 			BaseTest.getTestObject().setScreenshotType(ScreenshotType.BROWSER_SCREENSHOT);
 			_logger.warn("Error Initializing DESKTOP SCREENSHOT. BROWSER_SCREENSHOT will be used.", e);
+		} catch(Exception ex){
+			BaseTest.getTestObject().setScreenshotType(ScreenshotType.BROWSER_SCREENSHOT);
+			_logger.warn("Error Initializing DESKTOP SCREENSHOT. BROWSER_SCREENSHOT will be used.", ex);
 		}
 	}
 	private static int screenshotNumber = 0;
