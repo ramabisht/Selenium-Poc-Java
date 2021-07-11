@@ -3,11 +3,9 @@ package com.mcmp.tests;
 
 import com.automacent.fwk.annotations.Repeat;
 import com.automacent.fwk.annotations.Steps;
-import com.mcmp.constants.LoadData;
 import com.pom.steps.home.HomePageSteps;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
-import org.testng.annotations.*;
 import com.pom.steps.login.LoginSteps;
 
 public class LoginTest extends BaseTest {
