@@ -1,13 +1,6 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-    <modelVersion>4.0.0</modelVersion>
 
-    <!--
-    <parent>
-        <groupId>com.automacent</groupId>
-        <artifactId>automacent-fwk-components</artifactId>
-        <version>1.3-SNAPSHOT</version>
-    </parent>
-    -->
+    <modelVersion>4.0.0</modelVersion>
     <groupId>com.automacent</groupId>
     <artifactId>automacent-fwk-core</artifactId>
     <name>automacent-fwk-core</name>
@@ -21,7 +14,6 @@
             <distribution>repo</distribution>
         </license>
     </licenses>
-
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -55,10 +47,21 @@
         <org.seleniumhq.selenium.version>3.141.59</org.seleniumhq.selenium.version>
         <org.seleniumhq.selenium.htmlunit-driver.version>2.33.2</org.seleniumhq.selenium.htmlunit-driver.version>
         <io.grpc.version>1.39.0</io.grpc.version>
-
-        <!--
-        <allure-testng-version>2.13.9</allure-testng-version>
-        -->
+        <net.lightbody.bmp.version>2.1.5</net.lightbody.bmp.version>
+        <maven-compiler-plugin.version>3.3</maven-compiler-plugin.version>
+        <aspectj-maven-plugin-version>1.11</aspectj-maven-plugin-version>
+        <allure-maven-version>2.10.0</allure-maven-version>
+        <maven-surefire-plugin-version>2.19.1</maven-surefire-plugin-version>
+        <maven-compiler-plugin-version>3.3</maven-compiler-plugin-version>
+        <maven-deploy-plugin-version>2.8.2</maven-deploy-plugin-version>
+        <maven-release-plugin-version>2.5.3</maven-release-plugin-version>
+        <maven-scm-provider-gitexe-version>1.9.5</maven-scm-provider-gitexe-version>
+        <org.sonatype.plugins.version>1.6.7</org.sonatype.plugins.version>
+        <maven-source-plugin-version>3.2.1</maven-source-plugin-version>
+        <maven-javadoc-plugin-version>3.3.0</maven-javadoc-plugin-version>
+        <maven-resources-plugin-version>2.5</maven-resources-plugin-version>
+        <lifecycle-mapping-version>1.0.0</lifecycle-mapping-version>
+        <com.googlecode.json-simple-version>1.1</com.googlecode.json-simple-version>
     </properties>
 
     <profiles>
@@ -139,16 +142,6 @@
         </profile>
 
     </profiles>
-
-    <!--
-    <dependencies>
-        <dependency>
-            <groupId>org.testng</groupId>
-            <artifactId>testng</artifactId>
-            <version>6.8</version>
-        </dependency>
-    </dependencies>
-    -->
 
     <dependencies>
 
@@ -298,6 +291,18 @@
             <version>${io.grpc.version}</version>
         </dependency>
 
+        <dependency>
+            <groupId>net.lightbody.bmp</groupId>
+            <artifactId>browsermob-core</artifactId>
+            <version>${net.lightbody.bmp.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.googlecode.json-simple</groupId>
+            <artifactId>json-simple</artifactId>
+            <version>${com.googlecode.json-simple-version}</version>
+        </dependency>
+
     </dependencies>
 
     <build>
@@ -306,7 +311,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.3</version>
+                <version>${maven-compiler-plugin.version}</version>
                 <configuration>
                     <source>1.8</source>
                     <target>1.8</target>
@@ -317,7 +322,7 @@
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>aspectj-maven-plugin</artifactId>
-                <version>1.11</version>
+                <version>${aspectj-maven-plugin-version}</version>
                 <!--
                 <groupId>com.github.m50d</groupId>
                 <artifactId>aspectj-maven-plugin</artifactId>
@@ -369,17 +374,16 @@
                 </dependencies>
             </plugin>
 
-
             <plugin>
                 <groupId>io.qameta.allure</groupId>
                 <artifactId>allure-maven</artifactId>
-                <version>2.10.0</version>
+                <version>${allure-maven-version}</version>
             </plugin>
 
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.19.1</version>
+                <version>${maven-surefire-plugin-version}</version>
                 <configuration>
                     <failIfNoTests>${failIfNoTests}</failIfNoTests>
                     <skipTests>${skipTests}</skipTests>
@@ -409,7 +413,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.3</version>
+                <version>${maven-compiler-plugin-version}</version>
                 <configuration>
                     <source>1.8</source>
                     <target>1.8</target>
@@ -420,7 +424,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-deploy-plugin</artifactId>
-                <version>2.8.2</version>
+                <version>${maven-deploy-plugin-version}</version>
                 <executions>
                     <execution>
                         <id>default-deploy</id>
@@ -435,7 +439,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-release-plugin</artifactId>
-                <version>2.5.3</version>
+                <version>${maven-release-plugin-version}</version>
                 <configuration>
                     <localCheckout>true</localCheckout>
                     <pushChanges>false</pushChanges>
@@ -448,7 +452,7 @@
                     <dependency>
                         <groupId>org.apache.maven.scm</groupId>
                         <artifactId>maven-scm-provider-gitexe</artifactId>
-                        <version>1.9.5</version>
+                        <version>${maven-scm-provider-gitexe-version}</version>
                     </dependency>
                 </dependencies>
             </plugin>
@@ -456,7 +460,7 @@
             <plugin>
                 <groupId>org.sonatype.plugins</groupId>
                 <artifactId>nexus-staging-maven-plugin</artifactId>
-                <version>1.6.7</version>
+                <version>${org.sonatype.plugins.version}</version>
                 <extensions>true</extensions>
                 <configuration>
                     <serverId>ossrh</serverId>
@@ -468,7 +472,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
-                <version>3.2.1</version>
+                <version>${maven-source-plugin-version}</version>
                 <executions>
                     <execution>
                         <id>attach-sources</id>
@@ -482,7 +486,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
-                <version>3.3.0</version>
+                <version>${maven-javadoc-plugin-version}</version>
                 <executions>
                     <execution>
                         <id>attach-javadocs</id>
@@ -501,7 +505,7 @@
                 <plugin>
                     <groupId>org.eclipse.m2e</groupId>
                     <artifactId>lifecycle-mapping</artifactId>
-                    <version>1.0.0</version>
+                    <version>${lifecycle-mapping-version}</version>
                     <configuration>
                         <lifecycleMappingMetadata>
                             <pluginExecutions>
@@ -513,6 +517,7 @@
                                         <versionRange>[1.8,)</versionRange>
                                         <goals>
                                             <goal>compile</goal>
+                                            <goal>test-compile</goal>
                                         </goals>
                                     </pluginExecutionFilter>
                                     <action>
@@ -542,7 +547,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-resources-plugin</artifactId>
-                    <version>2.5</version>
+                    <version>${maven-resources-plugin-version}</version>
                     <configuration>
                         <resources>
                             <resource>
@@ -565,7 +570,6 @@
 
             </plugins>
         </pluginManagement>
-
     </build>
 
 </project>

@@ -3,6 +3,8 @@ package com.pom.pages.home;
 import com.automacent.fwk.annotations.Action;
 import com.automacent.fwk.annotations.Step;
 import com.automacent.fwk.core.PageObject;
+import com.automacent.fwk.reporting.Logger;
+import com.pom.steps.home.HomePageSteps;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -20,6 +22,8 @@ public class HomePage extends PageObject {
     private static final String LEFTNAVIPAGEXPATH = "//span[@class = 'bx--side-nav__link-text']";
     private static final String LEFTNAVIPAFETOBECLICKEDXPATH = "//a[@class = 'bx--side-nav__link'";
 
+    private static Logger _logger = Logger.getLogger(HomePage.class);
+
     @Override
     public PageValidation pageValidation() {
         return new PageValidation() {
@@ -30,7 +34,7 @@ public class HomePage extends PageObject {
 
             @Step
             public void validateHamburgerButton() {
-                Assert.assertTrue(isHamburgerButtonFound(), "Hamburger button is dispalyed");
+                Assert.assertTrue(isHamburgerButtonFound(), "Hamburger button is displayed");
             }
         };
     }
@@ -44,6 +48,7 @@ public class HomePage extends PageObject {
     public boolean isHamburgerButtonFound() {
         isElementFound(hamburgerButton);
         return hamburgerButton.isDisplayed();
+        //return hamburgerButton.isEnabled();
     }
 
     @Action
@@ -52,6 +57,7 @@ public class HomePage extends PageObject {
     }
 
     // --------------------------------------------------------------
+
     // Click on the left navigation link
     @FindBy(xpath = LEFTNAVIGATIONXPATH)
     private List<WebElement> leftNavigationLink;
@@ -60,7 +66,10 @@ public class HomePage extends PageObject {
     public WebElement selectLeftNavigation() {
         WebElement leftNavigationElement = null;
         for (WebElement element : leftNavigationLink){
+           _logger.info("elment getext value:"+ element.getText());
+            _logger.info("size of list:"+ leftNavigationLink.size());
             if (element.getText().equals(ELEMENTNAMETOBECLICKED)) {
+                _logger.info("element found");
                 leftNavigationElement = element;
                 break;
             }
@@ -70,6 +79,7 @@ public class HomePage extends PageObject {
 
     @Action
     public void clickLeftNavigation(){
+        _logger.info("click on the link:"+ ELEMENTNAMETOBECLICKED);
        if(isElementFound(driver.findElement(By.xpath(ELEMENTTOBECLICKED+" and text() ='" +selectLeftNavigation().getText()+"']")))){
            driver.findElement(By.xpath(ELEMENTTOBECLICKED+" and text() ='" +selectLeftNavigation().getText()+"']")).click();
        }
