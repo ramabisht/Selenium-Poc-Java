@@ -42,10 +42,11 @@ public class AutomacentWebDriverWait extends WebDriverWait {
 	 * @return Object that is expected to be returned after the
 	 *         {@link ExpectedCondition} succeeds
 	 */
+
 	private <V> V applyExplicit(ExpectedCondition<V> condition) {
 		try {
 			driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
-			return until(condition);
+			return (V) until(condition);
 		} finally {
 			driver.manage().timeouts().implicitlyWait(BaseTest.getTestObject().getTimeoutInSeconds(), TimeUnit.SECONDS);
 		}
@@ -57,9 +58,10 @@ public class AutomacentWebDriverWait extends WebDriverWait {
 	 * @param by Element identifier
 	 * @return Located {@link WebElement}
 	 */
+	/*
 	public WebElement untilPresenceOfElementLocated(final By by) {
 		return applyExplicit(ExpectedConditions.presenceOfElementLocated(by));
-	}
+	}*/
 
 	/**
 	 * Wait until proxy element declared by @FindBy is located in the DOM
@@ -67,9 +69,9 @@ public class AutomacentWebDriverWait extends WebDriverWait {
 	 * @param element {@link WebElement} on which condition has to be checked
 	 * @return Located {@link WebElement}
 	 */
+	/*
 	public WebElement untilProxyElementLocated(final WebElement element) {
 		return applyExplicit(new ExpectedCondition<WebElement>() {
-			@Override
 			public WebElement apply(WebDriver driver) {
 				element.getTagName();
 				return element;
@@ -80,7 +82,7 @@ public class AutomacentWebDriverWait extends WebDriverWait {
 				return "Proxy element to be locate in DOM";
 			}
 		});
-	}
+	}*/
 
 	/**
 	 * Wait until {@link WebElement} is visible in the DOM
@@ -120,9 +122,10 @@ public class AutomacentWebDriverWait extends WebDriverWait {
 	 * @param text    The text that should not be present
 	 * @return true if text is not found in the {@link WebElement}
 	 */
+	/*
 	public Boolean untilTextInElementNotMatches(final WebElement element, String text) {
 		return applyExplicit(new ExpectedCondition<Boolean>() {
-			@Override
+
 			public Boolean apply(WebDriver driver) {
 				return !element.getText().equals(text);
 			}
@@ -133,4 +136,8 @@ public class AutomacentWebDriverWait extends WebDriverWait {
 			}
 		});
 	}
+	*/
+
+
+
 }

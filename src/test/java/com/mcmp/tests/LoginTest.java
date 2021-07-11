@@ -7,6 +7,10 @@ import com.pom.steps.home.HomePageSteps;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
 import com.pom.steps.login.LoginSteps;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Parameters;
+import org.testng.annotations.Test;
 
 public class LoginTest extends BaseTest {
 
@@ -26,7 +30,7 @@ public class LoginTest extends BaseTest {
         homePageSteps.confirmHomePageIsLoaded();
     }
 
-    @Test (priority = 0, description="Login user case with username and password.", testName = "loginTest")
+    @Test(priority = 0, description="Login user case with username and password.", testName = "loginTest")
     @Severity(SeverityLevel.BLOCKER)
     @Parameters({ "Username", "Password" })
     //@Repeat

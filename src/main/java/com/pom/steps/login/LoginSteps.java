@@ -65,7 +65,7 @@ public final class LoginSteps extends WebTestSteps {
 
     @Step
     public void performLogin(String username, String password) {
-        loadData.loadApplicationUrl();
+       // loadData.loadApplicationUrl();
         loginView.enterUserName(username);
         validateUserNameCredentials(username);
         loginView.clickContinueButton();
