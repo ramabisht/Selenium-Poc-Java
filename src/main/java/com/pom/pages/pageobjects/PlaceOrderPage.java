@@ -1,8 +1,9 @@
-package com.pom.pages.home;
+package com.pom.pages.pageobjects;
 
 import com.automacent.fwk.annotations.Action;
 import com.automacent.fwk.annotations.Step;
 import com.automacent.fwk.core.PageObject;
+import com.pom.pages.orderdetails.FillOrderDetailsPages;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.testng.Assert;
@@ -13,7 +14,7 @@ public class PlaceOrderPage extends PageObject {
     private static final String REVIEWORDERPARAMETERPAGEXPATH=".//*[contains(text(),'Review Order')]" ;
     private static final String NEXTBUTTONXPATH="//button[contains(@id,'next-button')]";
     private static final String PREVIOUSBUTTONXPATH="//button[contains(@id,'previous')]";
-
+    private static final com.automacent.fwk.reporting.Logger _logger = com.automacent.fwk.reporting.Logger.getLogger(FillOrderDetailsPages.class);
 
     @Override
     public PageValidation pageValidation() {
@@ -64,6 +65,7 @@ public class PlaceOrderPage extends PageObject {
 
     @Action
     public void clickOnNextButton(){
+        _logger.info("Click on the next button");
         nextButton.click();
     }
 
@@ -77,6 +79,7 @@ public class PlaceOrderPage extends PageObject {
 
     @Action
     public void clickOnPreviousButton(){
+        _logger.info("Click on the previous button");
         previousButton.click();
     }
 

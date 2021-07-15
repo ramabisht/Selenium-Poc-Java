@@ -23,13 +23,13 @@
       },
       "Team": {
         "type": "RadioButton",
-        "id": "radio-button-team_TEAM1",
-        "value": "TEAM1"
+        "id": "radio-button-team_Auto-TEAM1",
+        "value": "Auto-TEAM1"
       },
-      "Environment":{
+      "Environment": {
         "type": "Dropdown",
         "id": "env",
-        "value":"NONE"
+        "value": "NONE"
       },
       "Application": {
         "type": "Dropdown",
@@ -42,39 +42,38 @@
         "value": "VRA82 / VRA82"
       }
     },
-    "Additional Configuration": {
+    "Additional Parameters": {
       "Project": {
         "type": "Dropdown",
         "id": "bx--dropdown-single-parent_$projectId",
-        "value":"MCMP Development"
-      }
-    },
-    "[IaaSC-8.2] - CentOS77 - Composite": {
-      "CPU Value": {
-        "type": "Textbox",
-        "id": "slider-input-box-cpu",
-        "value": "1"
+        "value": "MCMP Development"
       },
-
-      "Memory": {
-        "type": "Textbox",
-        "id": "slider-input-box-memory",
-        "value": "2048"
-      },
-      "VM Name": {
-        "type": "Textbox",
-        "id": "text-input-vm_name",
-        "value": "Mcmpdevelopment"
-      },
-      "Disk label": {
-        "type": "Textbox",
-        "id": "text-input-disks_label-fixed1",
-        "value": "Disk0"
-      },
-      "Disk Size": {
-        "type": "Textbox",
-        "id": "text-input-disks_size-fixed1",
-        "value":  "30"
+      "[IaaSC-8.2] - CentOS77 - Composite": {
+        "CPU Value": {
+          "type": "Textbox",
+          "id": "slider-input-box-cpu",
+          "value": "1"
+        },
+        "Memory": {
+          "type": "Textbox",
+          "id": "slider-input-box-memory",
+          "value": "2048"
+        },
+        "VM Name": {
+          "type": "Textbox",
+          "id": "text-input-vm_name",
+          "value": "Mcmpdevelopment"
+        },
+        "Disk label": {
+          "type": "Textbox",
+          "id": "text-input-disks_label-fixed1",
+          "value": "Disk0"
+        },
+        "Disk Size": {
+          "type": "Textbox",
+          "id": "text-input-disks_size-fixed1",
+          "value": "30"
+        }
       }
     }
   }

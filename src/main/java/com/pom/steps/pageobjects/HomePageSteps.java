@@ -1,18 +1,17 @@
-package com.pom.steps.home;
+package com.pom.steps.pageobjects;
 
 import com.automacent.fwk.annotations.Pages;
 import com.automacent.fwk.annotations.Step;
-import com.automacent.fwk.core.BaseTest;
 import com.automacent.fwk.core.WebTestSteps;
 import com.automacent.fwk.reporting.Logger;
 import com.pom.pages.AbstractHomePage;
-import com.pom.pages.home.HomePage;
+import com.pom.pages.pageobjects.HomePage;
 import org.testng.Assert;
 
 public class HomePageSteps extends WebTestSteps {
 
     // XPath Constants
-    String ExpectedURL = "https://mcmp-stagedal-master-autoui.multicloud-ibm.com/launchpad";
+    String ExpectedURL = "https://mcmp-dev2fra-release-autoui.multicloud-ibm.com/launchpad";
     String ExpectedPageTitle = "IBM Services for Multicloud Management";
 
     private static Logger _logger = Logger.getLogger(HomePageSteps.class);

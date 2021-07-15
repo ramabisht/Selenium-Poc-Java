@@ -1,9 +1,8 @@
 package com.mcmp.tests;
 
 
-import com.automacent.fwk.annotations.Repeat;
 import com.automacent.fwk.annotations.Steps;
-import com.pom.steps.home.HomePageSteps;
+import com.pom.steps.pageobjects.HomePageSteps;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
 import com.pom.steps.login.LoginSteps;
@@ -25,7 +24,7 @@ public class LoginTest extends BaseTest {
     public void login(String Username, String Password) {
         loginSteps.confirmLoginPageIsLoaded();
         loginSteps.performLogin(Username, Password);
-        loginSteps.checkForLoginErrors();
+        //loginSteps.checkForLoginErrors();
         loginSteps.acceptPrivacy();
         homePageSteps.confirmHomePageIsLoaded();
     }
@@ -35,6 +34,7 @@ public class LoginTest extends BaseTest {
     @Parameters({ "Username", "Password" })
     //@Repeat
     public void loginTest(String Username, String Password){
+        BaseTest.getTestObject().getTestName();
         System.out.println("login invokes");
     }
 

@@ -1,10 +1,9 @@
-package com.pom.pages.home;
+package com.pom.pages.pageobjects;
 
 import com.automacent.fwk.annotations.Action;
 import com.automacent.fwk.annotations.Step;
 import com.automacent.fwk.core.PageObject;
 import com.automacent.fwk.reporting.Logger;
-import com.pom.steps.home.HomePageSteps;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -66,8 +65,6 @@ public class HomePage extends PageObject {
     public WebElement selectLeftNavigation() {
         WebElement leftNavigationElement = null;
         for (WebElement element : leftNavigationLink){
-           _logger.info("elment getext value:"+ element.getText());
-            _logger.info("size of list:"+ leftNavigationLink.size());
             if (element.getText().equals(ELEMENTNAMETOBECLICKED)) {
                 _logger.info("element found");
                 leftNavigationElement = element;

@@ -1,6 +1,8 @@
-package com.pom.pages.home;
+package com.pom.pages.pageobjects;
 import com.automacent.fwk.annotations.Action;
+import com.automacent.fwk.annotations.Pages;
 import com.automacent.fwk.annotations.Step;
+import com.automacent.fwk.core.BrowserControls;
 import com.automacent.fwk.core.PageObject;
 import com.automacent.fwk.reporting.Logger;
 import com.pom.steps.login.LoginSteps;
@@ -13,16 +15,19 @@ import java.util.List;
 
 public class CatalogPage extends PageObject {
 
+
+
     private static final String CATALOGPAGETITLE = "h1.ibm--page-header__title[title~='Catalog']";
-    private static final String IFRAME = "mcmp-iframe";
+    public static final String IFRAME = "mcmp-iframe";
     private static final String ALLCATEGORY = "ul.cb--selectable-list";
     private static final String CATEGORYLISTXPATH = "//ul[@class='cb--selectable-list']/li/a";
     private static final String GETCATEGORYVALUEXPATH = "//child::li/a";
     private static final String PROVIDERCONTAINERCSS = ".provider-internal-container";
-    private static final String PROVIDERLISTCSS = ".provider-internal-container";
-    private static final String PROVIDERTOBECLICKED = "//span[@class = 'bx--checkbox-label-text";
-    private static final String CARDSERVICETITLE  = ".card-service-title" ;
+    private static final String PROVIDERLISTXPATH = "//span[@class = 'bx--checkbox-label-text']";
+    private static final String PROVIDERTOBECLICKED = "//span[@class = 'bx--checkbox-label-text'";
+    private static final String CARDSERVICETITLE = ".card-service-title" ;
     private static Logger _logger = Logger.getLogger(LoginSteps.class);
+
     @Override
     public PageValidation pageValidation() {
         return new PageValidation() {
@@ -43,6 +48,21 @@ public class CatalogPage extends PageObject {
     }
 
     //---------------------------------- validate heading ------------------------------------
+   // @FindBy(id = IFRAME)
+   // private WebElement iframe;
+
+   /* @Action
+    public void switchIframe() {
+        try {
+            isElementFound(iframe);
+            switchIframe();
+            driver.switchTo().frame(IFRAME);
+        }
+        catch (Exception ex){
+            _logger.info("Exception trace:"+ ex);
+        }
+    }*/
+
     @Action
     public void switchIframe() {
         _logger.info("Switching iframe");
@@ -106,18 +126,17 @@ public class CatalogPage extends PageObject {
         return (providerContainer.isEnabled());
     }
 
-    @FindBy(css = PROVIDERLISTCSS )
+    @FindBy(xpath = PROVIDERLISTXPATH)
     private List<WebElement> allProviderList;
 
     @Action
     public WebElement verifyProviderPresent(String providerName){ //fill value is steps page : provider value is test case level
         WebElement providerToBeClicked = null;
         for (WebElement element : allProviderList) {
-            _logger.info("element.getText()"+ element.getText());
-            if (element.getText().equals(providerName)) {
+            if (element.getText().contains(providerName)) {
+                _logger.info("Provider Found"+ providerName);
                 providerToBeClicked=element;
             }
-
         }
         _logger.info("providerToBeClicked:"+ providerToBeClicked);
         return providerToBeClicked;
@@ -127,9 +146,9 @@ public class CatalogPage extends PageObject {
     public void clickOnTheProvider(String providerName){
         _logger.info("click on the provider name:"+ providerName);
         WebElement providerToClick = verifyProviderPresent(providerName);
-        if(isElementFound(driver.findElement(By.xpath(PROVIDERTOBECLICKED+ " and text() ='" + providerToClick.getText()+ "']")))){
+        if(isElementFound(driver.findElement(By.xpath(PROVIDERTOBECLICKED+ " and text() =' " + providerToClick.getText()+ " ']")))){
             _logger.info("provider is present");
-            driver.findElement(By.xpath(PROVIDERTOBECLICKED+ " and text() ='" + providerToClick.getText()+ "']")).click();
+            driver.findElement(By.xpath(PROVIDERTOBECLICKED+ " and text() =' " + providerToClick.getText()+ " ']")).click();
         }
     }
 

@@ -1,16 +1,17 @@
-package com.pom.steps.home;
+package com.pom.steps.pageobjects;
 
 import com.automacent.fwk.annotations.Pages;
 import com.automacent.fwk.annotations.Step;
+import com.automacent.fwk.core.WebTestSteps;
 import com.automacent.fwk.reporting.Logger;
 import com.pom.pages.AbstractHomePage;
-import com.pom.pages.home.CatalogPage;
+import com.pom.pages.pageobjects.CatalogPage;
 import com.pom.steps.login.LoginSteps;
 import org.testng.Assert;
 
-public class CatalogPageSteps {
+public class CatalogPageSteps  {
 
-    String ExpectedURL = "https://mcmp-stagedal-master-autoui.multicloud-ibm.com/lite/consume/storeFront";
+    String ExpectedURL = "https://mcmp-dev2fra-release-autoui.multicloud-ibm.com/lite/consume/storeFront";
     String ExpectedPageTitle = "IBM Services for Multicloud Management";
     String CategoryList = "All Categories" ;
     private static Logger _logger = Logger.getLogger(LoginSteps.class);
@@ -45,7 +46,7 @@ public class CatalogPageSteps {
 
     @Step
     public void verifyCategoryListPresent(){
-       Assert.assertTrue(catalogPageView.verifyCategoriesLoaded(),  "Verify Catory is loaded on th page");
+       Assert.assertTrue(catalogPageView.verifyCategoriesLoaded(),  "Verify Category is loaded on th page");
     }
 
     @Step
@@ -70,9 +71,11 @@ public class CatalogPageSteps {
 
     @Step
     public void selectCategory(String category){
-        _logger.info("Tets started at catalog page");
+        _logger.info("Test started at catalog page");
         confirmPageUrl();
         confirmPageTitle();
+        //catalogPageView.switchIframe() ;
+        //switchToIFrame(catalogPageView.IFRAME);
         verifyCategoryIndexIsPresent(CategoryList);
         verifyCategoryListPresent();
         verifyAndClickOnCategory(category);
@@ -85,7 +88,7 @@ public class CatalogPageSteps {
     }
 
     @Step
-    public void selectServiceTemplet(String bluePrintName){
+    public void selectServiceTemplate(String bluePrintName){
         verifyServicePresentAndClick(bluePrintName);
     }
 }

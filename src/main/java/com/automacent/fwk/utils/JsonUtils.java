@@ -58,7 +58,7 @@ public class JsonUtils {
      */
     public JSONObject readJsonFromFile(String fileLocation) {
         try {
-            _logger.info(String.format("Reading JSON data from file {}", fileLocation));
+            _logger.info(String.format("Reading JSON data from file:", fileLocation));
             jsonObject = (JSONObject) new JSONParser().parse(new FileReader(fileLocation));
         } catch (FileNotFoundException fileNotFoundException) {
             _logger.error(String.format("File not found at location %s ", fileLocation), fileNotFoundException);

@@ -4,7 +4,7 @@ package com.pom.steps;
 import com.automacent.fwk.annotations.Pages;
 import com.automacent.fwk.core.WebTestSteps;
 import com.automacent.fwk.reporting.Logger;
-import com.pom.pages.home.*;
+import com.pom.pages.pageobjects.*;
 
 /*
 * Common functionality for validate page url and title and many more
@@ -18,7 +18,7 @@ public class AbstractHomeSteps extends WebTestSteps {
     protected HomePage homePage;
 
     public void refreshPageUsingRefreshButton() {
-        //homePage.header().clickRefreshButton();
+         //homePage.header().clickRefreshButton();
     }
 
 }
