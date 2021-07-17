@@ -1,4 +1,4 @@
-package com.pom.pages.pageobjects;
+package com.pom.pages.catalog;
 
 import com.automacent.fwk.annotations.Action;
 import com.automacent.fwk.annotations.Step;

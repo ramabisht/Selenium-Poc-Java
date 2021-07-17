@@ -1,9 +1,7 @@
-package com.pom.pages.pageobjects;
+package com.pom.pages.catalog;
 
 import com.automacent.fwk.annotations.Action;
-import com.automacent.fwk.annotations.Pages;
 import com.automacent.fwk.annotations.Step;
-import com.automacent.fwk.core.BrowserControls;
 import com.automacent.fwk.core.PageObject;
 import com.automacent.fwk.reporting.Logger;
 import com.pom.steps.login.LoginSteps;

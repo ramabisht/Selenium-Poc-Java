@@ -1,11 +1,10 @@
-package com.pom.steps.pageobjects;
+package com.pom.steps.catalog;
 
 import com.automacent.fwk.annotations.Pages;
 import com.automacent.fwk.annotations.Step;
-import com.automacent.fwk.core.WebTestSteps;
 import com.automacent.fwk.reporting.Logger;
 import com.pom.pages.AbstractHomePage;
-import com.pom.pages.pageobjects.CatalogPage;
+import com.pom.pages.catalog.CatalogPage;
 import com.pom.steps.login.LoginSteps;
 import org.testng.Assert;
 

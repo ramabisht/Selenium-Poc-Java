@@ -1,9 +1,9 @@
-package com.pom.pages.pageobjects;
+package com.pom.pages.orders;
 
 import com.automacent.fwk.annotations.Action;
 import com.automacent.fwk.annotations.Step;
 import com.automacent.fwk.core.PageObject;
-import com.pom.pages.orderdetails.FillOrderDetailsPages;
+import com.pom.pages.orders.FillOrderDetailsPages;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.testng.Assert;

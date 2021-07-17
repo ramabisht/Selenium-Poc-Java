@@ -3,8 +3,7 @@ package com.pom.pages.validatedata;
 import com.automacent.fwk.annotations.Action;
 import com.automacent.fwk.annotations.Steps;
 import com.automacent.fwk.core.PageObject;
-import com.pom.pages.pageobjects.PlaceOrderPage;
-import org.openqa.selenium.support.FindBy;
+import com.pom.pages.orders.PlaceOrderPage;
 
 public class ValidateApplicationData extends PageObject {
 

@@ -2,7 +2,7 @@ package com.mcmp.tests;
 
 
 import com.automacent.fwk.annotations.Steps;
-import com.pom.steps.pageobjects.HomePageSteps;
+import com.pom.steps.home.HomePageSteps;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
 import com.pom.steps.login.LoginSteps;

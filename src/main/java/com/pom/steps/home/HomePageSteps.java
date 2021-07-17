@@ -1,11 +1,12 @@
-package com.pom.steps.pageobjects;
+package com.pom.steps.home;
 
 import com.automacent.fwk.annotations.Pages;
 import com.automacent.fwk.annotations.Step;
+import com.automacent.fwk.core.BaseTest;
 import com.automacent.fwk.core.WebTestSteps;
 import com.automacent.fwk.reporting.Logger;
 import com.pom.pages.AbstractHomePage;
-import com.pom.pages.pageobjects.HomePage;
+import com.pom.pages.home.HomePage;
 import org.testng.Assert;
 
 public class HomePageSteps extends WebTestSteps {
@@ -28,6 +29,8 @@ public class HomePageSteps extends WebTestSteps {
     // Steps ----------------------------------------------
     @Step
     public void confirmHomePageIsLoaded() {
+
+        BaseTest.getTestObject().getBaseUrl();
         homePageView.pageValidation().validate();
     }
 

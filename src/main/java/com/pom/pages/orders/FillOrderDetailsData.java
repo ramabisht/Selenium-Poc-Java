@@ -1,4 +1,4 @@
-package com.pom.pages.orderdetails;
+package com.pom.pages.orders;
 
 import com.automacent.fwk.annotations.Action;
 import com.automacent.fwk.core.PageObject;

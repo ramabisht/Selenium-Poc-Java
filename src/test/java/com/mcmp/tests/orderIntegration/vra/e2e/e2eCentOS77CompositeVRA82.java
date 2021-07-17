@@ -2,10 +2,10 @@ package com.mcmp.tests.orderIntegration.vra.e2e;
 
 import com.automacent.fwk.annotations.Steps;
 import com.mcmp.tests.LoginTest;
-import com.pom.steps.orderdetails.FillOrderDetailsSteps;
-import com.pom.steps.pageobjects.CatalogDetailPageSteps;
-import com.pom.steps.pageobjects.CatalogPageSteps;
-import com.pom.steps.pageobjects.HomePageSteps;
+import com.pom.steps.orders.FillOrderDetailsSteps;
+import com.pom.steps.catalog.CatalogDetailPageSteps;
+import com.pom.steps.catalog.CatalogPageSteps;
+import com.pom.steps.home.HomePageSteps;
 import com.pom.utils.LoadData;
 import org.testng.annotations.*;
 

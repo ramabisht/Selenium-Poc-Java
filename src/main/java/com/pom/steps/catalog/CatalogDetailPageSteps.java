@@ -1,8 +1,8 @@
-package com.pom.steps.pageobjects;
+package com.pom.steps.catalog;
 
 import com.automacent.fwk.annotations.Pages;
 import com.automacent.fwk.annotations.Step;
-import com.pom.pages.pageobjects.CatalogDetailPage;
+import com.pom.pages.catalog.CatalogDetailPage;
 import org.testng.Assert;
 
 public class CatalogDetailPageSteps {

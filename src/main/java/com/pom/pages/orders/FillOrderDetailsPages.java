@@ -1,4 +1,4 @@
-package com.pom.pages.orderdetails;
+package com.pom.pages.orders;
 
 import com.automacent.fwk.annotations.Action;
 import com.automacent.fwk.annotations.Step;
@@ -6,7 +6,6 @@ import com.automacent.fwk.annotations.Steps;
 import com.automacent.fwk.core.BaseTest;
 import com.automacent.fwk.core.PageObject;
 import com.automacent.fwk.reporting.Logger;
-import com.pom.pages.pageobjects.PlaceOrderPage;
 import com.pom.utils.LoadData;
 import org.json.simple.JSONObject;
 import org.openqa.selenium.WebElement;
@@ -14,7 +13,6 @@ import org.openqa.selenium.support.FindBy;
 import org.testng.Assert;
 
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.Map;
 
 

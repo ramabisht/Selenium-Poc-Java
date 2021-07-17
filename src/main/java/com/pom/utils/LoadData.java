@@ -1,6 +1,7 @@
 package com.pom.utils;
 
 import com.automacent.fwk.annotations.Step;
+import com.automacent.fwk.core.BaseTest;
 import com.automacent.fwk.core.WebTestSteps;
 import com.automacent.fwk.reporting.Logger;
 import com.automacent.fwk.utils.JsonUtils;
@@ -52,6 +53,12 @@ public class LoadData extends WebTestSteps {
         _logger.info("Loading the test data under folder " + folderName + " for Test " + testName);
         String testNameOutput = testName.split("\\.")[(testName.split("\\.")).length - 1];
         return jsonUtils.readJsonFromFile(System.getProperty("user.dir") + RESOURCES + MCMP + "\\" + folderName + "\\" + testNameOutput + ".json");
+    }
+
+    @Step
+    public JSONObject loadTestDataFile(String folderName) {
+        _logger.info("Loading the test data under folder " + folderName );
+        return jsonUtils.readJsonFromFile(System.getProperty("user.dir") + RESOURCES + MCMP + "\\" + folderName + "\\" + BaseTest.getTestObject().getTestName() + ".json");
     }
 
     @Step
