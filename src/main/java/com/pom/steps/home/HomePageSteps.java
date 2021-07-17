@@ -6,13 +6,14 @@ import com.automacent.fwk.core.WebTestSteps;
 import com.automacent.fwk.reporting.Logger;
 import com.pom.pages.AbstractHomePageView;
 import com.pom.pages.home.HomePageView;
+import com.pom.steps.AbstractHomeSteps;
 import org.testng.Assert;
 
-public class HomePageSteps extends WebTestSteps {
+public class HomePageSteps extends AbstractHomeSteps {
 
     // XPath Constants
-    String ExpectedURL = "https://mcmp-dev2fra-release-autoui.multicloud-ibm.com/launchpad";
-    String ExpectedPageTitle = "IBM Services for Multicloud Management";
+    //String ExpectedURL = "https://mcmp-dev2fra-release-autoui.multicloud-ibm.com/launchpad";
+    //String ExpectedPageTitle = "IBM Services for Multicloud Management";
 
     private static Logger _logger = Logger.getLogger(HomePageSteps.class);
 
@@ -31,6 +32,7 @@ public class HomePageSteps extends WebTestSteps {
         homePageView.pageValidation().validate();
     }
 
+    /*
     @Step
     public void confirmPageUrl() {
         Assert.assertEquals(abstractHomePageView.validatePageUrl(), ExpectedURL, "Actual page Url is same as expected");
@@ -39,7 +41,7 @@ public class HomePageSteps extends WebTestSteps {
     @Step
     public void confirmPageTitle() {
         Assert.assertEquals(abstractHomePageView.validatePageTitle(), ExpectedPageTitle, "Actual page title is same as expected");
-    }
+    }*/
 
     @Step
     public void validateHamburgerButton() {
@@ -48,8 +50,8 @@ public class HomePageSteps extends WebTestSteps {
 
     @Step
     public void verifyHamburgerButton() {
-        confirmPageUrl();
-        confirmPageTitle();
+        //confirmPageUrl();
+        //confirmPageTitle();
         validateHamburgerButton();
 
     }

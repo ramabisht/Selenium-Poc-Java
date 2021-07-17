@@ -2,7 +2,10 @@ package com.pom.pages.orders;
 
 import com.automacent.fwk.annotations.Action;
 import com.automacent.fwk.annotations.Step;
+import com.automacent.fwk.core.BaseTest;
 import com.automacent.fwk.core.PageObject;
+import com.automacent.fwk.reporting.Logger;
+import com.pom.utils.LoadData;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.testng.Assert;
@@ -14,7 +17,9 @@ public class PlaceOrderPageView extends PageObject {
     private static final String REVIEWORDERPARAMETERPAGEXPATH = ".//*[contains(text(),'Review Order')]";
     private static final String NEXTBUTTONXPATH = "//button[contains(@id,'next-button')]";
     private static final String PREVIOUSBUTTONXPATH = "//button[contains(@id,'previous')]";
-    private static final com.automacent.fwk.reporting.Logger _logger = com.automacent.fwk.reporting.Logger.getLogger(FillOrderDetailsPagesView.class);
+
+
+    private static final Logger _logger = Logger.getLogger(FillOrderDetailsPagesView.class);
 
     @Override
     public PageValidation pageValidation() {
@@ -27,6 +32,11 @@ public class PlaceOrderPageView extends PageObject {
             @Step
             public void validatePlaceOrderPageLoaded() {
                 Assert.assertTrue(verifyLandedToMainParaPage(), "UserName Field on Login Page is loaded");
+                //Change the param for Login page for title and URL accordingly
+                LoadData loadData = new LoadData();
+                Assert.assertEquals(driver.getTitle(),  loadData.getParamValue(loadData.loadApplicationTitle(), "launchpadTitle"), "Page title validation failed");
+                Assert.assertEquals(driver.getCurrentUrl(), BaseTest.getTestObject().getBaseUrl() +
+                        loadData.getParamValue(loadData.loadApplicationUrl(), "launchpadUrl"), "Page title validation failed");
             }
         };
     }

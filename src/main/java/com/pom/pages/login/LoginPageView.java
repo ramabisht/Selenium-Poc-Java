@@ -2,13 +2,18 @@ package com.pom.pages.login;
 
 import com.automacent.fwk.annotations.Action;
 import com.automacent.fwk.annotations.Step;
+import com.automacent.fwk.core.BaseTest;
 import com.automacent.fwk.core.PageObject;
+import com.automacent.fwk.reporting.Logger;
+import com.pom.utils.LoadData;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.testng.Assert;
 
 public final class LoginPageView extends PageObject {
 
+
+    private static final Logger _logger = Logger.getLogger(LoginPageView.class);
 
     @Override
     public PageValidation pageValidation() {
@@ -23,6 +28,12 @@ public final class LoginPageView extends PageObject {
             public void validateLoginPageIsLoaded() {
                 Assert.assertTrue(isUserNameFieldFound(), "UserName Field on Login Page is loaded");
                 Assert.assertTrue(isContinueButtonFound(), "Continue Button on Login Page is loaded");
+
+                //Change the param for Login page for title and URL accordingly
+                LoadData loadData = new LoadData();
+                Assert.assertEquals(driver.getTitle(),  loadData.getParamValue(loadData.loadApplicationTitle(), "launchpadTitle"), "Page title validation failed");
+                Assert.assertEquals(driver.getCurrentUrl(), BaseTest.getTestObject().getBaseUrl() +
+                        loadData.getParamValue(loadData.loadApplicationUrl(), "launchpadUrl"), "Page title validation failed");
             }
         };
     }

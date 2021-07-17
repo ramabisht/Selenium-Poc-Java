@@ -37,6 +37,12 @@ public class FillOrderDetailsPagesView extends PageObject {
             public void validateOrderPageLoaded() {
                 Assert.assertTrue(isOrderPageHeaderPresent(), "Is place order page heading is present");
 
+                //Change the param for Login page for title and URL accordingly
+                LoadData loadData = new LoadData();
+                Assert.assertEquals(driver.getTitle(),  loadData.getParamValue(loadData.loadApplicationTitle(), "launchpadTitle"), "Page title validation failed");
+                Assert.assertEquals(driver.getCurrentUrl(), BaseTest.getTestObject().getBaseUrl() +
+                        loadData.getParamValue(loadData.loadApplicationUrl(), "launchpadUrl"), "Page title validation failed");
+
             }
         };
     }

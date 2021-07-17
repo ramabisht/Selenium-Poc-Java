@@ -2,9 +2,11 @@ package com.pom.pages.catalog;
 
 import com.automacent.fwk.annotations.Action;
 import com.automacent.fwk.annotations.Step;
+import com.automacent.fwk.core.BaseTest;
 import com.automacent.fwk.core.PageObject;
 import com.automacent.fwk.reporting.Logger;
 import com.pom.steps.login.LoginSteps;
+import com.pom.utils.LoadData;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -23,7 +25,9 @@ public class CatalogPageView extends PageObject {
     private static final String PROVIDERLISTXPATH = "//span[@class = 'bx--checkbox-label-text']";
     private static final String PROVIDERTOBECLICKED = "//span[@class = 'bx--checkbox-label-text'";
     private static final String CARDSERVICETITLE = ".card-service-title";
-    private static Logger _logger = Logger.getLogger(LoginSteps.class);
+
+
+    private static Logger _logger = Logger.getLogger(CatalogPageView.class);
 
     @Override
     public PageValidation pageValidation() {
@@ -38,6 +42,13 @@ public class CatalogPageView extends PageObject {
                 try {
                     switchIframe();
                     Assert.assertTrue(isCatalogTilePresent(), "Is Catalog heading has been displayed");
+
+                    //Change the param for Login page for title and URL accordingly
+                    LoadData loadData = new LoadData();
+                    Assert.assertEquals(driver.getTitle(),  loadData.getParamValue(loadData.loadApplicationTitle(), "launchpadTitle"), "Page title validation failed");
+                    Assert.assertEquals(driver.getCurrentUrl(), BaseTest.getTestObject().getBaseUrl() +
+                            loadData.getParamValue(loadData.loadApplicationUrl(), "launchpadUrl"), "Page title validation failed");
+
                 } catch (Exception ex) {
                     _logger.info("Exception:" + ex);
                 }

@@ -2,10 +2,13 @@ package com.pom.steps.catalog;
 
 import com.automacent.fwk.annotations.Pages;
 import com.automacent.fwk.annotations.Step;
+import com.automacent.fwk.reporting.Logger;
 import com.pom.pages.catalog.CatalogDetailPageView;
 import org.testng.Assert;
 
 public class CatalogDetailPageSteps {
+
+    private static Logger _logger = Logger.getLogger(CatalogDetailPageSteps.class);
 
     @Pages
     private CatalogDetailPageView catalogDetailPageView;

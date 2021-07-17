@@ -2,6 +2,7 @@ package com.pom.pages.orders;
 
 import com.automacent.fwk.annotations.Action;
 import com.automacent.fwk.core.PageObject;
+import com.automacent.fwk.reporting.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
@@ -9,7 +10,7 @@ import java.util.List;
 
 public class FillOrderDetailsDataView extends PageObject {
 
-    private static final com.automacent.fwk.reporting.Logger _logger = com.automacent.fwk.reporting.Logger.getLogger(FillOrderDetailsPagesView.class);
+    private static final Logger _logger = Logger.getLogger(FillOrderDetailsPagesView.class);
 
     @Override
     public PageValidation pageValidation() {

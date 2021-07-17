@@ -13,7 +13,9 @@ public class CatalogPageSteps {
     String ExpectedURL = "https://mcmp-dev2fra-release-autoui.multicloud-ibm.com/lite/consume/storeFront";
     String ExpectedPageTitle = "IBM Services for Multicloud Management";
     String CategoryList = "All Categories";
-    private static Logger _logger = Logger.getLogger(LoginSteps.class);
+
+
+    private static Logger _logger = Logger.getLogger(CatalogPageSteps.class);
 
     @Pages
     private AbstractHomePageView abstractHomePageView;

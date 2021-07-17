@@ -2,8 +2,10 @@ package com.pom.pages.home;
 
 import com.automacent.fwk.annotations.Action;
 import com.automacent.fwk.annotations.Step;
+import com.automacent.fwk.core.BaseTest;
 import com.automacent.fwk.core.PageObject;
 import com.automacent.fwk.reporting.Logger;
+import com.pom.utils.LoadData;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -30,12 +32,17 @@ public class HomePageView extends PageObject {
 
             @Override
             public void validate() {
-                validateHamburgerButton();
+                validateHomePageIsLoaded();
             }
 
             @Step
-            public void validateHamburgerButton() {
+            public void validateHomePageIsLoaded() {
                 Assert.assertTrue(isHamburgerButtonFound(), "Hamburger button is displayed.");
+                LoadData loadData = new LoadData();
+                Assert.assertEquals(driver.getTitle(),  loadData.getParamValue(loadData.loadApplicationTitle(), "launchpadTitle"), "Page title validation failed");
+                Assert.assertEquals(driver.getCurrentUrl(), BaseTest.getTestObject().getBaseUrl() +
+                        loadData.getParamValue(loadData.loadApplicationUrl(), "launchpadUrl"), "Page title validation failed");
+
             }
         };
     }
@@ -47,9 +54,7 @@ public class HomePageView extends PageObject {
 
     @Action
     public boolean isHamburgerButtonFound() {
-        isElementFound(hamburgerButton);
-        return hamburgerButton.isDisplayed();
-        //return hamburgerButton.isEnabled();
+          return isElementFound(hamburgerButton) && hamburgerButton.isDisplayed() ;
     }
 
     @Action
@@ -106,6 +111,4 @@ public class HomePageView extends PageObject {
             driver.findElement(By.xpath(LEFTNAVIPAFETOBECLICKEDXPATH + " and @title ='" + selectNavigationPage().getText() + "']")).click();
         }
     }
-
-
 }
