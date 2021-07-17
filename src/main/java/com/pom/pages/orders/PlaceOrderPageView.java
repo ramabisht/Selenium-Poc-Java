@@ -3,19 +3,18 @@ package com.pom.pages.orders;
 import com.automacent.fwk.annotations.Action;
 import com.automacent.fwk.annotations.Step;
 import com.automacent.fwk.core.PageObject;
-import com.pom.pages.orders.FillOrderDetailsPages;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.testng.Assert;
 
-public class PlaceOrderPage extends PageObject {
+public class PlaceOrderPageView extends PageObject {
 
     private static final String MAINPARAMETERPAGEXPATH = ".//*[contains(text(),'Main Parameters')]";
     private static final String ADDITIONALPARAMETERPAGEXPATH = ".//*[contains(text(),'Additional Parameters')]";
     private static final String REVIEWORDERPARAMETERPAGEXPATH = ".//*[contains(text(),'Review Order')]";
     private static final String NEXTBUTTONXPATH = "//button[contains(@id,'next-button')]";
     private static final String PREVIOUSBUTTONXPATH = "//button[contains(@id,'previous')]";
-    private static final com.automacent.fwk.reporting.Logger _logger = com.automacent.fwk.reporting.Logger.getLogger(FillOrderDetailsPages.class);
+    private static final com.automacent.fwk.reporting.Logger _logger = com.automacent.fwk.reporting.Logger.getLogger(FillOrderDetailsPagesView.class);
 
     @Override
     public PageValidation pageValidation() {

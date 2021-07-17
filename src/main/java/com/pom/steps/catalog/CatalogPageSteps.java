@@ -3,8 +3,8 @@ package com.pom.steps.catalog;
 import com.automacent.fwk.annotations.Pages;
 import com.automacent.fwk.annotations.Step;
 import com.automacent.fwk.reporting.Logger;
-import com.pom.pages.AbstractHomePage;
-import com.pom.pages.catalog.CatalogPage;
+import com.pom.pages.AbstractHomePageView;
+import com.pom.pages.catalog.CatalogPageView;
 import com.pom.steps.login.LoginSteps;
 import org.testng.Assert;
 
@@ -16,9 +16,9 @@ public class CatalogPageSteps {
     private static Logger _logger = Logger.getLogger(LoginSteps.class);
 
     @Pages
-    private AbstractHomePage abstractHomePageView;
+    private AbstractHomePageView abstractHomePageView;
     @Pages
-    private CatalogPage catalogPageView;
+    private CatalogPageView catalogPageView;
 
 
     // Steps ----------------------------------------------

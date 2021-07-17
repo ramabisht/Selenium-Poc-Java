@@ -11,7 +11,7 @@ import com.automacent.fwk.annotations.Step;
 import com.automacent.fwk.core.BaseTest;
 import com.automacent.fwk.reporting.Logger;
 import com.automacent.fwk.utils.ThreadUtils;
-import com.pom.pages.login.LoginPage;
+import com.pom.pages.login.LoginPageView;
 
 public final class LoginSteps extends WebTestSteps {
 
@@ -20,7 +20,7 @@ public final class LoginSteps extends WebTestSteps {
     // Pages ----------------------------------------------
 
     @Pages
-    private LoginPage loginView;
+    private LoginPageView loginView;
 
     // Steps ----------------------------------------------
 

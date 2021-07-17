@@ -7,9 +7,9 @@ import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
-public class FillOrderDetailsData extends PageObject {
+public class FillOrderDetailsDataView extends PageObject {
 
-    private static final com.automacent.fwk.reporting.Logger _logger = com.automacent.fwk.reporting.Logger.getLogger(FillOrderDetailsPages.class);
+    private static final com.automacent.fwk.reporting.Logger _logger = com.automacent.fwk.reporting.Logger.getLogger(FillOrderDetailsPagesView.class);
 
     @Override
     public PageValidation pageValidation() {

@@ -15,7 +15,7 @@ public class AbstractHomeSteps extends WebTestSteps {
     private static final Logger _logger = Logger.getLogger(AbstractHomeSteps.class);
 
     @Pages
-    protected HomePage homePage;
+    protected HomePageView homePageView;
 
     public void refreshPageUsingRefreshButton() {
         //homePage.header().clickRefreshButton();

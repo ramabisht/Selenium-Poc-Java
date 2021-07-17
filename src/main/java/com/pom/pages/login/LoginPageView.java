@@ -7,7 +7,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.testng.Assert;
 
-public final class LoginPage extends PageObject {
+public final class LoginPageView extends PageObject {
 
 
     @Override

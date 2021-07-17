@@ -2,23 +2,23 @@ package com.pom.steps.orders;
 
 import com.automacent.fwk.annotations.Pages;
 import com.automacent.fwk.annotations.Step;
-import com.pom.pages.orders.FillOrderDetailsPages;
-import com.pom.pages.orders.PlaceOrderPage;
+import com.pom.pages.orders.FillOrderDetailsPagesView;
+import com.pom.pages.orders.PlaceOrderPageView;
 
 public class FillOrderDetailsSteps {
 
     @Pages
-    private FillOrderDetailsPages fillOrderDetailsPages;
+    private FillOrderDetailsPagesView fillOrderDetailsPagesView;
     @Pages
-    private PlaceOrderPage placeOrderPage;
+    private PlaceOrderPageView placeOrderPageView;
 
     @Step
     public void fillOrderParameterDetailsMainParam(String providerName) {
-        fillOrderDetailsPages.fillMainParameterPage(providerName);
-        placeOrderPage.clickOnNextButton();
+        fillOrderDetailsPagesView.fillMainParameterPage(providerName);
+        placeOrderPageView.clickOnNextButton();
     }
 
     public void fillOrderParameterDetailsAdditionalParam(String providerName) {
-        fillOrderDetailsPages.fillAdditionalParameterPage(providerName);
+        fillOrderDetailsPagesView.fillAdditionalParameterPage(providerName);
     }
 }

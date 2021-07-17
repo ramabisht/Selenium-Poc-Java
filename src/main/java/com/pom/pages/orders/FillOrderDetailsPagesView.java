@@ -16,14 +16,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-public class FillOrderDetailsPages extends PageObject {
+public class FillOrderDetailsPagesView extends PageObject {
 
 
     private static final String ORDER_DETAIL_TITLE_CSS = "h1.ibm--page-header__title";
     private static final String ORDERPARAMETERS = "Order Parameters";
     private static final String MAINPARAMETER = "Main Parameters";
     private static final String ADDITIONALPARAMETER = "Additional Parameters";
-    private static final Logger _logger = Logger.getLogger(FillOrderDetailsPages.class);
+    private static final Logger _logger = Logger.getLogger(FillOrderDetailsPagesView.class);
 
     @Override
     public PageValidation pageValidation() {
@@ -45,10 +45,10 @@ public class FillOrderDetailsPages extends PageObject {
     private LoadData loadData;
 
     @Steps
-    private PlaceOrderPage placeOrderPage;
+    private PlaceOrderPageView placeOrderPageView;
 
     @Steps
-    private FillOrderDetailsData fillOrderDetailsData;
+    private FillOrderDetailsDataView fillOrderDetailsDataView;
 
     @FindBy(css = ORDER_DETAIL_TITLE_CSS)
     private WebElement pageHeader;
@@ -83,7 +83,7 @@ public class FillOrderDetailsPages extends PageObject {
     public void fillMainParameterPage(String providerName) {
         try {
             _logger.info("Starting filling values in main parameter page");
-            boolean verifyMainParaPage = placeOrderPage.verifyLandedToMainParaPage();
+            boolean verifyMainParaPage = placeOrderPageView.verifyLandedToMainParaPage();
             if (verifyMainParaPage) {
                 _logger.info("inside if condition");
                 ((HashMap) ((HashMap) getOrderParameters(providerName)).get(MAINPARAMETER)).forEach((key, value) -> {
@@ -93,7 +93,7 @@ public class FillOrderDetailsPages extends PageObject {
                     String paramType = (String) mainParamsValue.get("type");
                     String paramValue = (String) mainParamsValue.get("value");
                     _logger.info("Outer Param id :" + paramId + ", Param type :" + paramType + ", Param Value :" + paramValue);
-                    fillOrderDetailsData.fillOrderDetails(paramId, paramValue, paramType);
+                    fillOrderDetailsDataView.fillOrderDetails(paramId, paramValue, paramType);
                 });
             }
         } catch (Exception ex) {
@@ -106,7 +106,7 @@ public class FillOrderDetailsPages extends PageObject {
     /*-------------------------------Fill oder detail for Additional parameter page---------------------------------------*/
     @Action
     public void fillAdditionalParameterPage(String providerName) {
-        boolean verifyAdditionalParaPage = placeOrderPage.verifyLandedToAdditionalParaPage();
+        boolean verifyAdditionalParaPage = placeOrderPageView.verifyLandedToAdditionalParaPage();
         if (verifyAdditionalParaPage) {
             try {
                 ((HashMap) ((HashMap) getOrderParameters(providerName)).get(ADDITIONALPARAMETER)).forEach((key, value) -> {
@@ -119,8 +119,8 @@ public class FillOrderDetailsPages extends PageObject {
                         paramValue = (String) additionalParamKey.get("value");
                         _logger.info("Filling details for " + key + "parameter in Additional parameters page" + "to value " + paramValue);
                         //System.out.println("Outer Param id :" + paramId + ", Param type :" + paramType + ", Param Value :" + paramValue);
-                        fillOrderDetailsData.fillOrderDetails(paramId, paramType, paramValue);
-                        placeOrderPage.clickOnNextButton();
+                        fillOrderDetailsDataView.fillOrderDetails(paramId, paramType, paramValue);
+                        placeOrderPageView.clickOnNextButton();
                     } else {
                         additionalParamKey.forEach((parkey, parValue) -> {
                             String paramId = "", paramType = "", paramValue = "";
@@ -130,10 +130,10 @@ public class FillOrderDetailsPages extends PageObject {
                             paramType = (String) additionalParamValue.get("type");
                             paramValue = (String) additionalParamValue.get("value");
                             _logger.info("Filling details for " + parkey + " parameter in Additional parameters page" + "to value " + paramValue);
-                            fillOrderDetailsData.fillOrderDetails(paramId, paramType, paramValue);
+                            fillOrderDetailsDataView.fillOrderDetails(paramId, paramType, paramValue);
                             //System.out.println("Outer Param id :" + paramId + ", Param type :" + paramType + ", Param Value :" + paramValue);
                         });
-                        placeOrderPage.clickOnNextButton();
+                        placeOrderPageView.clickOnNextButton();
                     }
                 });
             } catch (Exception ex) {

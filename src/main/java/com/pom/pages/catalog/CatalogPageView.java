@@ -12,7 +12,7 @@ import org.testng.Assert;
 
 import java.util.List;
 
-public class CatalogPage extends PageObject {
+public class CatalogPageView extends PageObject {
 
     private static final String CATALOGPAGETITLE = "h1.ibm--page-header__title[title~='Catalog']";
     public static final String IFRAME = "mcmp-iframe";

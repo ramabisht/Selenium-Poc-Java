@@ -8,7 +8,7 @@ import com.pom.steps.login.LoginSteps;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class CatalogDetailPage extends PageObject {
+public class CatalogDetailPageView extends PageObject {
 
     private static final String SERVICENAMEECSS = "h1.ibm--page-header__title";
     private static final String CONFIGURESERIVECSS = "button#configure-service";

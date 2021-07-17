@@ -11,7 +11,7 @@ import org.testng.Assert;
 
 import java.util.List;
 
-public class HomePage extends PageObject {
+public class HomePageView extends PageObject {
 
     private static final String HAMBURGERCSS = "ibm-hamburger button";
     private static final String LEFTNAVIGATIONXPATH = "//span[@class = 'bx--side-nav__submenu-title']";
@@ -22,11 +22,12 @@ public class HomePage extends PageObject {
     private static final String LEFTNAVIPAGEXPATH = "//span[@class = 'bx--side-nav__link-text']";
     private static final String LEFTNAVIPAFETOBECLICKEDXPATH = "//a[@class = 'bx--side-nav__link'";
 
-    private static Logger _logger = Logger.getLogger(HomePage.class);
+    private static Logger _logger = Logger.getLogger(HomePageView.class);
 
     @Override
     public PageValidation pageValidation() {
         return new PageValidation() {
+
             @Override
             public void validate() {
                 validateHamburgerButton();
@@ -34,7 +35,7 @@ public class HomePage extends PageObject {
 
             @Step
             public void validateHamburgerButton() {
-                Assert.assertTrue(isHamburgerButtonFound(), "Hamburger button is displayed");
+                Assert.assertTrue(isHamburgerButtonFound(), "Hamburger button is displayed.");
             }
         };
     }
