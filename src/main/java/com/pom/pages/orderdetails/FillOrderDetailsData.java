@@ -29,9 +29,20 @@ public class FillOrderDetailsData extends PageObject {
     public void fillValueForButtons(String elementId, String elementValue){
         _logger.info("stating the Buttons function");
         WebElement idElement=driver.findElement(By.id(elementId));
-            isClickableElementFound(idElement);
+            if (isClickableElementFound(idElement)) {
+                idElement.click();
+                _logger.info("Clicked on " + elementValue);
+            }
+    }
+
+    @Action
+    public void fillValueForRadioButtons(String elementId, String elementValue){
+        _logger.info("stating the Buttons function");
+        WebElement idElement=driver.findElement(By.cssSelector("[id=\"" + elementId + "\"] ~ label span"));
+        if (isClickableElementFound(idElement)) {
             idElement.click();
-            _logger.info("Clicked on "+ elementValue);
+            _logger.info("Clicked on " + elementValue);
+        }
     }
 
     @Action
@@ -53,7 +64,7 @@ public class FillOrderDetailsData extends PageObject {
     @Action
     public void fillOrderDetails(String elementId, String elementValue, String elementType){
         _logger.info("starting the fillorderdetail function"+elementType+" "+elementType.length());
-        if (elementType.trim().contains("Textbox")){
+        if (elementType.equals("Textbox")){
             _logger.info("inside the fill fucntion");
             fillValueForText(elementId, elementValue);
         }
@@ -62,11 +73,13 @@ public class FillOrderDetailsData extends PageObject {
             fillValueForDropDown(elementId, elementValue);
         }
 
-        else if (elementType.equals("RadioButton")|| elementType.equals("CheckBox"))
-            _logger.info("inside the fill fucntion");{
+        else if (elementType.equals("CheckBox")){
+            _logger.info("inside the fill fucntion");
             fillValueForButtons(elementId, elementValue);
         }
-
+         else if (elementType.equals("RadioButton")) {
+            fillValueForRadioButtons(elementId, elementValue);
+        }
     }
 
     }
