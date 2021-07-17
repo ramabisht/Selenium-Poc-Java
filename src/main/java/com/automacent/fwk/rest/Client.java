@@ -22,7 +22,7 @@ public class Client {
     public static final int POST_RESPONSE_CODE = 201;
     public static final int DELETE_RESPONSE_CODE = 202;
 
-    public void Client(){
+    public void Client() {
         restAssured = new RestAssured();
     }
 
@@ -35,20 +35,20 @@ public class Client {
         restAssured.given().contentType(Type);
     }
 
-    public void setDefaultContentType(){
+    public void setDefaultContentType() {
         _logger.info("Setting JSON as default content type");
         restAssured.given().contentType(ContentType.JSON);
     }
 
-    public Map getDefaultHeader(){
+    public Map getDefaultHeader() {
         Map<String, String> header = new HashMap<String, String>();
         header.put("Content-Type", "application/json");
         return header;
     }
 
-    public Response performAuthentication(String url, String userName, String password){
+    public Response performAuthentication(String url, String userName, String password) {
         _logger.info("Performing authentication on url: " + url + ", userName: " + userName + " password: " + password);
-        return  restAssured.given().relaxedHTTPSValidation().auth().basic(userName, password).post();
+        return restAssured.given().relaxedHTTPSValidation().auth().basic(userName, password).post();
     }
 
     // ********** Get Requests *************//
@@ -60,7 +60,7 @@ public class Client {
         _logger.info("**************  Get Request Details Starts   *******************");
         _logger.info("URL:" + getUrl);
         _logger.info("**************  Get Request Details Ends     *******************");
-        return  RestAssured.given().relaxedHTTPSValidation().urlEncodingEnabled(false).when().get(getUrl);
+        return RestAssured.given().relaxedHTTPSValidation().urlEncodingEnabled(false).when().get(getUrl);
     }
 
     public Response getRequestByHeaders(String getUrl, Map<String, String> headers) {
@@ -184,7 +184,7 @@ public class Client {
     // ********** Delete Requests *************//
 
     public Response deleteRequest() {
-        return  RestAssured.given().relaxedHTTPSValidation().delete();
+        return RestAssured.given().relaxedHTTPSValidation().delete();
     }
 
     public Response deleteRequestByUrl(String deleteUrl) {
@@ -215,19 +215,19 @@ public class Client {
 
     /**** Status code validation checkers **/
 
-    public void validateGetResponseCode(Response response){
+    public void validateGetResponseCode(Response response) {
         response.then().assertThat().statusCode(GET_RESPONSE_CODE);
     }
 
-    public void validatePostResponseCode(Response response){
+    public void validatePostResponseCode(Response response) {
         response.then().assertThat().statusCode(POST_RESPONSE_CODE);
     }
 
-    public void validatePutResponseCode(Response response){
+    public void validatePutResponseCode(Response response) {
         response.then().assertThat().statusCode(PUT_RESPONSE_CODE);
     }
 
-    public void validateDeleteResponseCode(Response response){
+    public void validateDeleteResponseCode(Response response) {
         response.then().assertThat().statusCode(DELETE_RESPONSE_CODE);
     }
 
@@ -264,7 +264,6 @@ public class Client {
     public String getResponseCookie(Response response, String cookieName) {
         return response.getCookie(cookieName);
     }
-
 
 
 }

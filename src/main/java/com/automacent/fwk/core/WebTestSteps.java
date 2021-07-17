@@ -7,12 +7,11 @@ import java.util.regex.Pattern;
  * class. Inheriting this class will enforce parity in constructor signature and
  * provide common functions for use in step libraries. This class provides
  * {@link BrowserControls} in addition to other Step executiokn utilities
- * 
- * @author rama.bisht
  *
+ * @author rama.bisht
  */
 public class WebTestSteps extends BrowserControls {
 
-	protected static final Pattern FIND_HTML_TAGS = Pattern.compile("<[^>]*>");
+    protected static final Pattern FIND_HTML_TAGS = Pattern.compile("<[^>]*>");
 
 }

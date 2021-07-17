@@ -20,7 +20,7 @@ public final class LoginPage extends PageObject {
             }
 
             @Step
-            public void validateLoginPageIsLoaded(){
+            public void validateLoginPageIsLoaded() {
                 Assert.assertTrue(isUserNameFieldFound(), "UserName Field on Login Page is loaded");
                 Assert.assertTrue(isContinueButtonFound(), "Continue Button on Login Page is loaded");
             }
@@ -33,7 +33,7 @@ public final class LoginPage extends PageObject {
     private WebElement loginForm;
 
     public boolean isLoginFormFound() {
-        return isElementFound(loginForm,1);
+        return isElementFound(loginForm, 1);
     }
 
 
@@ -42,18 +42,18 @@ public final class LoginPage extends PageObject {
     private WebElement userNameField;
 
     @Action
-    public boolean isUserNameFieldFound(){
+    public boolean isUserNameFieldFound() {
         isElementFound(userNameField);
         return userNameField.isDisplayed();
     }
 
     @Action
-    public void enterUserName(String username){
+    public void enterUserName(String username) {
         userNameField.sendKeys(username);
     }
 
     @Action
-    public String getUserName(){
+    public String getUserName() {
         return userNameField.getAttribute("value");
     }
 
@@ -63,13 +63,13 @@ public final class LoginPage extends PageObject {
     private WebElement continueButton;
 
     @Action
-    public boolean isContinueButtonFound(){
+    public boolean isContinueButtonFound() {
         isElementFound(continueButton);
         return continueButton.isDisplayed();
     }
 
     @Action
-    public void clickContinueButton(){
+    public void clickContinueButton() {
         continueButton.click();
     }
 
@@ -79,17 +79,17 @@ public final class LoginPage extends PageObject {
     private WebElement passwordField;
 
     @Action
-    public boolean isPasswordFieldFound(){
+    public boolean isPasswordFieldFound() {
         return passwordField.isDisplayed();
     }
 
     @Action
-    public String getPassword(){
+    public String getPassword() {
         return passwordField.getAttribute("value");
     }
 
     @Action
-    public void enterPassword(String password){
+    public void enterPassword(String password) {
         passwordField.sendKeys(password);
     }
 
@@ -98,12 +98,12 @@ public final class LoginPage extends PageObject {
     private WebElement loginButton;
 
     @Action
-    public boolean isLoginButtonFound(){
-        return  loginButton.isDisplayed();
+    public boolean isLoginButtonFound() {
+        return loginButton.isDisplayed();
     }
 
     @Action
-    public void clickLoginButton(){
+    public void clickLoginButton() {
         loginButton.click();
     }
 
@@ -112,12 +112,12 @@ public final class LoginPage extends PageObject {
     private WebElement privacyAccept;
 
     @Action
-    public boolean isPrivacyWarningFound(){
-        return  privacyAccept.isDisplayed();
+    public boolean isPrivacyWarningFound() {
+        return privacyAccept.isDisplayed();
     }
 
     @Action
-    public void acceptPrivacy(){
+    public void acceptPrivacy() {
         privacyAccept.click();
     }
 
@@ -126,12 +126,12 @@ public final class LoginPage extends PageObject {
     private WebElement loginErrorMessage;
 
     @Action
-    public boolean isLoginErrorFound(){
+    public boolean isLoginErrorFound() {
         return isElementFound(loginErrorMessage, 5);
     }
 
     @Action
-    public String getLoginErrorMessage(){
+    public String getLoginErrorMessage() {
         return loginErrorMessage.getText().trim();
     }
 

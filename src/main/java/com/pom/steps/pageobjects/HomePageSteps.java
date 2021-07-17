@@ -37,35 +37,36 @@ public class HomePageSteps extends WebTestSteps {
     }
 
     @Step
-    public void confirmPageTitle(){
+    public void confirmPageTitle() {
         Assert.assertEquals(abstractHomePageView.validatePageTitle(), ExpectedPageTitle, "Actual page title is same as expected");
     }
 
     @Step
     public void validateHamburgerButton() {
-        Assert.assertEquals(homePageView.isHamburgerButtonFound(),true);
+        Assert.assertEquals(homePageView.isHamburgerButtonFound(), true);
     }
 
     @Step
-    public void verifyHamburgerButton(){
+    public void verifyHamburgerButton() {
         confirmPageUrl();
         confirmPageTitle();
         validateHamburgerButton();
 
     }
+
     @Step
-    public void clickHamburgerButton(){
+    public void clickHamburgerButton() {
         homePageView.clickHamburgerButton();
     }
 
     @Step
-    public void clickOnLeftNavigation(){
+    public void clickOnLeftNavigation() {
         homePageView.selectLeftNavigation();
         homePageView.clickLeftNavigation();
     }
 
     @Step
-    public void clickOnNavigationPage(){
+    public void clickOnNavigationPage() {
         homePageView.selectNavigationPage();
         homePageView.clickLeftNavigationPage();
     }

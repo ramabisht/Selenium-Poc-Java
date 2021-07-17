@@ -9,10 +9,10 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 public class CatalogDetailPage extends PageObject {
-    private static final String SERVICENAMEECSS="h1.ibm--page-header__title" ;
-    private static final String CONFIGURESERIVECSS="button#configure-service" ;
-    private static Logger _logger = Logger.getLogger(LoginSteps.class);
 
+    private static final String SERVICENAMEECSS = "h1.ibm--page-header__title";
+    private static final String CONFIGURESERIVECSS = "button#configure-service";
+    private static Logger _logger = Logger.getLogger(LoginSteps.class);
 
     @Override
     public PageValidation pageValidation() {
@@ -30,27 +30,27 @@ public class CatalogDetailPage extends PageObject {
     }
 
     //-------------------------------validate catalog detail page header-----------------------------
-    @FindBy(css=SERVICENAMEECSS)
+    @FindBy(css = SERVICENAMEECSS)
     private WebElement serviceNameTitle;
 
     @Action
-    public boolean verifyServiceNamePresent(String bluePrint){
+    public boolean verifyServiceNamePresent(String bluePrint) {
         _logger.info("Verify page heading is" + bluePrint);
         return (serviceNameTitle.getText().equals(bluePrint));
     }
 
     //-----------------------------------click on the configure button---------------------------------
 
-    @FindBy(css=CONFIGURESERIVECSS)
+    @FindBy(css = CONFIGURESERIVECSS)
     private WebElement configureServiceButton;
 
     @Action
-    public boolean verifyConfigureButtonVisible(){
+    public boolean verifyConfigureButtonVisible() {
         return isClickableElementFound(configureServiceButton);
     }
 
     @Action
-    public void clickOnConfigureService(){
+    public void clickOnConfigureService() {
         _logger.info("Click on the configure button");
         configureServiceButton.click();
     }

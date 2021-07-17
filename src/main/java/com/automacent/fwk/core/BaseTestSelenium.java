@@ -74,7 +74,7 @@ public abstract class BaseTestSelenium extends BaseTest {
      * @param screenshotModeForIteration {@link ScreenshotModeForIteration}
      * @param baseUrl                    Base URL of the application
      * @param testContext                testNg {@link ITestContext}
-     * @param harType                  {@link HarType}
+     * @param harType                    {@link HarType}
      */
     @BeforeTest
     @Parameters({

@@ -17,58 +17,57 @@ import com.automacent.fwk.core.BaseTest;
  * the dependency on call {@link WebDriverWait#until}({@link ExpectedCondition}). The
  * additional methods will directly reference the {@link ExpectedCondition}
  * without the user explicitly calling the {@link ExpectedCondition} conditions.
- * 
+ * <p>
  * All the new until* methods will throws {@link TimeoutException} if the
  * condition fails
- * 
- * @author rama.bisht
  *
+ * @author rama.bisht
  */
 public class AutomacentWebDriverWait extends WebDriverWait {
 
-	private final WebDriver driver;
+    private final WebDriver driver;
 
-	public AutomacentWebDriverWait(WebDriver driver, long timeOutInSeconds) {
-		super(driver, timeOutInSeconds);
-		this.driver = driver;
-	}
+    public AutomacentWebDriverWait(WebDriver driver, long timeOutInSeconds) {
+        super(driver, timeOutInSeconds);
+        this.driver = driver;
+    }
 
-	/**
-	 * Execute the until() condition by setting the proper implicit and explicit
-	 * wait timeouts
-	 * 
-	 * @param <V>       Return type of {@link ExpectedCondition}
-	 * @param condition {@link ExpectedCondition}
-	 * @return Object that is expected to be returned after the
-	 *         {@link ExpectedCondition} succeeds
-	 */
+    /**
+     * Execute the until() condition by setting the proper implicit and explicit
+     * wait timeouts
+     *
+     * @param <V>       Return type of {@link ExpectedCondition}
+     * @param condition {@link ExpectedCondition}
+     * @return Object that is expected to be returned after the
+     * {@link ExpectedCondition} succeeds
+     */
 
-	private <V> V applyExplicit(ExpectedCondition<V> condition) {
-		try {
-			driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
-			return (V) until(condition);
-		} finally {
-			driver.manage().timeouts().implicitlyWait(BaseTest.getTestObject().getTimeoutInSeconds(), TimeUnit.SECONDS);
-		}
-	}
+    private <V> V applyExplicit(ExpectedCondition<V> condition) {
+        try {
+            driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+            return (V) until(condition);
+        } finally {
+            driver.manage().timeouts().implicitlyWait(BaseTest.getTestObject().getTimeoutInSeconds(), TimeUnit.SECONDS);
+        }
+    }
 
-	/**
-	 * Wait until element defined by locator {@link By} is located in the DOM
-	 * 
-	 * @param by Element identifier
-	 * @return Located {@link WebElement}
-	 */
+    /**
+     * Wait until element defined by locator {@link By} is located in the DOM
+     *
+     * @param by Element identifier
+     * @return Located {@link WebElement}
+     */
 	/*
 	public WebElement untilPresenceOfElementLocated(final By by) {
 		return applyExplicit(ExpectedConditions.presenceOfElementLocated(by));
 	}*/
 
-	/**
-	 * Wait until proxy element declared by @FindBy is located in the DOM
-	 * 
-	 * @param element {@link WebElement} on which condition has to be checked
-	 * @return Located {@link WebElement}
-	 */
+    /**
+     * Wait until proxy element declared by @FindBy is located in the DOM
+     *
+     * @param element {@link WebElement} on which condition has to be checked
+     * @return Located {@link WebElement}
+     */
 	/*
 	public WebElement untilProxyElementLocated(final WebElement element) {
 		return applyExplicit(new ExpectedCondition<WebElement>() {
@@ -84,44 +83,44 @@ public class AutomacentWebDriverWait extends WebDriverWait {
 		});
 	}*/
 
-	/**
-	 * Wait until {@link WebElement} is visible in the DOM
-	 * 
-	 * @param element {@link WebElement} on which condition has to be checked
-	 * @return Visible {@link WebElement}
-	 */
-	public WebElement untilVisibilityOf(final WebElement element) {
-		return applyExplicit(ExpectedConditions.visibilityOf(element));
-	}
+    /**
+     * Wait until {@link WebElement} is visible in the DOM
+     *
+     * @param element {@link WebElement} on which condition has to be checked
+     * @return Visible {@link WebElement}
+     */
+    public WebElement untilVisibilityOf(final WebElement element) {
+        return applyExplicit(ExpectedConditions.visibilityOf(element));
+    }
 
-	/**
-	 * Wait until {@link WebElement} to be clickable in the UI
-	 * 
-	 * @param element {@link WebElement} on which condition has to be checked
-	 * @return Clickable {@link WebElement}
-	 */
-	public WebElement untilElementToBeClickable(final WebElement element) {
-		return applyExplicit(ExpectedConditions.elementToBeClickable(element));
-	}
+    /**
+     * Wait until {@link WebElement} to be clickable in the UI
+     *
+     * @param element {@link WebElement} on which condition has to be checked
+     * @return Clickable {@link WebElement}
+     */
+    public WebElement untilElementToBeClickable(final WebElement element) {
+        return applyExplicit(ExpectedConditions.elementToBeClickable(element));
+    }
 
-	/**
-	 * Wait until {@link WebElement} is state has changed in the DOM and would need
-	 * re-identification
-	 * 
-	 * @param element {@link WebElement} on which condition has to be checked
-	 * @return true will element is stale
-	 */
-	public Boolean untilStalenessOf(final WebElement element) {
-		return applyExplicit(ExpectedConditions.stalenessOf(element));
-	}
+    /**
+     * Wait until {@link WebElement} is state has changed in the DOM and would need
+     * re-identification
+     *
+     * @param element {@link WebElement} on which condition has to be checked
+     * @return true will element is stale
+     */
+    public Boolean untilStalenessOf(final WebElement element) {
+        return applyExplicit(ExpectedConditions.stalenessOf(element));
+    }
 
-	/**
-	 * Wait until {@link WebElement} is does not contain the provided text
-	 * 
-	 * @param element {@link WebElement} on which condition has to be checked
-	 * @param text    The text that should not be present
-	 * @return true if text is not found in the {@link WebElement}
-	 */
+    /**
+     * Wait until {@link WebElement} is does not contain the provided text
+     *
+     * @param element {@link WebElement} on which condition has to be checked
+     * @param text    The text that should not be present
+     * @return true if text is not found in the {@link WebElement}
+     */
 	/*
 	public Boolean untilTextInElementNotMatches(final WebElement element, String text) {
 		return applyExplicit(new ExpectedCondition<Boolean>() {
@@ -137,7 +136,6 @@ public class AutomacentWebDriverWait extends WebDriverWait {
 		});
 	}
 	*/
-
 
 
 }

@@ -17,27 +17,27 @@ import com.automacent.fwk.reporting.Logger;
  * <li>Default output directory is .\reports. Change should be specified as
  * system property with key <b>automacent.reportdir</b></li>
  * </ul>
- * 
+ * <p>
  * Example: Consider we have to run test LoginTest with test class
  * com.automacent.tests.LoginTest and parameters user name and password. To run
  * tests via command line following command can be used
- * 
+ *
  * <pre>
- * java -Dautomacent.tests=LoginTest -DLoginTest.testclass=com.automacent.tests.LoginTest 
+ * java -Dautomacent.tests=LoginTest -DLoginTest.testclass=com.automacent.tests.LoginTest
  * 			-DLoginTest.userName=admin -DLoginTest.password=password
  * 				-cp test.jar com.automacent.fwk.execution.TestExecutor
  * </pre>
- * 
+ *
  * @author rama.bisht
  */
 public class TestExecutor {
 
-	private static final Logger _logger = Logger.getLogger(TestExecutor.class);
+    private static final Logger _logger = Logger.getLogger(TestExecutor.class);
 
-	public static void main(String[] args) {
-		_logger.info("Constructing test suite");
-		Executor mapper = new Executor();
-		mapper.generateXmlSuite();
-		mapper.runXMLSuite();
-	}
+    public static void main(String[] args) {
+        _logger.info("Constructing test suite");
+        Executor mapper = new Executor();
+        mapper.generateXmlSuite();
+        mapper.runXMLSuite();
+    }
 }

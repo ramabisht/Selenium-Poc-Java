@@ -8,6 +8,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.testng.Assert;
+
 import java.util.List;
 
 public class HomePage extends PageObject {
@@ -64,46 +65,46 @@ public class HomePage extends PageObject {
     @Action
     public WebElement selectLeftNavigation() {
         WebElement leftNavigationElement = null;
-        for (WebElement element : leftNavigationLink){
+        for (WebElement element : leftNavigationLink) {
             if (element.getText().equals(ELEMENTNAMETOBECLICKED)) {
                 _logger.info("element found");
                 leftNavigationElement = element;
                 break;
             }
         }
-       return leftNavigationElement;
+        return leftNavigationElement;
     }
 
     @Action
-    public void clickLeftNavigation(){
-        _logger.info("click on the link:"+ ELEMENTNAMETOBECLICKED);
-       if(isElementFound(driver.findElement(By.xpath(ELEMENTTOBECLICKED+" and text() ='" +selectLeftNavigation().getText()+"']")))){
-           driver.findElement(By.xpath(ELEMENTTOBECLICKED+" and text() ='" +selectLeftNavigation().getText()+"']")).click();
-       }
+    public void clickLeftNavigation() {
+        _logger.info("click on the link:" + ELEMENTNAMETOBECLICKED);
+        if (isElementFound(driver.findElement(By.xpath(ELEMENTTOBECLICKED + " and text() ='" + selectLeftNavigation().getText() + "']")))) {
+            driver.findElement(By.xpath(ELEMENTTOBECLICKED + " and text() ='" + selectLeftNavigation().getText() + "']")).click();
+        }
     }
 
     // --------------------------------------------------------------
     // Click on left navigation required page
     @FindBy(xpath = LEFTNAVIPAGEXPATH)
-    private List<WebElement>  leftNavigationPage;
+    private List<WebElement> leftNavigationPage;
 
     @Action
-    public WebElement selectNavigationPage(){
+    public WebElement selectNavigationPage() {
         WebElement leftNavigationClickableElement = null;
-        for (WebElement element : leftNavigationPage){
+        for (WebElement element : leftNavigationPage) {
             if (element.getText().equals(PAGETOBECLICKED)) {
                 leftNavigationClickableElement = element;
             }
         }
-        return leftNavigationClickableElement ;
+        return leftNavigationClickableElement;
     }
 
     @Action
-    public void clickLeftNavigationPage(){
-        if(isElementFound(driver.findElement(By.xpath(LEFTNAVIPAFETOBECLICKEDXPATH+ " and @title ='" + selectNavigationPage().getText()+ "']")))){
-            driver.findElement(By.xpath(LEFTNAVIPAFETOBECLICKEDXPATH+ " and @title ='" + selectNavigationPage().getText()+ "']")).click();
+    public void clickLeftNavigationPage() {
+        if (isElementFound(driver.findElement(By.xpath(LEFTNAVIPAFETOBECLICKEDXPATH + " and @title ='" + selectNavigationPage().getText() + "']")))) {
+            driver.findElement(By.xpath(LEFTNAVIPAFETOBECLICKEDXPATH + " and @title ='" + selectNavigationPage().getText() + "']")).click();
         }
-      }
+    }
 
 
 }

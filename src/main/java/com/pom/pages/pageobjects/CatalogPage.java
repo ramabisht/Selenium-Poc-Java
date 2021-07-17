@@ -1,4 +1,5 @@
 package com.pom.pages.pageobjects;
+
 import com.automacent.fwk.annotations.Action;
 import com.automacent.fwk.annotations.Pages;
 import com.automacent.fwk.annotations.Step;
@@ -15,8 +16,6 @@ import java.util.List;
 
 public class CatalogPage extends PageObject {
 
-
-
     private static final String CATALOGPAGETITLE = "h1.ibm--page-header__title[title~='Catalog']";
     public static final String IFRAME = "mcmp-iframe";
     private static final String ALLCATEGORY = "ul.cb--selectable-list";
@@ -25,7 +24,7 @@ public class CatalogPage extends PageObject {
     private static final String PROVIDERCONTAINERCSS = ".provider-internal-container";
     private static final String PROVIDERLISTXPATH = "//span[@class = 'bx--checkbox-label-text']";
     private static final String PROVIDERTOBECLICKED = "//span[@class = 'bx--checkbox-label-text'";
-    private static final String CARDSERVICETITLE = ".card-service-title" ;
+    private static final String CARDSERVICETITLE = ".card-service-title";
     private static Logger _logger = Logger.getLogger(LoginSteps.class);
 
     @Override
@@ -41,15 +40,16 @@ public class CatalogPage extends PageObject {
                 try {
                     switchIframe();
                     Assert.assertTrue(isCatalogTilePresent(), "Is Catalog heading has been displayed");
+                } catch (Exception ex) {
+                    _logger.info("Exception:" + ex);
                 }
-                catch(Exception ex){_logger.info("Exception:"+ ex);}
             }
         };
     }
 
     //---------------------------------- validate heading ------------------------------------
-   // @FindBy(id = IFRAME)
-   // private WebElement iframe;
+    // @FindBy(id = IFRAME)
+    // private WebElement iframe;
 
    /* @Action
     public void switchIframe() {
@@ -68,6 +68,7 @@ public class CatalogPage extends PageObject {
         _logger.info("Switching iframe");
         driver.switchTo().frame(IFRAME);
     }
+
     @FindBy(css = CATALOGPAGETITLE)
     private WebElement catalogPageTile;
 
@@ -94,8 +95,8 @@ public class CatalogPage extends PageObject {
     @Action
     public Boolean verifyCategoriesLoaded() {
         Boolean catogaryListSize = false;
-        if (categoryCount.size()>0){
-            catogaryListSize=true;
+        if (categoryCount.size() > 0) {
+            catogaryListSize = true;
         }
         return catogaryListSize;
     }
@@ -116,12 +117,13 @@ public class CatalogPage extends PageObject {
             }
         }
     }
+
     //---------------------------------- Select required provider VRA ------------------------------------ also cjheck how to put wait here
-   @FindBy(css=PROVIDERCONTAINERCSS)
+    @FindBy(css = PROVIDERCONTAINERCSS)
     private WebElement providerContainer;
 
     @Action
-    public boolean isProviderListDisplayed(){
+    public boolean isProviderListDisplayed() {
         //return (providerContainer.isEnabled() && providerContainer.isDisplayed());
         return (providerContainer.isEnabled());
     }
@@ -130,48 +132,48 @@ public class CatalogPage extends PageObject {
     private List<WebElement> allProviderList;
 
     @Action
-    public WebElement verifyProviderPresent(String providerName){ //fill value is steps page : provider value is test case level
+    public WebElement verifyProviderPresent(String providerName) { //fill value is steps page : provider value is test case level
         WebElement providerToBeClicked = null;
         for (WebElement element : allProviderList) {
             if (element.getText().contains(providerName)) {
-                _logger.info("Provider Found"+ providerName);
-                providerToBeClicked=element;
+                _logger.info("Provider Found" + providerName);
+                providerToBeClicked = element;
             }
         }
-        _logger.info("providerToBeClicked:"+ providerToBeClicked);
+        _logger.info("providerToBeClicked:" + providerToBeClicked);
         return providerToBeClicked;
     }
 
     @Action
-    public void clickOnTheProvider(String providerName){
-        _logger.info("click on the provider name:"+ providerName);
+    public void clickOnTheProvider(String providerName) {
+        _logger.info("click on the provider name:" + providerName);
         WebElement providerToClick = verifyProviderPresent(providerName);
-        if(isElementFound(driver.findElement(By.xpath(PROVIDERTOBECLICKED+ " and text() =' " + providerToClick.getText()+ " ']")))){
+        if (isElementFound(driver.findElement(By.xpath(PROVIDERTOBECLICKED + " and text() =' " + providerToClick.getText() + " ']")))) {
             _logger.info("provider is present");
-            driver.findElement(By.xpath(PROVIDERTOBECLICKED+ " and text() =' " + providerToClick.getText()+ " ']")).click();
+            driver.findElement(By.xpath(PROVIDERTOBECLICKED + " and text() =' " + providerToClick.getText() + " ']")).click();
         }
     }
 
     //-----------------------------------------------------Select required blueprint name here--------------------------------------------------------------------------------------
-    @FindBy(css=CARDSERVICETITLE)
+    @FindBy(css = CARDSERVICETITLE)
     private List<WebElement> cardIndexValue;
 
     @Action
-    public Integer verifyServicePresent(String bluePrintName){
+    public Integer verifyServicePresent(String bluePrintName) {
         int indexValue = 0;
-        for (WebElement element:cardIndexValue){
-            if(element.getText().equals(bluePrintName)){
+        for (WebElement element : cardIndexValue) {
+            if (element.getText().equals(bluePrintName)) {
                 indexValue = cardIndexValue.indexOf(element);
 
             }
         }
-       return  indexValue;
+        return indexValue;
     }
 
     @Action
-    public void clickOnService(String bluePrintName){ // check for calling the function again and again
+    public void clickOnService(String bluePrintName) { // check for calling the function again and again
         int indexValue = verifyServicePresent(bluePrintName);
-        if (isClickableElementFound(cardIndexValue.get(indexValue))){
+        if (isClickableElementFound(cardIndexValue.get(indexValue))) {
             cardIndexValue.get(indexValue).click();
 
         }

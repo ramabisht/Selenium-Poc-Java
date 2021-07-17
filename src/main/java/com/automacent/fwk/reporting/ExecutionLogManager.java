@@ -225,7 +225,7 @@ public class ExecutionLogManager {
                 String.format("Iteration %s", IterationManager.getManager().getIteration()), MethodType.ITERATION);
 
         //if (!BaseTest.getTestObject().getHarType().equals(HarType.NOT_ENABLED))
-         //   ReportingTools.startHarCapture();
+        //   ReportingTools.startHarCapture();
     }
 
     /**
@@ -275,9 +275,9 @@ public class ExecutionLogManager {
                 String.format("Iteration %s", IterationManager.getManager().getIteration()), MethodType.ITERATION,
                 TestStatus.FAIL, duration, e);
 
-       // if (BaseTest.getTestObject().getHarType().equals(HarType.ON_FAILURE)) {
+        // if (BaseTest.getTestObject().getHarType().equals(HarType.ON_FAILURE)) {
         //    ReportingTools.endHarCollection();
-       // }
+        // }
     }
 
     /**

@@ -20,7 +20,7 @@ public class LoginTest extends BaseTest {
     private HomePageSteps homePageSteps;
 
     @BeforeClass(alwaysRun = true)
-    @Parameters({ "Username", "Password" })
+    @Parameters({"Username", "Password"})
     public void login(String Username, String Password) {
         loginSteps.confirmLoginPageIsLoaded();
         loginSteps.performLogin(Username, Password);
@@ -29,11 +29,11 @@ public class LoginTest extends BaseTest {
         homePageSteps.confirmHomePageIsLoaded();
     }
 
-    @Test(priority = 0, description="Login user case with username and password.", testName = "loginTest")
+    @Test(priority = 0, description = "Login user case with username and password.", testName = "loginTest")
     @Severity(SeverityLevel.BLOCKER)
-    @Parameters({ "Username", "Password" })
+    @Parameters({"Username", "Password"})
     //@Repeat
-    public void loginTest(String Username, String Password){
+    public void loginTest(String Username, String Password) {
         BaseTest.getTestObject().getTestName();
         System.out.println("login invokes");
     }

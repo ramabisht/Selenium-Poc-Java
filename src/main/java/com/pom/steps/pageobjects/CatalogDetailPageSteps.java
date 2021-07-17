@@ -11,22 +11,22 @@ public class CatalogDetailPageSteps {
     private CatalogDetailPage catalogDetailPage;
 
     @Step
-    public void confirmPageTitle(String bluePrintName){
-        Assert.assertTrue(catalogDetailPage.verifyServiceNamePresent(bluePrintName),  "Actual page heading is same as expected");
+    public void confirmPageTitle(String bluePrintName) {
+        Assert.assertTrue(catalogDetailPage.verifyServiceNamePresent(bluePrintName), "Actual page heading is same as expected");
     }
 
     @Step
-    public void verifyConfigureButtonIsVisible(){
+    public void verifyConfigureButtonIsVisible() {
         Assert.assertTrue(catalogDetailPage.verifyConfigureButtonVisible());
     }
 
     @Step
-    public void clickOnConfigurationButton(){
+    public void clickOnConfigurationButton() {
         catalogDetailPage.clickOnConfigureService();
     }
 
     @Step
-    public void configureService(String bluePrintName){
+    public void configureService(String bluePrintName) {
         confirmPageTitle(bluePrintName);
         verifyConfigureButtonIsVisible();
         clickOnConfigurationButton();

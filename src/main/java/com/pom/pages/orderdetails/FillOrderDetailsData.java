@@ -1,4 +1,5 @@
 package com.pom.pages.orderdetails;
+
 import com.automacent.fwk.annotations.Action;
 import com.automacent.fwk.core.PageObject;
 import org.openqa.selenium.By;
@@ -17,28 +18,29 @@ public class FillOrderDetailsData extends PageObject {
     }
 
     @Action
-    public void fillValueForText(String elementId, String elementValue ) {
+    public void fillValueForText(String elementId, String elementValue) {
         _logger.info("stating the text function");
         WebElement idElement = driver.findElement(By.id(elementId));
-            isElementFound(idElement);
-            idElement.clear();
-            idElement.sendKeys(elementValue);
-            _logger.info("Value entered is"+ elementValue);
-    }
-    @Action
-    public void fillValueForButtons(String elementId, String elementValue){
-        _logger.info("stating the Buttons function");
-        WebElement idElement=driver.findElement(By.id(elementId));
-            if (isClickableElementFound(idElement)) {
-                idElement.click();
-                _logger.info("Clicked on " + elementValue);
-            }
+        isElementFound(idElement);
+        idElement.clear();
+        idElement.sendKeys(elementValue);
+        _logger.info("Value entered is" + elementValue);
     }
 
     @Action
-    public void fillValueForRadioButtons(String elementId, String elementValue){
+    public void fillValueForButtons(String elementId, String elementValue) {
         _logger.info("stating the Buttons function");
-        WebElement idElement=driver.findElement(By.cssSelector("[id=\"" + elementId + "\"] ~ label span"));
+        WebElement idElement = driver.findElement(By.id(elementId));
+        if (isClickableElementFound(idElement)) {
+            idElement.click();
+            _logger.info("Clicked on " + elementValue);
+        }
+    }
+
+    @Action
+    public void fillValueForRadioButtons(String elementId, String elementValue) {
+        _logger.info("stating the Buttons function");
+        WebElement idElement = driver.findElement(By.cssSelector("[id=\"" + elementId + "\"] ~ label span"));
         if (isClickableElementFound(idElement)) {
             idElement.click();
             _logger.info("Clicked on " + elementValue);
@@ -62,27 +64,23 @@ public class FillOrderDetailsData extends PageObject {
     }
 
     @Action
-    public void fillOrderDetails(String elementId, String elementValue, String elementType){
-        _logger.info("starting the fillorderdetail function"+elementType+" "+elementType.length());
-        if (elementType.equals("Textbox")){
+    public void fillOrderDetails(String elementId, String elementValue, String elementType) {
+        _logger.info("starting the fillorderdetail function" + elementType + " " + elementType.length());
+        if (elementType.equals("Textbox")) {
             _logger.info("inside the fill fucntion");
             fillValueForText(elementId, elementValue);
-        }
-        else if (elementType.equals("Dropdown")){
+        } else if (elementType.equals("Dropdown")) {
             _logger.info("inside the fill fucntion");
             fillValueForDropDown(elementId, elementValue);
-        }
-
-        else if (elementType.equals("CheckBox")){
+        } else if (elementType.equals("CheckBox")) {
             _logger.info("inside the fill fucntion");
             fillValueForButtons(elementId, elementValue);
-        }
-         else if (elementType.equals("RadioButton")) {
+        } else if (elementType.equals("RadioButton")) {
             fillValueForRadioButtons(elementId, elementValue);
         }
     }
 
-    }
+}
 
 
 

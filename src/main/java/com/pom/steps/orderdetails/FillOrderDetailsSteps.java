@@ -8,17 +8,17 @@ import com.pom.pages.pageobjects.PlaceOrderPage;
 public class FillOrderDetailsSteps {
 
     @Pages
-    private FillOrderDetailsPages fillOrderDetailsPages ;
+    private FillOrderDetailsPages fillOrderDetailsPages;
     @Pages
     private PlaceOrderPage placeOrderPage;
 
     @Step
-    public void fillOrderParameterDetailsMainParam (String providerName){
+    public void fillOrderParameterDetailsMainParam(String providerName) {
         fillOrderDetailsPages.fillMainParameterPage(providerName);
         placeOrderPage.clickOnNextButton();
     }
 
-    public void fillOrderParameterDetailsAdditionalParam (String providerName){
+    public void fillOrderParameterDetailsAdditionalParam(String providerName) {
         fillOrderDetailsPages.fillAdditionalParameterPage(providerName);
     }
 }

@@ -3,25 +3,25 @@ package com.automacent.fwk.exceptions;
 /**
  * Custom exception thrown to indicate that an issue occurred during the
  * execution of recovery scenarios.
- * 
+ *
  * @author rama.bisht
  */
 public class RecoveryFailedException extends RuntimeException {
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+    /**
+     *
+     */
+    private static final long serialVersionUID = 1L;
 
-	public RecoveryFailedException(String message) {
-		super(message);
-	}
+    public RecoveryFailedException(String message) {
+        super(message);
+    }
 
-	public RecoveryFailedException(String message, Throwable e) {
-		super(String.format("%s %s", message, e.getMessage()), e);
-	}
+    public RecoveryFailedException(String message, Throwable e) {
+        super(String.format("%s %s", message, e.getMessage()), e);
+    }
 
-	public RecoveryFailedException(Throwable e) {
-		super(e);
-	}
+    public RecoveryFailedException(Throwable e) {
+        super(e);
+    }
 
 }

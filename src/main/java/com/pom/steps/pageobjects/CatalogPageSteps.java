@@ -9,11 +9,11 @@ import com.pom.pages.pageobjects.CatalogPage;
 import com.pom.steps.login.LoginSteps;
 import org.testng.Assert;
 
-public class CatalogPageSteps  {
+public class CatalogPageSteps {
 
     String ExpectedURL = "https://mcmp-dev2fra-release-autoui.multicloud-ibm.com/lite/consume/storeFront";
     String ExpectedPageTitle = "IBM Services for Multicloud Management";
-    String CategoryList = "All Categories" ;
+    String CategoryList = "All Categories";
     private static Logger _logger = Logger.getLogger(LoginSteps.class);
 
     @Pages
@@ -34,43 +34,43 @@ public class CatalogPageSteps  {
     }
 
     @Step
-    public void confirmPageTitle(){
+    public void confirmPageTitle() {
         Assert.assertEquals(abstractHomePageView.validatePageTitle(), ExpectedPageTitle, "Actual page title is same as expected");
     }
 
     @Step
-    public void verifyCategoryIndexIsPresent(String CategoryList){
+    public void verifyCategoryIndexIsPresent(String CategoryList) {
         catalogPageView.switchIframe();
         Assert.assertTrue(catalogPageView.isCategoryListPresent(CategoryList), "Verify  All Categories is present on Catalog page");
     }
 
     @Step
-    public void verifyCategoryListPresent(){
-       Assert.assertTrue(catalogPageView.verifyCategoriesLoaded(),  "Verify Category is loaded on th page");
+    public void verifyCategoryListPresent() {
+        Assert.assertTrue(catalogPageView.verifyCategoriesLoaded(), "Verify Category is loaded on th page");
     }
 
     @Step
-    public void verifyAndClickOnCategory(String category){
+    public void verifyAndClickOnCategory(String category) {
         catalogPageView.clickOnCategory(category); // fill the value in page
     }
 
     @Step
-    public void verifyProviderListDisplayed(){
-         Assert.assertTrue(catalogPageView.isProviderListDisplayed(), "Is provider list is displayed and enabled");
+    public void verifyProviderListDisplayed() {
+        Assert.assertTrue(catalogPageView.isProviderListDisplayed(), "Is provider list is displayed and enabled");
     }
 
     @Step
-    public void clickOnTheProviderAccount(String providerName){
+    public void clickOnTheProviderAccount(String providerName) {
         catalogPageView.clickOnTheProvider(providerName);
     }
 
     @Step
-    public void verifyServicePresentAndClick(String bluePrintName){
+    public void verifyServicePresentAndClick(String bluePrintName) {
         catalogPageView.clickOnService(bluePrintName);
     }
 
     @Step
-    public void selectCategory(String category){
+    public void selectCategory(String category) {
         _logger.info("Test started at catalog page");
         confirmPageUrl();
         confirmPageTitle();
@@ -82,13 +82,13 @@ public class CatalogPageSteps  {
     }
 
     @Step
-    public void selectProvider(String providerName){
+    public void selectProvider(String providerName) {
         verifyProviderListDisplayed();
         clickOnTheProviderAccount(providerName);
     }
 
     @Step
-    public void selectServiceTemplate(String bluePrintName){
+    public void selectServiceTemplate(String bluePrintName) {
         verifyServicePresentAndClick(bluePrintName);
     }
 }

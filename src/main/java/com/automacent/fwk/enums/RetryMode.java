@@ -5,13 +5,13 @@ package com.automacent.fwk.enums;
  * whether to retry a test or not. This can be set in the test (TestNG xml file)
  * as a parameter so that the MODE will be set for the whole SUITE or for a
  * particular test instance
- * 
+ *
  * @author rama.bisht
  */
 public enum RetryMode {
-	OFF, ON;
+    OFF, ON;
 
-	public static RetryMode getDefault() {
-		return OFF;
-	}
+    public static RetryMode getDefault() {
+        return OFF;
+    }
 }

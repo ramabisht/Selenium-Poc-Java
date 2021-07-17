@@ -12,16 +12,16 @@ import org.json.simple.JSONObject;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.testng.Assert;
+
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
 
-
 public class FillOrderDetailsPages extends PageObject {
 
 
-    private static final String ORDER_DETAIL_TITLE_CSS = "h1.ibm--page-header__title" ;
+    private static final String ORDER_DETAIL_TITLE_CSS = "h1.ibm--page-header__title";
     private static final String ORDERPARAMETERS = "Order Parameters";
     private static final String MAINPARAMETER = "Main Parameters";
     private static final String ADDITIONALPARAMETER = "Additional Parameters";
@@ -45,21 +45,23 @@ public class FillOrderDetailsPages extends PageObject {
 
     @Steps
     private LoadData loadData;
+
     @Steps
-    private PlaceOrderPage placeOrderPage ;
+    private PlaceOrderPage placeOrderPage;
+
     @Steps
     private FillOrderDetailsData fillOrderDetailsData;
 
-    @FindBy(css=ORDER_DETAIL_TITLE_CSS)
+    @FindBy(css = ORDER_DETAIL_TITLE_CSS)
     private WebElement pageHeader;
 
     @Action
-    public boolean isOrderPageHeaderPresent(){
+    public boolean isOrderPageHeaderPresent() {
         return pageHeader.isDisplayed();
     }
 
     @Action
-    public String isPageTitleSameAsServiceName(){ //put assert here for String bluePrint name
+    public String isPageTitleSameAsServiceName() { //put assert here for String bluePrint name
         return pageHeader.getAttribute("title");
     }
 
@@ -70,34 +72,33 @@ public class FillOrderDetailsPages extends PageObject {
 
     /*-------------------------------Fill oder detail for main parameter page---------------------------------------*/
     @Action
-    public JSONObject loadTestData(String providerName){
+    public JSONObject loadTestData(String providerName) {
         return loadData.loadTestDataFile(providerName, BaseTest.getTestObject().getTestName());
     }
 
     @Action
-    public Object getOrderParameters(String providerName){
-        return  loadData.getParamValue(loadTestData(providerName) , ORDERPARAMETERS);
+    public Object getOrderParameters(String providerName) {
+        return loadData.getParamValue(loadTestData(providerName), ORDERPARAMETERS);
     }
 
     @Action
     public void fillMainParameterPage(String providerName) {
         try {
-        _logger.info("Starting filling values in main parameter page");
-        boolean verifyMainParaPage = placeOrderPage.verifyLandedToMainParaPage();
-        if (verifyMainParaPage) {
+            _logger.info("Starting filling values in main parameter page");
+            boolean verifyMainParaPage = placeOrderPage.verifyLandedToMainParaPage();
+            if (verifyMainParaPage) {
                 _logger.info("inside if condition");
-            ((HashMap)((HashMap) getOrderParameters(providerName)).get(MAINPARAMETER)).forEach((key, value) -> {
-                    _logger.info("Filling details for " + key + " parameter in Main parameter page " + "to value "+ value);
+                ((HashMap) ((HashMap) getOrderParameters(providerName)).get(MAINPARAMETER)).forEach((key, value) -> {
+                    _logger.info("Filling details for " + key + " parameter in Main parameter page " + "to value " + value);
                     Map<String, Object> mainParamsValue = (Map<String, Object>) value;
-                        String paramId = (String) mainParamsValue.get("id");
-                        String paramType = (String) mainParamsValue.get("type");
-                        String paramValue = (String) mainParamsValue.get("value");
-                        _logger.info("Outer Param id :" + paramId + ", Param type :" + paramType + ", Param Value :" + paramValue);
-                        fillOrderDetailsData.fillOrderDetails(paramId, paramValue, paramType);
+                    String paramId = (String) mainParamsValue.get("id");
+                    String paramType = (String) mainParamsValue.get("type");
+                    String paramValue = (String) mainParamsValue.get("value");
+                    _logger.info("Outer Param id :" + paramId + ", Param type :" + paramType + ", Param Value :" + paramValue);
+                    fillOrderDetailsData.fillOrderDetails(paramId, paramValue, paramType);
                 });
             }
-        }
-        catch (Exception ex) {
+        } catch (Exception ex) {
             _logger.info("Exception:" + ex);
         }
     }
@@ -110,17 +111,17 @@ public class FillOrderDetailsPages extends PageObject {
         boolean verifyAdditionalParaPage = placeOrderPage.verifyLandedToAdditionalParaPage();
         if (verifyAdditionalParaPage) {
             try {
-                ((HashMap)((HashMap) getOrderParameters(providerName)).get(ADDITIONALPARAMETER)).forEach((key, value) -> {
+                ((HashMap) ((HashMap) getOrderParameters(providerName)).get(ADDITIONALPARAMETER)).forEach((key, value) -> {
                     _logger.info("Filling details for " + key + "parameter in Additional parameter page");
                     Map<String, Object> additionalParamKey = (Map<String, Object>) value;
-                    if((String) additionalParamKey.get("id") != null) {
+                    if ((String) additionalParamKey.get("id") != null) {
                         String paramId = "", paramType = "", paramValue = "";
                         paramId = (String) additionalParamKey.get("id");
                         paramType = (String) additionalParamKey.get("type");
                         paramValue = (String) additionalParamKey.get("value");
-                        _logger.info("Filling details for " + key + "parameter in Additional parameters page" + "to value "+ paramValue);
+                        _logger.info("Filling details for " + key + "parameter in Additional parameters page" + "to value " + paramValue);
                         //System.out.println("Outer Param id :" + paramId + ", Param type :" + paramType + ", Param Value :" + paramValue);
-                        fillOrderDetailsData.fillOrderDetails(paramId, paramType,paramValue);
+                        fillOrderDetailsData.fillOrderDetails(paramId, paramType, paramValue);
                         placeOrderPage.clickOnNextButton();
                     } else {
                         additionalParamKey.forEach((parkey, parValue) -> {
@@ -130,8 +131,8 @@ public class FillOrderDetailsPages extends PageObject {
                             paramId = (String) additionalParamValue.get("id");
                             paramType = (String) additionalParamValue.get("type");
                             paramValue = (String) additionalParamValue.get("value");
-                            _logger.info("Filling details for " + parkey + " parameter in Additional parameters page" + "to value "+ paramValue);
-                            fillOrderDetailsData.fillOrderDetails(paramId, paramType,paramValue);
+                            _logger.info("Filling details for " + parkey + " parameter in Additional parameters page" + "to value " + paramValue);
+                            fillOrderDetailsData.fillOrderDetails(paramId, paramType, paramValue);
                             //System.out.println("Outer Param id :" + paramId + ", Param type :" + paramType + ", Param Value :" + paramValue);
                         });
                         placeOrderPage.clickOnNextButton();
@@ -142,13 +143,13 @@ public class FillOrderDetailsPages extends PageObject {
             }
         }
     }
-    }
+}
 
 
-    // Put logic to click on the next button in the steps
+// Put logic to click on the next button in the steps
 
-    /*-------------------------------Put logic here for review order---------------------------------------*/
+/*-------------------------------Put logic here for review order---------------------------------------*/
 
-    // Put logic to click on the Submit button in the steps
+// Put logic to click on the Submit button in the steps
 
 

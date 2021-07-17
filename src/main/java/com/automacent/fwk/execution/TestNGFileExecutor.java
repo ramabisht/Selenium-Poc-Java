@@ -12,23 +12,23 @@ import com.automacent.fwk.reporting.Logger;
  * <li>Default output directory is .\reports. Change should be specified as
  * system property with key <b>automacent.reportdir</b></li>
  * </ul>
- * 
+ * <p>
  * Eg: Consider we have to run testNG.xml file
- * 
+ *
  * <pre>
- * java -automacent.testsuites=testNG.xml 
+ * java -automacent.testsuites=testNG.xml
  * 			-cp fat-h5-system-test-0.0.3-SNAPSHOT.jar com.automacent.fwk.execution.TestNGFileExecutor
  * </pre>
- * 
+ *
  * @author rama.bisht
  */
 public class TestNGFileExecutor {
-	private static final Logger _logger = Logger.getLogger(TestNGFileExecutor.class);
+    private static final Logger _logger = Logger.getLogger(TestNGFileExecutor.class);
 
-	public static void main(String[] args) {
-		_logger.info("Constructing test suite");
-		Executor mapper = new Executor();
-		mapper.generateTestNGFileSuites();
-		mapper.runTestNGFileSuites();
-	}
+    public static void main(String[] args) {
+        _logger.info("Constructing test suite");
+        Executor mapper = new Executor();
+        mapper.generateTestNGFileSuites();
+        mapper.runTestNGFileSuites();
+    }
 }

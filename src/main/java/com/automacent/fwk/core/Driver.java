@@ -352,7 +352,7 @@ public class Driver {
         try {
             DesiredCapabilities capabilities = new DesiredCapabilities();
             if (BaseTest.getTestObject().getHarType() != null &&
-            !BaseTest.getTestObject().getHarType().equals(HarType.NOT_ENABLED)) {
+                    !BaseTest.getTestObject().getHarType().equals(HarType.NOT_ENABLED)) {
                 try {
                     browserMobProxyServer = new BrowserMobProxyServer();
                     browserMobProxyServer.setTrustAllServers(true);
@@ -387,7 +387,7 @@ public class Driver {
                     _logger.info("Using chromeDriver from framework");
                 }
                 ChromeOptions chromeOptions = new ChromeOptions();
-                if  (BaseTest.getTestObject().getHarType() != null &&
+                if (BaseTest.getTestObject().getHarType() != null &&
                         !BaseTest.getTestObject().getHarType().equals(HarType.NOT_ENABLED)) {
                     chromeOptions.merge(capabilities);
                 }
@@ -490,7 +490,7 @@ public class Driver {
             }
         }*/
 
-        if(browserMobProxyServer != null){
+        if (browserMobProxyServer != null) {
             try {
                 browserMobProxyServer.stop();
                 _logger.info("Stopped the BMP server");

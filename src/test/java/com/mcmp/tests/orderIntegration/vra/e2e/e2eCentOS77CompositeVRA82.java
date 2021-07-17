@@ -10,21 +10,24 @@ import com.pom.utils.LoadData;
 import org.testng.annotations.*;
 
 public class e2eCentOS77CompositeVRA82 extends LoginTest {
+
     //Read these values from the test json
-
-
-    String category= "Compute" ;
-    String provider= "VRA";
-    String bluePrintName="[IaaSC-8.2] - CentOS77 - Composite";
+    String category = "Compute";
+    String provider = "VRA";
+    String bluePrintName = "[IaaSC-8.2] - CentOS77 - Composite";
 
     @Steps
     private HomePageSteps homePageSteps;
+
     @Steps
     private CatalogPageSteps catalogPageSteps;
+
     @Steps
     private CatalogDetailPageSteps catalogDetailPageSteps;
+
     @Steps
     private FillOrderDetailsSteps fillOrderDetailsSteps;
+
     @Steps
     private LoadData loadData;
 

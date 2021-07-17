@@ -14,14 +14,14 @@ public class ValidateApplicationData extends PageObject {
     }
 
     @Steps
-    private PlaceOrderPage placeOrderPage ;
+    private PlaceOrderPage placeOrderPage;
 
-   @Action
-    public void validateReviewOrderPage(){
-       boolean verifyReviewOrderPage = placeOrderPage.verifyLandedToAdditionalParaPage();
-       if(verifyReviewOrderPage){
+    @Action
+    public void validateReviewOrderPage() {
+        boolean verifyReviewOrderPage = placeOrderPage.verifyLandedToAdditionalParaPage();
+        if (verifyReviewOrderPage) {
 
-       }
-   }
+        }
+    }
 
 }

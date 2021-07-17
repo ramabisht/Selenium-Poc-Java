@@ -4,6 +4,8 @@ import com.automacent.fwk.annotations.Action;
 import com.automacent.fwk.core.PageObject;
 
 public class AbstractHomePage extends PageObject {
+
+
     @Override
     public PageValidation pageValidation() {
         return null;
