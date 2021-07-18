@@ -24,13 +24,13 @@ public class LoadData extends WebTestSteps {
 
     private void loadPropertyData() {
         properties = PropertyUtils.readProperties(System.getProperty("user.dir") + RESOURCES + TEST_DATA_PROPERTIES);
-        _logger.info("Loaded the " + TEST_DATA_PROPERTIES + "property data;");
+        _logger.info("Loaded the " + TEST_DATA_PROPERTIES + " file property data");
     }
 
     @Step
     public JSONObject loadApplicationUrl() {
         loadPropertyData();
-        _logger.info("Loading the " + APPLICATION_URL_DATA + " data;");
+        _logger.info("Loading the " + APPLICATION_URL_DATA + " data");
         return jsonUtils.readJsonFromFile(System.getProperty("user.dir") + RESOURCES + MCMP + "\\" + properties.getProperty(APPLICATION_URL_DATA));
     }
 
@@ -50,20 +50,20 @@ public class LoadData extends WebTestSteps {
 
     @Step
     public JSONObject loadTestDataFile(String folderName, String testName) {
-        _logger.info("Loading the test data under folder " + folderName + " for Test " + testName);
-        String testNameOutput = testName.split("\\.")[(testName.split("\\.")).length - 1];
-        return jsonUtils.readJsonFromFile(System.getProperty("user.dir") + RESOURCES + MCMP + "\\" + folderName + "\\" + testNameOutput + ".json");
+        _logger.info("Loading the test data under folder " + folderName + " for Test " + BaseTest.getTestObject().getTestName());
+        return jsonUtils.readJsonFromFile(System.getProperty("user.dir") + RESOURCES + MCMP + "\\" + folderName + "\\" + testName + ".json");
     }
 
     @Step
     public JSONObject loadTestDataFile(String folderName) {
         _logger.info("Loading the test data under folder " + folderName );
-        return jsonUtils.readJsonFromFile(System.getProperty("user.dir") + RESOURCES + MCMP + "\\" + folderName + "\\" + BaseTest.getTestObject().getTestName() + ".json");
+        String testNameOutput =  BaseTest.getTestObject().getTestName().split("\\.")[( BaseTest.getTestObject().getTestName().split("\\.")).length - 1];
+        return jsonUtils.readJsonFromFile(System.getProperty("user.dir") + RESOURCES + MCMP + "\\" + folderName + "\\" + testNameOutput + ".json");
     }
 
     @Step
     public Object getParamValue(JSONObject jsonObject, String paramName) {
-        _logger.info("Returning value for params :" + paramName);
+        _logger.info("Returning value for params :" + paramName + " as [" + jsonObject.get(paramName) + "]");
         return jsonObject.get(paramName);
     }
 

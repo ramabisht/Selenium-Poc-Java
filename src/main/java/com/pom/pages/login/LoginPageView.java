@@ -6,6 +6,7 @@ import com.automacent.fwk.core.BaseTest;
 import com.automacent.fwk.core.PageObject;
 import com.automacent.fwk.reporting.Logger;
 import com.pom.utils.LoadData;
+import org.checkerframework.checker.units.qual.A;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.testng.Assert;
@@ -26,10 +27,8 @@ public final class LoginPageView extends PageObject {
 
             @Step
             public void validateLoginPageIsLoaded() {
-                //Change the param for Login page for title and URL accordingly
                 LoadData loadData = new LoadData();
                 Assert.assertEquals(driver.getTitle(), loadData.getParamValue(loadData.loadApplicationTitle(), "loginTitle"), "Page title validation failed");
-
                 Assert.assertTrue(isLoginFormFound(), "Login Form is loaded");
                 Assert.assertTrue(isUserNameFieldFound(), "UserName Field on Login Page is loaded");
                 //Assert.assertTrue(isContinueButtonFound(), "Continue Button on Login Page is loaded");
@@ -45,13 +44,13 @@ public final class LoginPageView extends PageObject {
 
     // Actions--------------------------------------------------------------
 
-    @FindBy(xpath = "//div[normalize-space(.)='Log in to IBM']")
+    @FindBy(xpath = ".//div[normalize-space(.)='Log in to IBM']")
     private WebElement loginForm;
 
+    @Action
     public boolean isLoginFormFound() {
         return isElementFound(loginForm);
     }
-
 
     //Username related methods
     @FindBy(id = "username")
@@ -117,7 +116,7 @@ public final class LoginPageView extends PageObject {
 
     @Action
     private boolean isLoginButtonFound() {
-        return isElementFound(continueButton) && loginButton.isDisplayed();
+        return isElementFound(loginButton) && loginButton.isDisplayed();
     }
 
     @Action
@@ -135,12 +134,16 @@ public final class LoginPageView extends PageObject {
 
     @Action
     public boolean isPrivacyWarningFound() {
-        return privacyAccept.isDisplayed();
+        return isElementFound(privacyAccept) && privacyAccept.isDisplayed();
     }
 
     @Action
-    public void acceptPrivacy() {
-        privacyAccept.click();
+    public boolean acceptPrivacy() {
+        if (isPrivacyWarningFound()) {
+            privacyAccept.click();
+            return true;
+        }
+        return false;
     }
 
     //Login Error

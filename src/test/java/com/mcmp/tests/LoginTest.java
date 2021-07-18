@@ -6,10 +6,7 @@ import com.pom.steps.home.HomePageSteps;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
 import com.pom.steps.login.LoginSteps;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Parameters;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 public class LoginTest extends BaseTest {
 
@@ -26,20 +23,22 @@ public class LoginTest extends BaseTest {
         loginSteps.performLogin(Username, Password);
         loginSteps.checkForLoginErrors();
         loginSteps.acceptPrivacy();
+        homePageSteps.confirmHomePageIsLoaded();
     }
 
+    /*
     @Test(priority = 0, description = "Login user case with username and password.", testName = "loginTest")
     @Severity(SeverityLevel.BLOCKER)
     @Parameters({"Username", "Password"})
     //@Repeat
     public void loginTest(String Username, String Password) {
-        homePageSteps.confirmHomePageIsLoaded();
-    }
+
+    }*/
 
     //We can invoke few cleaning up methods and activities here
-    @AfterMethod(alwaysRun = true)
+    @AfterClass(alwaysRun = true)
     public void logout() {
-        //loginSteps.performsLogout();
+        homePageSteps.performLogOut();
     }
 
 }

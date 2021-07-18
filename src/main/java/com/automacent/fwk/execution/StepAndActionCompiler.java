@@ -40,7 +40,7 @@ public class StepAndActionCompiler {
      * @return Result Result of execution
      */
     @Around("execution(* *(..)) && @annotation(com.automacent.fwk.annotations.Action)")
-    public Object aroundActionCompilerAspect(ProceedingJoinPoint point) {
+    public Object aroundActionCompilerAspect(ProceedingJoinPoint point){
         long startTime = new Date().getTime();
         ExecutionLogManager.logMethodStart(point, MethodType.ACTION);
         String methodNameWithArguments = AspectJUtils.getMethodNameWithArguments(point);
@@ -51,6 +51,8 @@ public class StepAndActionCompiler {
         Object result = null;
         TestStatus testStatus = TestStatus.PASS;
         Throwable t = null;
+
+
         try {
             ThreadUtils.sleepFor((int) BaseTest.getTestObject().getSlowdownDurationInSeconds());
             result = point.proceed();
@@ -61,8 +63,7 @@ public class StepAndActionCompiler {
                 retry = ((PageObject) point.getThis()).reInitializePageObject();
             if (retry) {
                 try {
-                    Logger.getLogger(MethodSignature.class.cast(point.getSignature()).getDeclaringType())
-                            .info("Retrying action");
+                    Logger.getLogger(MethodSignature.class.cast(point.getSignature()).getDeclaringType()).info("Retrying action");
                     result = point.proceed();
                     testStatus = TestStatus.PASS;
                 } catch (Throwable ee) {

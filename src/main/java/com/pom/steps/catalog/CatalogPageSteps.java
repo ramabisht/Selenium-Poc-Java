@@ -9,12 +9,7 @@ import com.pom.steps.AbstractHomeSteps;
 import com.pom.steps.login.LoginSteps;
 import org.testng.Assert;
 
-public class CatalogPageSteps extends AbstractHomeSteps  {
-
-    /*
-    String ExpectedURL = "https://mcmp-dev2fra-release-autoui.multicloud-ibm.com/lite/consume/storeFront";
-    String ExpectedPageTitle = "IBM Services for Multicloud Management";
-     */
+public class CatalogPageSteps extends AbstractHomeSteps {
 
     String CategoryList = "All Categories";
     private static final String MCMP_IFRAME = "mcmp-iframe";
@@ -37,23 +32,11 @@ public class CatalogPageSteps extends AbstractHomeSteps  {
         catalogPageView.pageValidation().validate();
     }
 
-    /*
     @Step
-    public void confirmPageUrl() {
-        Assert.assertEquals(abstractHomePageView.validatePageUrl(), ExpectedURL, "Actual page Url is same as expected");
+    private void switchToMCMPIFrame() {
+        //switchToIFrame(MCMP_IFRAME);
+        Assert.assertTrue(catalogPageView.switchToCatalogIFrame(), "Switch to catalog iFrame completed");
     }
-
-    @Step
-    public void confirmPageTitle() {
-        Assert.assertEquals(abstractHomePageView.validatePageTitle(), ExpectedPageTitle, "Actual page title is same as expected");
-    }*/
-
-
-    @Step
-    private void switchToMCMPIFrame(){
-        switchToIFrame(MCMP_IFRAME);
-    }
-
 
     @Step
     private void verifyCategoryIndexIsPresent(String CategoryList) {
@@ -77,7 +60,7 @@ public class CatalogPageSteps extends AbstractHomeSteps  {
 
     @Step
     private void clickOnProviderAccount(String providerName) {
-        Assert.assertTrue(catalogPageView.clickOnProvider(providerName), "Provider Clicked :" + providerName);
+        Assert.assertTrue(catalogPageView.verifyProviderPresent(providerName), "Provider Clicked :" + providerName);
     }
 
     @Step
@@ -93,26 +76,27 @@ public class CatalogPageSteps extends AbstractHomeSteps  {
         verifyCategoryIndexIsPresent(CategoryList);
         verifyCategoryListPresent();
         verifyAndClickOnCategory(category);
-        switchToDefaultContent();
         _logger.info("Category selected as:" + category);
     }
 
     @Step
     public void selectProvider(String providerName) {
         _logger.info("Selecting provider name as:" + providerName);
-        switchToMCMPIFrame();
         verifyProviderListDisplayed();
         clickOnProviderAccount(providerName);
-        switchToDefaultContent();
         _logger.info("Provider name selected as:" + providerName);
     }
 
     @Step
     public void selectServiceTemplate(String bluePrintName) {
         _logger.info("Selecting service template as:" + bluePrintName);
-        switchToMCMPIFrame();
         verifyServicePresentAndClick(bluePrintName);
-        switchToDefaultContent();
         _logger.info("Selected service template as :" + bluePrintName);
+    }
+
+
+    @Step
+    public void switchToDefaultContent() {
+        switchToDefaultContent();
     }
 }

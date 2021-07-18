@@ -75,9 +75,11 @@ public class OrderDetailsPageView extends PageObject {
 
 
     /*-------------------------------Fill oder detail for main parameter page---------------------------------------*/
+
+
     @Action
     public JSONObject loadTestData(String providerName) {
-        return loadData.loadTestDataFile(providerName, BaseTest.getTestObject().getTestName());
+        return loadData.loadTestDataFile(providerName);
     }
 
     @Action
@@ -115,7 +117,7 @@ public class OrderDetailsPageView extends PageObject {
             ((HashMap) ((HashMap) getOrderParameters(providerName)).get(ADDITIONAL_PARAMETERS)).forEach((key, value) -> {
                 _logger.info("Filling details for " + key + "parameter in Additional parameter page");
                 Map<String, Object> additionalParamKey = (Map<String, Object>) value;
-                if(additionalParamKey.get("id") != null) {
+                if (additionalParamKey.get("id") != null) {
                     String paramId = "", paramType = "", paramValue = "";
                     paramId = (String) additionalParamKey.get("id");
                     paramType = (String) additionalParamKey.get("type");

@@ -61,15 +61,32 @@ public class JsonUtils {
      */
     public JSONObject readJsonFromFile(String fileLocation) {
         try {
-            _logger.info(String.format("Reading JSON data from file:", fileLocation));
+            _logger.info(String.format("Reading JSON data from file: %s", fileLocation));
             BufferedReader bufferedReader = new BufferedReader(new FileReader(fileLocation));
             jsonObject = (JSONObject) new Gson().fromJson(bufferedReader, HashMap.class);
         } catch (FileNotFoundException fileNotFoundException) {
-            _logger.error(String.format("File not found at location %s ", fileLocation), fileNotFoundException);
+            _logger.error(String.format("File not found at location: %s ", fileLocation), fileNotFoundException);
         } catch (IOException ioException) {
             _logger.error(String.format("Error reading the data from file %s ", fileLocation), ioException);
+        } catch (ClassCastException classCastException) {
+            try {
+                _logger.warn("Could not load the JSON file bu GSON, trying with JSON now, reason :" + classCastException.getMessage());
+                jsonObject = (JSONObject) new JSONParser().parse(new FileReader(fileLocation));
+            } catch (FileNotFoundException fileNotFoundException) {
+                _logger.error(String.format("File not found at location %s ", fileLocation), fileNotFoundException);
+            } catch (IOException ioException) {
+                _logger.error(String.format("Error reading the data from file %s ", fileLocation), ioException);
+            } catch (ParseException parseException) {
+                _logger.error(String.format("Error parsing the data from file %s ", fileLocation), parseException);
+                try {
+                    jsonObject = (JSONObject) new JSONValue().parse(new FileReader(fileLocation));
+                } catch (Exception exception1) {
+                    _logger.error(String.format("Error getting the data from file %s ", fileLocation), exception1);
+                }
+            }
         } catch (Exception exception) {
             try {
+                _logger.warn("Could not load the JSON file bu GSON, trying with JSON now..");
                 jsonObject = (JSONObject) new JSONParser().parse(new FileReader(fileLocation));
             } catch (FileNotFoundException fileNotFoundException) {
                 _logger.error(String.format("File not found at location %s ", fileLocation), fileNotFoundException);

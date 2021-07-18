@@ -4,6 +4,7 @@ import com.automacent.fwk.annotations.Pages;
 import com.automacent.fwk.annotations.Step;
 import com.automacent.fwk.core.WebTestSteps;
 import com.automacent.fwk.reporting.Logger;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.pom.pages.AbstractHomePageView;
 import com.pom.pages.home.HomePageView;
 import com.pom.steps.AbstractHomeSteps;
@@ -14,7 +15,6 @@ public class HomePageSteps extends AbstractHomeSteps {
     // XPath Constants
     //String ExpectedURL = "https://mcmp-dev2fra-release-autoui.multicloud-ibm.com/launchpad";
     //String ExpectedPageTitle = "IBM Services for Multicloud Management";
-
 
 
     private static Logger _logger = Logger.getLogger(HomePageSteps.class);
@@ -35,6 +35,12 @@ public class HomePageSteps extends AbstractHomeSteps {
         homePageView.pageValidation().validate();
     }
 
+    // Use this method for navigating to home page from any page
+    @Step
+    public void navigateToHomePage() {
+        Assert.assertTrue(homePageView.navigateToHomePage(), "Navigated to home page successfully.");
+    }
+
     /*
     @Step
     public void confirmPageUrl() {
@@ -53,10 +59,7 @@ public class HomePageSteps extends AbstractHomeSteps {
 
     @Step
     public void verifyHamburgerButton() {
-        //confirmPageUrl();
-        //confirmPageTitle();
         validateHamburgerButton();
-
     }
 
     @Step
@@ -66,13 +69,22 @@ public class HomePageSteps extends AbstractHomeSteps {
 
     @Step
     public void clickOnMenuItem(String menuItem) {
-        // homePageView.selectLeftNavigation();
-        Assert.assertTrue(homePageView.clickMenuItem(menuItem), "Selected " + menuItem);
+        Assert.assertTrue(homePageView.clickMenuItem(menuItem), "Selected Menu item: " + menuItem);
     }
 
     @Step
     public void clickOnSubMenuItem(String subMenuItem) {
-        //homePageView.selectNavigationPage();
-        Assert.assertTrue(homePageView.clickSubMenuItem(subMenuItem), "Selected " + subMenuItem);
+        Assert.assertTrue(homePageView.clickSubMenuItem(subMenuItem), "Selected SubMenu Item: " + subMenuItem);
+    }
+
+    @Step
+    public void openUserMenu() {
+        Assert.assertTrue(homePageView.openUserMenu(), "User Menu opened");
+    }
+
+    @Step
+    public void performLogOut() {
+        openUserMenu();
+        Assert.assertTrue(homePageView.performLogOut(), "Logout performed....");
     }
 }

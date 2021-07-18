@@ -21,7 +21,8 @@ public class CatalogPageView extends PageObject {
     private static final String GET_CATEGORY_VALUE_XPATH = "//child::li/a";
     private static final String PROVIDER_CONTAINER_CSS = ".provider-internal-container";
     private static final String PROVIDER_LIST_XPATH = "//span[@class = 'bx--checkbox-label-text']";
-    private static final String PROVIDER_TO_BE_CLICKED = "//span[@class = 'bx--checkbox-label-text'";
+    //private static final String PROVIDER_TO_BE_CLICKED = "//span[@class = 'bx--checkbox-label-text'";
+    private static final String PROVIDER_TO_BE_CLICKED = "//input[@name='%s']";
     private static final String CARD_SERVICE_TITLE = ".card-service-title";
 
 
@@ -37,15 +38,12 @@ public class CatalogPageView extends PageObject {
 
             @Step
             public void validateCatalogPageLoaded() {
-                try {
-                    //Change the param for Login page for title and URL accordingly
-                    LoadData loadData = new LoadData();
-                    Assert.assertEquals(driver.getTitle(), loadData.getParamValue(loadData.loadApplicationTitle(), "catalogTitle"), "Page title validation failed");
-                    Assert.assertEquals(driver.getCurrentUrl(), BaseTest.getTestObject().getBaseUrl() +
-                            loadData.getParamValue(loadData.loadApplicationUrl(), "catalogPageUrl"), "Page title validation failed");
-                } catch (Exception ex) {
-                    _logger.info("Exception:" + ex);
-                }
+                LoadData loadData = new LoadData();
+                Assert.assertEquals(driver.getTitle(), loadData.getParamValue(loadData.loadApplicationTitle(), "catalogTitle"),
+                        "Page title validation failed");
+                Assert.assertEquals(driver.getCurrentUrl(), BaseTest.getTestObject().getBaseUrl() +
+                        loadData.getParamValue(loadData.loadApplicationUrl(), "catalogPageUrl"), "Page title validation failed");
+                _logger.info("Catalog page load validation completed...");
             }
         };
     }
@@ -59,13 +57,21 @@ public class CatalogPageView extends PageObject {
         return isElementFound(catalogPageTile) && catalogPageTile.isDisplayed();
     }
 
+    public boolean switchToCatalogIFrame() {
+        if (isElementFound(driver.findElement(By.id("mcmp-iframe")))) {
+            driver.switchTo().frame(driver.findElement(By.id("mcmp-iframe")));
+            return true;
+        }
+        return false;
+    }
+
     //---------------------------------- Select required category ------------------------------------
     @FindBy(css = ALL_CATEGORY)
     private WebElement allCategoryList;
 
     @Action
     public boolean isCategoryListPresent(String allCategory) {
-       return isElementFound(allCategoryList) && (allCategoryList.getText()).contains(allCategory);
+        return isElementFound(allCategoryList) && (allCategoryList.getText()).contains(allCategory);
     }
 
     @FindBy(xpath = CATEGORIES_LIST_XPATH)
@@ -85,8 +91,8 @@ public class CatalogPageView extends PageObject {
         for (WebElement element : categoryList) {
             if (isElementFound(element) && element.getText().equals(categoryToBeSelected) &&
                     element.isDisplayed() && element.isEnabled()) {
-                      element.click();
-                      return true;
+                element.click();
+                return true;
             }
         }
         return false;
@@ -105,28 +111,41 @@ public class CatalogPageView extends PageObject {
     private List<WebElement> allProviderList;
 
     @Action
-    private WebElement verifyProviderPresent(String providerName) {
-        WebElement providerToBeClicked = null;
+    public boolean verifyProviderPresent(String providerName) {
         for (WebElement element : allProviderList) {
-            if (element.getText().contains(providerName) && isElementFound(element)) {
-                _logger.info("Provider Found :" + providerName);
-                providerToBeClicked = element;
-                break;
+            _logger.info("Iterating from provider :" + element.getText());
+            if (element.getText().contains(providerName) && isElementFound(element)
+                    && isClickableElementFound(element)) {
+                _logger.info("Provider Found :" + element.getText());
+                element.click();
+                return true;
             }
         }
-        Assert.assertNotNull(providerToBeClicked, "Found the provider :" + providerName);
-        return providerToBeClicked;
+        return false;
     }
 
+    /*
     @Action
     public boolean clickOnProvider(String providerName) {
         WebElement providerToClick = verifyProviderPresent(providerName);
-        if (isElementFound(By.xpath(PROVIDER_TO_BE_CLICKED + " and text() =' " + providerToClick.getText() + " ']"))) {
+
+        _logger.info("Provider element found xPath trying is :" + PROVIDER_TO_BE_CLICKED + " and text() =' " + providerToClick.getText() + " ']");
+        if (providerToClick != null
+                && isElementFound(By.xpath(PROVIDER_TO_BE_CLICKED + " and text() =' " + providerToClick.getText() + " ']"))) {
             driver.findElement(By.xpath(PROVIDER_TO_BE_CLICKED + " and text() =' " + providerToClick.getText() + " ']")).click();
             return true;
         } else
             return false;
-    }
+
+
+        if(isElementFound(By.xpath(String.format(PROVIDER_TO_BE_CLICKED, providerName))) &&
+        isClickableElementFound(driver.findElement(By.xpath(String.format(PROVIDER_TO_BE_CLICKED, providerName))))){
+            driver.findElement(By.xpath(String.format(PROVIDER_TO_BE_CLICKED, providerName))).click();
+            return true;
+        }
+
+        return false;
+    }*/
 
     //-----------------------------------------------------Select required blueprint name here--------------------------------------------------------------------------------------
     @FindBy(css = CARD_SERVICE_TITLE)
@@ -149,8 +168,8 @@ public class CatalogPageView extends PageObject {
         for (WebElement element : cardIndexValue) {
             if (element.getText().equals(bluePrintName) && isElementFound(element) &&
                     isClickableElementFound(element)) {
-               element.click();
-               return true;
+                element.click();
+                return true;
             }
         }
         return false;

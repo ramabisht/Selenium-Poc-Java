@@ -2,6 +2,7 @@ package com.mcmp.tests.orderIntegration.vra.e2e;
 
 import com.automacent.fwk.annotations.Repeat;
 import com.automacent.fwk.annotations.Steps;
+import com.automacent.fwk.utils.ThreadUtils;
 import com.mcmp.tests.LoginTest;
 import com.pom.steps.orders.OrderDetailsSteps;
 import com.pom.steps.catalog.CatalogDetailPageSteps;
@@ -36,34 +37,31 @@ public class e2eCentOS77CompositeVRA82 extends LoginTest {
 
     @BeforeClass
     public void verifyAndOpenMenu() {
-        homePageSteps.verifyHamburgerButton();
         homePageSteps.clickHamburgerButton();
+        homePageSteps.clickOnMenuItem(ENTERPRISE_MARKET);
+        homePageSteps.clickOnSubMenuItem(CATALOG_PAGE);
     }
 
     @Test(priority = 0, description = "Navigate VRA Service Page.", testName = "VRA82: CentOS77 - Navigate VRA Service Page")
     @Severity(SeverityLevel.CRITICAL)
     //@Repeat
-    @Parameters({"Category", "Provider"})
-    public void openServiceTemplate(String category, String provider) {
-        homePageSteps.clickOnMenuItem(ENTERPRISE_MARKET);
-        homePageSteps.clickOnSubMenuItem(CATALOG_PAGE);
-        catalogPageSteps.selectCategory(category);
-        catalogPageSteps.selectProvider(provider);
+    public void openServiceTemplate() {
+        catalogPageSteps.confirmCatalogPageIsLoaded();
+        ThreadUtils.sleepFor(10);
+        catalogPageSteps.selectCategory((String) loadData.getParamValue(loadData.loadTestDataFile("VRA"), "Category"));
+        catalogPageSteps.selectProvider((String) loadData.getParamValue(loadData.loadTestDataFile("VRA"), "provider"));
     }
 
-    @Test(priority = 0, description = "Verify fields on Main Parameters page.", testName = "VRA82: CentOS77 - Verify Composite-Main Parameters page")
+    @Test(dependsOnMethods = {"openServiceTemplate"}, priority = 0, description = "Verify fields on Main Parameters page.", testName = "VRA82: CentOS77 - Verify Composite-Main Parameters page")
     @Severity(SeverityLevel.CRITICAL)
     //@Repeat
-    @Parameters({"Provider", "BluePrintName"})
-    public void configureVRAService(String provider, String bluePrintName) {
-        catalogPageSteps.selectServiceTemplate(bluePrintName);
-        catalogDetailPageSteps.configureService(bluePrintName);
-        orderDetailsSteps.fillOrderParameterDetailsMainParam(provider);
-        orderDetailsSteps.fillOrderParameterDetailsAdditionalParam(provider);
+    @Parameters()
+    public void configureVRAService() {
+        catalogPageSteps.selectServiceTemplate((String) loadData.getParamValue(loadData.loadTestDataFile("VRA"), "bluePrintName"));
+        catalogDetailPageSteps.configureService((String) loadData.getParamValue(loadData.loadTestDataFile("VRA"), "bluePrintName"));
+        orderDetailsSteps.fillOrderParameterDetailsMainParam((String) loadData.getParamValue(loadData.loadTestDataFile("VRA"), "provider"));
+        orderDetailsSteps.fillOrderParameterDetailsAdditionalParam((String) loadData.getParamValue(loadData.loadTestDataFile("VRA"), "provider"));
     }
 
 
-    @AfterClass
-    public void logoutFromApplication() {
-    }
 }

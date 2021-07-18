@@ -32,7 +32,6 @@ public class PlaceOrderPageView extends PageObject {
             @Step
             public void validatePlaceOrderPageLoaded() {
                 Assert.assertTrue(verifyLandedToMainParameterPage(), "UserName Field on Login Page is loaded");
-                //Change the param for Login page for title and URL accordingly
                 LoadData loadData = new LoadData();
                 Assert.assertEquals(driver.getTitle(),  loadData.getParamValue(loadData.loadApplicationTitle(), "launchpadTitle"), "Page title validation failed");
                 Assert.assertEquals(driver.getCurrentUrl(), BaseTest.getTestObject().getBaseUrl() +

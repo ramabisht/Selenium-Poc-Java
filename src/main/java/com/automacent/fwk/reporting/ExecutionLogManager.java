@@ -81,7 +81,6 @@ public class ExecutionLogManager {
      * @param methodType {@link MethodType}
      */
     public static void logTestStart(ProceedingJoinPoint point, MethodType methodType) {
-        _logger.info("logTestStart");
         String methodName = MethodSignature.class.cast(point.getSignature()).getMethod().getName();
         Logger.getLogger(MethodSignature.class.cast(point.getSignature()).getDeclaringType())
                 .infoHeading(
@@ -110,7 +109,6 @@ public class ExecutionLogManager {
      * @param duration   Execution duration for method in milliseconds
      */
     public static void logTestSuccess(ProceedingJoinPoint point, MethodType methodType, long duration) {
-        _logger.info("logTestSuccess");
         String methodName = MethodSignature.class.cast(point.getSignature()).getMethod().getName();
         Logger.getLogger(MethodSignature.class.cast(point.getSignature()).getDeclaringType())
                 .infoHeading(String.format("%s completed successfully",
@@ -142,7 +140,6 @@ public class ExecutionLogManager {
      * @param duration   Duration of Execution of method
      */
     public static void logTestFailure(ProceedingJoinPoint point, MethodType methodType, Throwable e, long duration) {
-        _logger.info("logTestFailure");
         String methodName = MethodSignature.class.cast(point.getSignature()).getMethod().getName();
         Logger.getLogger(MethodSignature.class.cast(point.getSignature()).getDeclaringType()).error(
                 String.format("%s failed", LoggingUtils.addSpaceToCamelCaseString(LoggingUtils.addGrammer(methodName))),
