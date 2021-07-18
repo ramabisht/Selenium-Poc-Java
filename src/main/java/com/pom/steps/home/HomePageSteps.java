@@ -15,6 +15,8 @@ public class HomePageSteps extends AbstractHomeSteps {
     //String ExpectedURL = "https://mcmp-dev2fra-release-autoui.multicloud-ibm.com/launchpad";
     //String ExpectedPageTitle = "IBM Services for Multicloud Management";
 
+
+
     private static Logger _logger = Logger.getLogger(HomePageSteps.class);
 
     // Pages ----------------------------------------------
@@ -27,6 +29,7 @@ public class HomePageSteps extends AbstractHomeSteps {
 
 
     // Steps ----------------------------------------------
+
     @Step
     public void confirmHomePageIsLoaded() {
         homePageView.pageValidation().validate();
@@ -58,18 +61,18 @@ public class HomePageSteps extends AbstractHomeSteps {
 
     @Step
     public void clickHamburgerButton() {
-        homePageView.clickHamburgerButton();
+        Assert.assertTrue(homePageView.clickHamburgerButton(), "Hamburger clicked.");
     }
 
     @Step
-    public void clickOnLeftNavigation() {
-        homePageView.selectLeftNavigation();
-        homePageView.clickLeftNavigation();
+    public void clickOnMenuItem(String menuItem) {
+        // homePageView.selectLeftNavigation();
+        Assert.assertTrue(homePageView.clickMenuItem(menuItem), "Selected " + menuItem);
     }
 
     @Step
-    public void clickOnNavigationPage() {
-        homePageView.selectNavigationPage();
-        homePageView.clickLeftNavigationPage();
+    public void clickOnSubMenuItem(String subMenuItem) {
+        //homePageView.selectNavigationPage();
+        Assert.assertTrue(homePageView.clickSubMenuItem(subMenuItem), "Selected " + subMenuItem);
     }
 }

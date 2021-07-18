@@ -12,14 +12,14 @@ import org.testng.Assert;
 
 public class PlaceOrderPageView extends PageObject {
 
-    private static final String MAINPARAMETERPAGEXPATH = ".//*[contains(text(),'Main Parameters')]";
-    private static final String ADDITIONALPARAMETERPAGEXPATH = ".//*[contains(text(),'Additional Parameters')]";
-    private static final String REVIEWORDERPARAMETERPAGEXPATH = ".//*[contains(text(),'Review Order')]";
-    private static final String NEXTBUTTONXPATH = "//button[contains(@id,'next-button')]";
-    private static final String PREVIOUSBUTTONXPATH = "//button[contains(@id,'previous')]";
+    private static final String MAIN_PARAMETERS_PAGE_XPATH = ".//*[contains(text(),'Main Parameters')]";
+    private static final String ADDITIONAL_PARAMETERS_PAGE_XPATH = ".//*[contains(text(),'Additional Parameters')]";
+    private static final String REVIEW_ORDER_PARAMETERS_PAGE_XPATH = ".//*[contains(text(),'Review Order')]";
+    private static final String NEXT_BUTTON_XPATH = "//button[contains(@id,'next-button')]";
+    private static final String PREVIOUS_BUTTON_XPATH = "//button[contains(@id,'previous')]";
 
 
-    private static final Logger _logger = Logger.getLogger(FillOrderDetailsPagesView.class);
+    private static final Logger _logger = Logger.getLogger(OrderDetailsPageView.class);
 
     @Override
     public PageValidation pageValidation() {
@@ -31,7 +31,7 @@ public class PlaceOrderPageView extends PageObject {
 
             @Step
             public void validatePlaceOrderPageLoaded() {
-                Assert.assertTrue(verifyLandedToMainParaPage(), "UserName Field on Login Page is loaded");
+                Assert.assertTrue(verifyLandedToMainParameterPage(), "UserName Field on Login Page is loaded");
                 //Change the param for Login page for title and URL accordingly
                 LoadData loadData = new LoadData();
                 Assert.assertEquals(driver.getTitle(),  loadData.getParamValue(loadData.loadApplicationTitle(), "launchpadTitle"), "Page title validation failed");
@@ -41,56 +41,64 @@ public class PlaceOrderPageView extends PageObject {
         };
     }
 
-    @FindBy(xpath = MAINPARAMETERPAGEXPATH)
+    // Actions--------------------------------------------------------------
+
+    @FindBy(xpath = MAIN_PARAMETERS_PAGE_XPATH)
     private WebElement mainParamPage;
 
     @Action
-    public boolean verifyLandedToMainParaPage() {
-        return mainParamPage.isEnabled();
+    public boolean verifyLandedToMainParameterPage() {
+        return isElementFound(mainParamPage) && mainParamPage.isEnabled();
     }
 
-    @FindBy(xpath = ADDITIONALPARAMETERPAGEXPATH)
+    @FindBy(xpath = ADDITIONAL_PARAMETERS_PAGE_XPATH)
     private WebElement additionalParamPage;
 
     @Action
-    public boolean verifyLandedToAdditionalParaPage() {
-        return additionalParamPage.isEnabled();
+    public boolean verifyLandedToAdditionalParameterPage() {
+        return isElementFound(additionalParamPage) && additionalParamPage.isEnabled();
     }
 
-    @FindBy(xpath = REVIEWORDERPARAMETERPAGEXPATH)
+    @FindBy(xpath = REVIEW_ORDER_PARAMETERS_PAGE_XPATH)
     private WebElement reviewOrderPage;
 
     @Action
     public boolean verifyLandedToReviewOrderPage() {
-        return reviewOrderPage.isEnabled();
+        return isElementFound(additionalParamPage) && reviewOrderPage.isEnabled();
     }
 
-    @FindBy(xpath = NEXTBUTTONXPATH)
+    @FindBy(xpath = NEXT_BUTTON_XPATH)
     private WebElement nextButton;
 
     @Action
-    public boolean isNextButtonEnabled() {
-        return nextButton.isEnabled();
+    private boolean isNextButtonEnabled() {
+        return isElementFound(additionalParamPage) && nextButton.isEnabled();
     }
 
     @Action
-    public void clickOnNextButton() {
-        _logger.info("Click on the next button");
-        nextButton.click();
+    public boolean clickOnNextButton() {
+        if(isNextButtonEnabled()) {
+            nextButton.click();
+            return true;
+        }
+        return false;
     }
 
-    @FindBy(xpath = PREVIOUSBUTTONXPATH)
+    @FindBy(xpath = PREVIOUS_BUTTON_XPATH)
     private WebElement previousButton;
 
     @Action
-    public boolean isPreviousButtonEnabled() {
-        return previousButton.isEnabled();
+    private boolean isPreviousButtonEnabled() {
+        return isElementFound(previousButton) && previousButton.isEnabled();
     }
 
     @Action
-    public void clickOnPreviousButton() {
-        _logger.info("Click on the previous button");
-        previousButton.click();
+    public boolean clickOnPreviousButton() {
+        if(isPreviousButtonEnabled()) {
+            previousButton.click();
+            return true;
+        }
+        return false;
     }
 
 }

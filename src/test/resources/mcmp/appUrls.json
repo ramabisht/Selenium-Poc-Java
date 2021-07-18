@@ -21,7 +21,7 @@
   "policyApprovalUrl" : "/lite/consume/policies",
   "operationPolicyUrl" : "/lite/consume/operationPolicies",
   "currentCartListUrl" : "/lite/consume/storeFront/cart/cart-list",
-  "GENERATE_PASS_CODE_URL" : "https://newrelictotp.mybluemix.net/generatePassCode/",
+  "generatePasscodeUrl" : "https://newrelictotp.mybluemix.net/generatePassCode/",
   "catalogMgmtPageUrl" :"marketplace-ordering-cloud-it-managed-services",
   "enterpriseMarketPageURL":	"mmpem/210616",
   "muticloudManagementPlatformURL":"sfmm/210616",

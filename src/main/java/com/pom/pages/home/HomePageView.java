@@ -15,14 +15,12 @@ import java.util.List;
 
 public class HomePageView extends PageObject {
 
-    private static final String HAMBURGERCSS = "ibm-hamburger button";
-    private static final String LEFTNAVIGATIONXPATH = "//span[@class = 'bx--side-nav__submenu-title']";
-    private static final String LEFTNAVIGATIONLinkSELECTXPATH = "//span[@class = 'bx--side-nav__submenu-title";
-    private static final String ELEMENTNAMETOBECLICKED = "Enterprise Marketplace";
-    private static final String ELEMENTTOBECLICKED = "//span[@class = 'bx--side-nav__submenu-title'";
-    private static final String PAGETOBECLICKED = "Catalog";
-    private static final String LEFTNAVIPAGEXPATH = "//span[@class = 'bx--side-nav__link-text']";
-    private static final String LEFTNAVIPAFETOBECLICKEDXPATH = "//a[@class = 'bx--side-nav__link'";
+    private static final String HAMBURGER_CSS = "ibm-hamburger button";
+    private static final String LEFT_NAVIGATION_XPATH = "//span[@class = 'bx--side-nav__submenu-title']";
+    private static final String LEFT_NAVIGATION_LINK_SELECT_XPATH = "//span[@class = 'bx--side-nav__submenu-title";
+    private static final String ELEMENT_TO_BE_CLICKED = "//span[@class = 'bx--side-nav__submenu-title'";
+    private static final String LEFT_NAVIGATE_PAGE_XPATH = "//span[@class = 'bx--side-nav__link-text']";
+    private static final String LEFT_NAVIGATE_PAGE_TO_BE_CLICKED_XPATH = "//a[@class = 'bx--side-nav__link'";
 
     private static Logger _logger = Logger.getLogger(HomePageView.class);
 
@@ -39,7 +37,7 @@ public class HomePageView extends PageObject {
             public void validateHomePageIsLoaded() {
                 Assert.assertTrue(isHamburgerButtonFound(), "Hamburger button is displayed.");
                 LoadData loadData = new LoadData();
-                Assert.assertEquals(driver.getTitle(),  loadData.getParamValue(loadData.loadApplicationTitle(), "launchpadTitle"), "Page title validation failed");
+                Assert.assertEquals(driver.getTitle(), loadData.getParamValue(loadData.loadApplicationTitle(), "launchpadTitle"), "Page title validation failed");
                 Assert.assertEquals(driver.getCurrentUrl(), BaseTest.getTestObject().getBaseUrl() +
                         loadData.getParamValue(loadData.loadApplicationUrl(), "launchpadUrl"), "Page title validation failed");
 
@@ -47,68 +45,77 @@ public class HomePageView extends PageObject {
         };
     }
 
-    // --------------------------------------------------------------
+    // Actions--------------------------------------------------------------
 
-    @FindBy(css = HAMBURGERCSS)
+    @FindBy(css = HAMBURGER_CSS)
     private WebElement hamburgerButton;
 
     @Action
     public boolean isHamburgerButtonFound() {
-          return isElementFound(hamburgerButton) && hamburgerButton.isDisplayed() ;
+        return isElementFound(hamburgerButton) && hamburgerButton.isDisplayed();
     }
 
     @Action
-    public void clickHamburgerButton() {
-        hamburgerButton.click();
+    public boolean clickHamburgerButton() {
+        if (isHamburgerButtonFound()) {
+            hamburgerButton.click();
+            return true;
+        }
+        return false;
     }
 
     // --------------------------------------------------------------
 
     // Click on the left navigation link
-    @FindBy(xpath = LEFTNAVIGATIONXPATH)
+    @FindBy(xpath = LEFT_NAVIGATION_XPATH)
     private List<WebElement> leftNavigationLink;
 
     @Action
-    public WebElement selectLeftNavigation() {
+    private WebElement selectLeftNavigation(String elementName) {
         WebElement leftNavigationElement = null;
         for (WebElement element : leftNavigationLink) {
-            if (element.getText().equals(ELEMENTNAMETOBECLICKED)) {
-                _logger.info("element found");
+            if (element.getText().equals(elementName) && isElementFound(element)) {
                 leftNavigationElement = element;
                 break;
             }
         }
+        Assert.assertNotNull(leftNavigationElement, "Element not found :" + elementName);
         return leftNavigationElement;
     }
 
     @Action
-    public void clickLeftNavigation() {
-        _logger.info("click on the link:" + ELEMENTNAMETOBECLICKED);
-        if (isElementFound(driver.findElement(By.xpath(ELEMENTTOBECLICKED + " and text() ='" + selectLeftNavigation().getText() + "']")))) {
-            driver.findElement(By.xpath(ELEMENTTOBECLICKED + " and text() ='" + selectLeftNavigation().getText() + "']")).click();
+    public boolean clickMenuItem(String elementName) {
+        if (isElementFound(driver.findElement(By.xpath(ELEMENT_TO_BE_CLICKED + " and text() ='" + selectLeftNavigation(elementName).getText() + "']")))) {
+            driver.findElement(By.xpath(ELEMENT_TO_BE_CLICKED + " and text() ='" + selectLeftNavigation(elementName).getText() + "']")).click();
+            return true;
         }
+        return false;
     }
 
     // --------------------------------------------------------------
     // Click on left navigation required page
-    @FindBy(xpath = LEFTNAVIPAGEXPATH)
+    @FindBy(xpath = LEFT_NAVIGATE_PAGE_XPATH)
     private List<WebElement> leftNavigationPage;
 
     @Action
-    public WebElement selectNavigationPage() {
+    private WebElement selectNavigationPage(String elementName) {
         WebElement leftNavigationClickableElement = null;
         for (WebElement element : leftNavigationPage) {
-            if (element.getText().equals(PAGETOBECLICKED)) {
+            //CATALOG_PAGE
+            if (element.getText().equals(elementName)) {
                 leftNavigationClickableElement = element;
             }
         }
+        Assert.assertNotNull(leftNavigationClickableElement, "Element not found :" + elementName);
         return leftNavigationClickableElement;
     }
 
     @Action
-    public void clickLeftNavigationPage() {
-        if (isElementFound(driver.findElement(By.xpath(LEFTNAVIPAFETOBECLICKEDXPATH + " and @title ='" + selectNavigationPage().getText() + "']")))) {
-            driver.findElement(By.xpath(LEFTNAVIPAFETOBECLICKEDXPATH + " and @title ='" + selectNavigationPage().getText() + "']")).click();
+    public boolean clickSubMenuItem(String elementName) {
+        if (isElementFound(driver.findElement(By.xpath(LEFT_NAVIGATE_PAGE_TO_BE_CLICKED_XPATH + " and @title ='" + selectNavigationPage(elementName).getText() + "']")))) {
+            driver.findElement(By.xpath(LEFT_NAVIGATE_PAGE_TO_BE_CLICKED_XPATH + " and @title ='" + selectNavigationPage(elementName).getText() + "']")).click();
+            return true;
         }
+        return false;
     }
 }

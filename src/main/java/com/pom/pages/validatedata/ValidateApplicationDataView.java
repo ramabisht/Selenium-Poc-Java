@@ -13,14 +13,16 @@ public class ValidateApplicationDataView extends PageObject {
         return null;
     }
 
-    @Steps
-    private PlaceOrderPageView placeOrderPageView;
 
     private static final Logger _logger = Logger.getLogger(ValidateApplicationDataView.class);
 
+    @Steps
+    private PlaceOrderPageView placeOrderPageView;
+
+    // Actions--------------------------------------------------------------
     @Action
     public void validateReviewOrderPage() {
-        boolean verifyReviewOrderPage = placeOrderPageView.verifyLandedToAdditionalParaPage();
+        boolean verifyReviewOrderPage = placeOrderPageView.verifyLandedToAdditionalParameterPage();
         if (verifyReviewOrderPage) {
 
         }

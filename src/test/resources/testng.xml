@@ -44,19 +44,25 @@
     <parameter name="baseUrl" value="https://mcmp-dev2fra-release-autoui.multicloud-ibm.com" />
 
     <!-- Add test specific parameters below -->
+    <!-- Test configuration below -->
 
     <parameter name="Username" value="uiautomcmpuser@outlook.com" />
     <parameter name="Password" value="Automcmpuser@00" />
+    <test verbose="2" name="com.mcmp.tests.LoginTest" enabled="false">
+        <classes>
+            <class name="com.mcmp.tests.LoginTest" />
+        </classes>
+    </test>
 
-    <!-- Test configuration below -->
+    <parameter name="Category" value="Compute" />
+    <parameter name="Provider" value="VRA" />
+    <parameter name="BluePrintName" value="[IaaSC-8.2] - CentOS77 - Composite" />
     <test verbose="2" name="com.mcmp.tests.orderIntegration.vra.e2e.e2eCentOS77CompositeVRA82" enabled="true">
         <classes>
             <class name="com.mcmp.tests.orderIntegration.vra.e2e.e2eCentOS77CompositeVRA82"/>
         </classes>
     </test>
-    <test verbose="2" name="com.mcmp.tests.LoginTest" enabled="false">
-        <classes>
-          <class name="com.mcmp.tests.LoginTest" />
-        </classes>
-    </test>
+
+
+
 </suite>

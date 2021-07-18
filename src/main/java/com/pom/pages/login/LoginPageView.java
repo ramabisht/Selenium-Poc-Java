@@ -26,25 +26,30 @@ public final class LoginPageView extends PageObject {
 
             @Step
             public void validateLoginPageIsLoaded() {
-                Assert.assertTrue(isUserNameFieldFound(), "UserName Field on Login Page is loaded");
-                Assert.assertTrue(isContinueButtonFound(), "Continue Button on Login Page is loaded");
-
                 //Change the param for Login page for title and URL accordingly
                 LoadData loadData = new LoadData();
-                Assert.assertEquals(driver.getTitle(),  loadData.getParamValue(loadData.loadApplicationTitle(), "launchpadTitle"), "Page title validation failed");
+                Assert.assertEquals(driver.getTitle(), loadData.getParamValue(loadData.loadApplicationTitle(), "loginTitle"), "Page title validation failed");
+
+                Assert.assertTrue(isLoginFormFound(), "Login Form is loaded");
+                Assert.assertTrue(isUserNameFieldFound(), "UserName Field on Login Page is loaded");
+                //Assert.assertTrue(isContinueButtonFound(), "Continue Button on Login Page is loaded");
+
+                //Commenting this out as Login Url looks to be dynamically generated for SSO login
+                /*
                 Assert.assertEquals(driver.getCurrentUrl(), BaseTest.getTestObject().getBaseUrl() +
                         loadData.getParamValue(loadData.loadApplicationUrl(), "launchpadUrl"), "Page title validation failed");
+                 */
             }
         };
     }
 
-    // --------------------------------------------------------------
+    // Actions--------------------------------------------------------------
 
-    @FindBy(id = "loginForm")
+    @FindBy(xpath = "//div[normalize-space(.)='Log in to IBM']")
     private WebElement loginForm;
 
     public boolean isLoginFormFound() {
-        return isElementFound(loginForm, 1);
+        return isElementFound(loginForm);
     }
 
 
@@ -54,8 +59,7 @@ public final class LoginPageView extends PageObject {
 
     @Action
     public boolean isUserNameFieldFound() {
-        isElementFound(userNameField);
-        return userNameField.isDisplayed();
+        return isElementFound(userNameField) && userNameField.isDisplayed();
     }
 
     @Action
@@ -74,14 +78,17 @@ public final class LoginPageView extends PageObject {
     private WebElement continueButton;
 
     @Action
-    public boolean isContinueButtonFound() {
-        isElementFound(continueButton);
-        return continueButton.isDisplayed();
+    private boolean isContinueButtonFound() {
+        return isElementFound(continueButton) && continueButton.isDisplayed();
     }
 
     @Action
-    public void clickContinueButton() {
-        continueButton.click();
+    public boolean clickContinueButton() {
+        if (isContinueButtonFound()) {
+            continueButton.click();
+            return true;
+        }
+        return false;
     }
 
 
@@ -91,7 +98,7 @@ public final class LoginPageView extends PageObject {
 
     @Action
     public boolean isPasswordFieldFound() {
-        return passwordField.isDisplayed();
+        return isElementFound(continueButton) && passwordField.isDisplayed();
     }
 
     @Action
@@ -109,13 +116,17 @@ public final class LoginPageView extends PageObject {
     private WebElement loginButton;
 
     @Action
-    public boolean isLoginButtonFound() {
-        return loginButton.isDisplayed();
+    private boolean isLoginButtonFound() {
+        return isElementFound(continueButton) && loginButton.isDisplayed();
     }
 
     @Action
-    public void clickLoginButton() {
-        loginButton.click();
+    public boolean clickLoginButton() {
+        if (isLoginButtonFound()) {
+            loginButton.click();
+            return true;
+        }
+        return false;
     }
 
     //Accept Privacy warning
@@ -137,13 +148,16 @@ public final class LoginPageView extends PageObject {
     private WebElement loginErrorMessage;
 
     @Action
-    public boolean isLoginErrorFound() {
-        return isElementFound(loginErrorMessage, 5);
+    private boolean isLoginErrorFound() {
+        return isElementFound(loginErrorMessage, 3);
     }
 
     @Action
     public String getLoginErrorMessage() {
-        return loginErrorMessage.getText().trim();
+        if (isLoginErrorFound())
+            return loginErrorMessage.getText().trim();
+
+        return "";
     }
 
 }

@@ -511,8 +511,7 @@ public abstract class PageObject implements IPageObject {
 
         protected String title;
 
-        public PageValidation() {
-        }
+        public PageValidation() {}
 
         public PageValidation(String title) {
             this.title = title;
@@ -520,9 +519,7 @@ public abstract class PageObject implements IPageObject {
 
         public abstract void validate();
 
-        public void validate(String... parameters) {
-
-        }
+        public void validate(String... parameters) {}
 
         ;
     }
