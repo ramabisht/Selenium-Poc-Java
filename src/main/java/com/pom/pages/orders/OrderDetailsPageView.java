@@ -13,6 +13,7 @@ import org.openqa.selenium.support.FindBy;
 import org.testng.Assert;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 
@@ -78,7 +79,7 @@ public class OrderDetailsPageView extends PageObject {
 
 
     @Action
-    public JSONObject loadTestData(String providerName) {
+    public LinkedHashMap<String, Object> loadTestData(String providerName) {
         return loadData.loadTestDataFile(providerName);
     }
 
@@ -92,9 +93,9 @@ public class OrderDetailsPageView extends PageObject {
         try {
             _logger.info("Starting filling values in main parameter page");
             Assert.assertTrue(placeOrderPageView.verifyLandedToMainParameterPage(), "Main Parameter page opened");
-            ((HashMap) ((HashMap) getOrderParameters(providerName)).get(MAIN_PARAMETERS)).forEach((key, value) -> {
+            ((LinkedHashMap) ((LinkedHashMap) getOrderParameters(providerName)).get(MAIN_PARAMETERS)).forEach((key, value) -> {
                 _logger.info("Filling details for " + key + " parameter in Main parameter page to value " + value);
-                Map<String, Object> mainParamsValue = (Map<String, Object>) value;
+                LinkedHashMap<String, Object> mainParamsValue = (LinkedHashMap<String, Object>) value;
                 String paramId = (String) mainParamsValue.get("id");
                 String paramType = (String) mainParamsValue.get("type");
                 String paramValue = (String) mainParamsValue.get("value");
@@ -114,25 +115,25 @@ public class OrderDetailsPageView extends PageObject {
     public void fillAdditionalParameterPage(String providerName) {
         Assert.assertTrue(placeOrderPageView.verifyLandedToAdditionalParameterPage(), "Additional parameter page opened");
         try {
-            ((HashMap) ((HashMap) getOrderParameters(providerName)).get(ADDITIONAL_PARAMETERS)).forEach((key, value) -> {
+            ((LinkedHashMap) ((LinkedHashMap) getOrderParameters(providerName)).get(ADDITIONAL_PARAMETERS)).forEach((key, value) -> {
                 _logger.info("Filling details for " + key + "parameter in Additional parameter page");
-                Map<String, Object> additionalParamKey = (Map<String, Object>) value;
+                LinkedHashMap<String, Object> additionalParamKey = (LinkedHashMap<String, Object>) value;
                 if (additionalParamKey.get("id") != null) {
                     String paramId = "", paramType = "", paramValue = "";
                     paramId = (String) additionalParamKey.get("id");
                     paramType = (String) additionalParamKey.get("type");
                     paramValue = (String) additionalParamKey.get("value");
                     _logger.info("Filling details for " + key + "parameter in Additional parameters page to value " + paramValue);
-                    orderDetailsDataView.fillOrderDetails(paramId, paramType, paramValue);
+                    orderDetailsDataView.fillOrderDetails(paramId, paramValue, paramType);
                 } else {
                     additionalParamKey.forEach((paramkey, parValue) -> {
-                        Map<String, Object> additionalParamValue = (Map<String, Object>) parValue;
+                        LinkedHashMap<String, Object> additionalParamValue = (LinkedHashMap<String, Object>) parValue;
                         String paramId = "", paramType = "", paramValue = "";
                         paramId = (String) additionalParamValue.get("id");
                         paramType = (String) additionalParamValue.get("type");
                         paramValue = (String) additionalParamValue.get("value");
                         _logger.info("Filling details for " + paramkey + " parameter in Additional parameters page to value " + paramValue);
-                        orderDetailsDataView.fillOrderDetails(paramId, paramType, paramValue);
+                        orderDetailsDataView.fillOrderDetails(paramId, paramValue, paramType);
                     });
                 }
                 Assert.assertTrue(placeOrderPageView.clickOnNextButton(), "Click on the next button post filling additional param for " + key);

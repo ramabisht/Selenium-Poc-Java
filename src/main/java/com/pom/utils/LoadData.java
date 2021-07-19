@@ -4,10 +4,12 @@ import com.automacent.fwk.annotations.Step;
 import com.automacent.fwk.core.BaseTest;
 import com.automacent.fwk.core.WebTestSteps;
 import com.automacent.fwk.reporting.Logger;
+import com.automacent.fwk.utils.JacksonUtils;
 import com.automacent.fwk.utils.JsonUtils;
 import com.automacent.fwk.utils.PropertyUtils;
 import org.json.simple.JSONObject;
 
+import java.util.LinkedHashMap;
 import java.util.Properties;
 
 public class LoadData extends WebTestSteps {
@@ -15,6 +17,7 @@ public class LoadData extends WebTestSteps {
     private static Logger _logger = Logger.getLogger(LoadData.class);
     private static Properties properties = null;
     private static JsonUtils jsonUtils = new JsonUtils();
+    private static JacksonUtils jacksonUtils = new JacksonUtils();
     private static final String TEST_DATA_PROPERTIES = "testdata.properties";
     private static final String RESOURCES = "\\src\\test\\resources\\";
     private static final String MCMP = "mcmp";
@@ -54,17 +57,24 @@ public class LoadData extends WebTestSteps {
         return jsonUtils.readJsonFromFile(System.getProperty("user.dir") + RESOURCES + MCMP + "\\" + folderName + "\\" + testName + ".json");
     }
 
+
     @Step
-    public JSONObject loadTestDataFile(String folderName) {
+    public LinkedHashMap<String, Object> loadTestDataFile(String folderName) {
         _logger.info("Loading the test data under folder " + folderName );
         String testNameOutput =  BaseTest.getTestObject().getTestName().split("\\.")[( BaseTest.getTestObject().getTestName().split("\\.")).length - 1];
-        return jsonUtils.readJsonFromFile(System.getProperty("user.dir") + RESOURCES + MCMP + "\\" + folderName + "\\" + testNameOutput + ".json");
+        return jacksonUtils.getJsonMapFromfile(System.getProperty("user.dir") + RESOURCES + MCMP + "\\" + folderName + "\\" + testNameOutput + ".json");
     }
 
     @Step
     public Object getParamValue(JSONObject jsonObject, String paramName) {
         _logger.info("Returning value for params :" + paramName + " as [" + jsonObject.get(paramName) + "]");
         return jsonObject.get(paramName);
+    }
+
+    @Step
+    public Object getParamValue(LinkedHashMap<String, Object> mapObject, String paramName) {
+        _logger.info("Returning value for params :" + paramName + " as [" + mapObject.get(paramName) + "]");
+        return mapObject.get(paramName);
     }
 
 }

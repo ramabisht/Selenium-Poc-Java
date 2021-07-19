@@ -59,11 +59,11 @@ public class JsonUtils {
      * @param fileLocation
      * @return JSONObject
      */
-    public JSONObject readJsonFromFile(String fileLocation) {
+    public static JSONObject readJsonFromFile(String fileLocation) {
         try {
             _logger.info(String.format("Reading JSON data from file: %s", fileLocation));
             BufferedReader bufferedReader = new BufferedReader(new FileReader(fileLocation));
-            jsonObject = (JSONObject) new Gson().fromJson(bufferedReader, HashMap.class);
+           jsonObject = (JSONObject) new Gson().fromJson(bufferedReader, HashMap.class);
         } catch (FileNotFoundException fileNotFoundException) {
             _logger.error(String.format("File not found at location: %s ", fileLocation), fileNotFoundException);
         } catch (IOException ioException) {

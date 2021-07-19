@@ -1,8 +1,10 @@
 package com.pom.pages.orders;
 
 import com.automacent.fwk.annotations.Action;
+import com.automacent.fwk.core.BaseTest;
 import com.automacent.fwk.core.PageObject;
 import com.automacent.fwk.reporting.Logger;
+import com.automacent.fwk.utils.ThreadUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
@@ -23,18 +25,20 @@ public class OrderDetailsDataView extends PageObject {
     @Action
     private void fillTextBox(String elementId, String elementValue) {
         _logger.info("Filling text box by Id :" + elementId + ", value:" + elementValue);
-        Assert.assertTrue(isElementFound(By.id(elementId)), "Text Box not found by Id " + elementId);
-        WebElement textBoxElement = driver.findElement(By.id(elementId));
+        Assert.assertTrue(isElementFound(By.xpath("//input[@id='"+ elementId +"' and @type='text']")), "Text Box found by Id " + elementId);
+        WebElement textBoxElement = driver.findElement(By.xpath("//input[@id='"+ elementId +"' and @type='text']"));
         textBoxElement.clear();
         textBoxElement.sendKeys(elementValue);
-        Assert.assertEquals(textBoxElement.getText(), elementValue, "Text box value entered is :" + elementValue);
+        ThreadUtils.sleepFor(2);
+        Assert.assertEquals(textBoxElement.getAttribute("value"), elementValue, "Text box value entered is :" + elementValue);
     }
 
     @Action
     private void selectCheckBox(String elementId, String elementValue) {
         _logger.info("Clicking on the button by Id :" + elementId + ", value:" + elementValue);
         Assert.assertTrue(isElementFound(By.id(elementId)), "Found the button element by Id " + elementId);
-        WebElement buttonElement = driver.findElement(By.id(elementId));
+        //WebElement buttonElement = driver.findElement(By.id(elementId));
+        WebElement buttonElement = driver.findElement(By.xpath("//input[@id='"+ elementId +"' and @type='checkbox']"));
         Assert.assertTrue(isClickableElementFound(buttonElement), "Found the clickable button element by Id " + elementId);
         buttonElement.click();
         _logger.info("Clicked on the button by Id:" + elementId);
@@ -45,6 +49,7 @@ public class OrderDetailsDataView extends PageObject {
         _logger.info("Clicking on the radio button by Id :" + elementId + ", value:" + elementValue);
         Assert.assertTrue(isElementFound(By.id(elementId)), "Found the radio button element by Id " + elementId);
         WebElement radioButtonElement = driver.findElement(By.cssSelector("[id=\"" + elementId + "\"] ~ label span"));
+        //WebElement radioButtonElement = driver.findElement(By.xpath("//input[@id='"+ elementId +"' and @type='radio']"));
         Assert.assertTrue(isClickableElementFound(radioButtonElement), "Found the clickable radio button element by Id " + elementId);
         radioButtonElement.click();
         _logger.info("Clicked on the radio button by Id:" + elementId);
@@ -54,17 +59,17 @@ public class OrderDetailsDataView extends PageObject {
     private void selectFromDropDown(String elementId, String elementValue) {
         _logger.info("Selecting the drop down by Id :" + elementId + ", value:" + elementValue);
         Assert.assertTrue(isElementFound(By.id(elementId)), "Found the drop down element by Id " + elementId);
-        WebElement dropDownElement = driver.findElement(By.xpath("//*[@id='" + elementId + "' or @id = '" + elementId.toLowerCase() + "']/div"));
+        WebElement dropDownElement = driver.findElement(By.xpath("//*[@id='" + elementId + "' or @id = '" + elementId.toLowerCase() + "']//div/button"));
         Assert.assertTrue(isClickableElementFound(dropDownElement), "Found the clickable drop down element by Id " + elementId);
         dropDownElement.click();
         _logger.info("Drop down expanded");
 
-        Assert.assertTrue(isElementFound(By.xpath("//*[@id='" + elementId + "' or @id = '" + elementId.toLowerCase() + "']//ul//li")),
+        Assert.assertTrue(isElementFound(By.xpath("//*[@id='" + elementId + "' or @id='" + elementId.toLowerCase() + "']//ul//li//button")),
                 "Drop down options enabled:");
 
-        List<WebElement> findDropDownElement = driver.findElements(By.xpath("//*[@id='" + elementId + "' or @id = '" + elementId.toLowerCase() + "']//ul//li"));
+        List<WebElement> findDropDownElement = driver.findElements(By.xpath("//*[@id='" + elementId + "' or @id='" + elementId.toLowerCase() + "']//ul//li//button"));
         for (WebElement element : findDropDownElement) {
-            if (element.getText().equals(elementValue)) {
+            if (element.getText().trim().equals(elementValue)) {
                 Assert.assertTrue(isClickableElementFound(element), "Found the provided options form Drop down " + elementValue);
                 element.click();
                 _logger.info("Selected the option " + element.getText() + " from drop down.");

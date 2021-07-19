@@ -38,6 +38,7 @@ public class LoginTest extends BaseTest {
     //We can invoke few cleaning up methods and activities here
     @AfterClass(alwaysRun = true)
     public void logout() {
+        homePageSteps.navigateToHomePage();
         homePageSteps.performLogOut();
     }
 

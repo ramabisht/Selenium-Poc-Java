@@ -10,8 +10,8 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.pagefactory.DefaultElementLocator;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
-import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.TimeoutException;
@@ -356,7 +356,7 @@ public abstract class PageObject implements IPageObject {
     }
 
 
-    private Wait<SearchContext> fluentWait(int explicitWaitInSeconds) {
+    private FluentWait fluentWait(int explicitWaitInSeconds) {
         return (new FluentWait(this.component)).withTimeout((long) explicitWaitInSeconds, TimeUnit.SECONDS)
                 .pollingEvery(100L, TimeUnit.MILLISECONDS).ignoring(NoSuchElementException.class);
     }
@@ -371,15 +371,40 @@ public abstract class PageObject implements IPageObject {
         WebElement returnElement = null;
         try {
             long startTime = (new Date()).getTime();
-            returnElement = (WebElement) this.explicitWait(explicitWaitInSeconds).until(CustomExpectedConditions.proxyElementLocated(element));
+            if(expectedCondition.equals(ExpectedCondition.PRESENCE_OF_ELEMENT_LOCATED_BY)){
+                returnElement = (WebElement) this.explicitWait(explicitWaitInSeconds).until(ExpectedConditions.elementToBeClickable(by));
+            }
+            else if(expectedCondition.equals(ExpectedCondition.PROXY_ELEMENT_LOCATED)) {
+                returnElement = (WebElement) this.explicitWait(explicitWaitInSeconds).until(CustomExpectedConditions.proxyElementLocated(element));
+            }
+
         } catch (Exception var11) {
             throw var11;
         } finally {
-            _logger.debug(String.format("Setting implicit wait to %s seconds", BaseTest.getTestObject().getTimeoutInSeconds()));
+            _logger.info(String.format("Setting wait until implicit wait to %s seconds", BaseTest.getTestObject().getTimeoutInSeconds()));
             this.driver.manage().timeouts().implicitlyWait(BaseTest.getTestObject().getTimeoutInSeconds(), TimeUnit.SECONDS);
         }
 
         return returnElement;
+    }
+
+
+    protected boolean waitUntillInvisibilityOfElement(By by) {
+        this.setImplicitWaitToOneSecond();
+        boolean returnValue = false;
+
+        try {
+            returnValue = (Boolean) this.explicitWait(this.explicitWaitInSeconds)
+                    .until(ExpectedConditions.invisibilityOfElementLocated(by));
+        } catch (Exception var7) {
+            throw var7;
+        } finally {
+            _logger.debug(String.format("Setting implicit wait to %s seconds",
+                    BaseTest.getTestObject().getTimeoutInSeconds()));
+            this.driver.manage().timeouts().implicitlyWait(BaseTest.getTestObject().getTimeoutInSeconds(),
+                    TimeUnit.SECONDS);
+        }
+        return returnValue;
     }
 
     /**
@@ -416,7 +441,7 @@ public abstract class PageObject implements IPageObject {
                 isFound = true;
             }
         } catch (NoSuchElementException | TimeoutException var5) {
-            _logger.debug(String.format("Element not found. %s", var5.getMessage()));
+            _logger.info(String.format("Element not found. %s", var5.getMessage()));
         }
 
         return isFound;

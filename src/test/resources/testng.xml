@@ -10,9 +10,9 @@
     <parameter name="runName" value="" />
     <parameter name="batchNumber" value="" />
     <parameter name="retryMode" value="ON" />
-    <parameter name="timeoutInSeconds" value="90" />
+    <parameter name="timeoutInSeconds" value="10" />
     <parameter name="recoveryClasses" value="" />
-    <parameter name="slowdownDurationInSeconds" value="1" />
+    <parameter name="slowdownDurationInSeconds" value="0" />
     <parameter name="repeatMode" value="INVOCATION_COUNT" />
     <parameter name="testDurationInSeconds" value="3000" />
     <parameter name="invocationCount" value="1" />

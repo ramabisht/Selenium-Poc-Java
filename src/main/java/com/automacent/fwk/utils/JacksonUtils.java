@@ -1,5 +1,8 @@
 package com.automacent.fwk.utils;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -74,6 +77,19 @@ public class JacksonUtils {
             _logger.warn(String.format("Error parsing String as JSON Node %s ", jsonString), e);
             return null;
         }
+    }
+
+    public static LinkedHashMap<String, Object> getJsonMapFromfile(String fileLocation){
+        try {
+            BufferedReader bufferedReader = new BufferedReader(new FileReader(fileLocation));
+            return  mapper.readValue(bufferedReader, LinkedHashMap.class);
+        } catch (FileNotFoundException fileNotFoundException) {
+            _logger.error(String.format("File not found at location %s ", fileLocation), fileNotFoundException);
+        }catch (IOException e) {
+            _logger.warn(String.format("Error parsing String as JSON Node %s "), e);
+            return null;
+        }
+        return null;
     }
 
     /**
