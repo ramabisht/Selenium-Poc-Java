@@ -5,6 +5,7 @@ import com.automacent.fwk.annotations.Step;
 import com.automacent.fwk.core.BaseTest;
 import com.automacent.fwk.core.PageObject;
 import com.automacent.fwk.reporting.Logger;
+import com.automacent.fwk.utils.ThreadUtils;
 import com.pom.utils.LoadData;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -17,6 +18,7 @@ public class PlaceOrderPageView extends PageObject {
     private static final String REVIEW_ORDER_PARAMETERS_PAGE_XPATH = ".//*[contains(text(),'Review Order')]";
     private static final String NEXT_BUTTON_XPATH = "//button[contains(@id,'next-button')]";
     private static final String PREVIOUS_BUTTON_XPATH = "//button[contains(@id,'previous')]";
+    private static final String SUBMIT_BUTTON_CSS = "button[id$=\"primary-btn-review-order\"]";
 
 
     private static final Logger _logger = Logger.getLogger(OrderDetailsPageView.class);
@@ -100,4 +102,21 @@ public class PlaceOrderPageView extends PageObject {
         return false;
     }
 
+    @FindBy(xpath = SUBMIT_BUTTON_CSS)
+    private WebElement submitButton;
+
+    @Action
+    private boolean isSubmitButtonEnabled() {
+        ThreadUtils.sleepFor(10);
+        return isElementFound(submitButton) && submitButton.isEnabled();
+    }
+
+    @Action
+    public boolean clickOnSubmitButton() {
+        if(isSubmitButtonEnabled()) {
+            submitButton.click();
+            return true;
+        }
+        return false;
+    }
 }

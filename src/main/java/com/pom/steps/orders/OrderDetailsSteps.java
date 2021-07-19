@@ -31,4 +31,9 @@ public class OrderDetailsSteps extends AbstractHomeSteps  {
     public void fillOrderParameterDetailsAdditionalParam(String providerName) {
         orderDetailsPageView.fillAdditionalParameterPage(providerName);
     }
+
+    @Step
+    public  void clickOnSubmitButton(){
+        Assert.assertTrue(placeOrderPageView.clickOnSubmitButton(),"Submit button enabled post filling Main parameters");
+    }
 }

@@ -19,7 +19,7 @@
       "Service Instance Name": {
         "type": "Textbox",
         "id": "text-input-main_params-serviceName",
-        "value": "centOsComposite"
+        "value": "TeatAutomation"
       },
       "Team": {
         "type": "RadioButton",

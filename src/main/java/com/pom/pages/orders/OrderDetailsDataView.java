@@ -6,6 +6,7 @@ import com.automacent.fwk.core.PageObject;
 import com.automacent.fwk.reporting.Logger;
 import com.automacent.fwk.utils.ThreadUtils;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 
@@ -25,11 +26,19 @@ public class OrderDetailsDataView extends PageObject {
     @Action
     private void fillTextBox(String elementId, String elementValue) {
         _logger.info("Filling text box by Id :" + elementId + ", value:" + elementValue);
-        Assert.assertTrue(isElementFound(By.xpath("//input[@id='"+ elementId +"' and @type='text']")), "Text Box found by Id " + elementId);
-        WebElement textBoxElement = driver.findElement(By.xpath("//input[@id='"+ elementId +"' and @type='text']"));
-        textBoxElement.clear();
-        textBoxElement.sendKeys(elementValue);
-        ThreadUtils.sleepFor(2);
+        //Assert.assertTrue(isElementFound(By.xpath("//input[@id='"+ elementId +"' and @type='text']")), "Text Box found by Id " + elementId);
+        Assert.assertTrue(isElementFound(By.xpath("//input[@id='"+ elementId +"']")), "Text Box found by Id " + elementId);
+        WebElement textBoxElement = driver.findElement(By.xpath("//input[@id='"+ elementId +"']"));
+        _logger.info("attribute value:"+(textBoxElement.getAttribute("value")));
+        if (textBoxElement.getAttribute("value").equals(elementValue)){
+            _logger.info("Input value "+ elementId +" is same as current value in Application");
+        }
+        else {
+            //textBoxElement.clear();
+            //textBoxElement.sendKeys(elementValue);
+            textBoxElement.sendKeys(Keys.HOME, Keys.chord(Keys.SHIFT, Keys.END), elementValue);
+            ThreadUtils.sleepFor(2);
+        }
         Assert.assertEquals(textBoxElement.getAttribute("value"), elementValue, "Text box value entered is :" + elementValue);
     }
 
@@ -59,7 +68,7 @@ public class OrderDetailsDataView extends PageObject {
     private void selectFromDropDown(String elementId, String elementValue) {
         _logger.info("Selecting the drop down by Id :" + elementId + ", value:" + elementValue);
         Assert.assertTrue(isElementFound(By.id(elementId)), "Found the drop down element by Id " + elementId);
-        WebElement dropDownElement = driver.findElement(By.xpath("//*[@id='" + elementId + "' or @id = '" + elementId.toLowerCase() + "']//div/button"));
+        WebElement dropDownElement = driver.findElement(By.xpath("//*[@id='" + elementId + "' or @id = '" + elementId.toLowerCase() + "']//button"));
         Assert.assertTrue(isClickableElementFound(dropDownElement), "Found the clickable drop down element by Id " + elementId);
         dropDownElement.click();
         _logger.info("Drop down expanded");

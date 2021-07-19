@@ -1,6 +1,7 @@
 package com.automacent.fwk.utils;
 
 import java.util.Base64;
+import java.util.Random;
 
 /**
  * String utility class
@@ -48,6 +49,26 @@ public class StringUtils {
      * @return Decoded String
      */
     public static String decodeBase64String(String encodedString) {
-        return new String(Base64.getDecoder().decode(encodedString));
+        return new String(Base64.getDecoder().decode(encodedString));}
+
+        /**
+         * Generate Random String
+         * @return String
+         */
+
+    public static String getAlphaNumericString() {
+            int length = 5;
+            int lowerLimit = 97;
+            int upperLimit = 122;
+            Random random = new Random();
+            StringBuffer r = new StringBuffer(length);
+            for (int i = 0; i < length; i++) {
+                int nextRandomChar = lowerLimit
+                        + (int)(random.nextFloat()
+                        * (upperLimit - lowerLimit + 1));
+                r.append((char)nextRandomChar);
+            }
+            return r.toString();
+        }
     }
-}
+

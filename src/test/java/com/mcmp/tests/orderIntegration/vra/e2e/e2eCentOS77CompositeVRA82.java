@@ -35,6 +35,7 @@ public class e2eCentOS77CompositeVRA82 extends LoginTest {
     @Steps
     private LoadData loadData;
 
+
     @BeforeClass
     public void verifyAndOpenMenu() {
         homePageSteps.clickHamburgerButton();
@@ -61,6 +62,7 @@ public class e2eCentOS77CompositeVRA82 extends LoginTest {
         catalogDetailPageSteps.configureService((String) loadData.getParamValue(loadData.loadTestDataFile("VRA"), "bluePrintName"));
         orderDetailsSteps.fillOrderParameterDetailsMainParam((String) loadData.getParamValue(loadData.loadTestDataFile("VRA"), "provider"));
         orderDetailsSteps.fillOrderParameterDetailsAdditionalParam((String) loadData.getParamValue(loadData.loadTestDataFile("VRA"), "provider"));
+        orderDetailsSteps.clickOnSubmitButton();
     }
 
 

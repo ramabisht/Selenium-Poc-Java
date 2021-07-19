@@ -10,7 +10,7 @@
     <parameter name="runName" value="" />
     <parameter name="batchNumber" value="" />
     <parameter name="retryMode" value="ON" />
-    <parameter name="timeoutInSeconds" value="10" />
+    <parameter name="timeoutInSeconds" value="20" />
     <parameter name="recoveryClasses" value="" />
     <parameter name="slowdownDurationInSeconds" value="0" />
     <parameter name="repeatMode" value="INVOCATION_COUNT" />
@@ -41,7 +41,8 @@
     <parameter name="screenshotMode" value="AFTER_ACTION" />
     <parameter name="screenshotModeForIteration" value="LAST_ITERATION" />
     <parameter name="browser" value="CHROME" />
-    <parameter name="baseUrl" value="https://mcmp-dev2fra-release-autoui.multicloud-ibm.com" />
+    <!--<parameter name="baseUrl" value="https://mcmp-dev2fra-release-autoui.multicloud-ibm.com" /> -->
+    <parameter name="baseUrl" value="${app.baseurl}" />
 
     <!-- Add test specific parameters below -->
     <!-- Test configuration below -->

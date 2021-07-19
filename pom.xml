@@ -438,6 +438,8 @@
                         <debugMode>${debugMode}</debugMode>
                         <automacent.reportdir>${automacent.reportdir}</automacent.reportdir>
                         <automacent.listeners>${automacent.listeners}</automacent.listeners>
+                        <!--suppress UnresolvedMavenProperty -->
+                        <!--<app.baseurl>${app.baseurl}</app.baseurl> -->
                     </systemPropertyVariables>
                 </configuration>
             </plugin>

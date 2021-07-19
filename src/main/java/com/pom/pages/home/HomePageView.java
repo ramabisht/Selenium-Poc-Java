@@ -15,7 +15,7 @@ import java.util.List;
 
 public class HomePageView extends PageObject {
 
-    private static final String HOME_PAGE_BUTTON = "//a[@title='IBM Services for Multicloud Management']";
+    private static final String HOME_PAGE_BUTTON = "//a[@title='IBM Services for Multicloud Management']/span";
     private static final String HAMBURGER_CSS = "ibm-hamburger button";
     private static final String LEFT_NAVIGATION_XPATH = "//span[@class = 'bx--side-nav__submenu-title']";
     private static final String LEFT_NAVIGATION_LINK_SELECT_XPATH = "//span[@class = 'bx--side-nav__submenu-title";
@@ -41,7 +41,6 @@ public class HomePageView extends PageObject {
                 Assert.assertEquals(driver.getCurrentUrl(), BaseTest.getTestObject().getBaseUrl() +
                         loadData.getParamValue(loadData.loadApplicationUrl(), "launchpadUrl"), "Page title validation failed");
                 Assert.assertTrue(isHamburgerButtonFound(), "Hamburger button is displayed.");
-
             }
         };
     }

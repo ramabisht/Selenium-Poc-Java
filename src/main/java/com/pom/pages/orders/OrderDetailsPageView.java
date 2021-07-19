@@ -11,7 +11,7 @@ import org.json.simple.JSONObject;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.testng.Assert;
-
+import com.automacent.fwk.utils.StringUtils;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -99,6 +99,9 @@ public class OrderDetailsPageView extends PageObject {
                 String paramId = (String) mainParamsValue.get("id");
                 String paramType = (String) mainParamsValue.get("type");
                 String paramValue = (String) mainParamsValue.get("value");
+                if (key.equals("Service Instance Name")){
+                    paramValue = paramValue+StringUtils.getAlphaNumericString();
+                }
                 _logger.info("Outer Param id :" + paramId + ", Param type :" + paramType + ", Param Value :" + paramValue);
                 orderDetailsDataView.fillOrderDetails(paramId, paramValue, paramType);
             });
@@ -112,7 +115,8 @@ public class OrderDetailsPageView extends PageObject {
 
     /*-------------------------------Fill oder detail for Additional parameter page---------------------------------------*/
     @Action
-    public void fillAdditionalParameterPage(String providerName) {
+    public void
+    fillAdditionalParameterPage(String providerName) {
         Assert.assertTrue(placeOrderPageView.verifyLandedToAdditionalParameterPage(), "Additional parameter page opened");
         try {
             ((LinkedHashMap) ((LinkedHashMap) getOrderParameters(providerName)).get(ADDITIONAL_PARAMETERS)).forEach((key, value) -> {

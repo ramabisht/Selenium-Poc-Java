@@ -2,6 +2,7 @@ package com.mcmp.tests;
 
 
 import com.automacent.fwk.annotations.Steps;
+import com.automacent.fwk.utils.ThreadUtils;
 import com.pom.steps.home.HomePageSteps;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
@@ -38,6 +39,7 @@ public class LoginTest extends BaseTest {
     //We can invoke few cleaning up methods and activities here
     @AfterClass(alwaysRun = true)
     public void logout() {
+        ThreadUtils.sleepFor(2);
         homePageSteps.navigateToHomePage();
         homePageSteps.performLogOut();
     }

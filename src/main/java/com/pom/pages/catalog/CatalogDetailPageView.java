@@ -5,6 +5,7 @@ import com.automacent.fwk.annotations.Step;
 import com.automacent.fwk.core.BaseTest;
 import com.automacent.fwk.core.PageObject;
 import com.automacent.fwk.reporting.Logger;
+import com.automacent.fwk.utils.ThreadUtils;
 import com.pom.utils.LoadData;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -52,6 +53,7 @@ public class CatalogDetailPageView extends PageObject {
 
     @Action
     public String getBluePrintName() {
+        ThreadUtils.sleepFor(5);
         Assert.assertTrue(isElementFound(blueprintName), "Blue print name element found.");
         return blueprintName.getText();
     }
