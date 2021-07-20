@@ -220,6 +220,7 @@ public class Client {
     }
 
     public void validatePostResponseCode(Response response) {
+        printResponse(response);
         response.then().assertThat().statusCode(POST_RESPONSE_CODE);
     }
 
@@ -263,6 +264,17 @@ public class Client {
 
     public String getResponseCookie(Response response, String cookieName) {
         return response.getCookie(cookieName);
+    }
+
+    /**************** Print response ******************/
+
+    public void printResponse(Response response){
+        _logger.info("******Response details starts*******");
+        _logger.info("Status code :" + response.getStatusCode());
+        _logger.info("Body :" + response.getBody());
+        _logger.info("Pretty string :" + response.asPrettyString());
+        _logger.info("String :" + response.toString());
+        _logger.info("******Response details ends*******");
     }
 
 

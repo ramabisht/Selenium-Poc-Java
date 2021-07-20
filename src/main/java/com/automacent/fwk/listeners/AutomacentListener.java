@@ -261,7 +261,7 @@ public class AutomacentListener extends TestListenerAdapter
         testResult.put("Skip", skippedTest);
         String output = JacksonUtils.getString(testResult);
         _logger.info("Final test result :" + output);
-        Slack.postRequestToSlack("", output);
+        Slack.postRequestToSlack("https://hooks.slack.com/services/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", output);
         FileUtils.cleanTempDirectory();
     }
 
