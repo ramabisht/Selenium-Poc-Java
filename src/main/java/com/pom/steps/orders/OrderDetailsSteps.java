@@ -34,6 +34,6 @@ public class OrderDetailsSteps extends AbstractHomeSteps  {
 
     @Step
     public  void clickOnSubmitButton(){
-        Assert.assertTrue(placeOrderPageView.clickOnSubmitButton(),"Submit button enabled post filling Main parameters");
+        Assert.assertTrue(placeOrderPageView.clickOnSubmitButton(),"Submit button enabled post filling Additional parameters");
     }
 }

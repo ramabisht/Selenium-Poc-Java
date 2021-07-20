@@ -24,6 +24,7 @@ public class CatalogPageView extends PageObject {
     //private static final String PROVIDER_TO_BE_CLICKED = "//span[@class = 'bx--checkbox-label-text'";
     private static final String PROVIDER_TO_BE_CLICKED = "//input[@name='%s']";
     private static final String CARD_SERVICE_TITLE = ".card-service-title";
+    private static final String MCMP_IFRAME_ID = "mcmp-iframe";
 
 
     private static Logger _logger = Logger.getLogger(CatalogPageView.class);
@@ -58,8 +59,8 @@ public class CatalogPageView extends PageObject {
     }
 
     public boolean switchToCatalogIFrame() {
-        if (isElementFound(driver.findElement(By.id("mcmp-iframe")))) {
-            driver.switchTo().frame(driver.findElement(By.id("mcmp-iframe")));
+        if (isElementFound(driver.findElement(By.id(MCMP_IFRAME_ID)))) {
+            driver.switchTo().frame(driver.findElement(By.id(MCMP_IFRAME_ID)));
             return true;
         }
         return false;

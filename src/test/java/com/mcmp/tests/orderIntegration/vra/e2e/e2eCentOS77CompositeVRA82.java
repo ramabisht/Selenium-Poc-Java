@@ -19,6 +19,8 @@ public class e2eCentOS77CompositeVRA82 extends LoginTest {
     //-----------Test Specific constants
     private static final String ENTERPRISE_MARKET = "Enterprise Marketplace";
     private static final String CATALOG_PAGE = "Catalog";
+    private static final String APPROVE_ORDERS_PAGE = "Approve Orders";
+    private static final String ORDERED_SERVICES_PAGE = "Ordered Services";
 
     @Steps
     private HomePageSteps homePageSteps;
@@ -40,13 +42,14 @@ public class e2eCentOS77CompositeVRA82 extends LoginTest {
     public void verifyAndOpenMenu() {
         homePageSteps.clickHamburgerButton();
         homePageSteps.clickOnMenuItem(ENTERPRISE_MARKET);
-        homePageSteps.clickOnSubMenuItem(CATALOG_PAGE);
+
     }
 
     @Test(priority = 0, description = "Navigate VRA Service Page.", testName = "VRA82: CentOS77 - Navigate VRA Service Page")
     @Severity(SeverityLevel.CRITICAL)
     //@Repeat
     public void openServiceTemplate() {
+        homePageSteps.clickOnSubMenuItem(CATALOG_PAGE);
         catalogPageSteps.confirmCatalogPageIsLoaded();
         ThreadUtils.sleepFor(10);
         catalogPageSteps.selectCategory((String) loadData.getParamValue(loadData.loadTestDataFile("VRA"), "Category"));
@@ -63,6 +66,9 @@ public class e2eCentOS77CompositeVRA82 extends LoginTest {
         orderDetailsSteps.fillOrderParameterDetailsMainParam((String) loadData.getParamValue(loadData.loadTestDataFile("VRA"), "provider"));
         orderDetailsSteps.fillOrderParameterDetailsAdditionalParam((String) loadData.getParamValue(loadData.loadTestDataFile("VRA"), "provider"));
         orderDetailsSteps.clickOnSubmitButton();
+        // click on hamburger button and then click on approve order
+        homePageSteps.clickOnSubMenuItem(APPROVE_ORDERS_PAGE);
+
     }
 
 
