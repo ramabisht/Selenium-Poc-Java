@@ -8,7 +8,7 @@ public class Slack {
 
     private static final Logger _logger = Logger.getLogger(Slack.class);
 
-    public void postRequestToSlack(String webHookUrl, String body){
+    public static void postRequestToSlack(String webHookUrl, String body){
         Client client = new Client();
         _logger.info("Posting slack message to url :" + webHookUrl + ", content :" + body);
         client.validatePostResponseCode(client.postRequestByUrlAndHeadersAndBodyContent(webHookUrl, client.getDefaultHeader(), body));

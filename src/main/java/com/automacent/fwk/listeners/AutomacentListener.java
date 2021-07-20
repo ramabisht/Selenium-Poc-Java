@@ -1,19 +1,12 @@
 package com.automacent.fwk.listeners;
 
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.logging.LogManager;
 
-import org.testng.IExecutionListener;
-import org.testng.IInvokedMethod;
-import org.testng.IInvokedMethodListener;
-import org.testng.IMethodInstance;
-import org.testng.IMethodInterceptor;
-import org.testng.ISuite;
-import org.testng.ISuiteListener;
-import org.testng.ITestContext;
-import org.testng.ITestResult;
-import org.testng.TestListenerAdapter;
-import org.testng.TestNGException;
+import com.automacent.fwk.notifiers.Slack;
+import com.automacent.fwk.rest.Client;
+import com.automacent.fwk.utils.JacksonUtils;
+import org.testng.*;
 
 import com.automacent.fwk.annotations.StepsAndPagesProcessor;
 import com.automacent.fwk.core.BaseTest;
@@ -44,6 +37,10 @@ public class AutomacentListener extends TestListenerAdapter
         implements IInvokedMethodListener, IExecutionListener, IMethodInterceptor, ISuiteListener {
 
     private static final Logger _logger = Logger.getLogger(AutomacentListener.class);
+    HashMap<String, Object> testResult = new HashMap<String, Object>();
+    List<Map<String, Long>> passedTest = new ArrayList<Map<String, Long>>();
+    List<Map<String, Long>> failedTest = new ArrayList<Map<String, Long>>();
+    List<Map<String, Long>> skippedTest = new ArrayList<Map<String, Long>>();
 
     /**
      * Override method for onStart where we start the {@link IterationManager} class
@@ -80,7 +77,7 @@ public class AutomacentListener extends TestListenerAdapter
         ISuiteListener.super.onStart(suite);
         Map<String, String> parameters = suite.getXmlSuite().getAllParameters();
 
-        _logger.debug(String.format("Setting up default framework parameters if not explicitly set for suite %s",
+        _logger.info(String.format("Setting up default framework parameters if not explicitly set for suite %s",
                 suite.getName()));
 
         // automacentInternalSetLauncherClients -----------
@@ -125,6 +122,10 @@ public class AutomacentListener extends TestListenerAdapter
 
     @Override
     public void onFinish(ISuite iSuite) {
+        _logger.info("Finish tests invoked results");
+        iSuite.getResults().forEach((k, v) -> {
+            _logger.info("Key >>" + k + " value >>" + v);
+        });
 
     }
 
@@ -140,6 +141,7 @@ public class AutomacentListener extends TestListenerAdapter
             ExecutionLogManager.logTestSkip(testResult);
         else
             ExecutionLogManager.logListenerFailure(testResult);
+        _logger.info("onTestFailure invoked");
         super.onTestFailure(testResult);
     }
 
@@ -152,6 +154,7 @@ public class AutomacentListener extends TestListenerAdapter
         Throwable throwable = testResult.getThrowable() == null ? new TestOrConfigurationSkipException()
                 : testResult.getThrowable();
         testResult.setThrowable(throwable);
+        _logger.info("onTestSkipped invoked");
         ExecutionLogManager.logTestSkip(testResult);
         super.onTestSkipped(testResult);
     }
@@ -179,6 +182,36 @@ public class AutomacentListener extends TestListenerAdapter
         ExecutionLogManager.logIterationDetails();
         ReportingTools.wipeScreenshotEntryInReports();
         LauncherClientManager.getManager().stopTest();
+        _logger.info("Finish tests invoked");
+
+        Set<ITestResult> passedTestResults = testContext.getPassedTests().getAllResults();
+        for(ITestResult result : passedTestResults){
+           _logger.info("Passed Test Name:" + result.getName() + "Name " + result.getTestName() + "Name "+ result.getTestContext().getName() +", Status " + result.getStatus() + ", Start Time: " + result.getStartMillis() + ", End time " + result.getEndMillis() );
+           Map<String, Long> results = new HashMap<String, Long>(){{
+               put(result.getTestContext().getName(), result.getEndMillis() - result.getStartMillis());
+           }};
+            passedTest.add(results);
+        }
+
+        Set<ITestResult> failedTestResults = testContext.getFailedTests().getAllResults();
+        for(ITestResult  result: failedTestResults){
+            _logger.info("Failed Test Name:" + result.getName() + "Name " + result.getTestName() + "Name "+ result.getTestContext().getName() +", Status " + result.getStatus() + ", Start Time: " + result.getStartMillis() + ", End time " + result.getEndMillis() );
+            Map<String, Long> results = new HashMap<String, Long>(){{
+                put(result.getTestContext().getName(), result.getEndMillis() - result.getStartMillis());
+            }};
+            failedTest.add(results);
+
+        }
+
+        Set<ITestResult> skippedTestResults = testContext.getSkippedTests().getAllResults();
+        for(ITestResult  result: skippedTestResults){
+            _logger.info("Skipped Test Name:" + result.getName() + "Name " + result.getTestName() + "Name "+ result.getTestContext().getName() +", Status " + result.getStatus() + ", Start Time: " + result.getStartMillis() + ", End time " + result.getEndMillis() );
+            Map<String, Long> results = new HashMap<String, Long>(){{
+                put(result.getTestContext().getName(), result.getEndMillis() - result.getStartMillis());
+            }};
+            skippedTest.add(results);
+        }
+
         super.onFinish(testContext);
     }
 
@@ -213,6 +246,7 @@ public class AutomacentListener extends TestListenerAdapter
      */
     @Override
     public void onExecutionStart() {
+        _logger.info("OnExecution tests onExecutionStart() invoked");
         FileUtils.cleanTempDirectory();
     }
 
@@ -221,8 +255,16 @@ public class AutomacentListener extends TestListenerAdapter
      */
     @Override
     public void onExecutionFinish() {
+        _logger.info("Finish tests onExecutionFinish() invoked");
+        testResult.put("Pass", passedTest);
+        testResult.put("Fail", failedTest);
+        testResult.put("Skip", skippedTest);
+        String output = JacksonUtils.getString(testResult);
+        _logger.info("Final test result :" + output);
+        Slack.postRequestToSlack("", output);
         FileUtils.cleanTempDirectory();
     }
+
 
     /**
      * Implement {@link IMethodInterceptor#intercept(List, ITestContext)} method to

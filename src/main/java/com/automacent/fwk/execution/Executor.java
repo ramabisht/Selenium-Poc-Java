@@ -124,9 +124,10 @@ class Executor {
         String listenerStrings[] = System.getProperty("automacent.listeners", AutomacentListener.class.getName())
                 .split(",");
         Set<Class<? extends ITestNGListener>> listeners = new HashSet<>();
-
+        _logger.info("Listeners are set to :" + listenerStrings);
         for (String listener : listenerStrings) {
             try {
+                _logger.info("Listeners adding:" + listener);
                 Class<?> clazz = Class.forName(listener);
                 if (!ITestNGListener.class.isAssignableFrom(clazz))
                     _logger.warn(String.format("Provided listener class %s does not extend ITestNGListener", listener));

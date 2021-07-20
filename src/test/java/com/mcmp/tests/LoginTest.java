@@ -7,7 +7,9 @@ import com.pom.steps.home.HomePageSteps;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
 import com.pom.steps.login.LoginSteps;
+import org.testng.Assert;
 import org.testng.annotations.*;
+
 
 public class LoginTest extends BaseTest {
 
@@ -16,6 +18,7 @@ public class LoginTest extends BaseTest {
 
     @Steps
     private HomePageSteps homePageSteps;
+
 
     @BeforeClass(alwaysRun = true)
     @Parameters({"Username", "Password"})
@@ -27,14 +30,15 @@ public class LoginTest extends BaseTest {
         homePageSteps.confirmHomePageIsLoaded();
     }
 
-    /*
+
     @Test(priority = 0, description = "Login user case with username and password.", testName = "loginTest")
     @Severity(SeverityLevel.BLOCKER)
     @Parameters({"Username", "Password"})
     //@Repeat
     public void loginTest(String Username, String Password) {
-
-    }*/
+        homePageSteps.confirmHomePageIsLoaded();
+        Assert.assertTrue(true);
+    }
 
     //We can invoke few cleaning up methods and activities here
     @AfterClass(alwaysRun = true)
