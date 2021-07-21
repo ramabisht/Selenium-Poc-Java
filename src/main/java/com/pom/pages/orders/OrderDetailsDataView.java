@@ -27,13 +27,12 @@ public class OrderDetailsDataView extends PageObject {
     private void fillTextBox(String elementId, String elementValue) {
         _logger.info("Filling text box by Id :" + elementId + ", value:" + elementValue);
         //Assert.assertTrue(isElementFound(By.xpath("//input[@id='"+ elementId +"' and @type='text']")), "Text Box found by Id " + elementId);
-        Assert.assertTrue(isElementFound(By.xpath("//input[@id='"+ elementId +"']")), "Text Box found by Id " + elementId);
-        WebElement textBoxElement = driver.findElement(By.xpath("//input[@id='"+ elementId +"']"));
-        _logger.info("attribute value:"+(textBoxElement.getAttribute("value")));
-        if (textBoxElement.getAttribute("value").equals(elementValue)){
-            _logger.info("Input value "+ elementId +" is same as current value in Application");
-        }
-        else {
+        Assert.assertTrue(isElementFound(By.xpath("//input[@id='" + elementId + "']")), "Text Box found by Id " + elementId);
+        WebElement textBoxElement = driver.findElement(By.xpath("//input[@id='" + elementId + "']"));
+        _logger.info("attribute value:" + (textBoxElement.getAttribute("value")));
+        if (textBoxElement.getAttribute("value").equals(elementValue)) {
+            _logger.info("Input value " + elementId + " is same as current value in Application");
+        } else {
             //textBoxElement.clear();
             //textBoxElement.sendKeys(elementValue);
             textBoxElement.sendKeys(Keys.HOME, Keys.chord(Keys.SHIFT, Keys.END), elementValue);
@@ -47,7 +46,7 @@ public class OrderDetailsDataView extends PageObject {
         _logger.info("Clicking on the button by Id :" + elementId + ", value:" + elementValue);
         Assert.assertTrue(isElementFound(By.id(elementId)), "Found the button element by Id " + elementId);
         //WebElement buttonElement = driver.findElement(By.id(elementId));
-        WebElement buttonElement = driver.findElement(By.xpath("//input[@id='"+ elementId +"' and @type='checkbox']"));
+        WebElement buttonElement = driver.findElement(By.xpath("//input[@id='" + elementId + "' and @type='checkbox']"));
         Assert.assertTrue(isClickableElementFound(buttonElement), "Found the clickable button element by Id " + elementId);
         buttonElement.click();
         _logger.info("Clicked on the button by Id:" + elementId);

@@ -510,4 +510,20 @@ public class TestObject {
             this.harType = HarType.getDefault();
         }
     }
+
+    private String slackWebHookUrl;
+    /**
+     * Get slack webHook Url for posting the result to slack
+     */
+    public String getSlackWebHookUrl() {
+        _logger.info("Returning webhook url :"+ slackWebHookUrl);
+        return slackWebHookUrl;
+    }
+
+    /**
+     * Set slack webHook Url for posting the result to slack
+     */
+    public void setSlackWebHookUrl(String slackWebHookUrl) {
+        _logger.info("Setting webhook url :"+slackWebHookUrl);
+        this.slackWebHookUrl = slackWebHookUrl;}
 }

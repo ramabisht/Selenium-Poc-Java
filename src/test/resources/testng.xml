@@ -36,6 +36,7 @@
     <parameter name="socketTimeoutInSeconds" value="300" />
     <parameter name="runInHeadlessMode" value="false" />
     <parameter name="harCollectionType" value="NOT_ENABLED" />
+    <parameter name="slackWebHookUrl" value="https://hooks.slack.com/services/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" />
 
     <!-- scope: test -->
     <parameter name="screenshotType" value="BROWSER_SCREENSHOT" />
@@ -60,7 +61,8 @@
         </classes>
     </test>
 
-    <test verbose="2" name="com.mcmp.tests.orderIntegration.vra.e2e.e2eCentOS77CompositeVRA82" enabled="false">
+
+    <test verbose="2" name="com.mcmp.tests.orderIntegration.vra.e2e.e2eCentOS77CompositeVRA82" enabled="true">
         <classes>
             <class name="com.mcmp.tests.orderIntegration.vra.e2e.e2eCentOS77CompositeVRA82"/>
         </classes>

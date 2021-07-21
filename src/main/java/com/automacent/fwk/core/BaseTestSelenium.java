@@ -75,6 +75,7 @@ public abstract class BaseTestSelenium extends BaseTest {
      * @param baseUrl                    Base URL of the application
      * @param testContext                testNg {@link ITestContext}
      * @param harType                    {@link HarType}
+     * @param slackWebHookUrl            slackWebHookUrl
      */
     @BeforeTest
     @Parameters({
@@ -85,6 +86,7 @@ public abstract class BaseTestSelenium extends BaseTest {
             "screenshotModeForIteration",
             "baseUrl",
             "harCollectionType"
+
     })
     public void automacentInternalSetWebTestParameters(
             DriverManagerType browser,

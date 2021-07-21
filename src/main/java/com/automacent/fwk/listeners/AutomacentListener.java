@@ -3,6 +3,8 @@ package com.automacent.fwk.listeners;
 import java.util.*;
 import java.util.logging.LogManager;
 
+import com.automacent.fwk.core.TestObject;
+import com.automacent.fwk.enums.*;
 import com.automacent.fwk.notifiers.Slack;
 import com.automacent.fwk.rest.Client;
 import com.automacent.fwk.utils.JacksonUtils;
@@ -10,11 +12,6 @@ import org.testng.*;
 
 import com.automacent.fwk.annotations.StepsAndPagesProcessor;
 import com.automacent.fwk.core.BaseTest;
-import com.automacent.fwk.enums.RepeatMode;
-import com.automacent.fwk.enums.RetryMode;
-import com.automacent.fwk.enums.ScreenshotMode;
-import com.automacent.fwk.enums.ScreenshotModeForIteration;
-import com.automacent.fwk.enums.ScreenshotType;
 import com.automacent.fwk.exceptions.TestOrConfigurationSkipException;
 import com.automacent.fwk.execution.IterationManager;
 import com.automacent.fwk.launcher.LauncherClientManager;
@@ -37,10 +34,10 @@ public class AutomacentListener extends TestListenerAdapter
         implements IInvokedMethodListener, IExecutionListener, IMethodInterceptor, ISuiteListener {
 
     private static final Logger _logger = Logger.getLogger(AutomacentListener.class);
-    HashMap<String, Object> testResult = new HashMap<String, Object>();
-    List<Map<String, Long>> passedTest = new ArrayList<Map<String, Long>>();
-    List<Map<String, Long>> failedTest = new ArrayList<Map<String, Long>>();
-    List<Map<String, Long>> skippedTest = new ArrayList<Map<String, Long>>();
+    HashMap<String, Object> testResult = new HashMap<>();
+    List<Map<String, Object>> passedTest = new ArrayList<>();
+    List<Map<String, Object>> failedTest = new ArrayList<>();
+    List<Map<String, Object>> skippedTest = new ArrayList<>();
 
     /**
      * Override method for onStart where we start the {@link IterationManager} class
@@ -115,6 +112,9 @@ public class AutomacentListener extends TestListenerAdapter
         setDefaultParameters(parameters, "screenshotModeForIteration",
                 ScreenshotModeForIteration.LAST_ITERATION.name());
         setDefaultParameters(parameters, "baseUrl", "");
+        setDefaultParameters(parameters, "runInHeadlessMode", "");
+        setDefaultParameters(parameters, "harCollectionType", HarType.getDefault().name());
+        setDefaultParameters(parameters, "slackWebHookUrl", "");
 
         _logger.info("Setup default framework parameters completed");
         suite.getXmlSuite().setParameters(parameters);
@@ -184,32 +184,22 @@ public class AutomacentListener extends TestListenerAdapter
         LauncherClientManager.getManager().stopTest();
         _logger.info("Finish tests invoked");
 
-        Set<ITestResult> passedTestResults = testContext.getPassedTests().getAllResults();
-        for(ITestResult result : passedTestResults){
-           _logger.info("Passed Test Name:" + result.getName() + "Name " + result.getTestName() + "Name "+ result.getTestContext().getName() +", Status " + result.getStatus() + ", Start Time: " + result.getStartMillis() + ", End time " + result.getEndMillis() );
-           Map<String, Long> results = new HashMap<String, Long>(){{
-               put(result.getTestContext().getName(), result.getEndMillis() - result.getStartMillis());
-           }};
-            passedTest.add(results);
+        for (ITestResult result : testContext.getPassedTests().getAllResults()) {
+            passedTest.add(new HashMap<String, Object>() {{
+                put(result.getTestContext().getName(), result);
+            }});
         }
 
-        Set<ITestResult> failedTestResults = testContext.getFailedTests().getAllResults();
-        for(ITestResult  result: failedTestResults){
-            _logger.info("Failed Test Name:" + result.getName() + "Name " + result.getTestName() + "Name "+ result.getTestContext().getName() +", Status " + result.getStatus() + ", Start Time: " + result.getStartMillis() + ", End time " + result.getEndMillis() );
-            Map<String, Long> results = new HashMap<String, Long>(){{
-                put(result.getTestContext().getName(), result.getEndMillis() - result.getStartMillis());
-            }};
-            failedTest.add(results);
-
+        for (ITestResult result : testContext.getFailedTests().getAllResults()) {
+            failedTest.add(new HashMap<String, Object>() {{
+                put(result.getTestContext().getName(), result);
+            }});
         }
 
-        Set<ITestResult> skippedTestResults = testContext.getSkippedTests().getAllResults();
-        for(ITestResult  result: skippedTestResults){
-            _logger.info("Skipped Test Name:" + result.getName() + "Name " + result.getTestName() + "Name "+ result.getTestContext().getName() +", Status " + result.getStatus() + ", Start Time: " + result.getStartMillis() + ", End time " + result.getEndMillis() );
-            Map<String, Long> results = new HashMap<String, Long>(){{
-                put(result.getTestContext().getName(), result.getEndMillis() - result.getStartMillis());
-            }};
-            skippedTest.add(results);
+        for (ITestResult result : testContext.getSkippedTests().getAllResults()) {
+            skippedTest.add(new HashMap<String, Object>() {{
+                put(result.getTestContext().getName(), result);
+            }});
         }
 
         super.onFinish(testContext);
@@ -259,9 +249,10 @@ public class AutomacentListener extends TestListenerAdapter
         testResult.put("Pass", passedTest);
         testResult.put("Fail", failedTest);
         testResult.put("Skip", skippedTest);
-        String output = JacksonUtils.getString(testResult);
-        _logger.info("Final test result :" + output);
-        Slack.postRequestToSlack("https://hooks.slack.com/services/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", output);
+        String slackBody = Slack.getSlackText(testResult);
+        HashMap<String, String> slackBodyMap = new HashMap<>();
+        slackBodyMap.put("text", slackBody);
+        Slack.postRequestToSlack(BaseTest.getTestObject().getSlackWebHookUrl(), slackBodyMap);
         FileUtils.cleanTempDirectory();
     }
 

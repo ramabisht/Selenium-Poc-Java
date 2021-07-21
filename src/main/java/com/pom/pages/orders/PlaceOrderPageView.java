@@ -35,7 +35,7 @@ public class PlaceOrderPageView extends PageObject {
             public void validatePlaceOrderPageLoaded() {
                 Assert.assertTrue(verifyLandedToMainParameterPage(), "UserName Field on Login Page is loaded");
                 LoadData loadData = new LoadData();
-                Assert.assertEquals(driver.getTitle(),  loadData.getParamValue(loadData.loadApplicationTitle(), "launchpadTitle"), "Page title validation failed");
+                Assert.assertEquals(driver.getTitle(), loadData.getParamValue(loadData.loadApplicationTitle(), "launchpadTitle"), "Page title validation failed");
                 Assert.assertEquals(driver.getCurrentUrl(), BaseTest.getTestObject().getBaseUrl() +
                         loadData.getParamValue(loadData.loadApplicationUrl(), "launchpadUrl"), "Page title validation failed");
             }
@@ -78,7 +78,7 @@ public class PlaceOrderPageView extends PageObject {
 
     @Action
     public boolean clickOnNextButton() {
-        if(isNextButtonEnabled()) {
+        if (isNextButtonEnabled()) {
             nextButton.click();
             return true;
         }
@@ -95,7 +95,7 @@ public class PlaceOrderPageView extends PageObject {
 
     @Action
     public boolean clickOnPreviousButton() {
-        if(isPreviousButtonEnabled()) {
+        if (isPreviousButtonEnabled()) {
             previousButton.click();
             return true;
         }
@@ -113,7 +113,7 @@ public class PlaceOrderPageView extends PageObject {
 
     @Action
     public boolean clickOnSubmitButton() {
-        if(isSubmitButtonEnabled()) {
+        if (isSubmitButtonEnabled()) {
             submitButton.click();
             return true;
         }

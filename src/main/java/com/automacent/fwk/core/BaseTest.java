@@ -95,13 +95,16 @@ public abstract class BaseTest {
     @Parameters({
             "launcherClients",
             "runName",
-            "batchNumber"
+            "batchNumber",
+            "slackWebHookUrl",
     })
     public void automacentInternalSetLauncherClients(
             String launcherClients,
             String runName,
-            String batchNumber) {
+            String batchNumber,
+            String slackWebHookUrl) {
         LauncherClientManager.getManager().generateLauncherClientMasterMap(launcherClients);
+        BaseTest.getTestObject().setSlackWebHookUrl(slackWebHookUrl);
     }
 
     /**
@@ -138,7 +141,7 @@ public abstract class BaseTest {
             "timeoutInSeconds",
             "slowdownDurationInSeconds",
             "retryMode",
-            "recoveryClasses"
+            "recoveryClasses",
     })
     public void automacentInternalSetParameters(
             RepeatMode repeatMode,
