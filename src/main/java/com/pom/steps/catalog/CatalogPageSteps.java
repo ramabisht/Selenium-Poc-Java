@@ -1,12 +1,11 @@
 package com.pom.steps.catalog;
 
-import com.automacent.fwk.annotations.Pages;
-import com.automacent.fwk.annotations.Step;
-import com.automacent.fwk.reporting.Logger;
+import com.autoui.fwk.annotations.Pages;
+import com.autoui.fwk.annotations.Step;
+import com.autoui.fwk.reporting.Logger;
 import com.pom.pages.AbstractHomePageView;
 import com.pom.pages.catalog.CatalogPageView;
 import com.pom.steps.AbstractHomeSteps;
-import com.pom.steps.login.LoginSteps;
 import org.testng.Assert;
 
 public class CatalogPageSteps extends AbstractHomeSteps {

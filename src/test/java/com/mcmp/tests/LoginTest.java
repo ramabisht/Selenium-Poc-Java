@@ -1,8 +1,8 @@
 package com.mcmp.tests;
 
 
-import com.automacent.fwk.annotations.Steps;
-import com.automacent.fwk.utils.ThreadUtils;
+import com.autoui.fwk.annotations.Steps;
+import com.autoui.fwk.utils.ThreadUtils;
 import com.pom.steps.home.HomePageSteps;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;

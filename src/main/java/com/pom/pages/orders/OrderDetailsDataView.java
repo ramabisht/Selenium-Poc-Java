@@ -1,10 +1,9 @@
 package com.pom.pages.orders;
 
-import com.automacent.fwk.annotations.Action;
-import com.automacent.fwk.core.BaseTest;
-import com.automacent.fwk.core.PageObject;
-import com.automacent.fwk.reporting.Logger;
-import com.automacent.fwk.utils.ThreadUtils;
+import com.autoui.fwk.annotations.Action;
+import com.autoui.fwk.core.PageObject;
+import com.autoui.fwk.reporting.Logger;
+import com.autoui.fwk.utils.ThreadUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;

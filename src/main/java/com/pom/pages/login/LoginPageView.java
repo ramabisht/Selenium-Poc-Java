@@ -1,10 +1,9 @@
 package com.pom.pages.login;
 
-import com.automacent.fwk.annotations.Action;
-import com.automacent.fwk.annotations.Step;
-import com.automacent.fwk.core.BaseTest;
-import com.automacent.fwk.core.PageObject;
-import com.automacent.fwk.reporting.Logger;
+import com.autoui.fwk.annotations.Action;
+import com.autoui.fwk.annotations.Step;
+import com.autoui.fwk.core.PageObject;
+import com.autoui.fwk.reporting.Logger;
 import com.pom.utils.LoadData;
 //import org.checkerframework.checker.units.qual.A;
 import org.openqa.selenium.WebElement;

@@ -1,8 +1,8 @@
 package com.pom.steps.catalog;
 
-import com.automacent.fwk.annotations.Pages;
-import com.automacent.fwk.annotations.Step;
-import com.automacent.fwk.reporting.Logger;
+import com.autoui.fwk.annotations.Pages;
+import com.autoui.fwk.annotations.Step;
+import com.autoui.fwk.reporting.Logger;
 import com.pom.pages.catalog.CatalogDetailPageView;
 import com.pom.steps.AbstractHomeSteps;
 import org.testng.Assert;

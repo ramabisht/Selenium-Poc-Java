@@ -4,9 +4,9 @@ package com.mcmp.tests;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 
-import com.automacent.fwk.core.BaseTestSelenium;
-import com.automacent.fwk.reporting.Logger;
-import com.automacent.fwk.utils.WebUtils;
+import com.autoui.fwk.core.BaseTestSelenium;
+import com.autoui.fwk.reporting.Logger;
+import com.autoui.fwk.utils.WebUtils;
 
 public abstract class BaseTest extends BaseTestSelenium {
 

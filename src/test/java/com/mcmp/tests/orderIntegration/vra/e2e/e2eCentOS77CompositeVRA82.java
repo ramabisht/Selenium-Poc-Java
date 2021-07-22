@@ -1,8 +1,7 @@
 package com.mcmp.tests.orderIntegration.vra.e2e;
 
-import com.automacent.fwk.annotations.Repeat;
-import com.automacent.fwk.annotations.Steps;
-import com.automacent.fwk.utils.ThreadUtils;
+import com.autoui.fwk.annotations.Steps;
+import com.autoui.fwk.utils.ThreadUtils;
 import com.mcmp.tests.LoginTest;
 import com.pom.steps.orders.OrderDetailsSteps;
 import com.pom.steps.catalog.CatalogDetailPageSteps;

@@ -1,7 +1,7 @@
 package com.pom.pages.orders;
 
-import com.automacent.fwk.annotations.Action;
-import com.automacent.fwk.core.PageObject;
+import com.autoui.fwk.annotations.Action;
+import com.autoui.fwk.core.PageObject;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 

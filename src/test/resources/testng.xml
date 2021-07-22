@@ -3,19 +3,17 @@
 
 <suite name="MCMP Functional Testing" parallel="tests" thread-count="11">
     <!-- Common to all tests -->
-    
+    <listeners>
+        <listener class-name="com.autoui.fwk.listeners.AutoUIListener"></listener>
+    </listeners>
 
     <!-- Scope: suite -->
-    <listeners>
-        <listener class-name="com.automacent.fwk.listeners.AutomacentListener"></listener>
-    </listeners>
-    <parameter name="launcherClients"
-               value="restclients.SPARC3RestClient" />
+    <parameter name="launcherClients" value="restclients.SPARC3RestClient" />
     <parameter name="runName" value="" />
     <parameter name="batchNumber" value="" />
     <parameter name="retryMode" value="ON" />
     <parameter name="timeoutInSeconds" value="20" />
-    <parameter name="recoveryClasses" value="" />
+
     <parameter name="slowdownDurationInSeconds" value="0" />
     <parameter name="repeatMode" value="INVOCATION_COUNT" />
     <parameter name="testDurationInSeconds" value="3000" />
@@ -56,13 +54,15 @@
     <parameter name="Username" value="uiautomcmpuser@outlook.com" />
     <parameter name="Password" value="Automcmpuser@00" />
     <test verbose="2" name="com.mcmp.tests.LoginTest" enabled="true">
+        <parameter name="recoveryClasses" value="com.mcmp.tests.recovery.LoginTestRecoverySteps" />
         <classes>
             <class name="com.mcmp.tests.LoginTest" />
         </classes>
     </test>
 
 
-    <test verbose="2" name="com.mcmp.tests.orderIntegration.vra.e2e.e2eCentOS77CompositeVRA82" enabled="true">
+    <test verbose="2" name="com.mcmp.tests.orderIntegration.vra.e2e.e2eCentOS77CompositeVRA82" enabled="false">
+        <parameter name="recoveryClasses" value="com.mcmp.tests.recovery.GeneralRecoverySteps" />
         <classes>
             <class name="com.mcmp.tests.orderIntegration.vra.e2e.e2eCentOS77CompositeVRA82"/>
         </classes>

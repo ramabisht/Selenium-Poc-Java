@@ -1,12 +1,12 @@
 package com.pom.utils;
 
-import com.automacent.fwk.annotations.Step;
-import com.automacent.fwk.core.BaseTest;
-import com.automacent.fwk.core.WebTestSteps;
-import com.automacent.fwk.reporting.Logger;
-import com.automacent.fwk.utils.JacksonUtils;
-import com.automacent.fwk.utils.JsonUtils;
-import com.automacent.fwk.utils.PropertyUtils;
+import com.autoui.fwk.annotations.Step;
+import com.autoui.fwk.core.BaseTest;
+import com.autoui.fwk.core.WebTestSteps;
+import com.autoui.fwk.reporting.Logger;
+import com.autoui.fwk.utils.JacksonUtils;
+import com.autoui.fwk.utils.JsonUtils;
+import com.autoui.fwk.utils.PropertyUtils;
 import org.json.simple.JSONObject;
 
 import java.util.LinkedHashMap;

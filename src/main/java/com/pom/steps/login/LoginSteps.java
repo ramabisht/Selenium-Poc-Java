@@ -2,16 +2,15 @@ package com.pom.steps.login;
 
 import java.util.Date;
 
-import com.automacent.fwk.annotations.Steps;
-import com.automacent.fwk.core.WebTestSteps;
+import com.autoui.fwk.annotations.Steps;
 import com.pom.steps.AbstractHomeSteps;
 import com.pom.utils.LoadData;
 import org.testng.Assert;
-import com.automacent.fwk.annotations.Pages;
-import com.automacent.fwk.annotations.Step;
-import com.automacent.fwk.core.BaseTest;
-import com.automacent.fwk.reporting.Logger;
-import com.automacent.fwk.utils.ThreadUtils;
+import com.autoui.fwk.annotations.Pages;
+import com.autoui.fwk.annotations.Step;
+import com.autoui.fwk.core.BaseTest;
+import com.autoui.fwk.reporting.Logger;
+import com.autoui.fwk.utils.ThreadUtils;
 import com.pom.pages.login.LoginPageView;
 
 public final class LoginSteps extends AbstractHomeSteps {

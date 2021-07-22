@@ -1,10 +1,8 @@
 package com.pom.steps.home;
 
-import com.automacent.fwk.annotations.Pages;
-import com.automacent.fwk.annotations.Step;
-import com.automacent.fwk.core.WebTestSteps;
-import com.automacent.fwk.reporting.Logger;
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.autoui.fwk.annotations.Pages;
+import com.autoui.fwk.annotations.Step;
+import com.autoui.fwk.reporting.Logger;
 import com.pom.pages.AbstractHomePageView;
 import com.pom.pages.home.HomePageView;
 import com.pom.steps.AbstractHomeSteps;

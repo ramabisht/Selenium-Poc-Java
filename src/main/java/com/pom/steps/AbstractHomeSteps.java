@@ -1,9 +1,9 @@
 package com.pom.steps;
 
 
-import com.automacent.fwk.annotations.Pages;
-import com.automacent.fwk.core.WebTestSteps;
-import com.automacent.fwk.reporting.Logger;
+import com.autoui.fwk.annotations.Pages;
+import com.autoui.fwk.core.WebTestSteps;
+import com.autoui.fwk.reporting.Logger;
 import com.pom.pages.home.*;
 
 /*

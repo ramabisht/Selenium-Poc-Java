@@ -2,11 +2,11 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.automacent</groupId>
-    <artifactId>automacent-fwk-core</artifactId>
-    <name>automacent-fwk-core</name>
+    <groupId>com.autoui</groupId>
+    <artifactId>autoui-fwk-core</artifactId>
+    <name>autoui-fwk-core</name>
     <packaging>jar</packaging>
-    <version>1.3-SNAPSHOT</version>
+    <version>1.0-SNAPSHOT</version>
 
     <licenses>
         <license>
@@ -18,10 +18,9 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <sparc.version>3.0-SNAPSHOT</sparc.version>
-        <automacent.testsuites>src\test\resources\testng.xml</automacent.testsuites>
-        <automacent.listeners>com.automacent.fwk.listeners.AutomacentListener</automacent.listeners>
-        <automacent.reportdir>${basedir}/target/Reports</automacent.reportdir>
+        <autoui.testsuites>src\test\resources\testng.xml</autoui.testsuites>
+        <autoui.listeners>com.autoui.fwk.listeners.AutoUIListener</autoui.listeners>
+        <autoui.reportdir>${basedir}/target/Report</autoui.reportdir>
         <debugMode>INFO</debugMode>
         <failIfNoTests>true</failIfNoTests>
         <skipTests>false</skipTests>
@@ -429,7 +428,7 @@
                     <failIfNoTests>${failIfNoTests}</failIfNoTests>
                     <skipTests>${skipTests}</skipTests>
                     <suiteXmlFiles>
-                        <suiteXmlFile>${automacent.testsuites}</suiteXmlFile>
+                        <suiteXmlFile>${autoui.testsuites}</suiteXmlFile>
                     </suiteXmlFiles>
                     <properties>
                         <property>
@@ -438,15 +437,15 @@
                         </property>
                         <property>
                             <name>listener</name>
-                            <value>${automacent.listeners}</value>
+                            <value>${autoui.listeners}</value>
                         </property>
                     </properties>
                     <workingDirectory>${basedir}</workingDirectory>
-                    <reportsDirectory>${automacent.reportdir}</reportsDirectory>
+                    <reportsDirectory>${autoui.reportdir}</reportsDirectory>
                     <systemPropertyVariables>
                         <debugMode>${debugMode}</debugMode>
-                        <automacent.reportdir>${automacent.reportdir}</automacent.reportdir>
-                        <automacent.listeners>${automacent.listeners}</automacent.listeners>
+                        <autoui.reportdir>${autoui.reportdir}</autoui.reportdir>
+                        <autoui.listeners>${autoui.listeners}</autoui.listeners>
                         <!--suppress UnresolvedMavenProperty -->
                         <!--<app.baseurl>${app.baseurl}</app.baseurl> -->
                     </systemPropertyVariables>

@@ -1,8 +1,8 @@
 package com.pom.pages;
 
-import com.automacent.fwk.annotations.Action;
-import com.automacent.fwk.core.PageObject;
-import com.automacent.fwk.reporting.Logger;
+import com.autoui.fwk.annotations.Action;
+import com.autoui.fwk.core.PageObject;
+import com.autoui.fwk.reporting.Logger;
 
 public class AbstractHomePageView extends PageObject {
 

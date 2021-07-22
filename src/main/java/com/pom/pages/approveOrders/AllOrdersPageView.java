@@ -1,6 +1,6 @@
 package com.pom.pages.approveOrders;
 
-import com.automacent.fwk.core.PageObject;
+import com.autoui.fwk.core.PageObject;
 
 public class AllOrdersPageView extends PageObject {
 
