@@ -93,7 +93,7 @@
     <parameter name="Password" value="Automcmpuser@00" />
 
 
-    <test verbose="2" name="com.mcmp.tests.LoginTest" enabled="true">
+    <test verbose="2" name="com.mcmp.tests.LoginTest" enabled="false">
         <parameter name="recoveryClasses" value="com.mcmp.tests.recovery.LoginTestRecoverySteps" />
         <classes>
             <class name="com.mcmp.tests.LoginTest" />
@@ -101,13 +101,13 @@
     </test>
 
 
-    <!--
+
     <test verbose="2" name="com.mcmp.tests.orderIntegration.vra.e2e.e2eCentOS77CompositeVRA82" enabled="true">
         <parameter name="recoveryClasses" value="com.mcmp.tests.recovery.GeneralRecoverySteps" />
         <classes>
             <class name="com.mcmp.tests.orderIntegration.vra.e2e.e2eCentOS77CompositeVRA82"/>
         </classes>
     </test>
-    -->
+
 
 </suite>

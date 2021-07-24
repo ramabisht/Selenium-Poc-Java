@@ -102,7 +102,10 @@ public abstract class BaseTest {
             String batchNumber,
             String slackWebHookUrl) {
         LauncherClientManager.getManager().generateLauncherClientMasterMap(launcherClients);
-        BaseTest.getTestObject().setSlackWebHookUrl(slackWebHookUrl);
+        if (slackWebHookUrl != null)
+            BaseTest.getTestObject().setSlackWebHookUrl(slackWebHookUrl);
+        else
+            BaseTest.getTestObject().setSlackWebHookUrl("");
     }
 
     /**

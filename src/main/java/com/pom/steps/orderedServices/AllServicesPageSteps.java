@@ -6,10 +6,9 @@ import com.autoui.fwk.reporting.Logger;
 import com.pom.pages.orderedServices.AllServicesPageView;
 import com.pom.pages.orders.OrderDetailsPageView;
 import com.pom.steps.AbstractHomeSteps;
-import org.omg.CORBA.PUBLIC_MEMBER;
 import org.testng.Assert;
 
-public class allServicesPageSteps extends AbstractHomeSteps {
+public class AllServicesPageSteps extends AbstractHomeSteps {
 
     private static final Logger _logger = Logger.getLogger(OrderDetailsPageView.class);
 

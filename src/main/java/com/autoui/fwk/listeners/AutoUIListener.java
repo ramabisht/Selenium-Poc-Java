@@ -241,7 +241,8 @@ public class AutoUIListener extends TestListenerAdapter
     @Override
     public void onExecutionFinish() {
         _logger.info("Finish tests onExecutionFinish() invoked");
-        if (!BaseTest.getTestObject().getSlackWebHookUrl().equals("") &&
+        if (BaseTest.getTestObject().getSlackWebHookUrl() != null &&
+                !BaseTest.getTestObject().getSlackWebHookUrl().equals("") &&
                 !BaseTest.getTestObject().getSlackWebHookUrl().equals(" ")) {
             testResult.put("Pass", passedTest);
             testResult.put("Fail", failedTest);

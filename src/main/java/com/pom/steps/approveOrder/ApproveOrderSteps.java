@@ -103,9 +103,9 @@ public class ApproveOrderSteps extends AbstractHomeSteps {
         _logger.info("Approve pending order in Approve Orders Page");
         //String orderId = reviewOrderPageSteps.submittedOrderNumber(); paas thi value in the test case level
         //verifyLandedOnPendingApprovalTab();
-        //Assert.assertTrue(catalogPageView.switchToCatalogIFrame(), "switch iframe");
+        Assert.assertTrue(catalogPageView.switchToCatalogIFrame(), "switch iframe");
         _logger.info("Searching for order in pending approval page");
-        ThreadUtils.sleepFor(50);
+        ThreadUtils.sleepFor(30);
         searchForOrderId(orderId);
         verifyOrderIdIsDisplayedAfterSearch(orderId);
         clickOnTheApproveButton();

@@ -24,7 +24,7 @@ public class CatalogPageView extends PageObject {
     //private static final String PROVIDER_TO_BE_CLICKED = "//span[@class = 'bx--checkbox-label-text'";
     private static final String PROVIDER_TO_BE_CLICKED = "//input[@name='%s']";
     private static final String CARD_SERVICE_TITLE = ".card-service-title";
-    private static final String MCMP_IFRAME_ID = "iframe#mcmp-iframe";
+    private static final String MCMP_IFRAME_ID = "mcmp-iframe";
 
 
     private static Logger _logger = Logger.getLogger(CatalogPageView.class);

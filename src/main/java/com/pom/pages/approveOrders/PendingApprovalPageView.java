@@ -15,7 +15,7 @@ public class PendingApprovalPageView extends PageObject {
 
     private static final Logger _logger = Logger.getLogger(OrderDetailsPageView.class);
     private static final String PENDING_APPROVAL_CSS = "a#tab-control-pending_approval_tab";
-    private static final String SEARCH_BOX_CSS = "input#search__input-orders-search";
+    private static final String SEARCH_BOX_CSS = "search__input-orders-search";
     private static final String ORDER_ID_CSS = ".order-items a";
     private static final String APPROVE_BUTTON_CSS = "button#order_approve_button";
     private static final String ORDER_APPROVAL_FLOW_XPATH = "//h2[contains(text(),'Order Approval Flow')]";
@@ -52,7 +52,7 @@ public class PendingApprovalPageView extends PageObject {
         return isElementFound(pendingApprovalTab) && pendingApprovalTab.isDisplayed();
     }
 
-    @FindBy(className = SEARCH_BOX_CSS)
+    @FindBy(id = SEARCH_BOX_CSS)
     private WebElement searchBox;
 
     @Action
