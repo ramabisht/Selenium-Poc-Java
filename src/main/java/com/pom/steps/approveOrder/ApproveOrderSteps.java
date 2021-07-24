@@ -42,9 +42,9 @@ public class ApproveOrderSteps extends AbstractHomeSteps {
 
     @Step
     public void verifyOrderIdIsDisplayedAfterSearch(String orderId) {
-        _logger.info("Verify the displed order id is same as " + orderId);
+        _logger.info("Verify the displayed order id is same as " + orderId);
         Assert.assertTrue(pendingApprovalPageView.OrderIdIsDisplayed());
-        Assert.assertEquals(pendingApprovalPageView.getOrderIdIsDisplayed(), orderId, "OrderId " + orderId + " is present after search for pending approval");
+        Assert.assertTrue(pendingApprovalPageView.getOrderIdIsDisplayed().contains(orderId), "OrderId " + orderId + " is present after search for pending approval");
     }
 
     @Step
@@ -59,8 +59,8 @@ public class ApproveOrderSteps extends AbstractHomeSteps {
 
     @Step
     public void clickOnFinancialAndTechnicalApproval() {
-        Assert.assertTrue(pendingApprovalPageView.clickOnFinancialApproval(), "Clicked on Financial Approval checkbox");
-        Assert.assertTrue(pendingApprovalPageView.clickOnTechnicalApproval(), "Clicked on Technical Approval checkbox");
+        Assert.assertTrue(pendingApprovalPageView.clickOnTechnicalApproval(), "Clicked on Financial Approval checkbox");
+        Assert.assertTrue(pendingApprovalPageView.clickOnFinancialApproval(), "Clicked on Technical Approval checkbox");
     }
 
     @Step
@@ -103,13 +103,14 @@ public class ApproveOrderSteps extends AbstractHomeSteps {
         _logger.info("Approve pending order in Approve Orders Page");
         //String orderId = reviewOrderPageSteps.submittedOrderNumber(); paas thi value in the test case level
         //verifyLandedOnPendingApprovalTab();
-        Assert.assertTrue(catalogPageView.switchToCatalogIFrame(), "switch iframe");
+        //Assert.assertTrue(catalogPageView.switchToCatalogIFrame(), "switch iframe");
         _logger.info("Searching for order in pending approval page");
-        ThreadUtils.sleepFor(30);
+        //ThreadUtils.sleepFor(5);
         searchForOrderId(orderId);
         verifyOrderIdIsDisplayedAfterSearch(orderId);
         clickOnTheApproveButton();
         verifyOrderApprovalDialogueIsDisplayed();
+        //ThreadUtils.sleepFor(30);
         clickOnFinancialAndTechnicalApproval();
         approveOrderInDialogue();
         validateApproveSuccessMessage(orderApprovedMessage);
@@ -119,6 +120,7 @@ public class ApproveOrderSteps extends AbstractHomeSteps {
     @Step
     public void verifyProvisioningIsCompleted(String expectedOrderStatus, String orderId) {
         _logger.info("Navigate to all orders tab");
+        //Assert.assertTrue(catalogPageView.switchToCatalogIFrame(), "switch iframe");
         navigateToAllOrdersTab();
         _logger.info("Searching for order in All Services approval page");
         searchForOrderId(orderId);

@@ -22,7 +22,7 @@
     <parameter name="retryMode" value="ON"/>
 
     <!--Timeout for any element to load-->
-    <parameter name="timeoutInSeconds" value="20"/>
+    <parameter name="timeoutInSeconds" value="50"/>
 
     <!--Provide slowdown between any actions performed on UI-->
     <parameter name="slowdownDurationInSeconds" value="0"/>

@@ -4,6 +4,7 @@ import com.autoui.fwk.annotations.Action;
 import com.autoui.fwk.annotations.Pages;
 import com.autoui.fwk.core.PageObject;
 import com.autoui.fwk.reporting.Logger;
+import com.autoui.fwk.utils.ThreadUtils;
 import com.pom.pages.orders.OrderDetailsPageView;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -24,7 +25,7 @@ public class AllOrdersPageView extends PageObject {
     @Pages
     private PendingApprovalPageView pendingApprovalPageView;
 
-    @FindBy(className = ALL_ORDERS_CSS)
+    @FindBy(css = ALL_ORDERS_CSS)
     private WebElement allOrdersTab;
 
     @Action
@@ -52,7 +53,7 @@ public class AllOrdersPageView extends PageObject {
     }
 
 
-    @FindBy(className = NO_ORDER_FOUND_XPATH)
+    @FindBy(xpath = NO_ORDER_FOUND_XPATH)
     private WebElement noOrderFound;
 
     @Action
@@ -71,7 +72,7 @@ public class AllOrdersPageView extends PageObject {
         return searchOrderStatus;
     }
 
-    @FindBy(className = ORDER_STATUS_CSS)
+    @FindBy(css = ORDER_STATUS_CSS)
     private WebElement oderStatus;
 
     @Action
@@ -91,8 +92,9 @@ public class AllOrdersPageView extends PageObject {
                 return true;
             }
             else{
+                ThreadUtils.sleepFor(60);
                 pendingApprovalPageView.searchForOrderInPage(orderId);
-                _logger.info("Waiting for "+ finalOrderStatus + " to be " + expectedOrderStatus);
+                _logger.info("Waiting for "+ finalOrderStatus + " to be " + expectedOrderStatus + " for " + counter + " times ");
                 counter+=1;
 
             }

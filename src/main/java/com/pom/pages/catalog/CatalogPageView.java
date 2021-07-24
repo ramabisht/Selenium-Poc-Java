@@ -58,12 +58,16 @@ public class CatalogPageView extends PageObject {
         return isElementFound(catalogPageTile) && catalogPageTile.isDisplayed();
     }
 
-    public boolean switchToCatalogIFrame() {
+    public boolean switchToIFrame() {
         if (isElementFound(driver.findElement(By.id(MCMP_IFRAME_ID)))) {
             driver.switchTo().frame(driver.findElement(By.id(MCMP_IFRAME_ID)));
             return true;
         }
         return false;
+    }
+
+    public void switchToDefaultContent() {
+        driver.switchTo().defaultContent();
     }
 
     //---------------------------------- Select required category ------------------------------------

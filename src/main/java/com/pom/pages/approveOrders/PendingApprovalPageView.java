@@ -19,10 +19,10 @@ public class PendingApprovalPageView extends PageObject {
     private static final String ORDER_ID_CSS = ".order-items a";
     private static final String APPROVE_BUTTON_CSS = "button#order_approve_button";
     private static final String ORDER_APPROVAL_FLOW_XPATH = "//h2[contains(text(),'Order Approval Flow')]";
-    private static final String FINANCIAL_APPROVAL_XPATH = "label[for='checkbox-financial']";
-    private static final String TECHNICAL_APPROVAL_XPATH = "label[for='checkbox-technical']";
-    private static final String APPROVE_ORDER_CSS = "#order_details_approval_approve";
-    private static final String APPROVE_SUCCESS_CSS = "#approve-success-body";
+    private static final String FINANCIAL_APPROVAL_CSS = "label[for='checkbox-financial']";
+    private static final String TECHNICAL_APPROVAL_CSS = "label[for='checkbox-technical']";
+    private static final String APPROVE_ORDER_CSS = "button#order_details_approval_approve";
+    private static final String APPROVE_SUCCESS_CSS = "span#approve-success-body";
     private static final String APPROVE_OK_CSS = "button#order_details_approval_ok";
 
     public PageValidation pageValidation() {
@@ -44,7 +44,7 @@ public class PendingApprovalPageView extends PageObject {
         };
     }
 
-    @FindBy(className = PENDING_APPROVAL_CSS)
+    @FindBy(css = PENDING_APPROVAL_CSS)
     private WebElement pendingApprovalTab;
 
     @Action
@@ -65,13 +65,13 @@ public class PendingApprovalPageView extends PageObject {
         if (isSearchBoxPresentInPendingApprovalPage()) {
             searchBox.clear();
             searchBox.sendKeys(orderId);
-            _logger.info("Searching for " + orderId);
+            _logger.info("Searching for orderId" + orderId);
             return true;
         }
         return false;
     }
 
-    @FindBy(className = ORDER_ID_CSS)
+    @FindBy(css = ORDER_ID_CSS)
     private WebElement displayOrderId;
 
     @Action
@@ -84,7 +84,7 @@ public class PendingApprovalPageView extends PageObject {
         return displayOrderId.getText();
     }
 
-    @FindBy(className = APPROVE_BUTTON_CSS)
+    @FindBy(css = APPROVE_BUTTON_CSS)
     private WebElement approveButton;
 
     @Action
@@ -110,7 +110,7 @@ public class PendingApprovalPageView extends PageObject {
         return isElementFound(orderApprovalFlow) && orderApprovalFlow.isDisplayed();
     }
 
-    @FindBy(xpath = FINANCIAL_APPROVAL_XPATH)
+    @FindBy(css = FINANCIAL_APPROVAL_CSS)
     private WebElement financialApproval;
 
     @Action
@@ -128,7 +128,7 @@ public class PendingApprovalPageView extends PageObject {
         return false;
     }
 
-    @FindBy(xpath = TECHNICAL_APPROVAL_XPATH)
+    @FindBy(css = TECHNICAL_APPROVAL_CSS)
     private WebElement technicalApproval;
 
     @Action
@@ -146,7 +146,7 @@ public class PendingApprovalPageView extends PageObject {
         return false;
     }
 
-    @FindBy(className = APPROVE_ORDER_CSS)
+    @FindBy(css = APPROVE_ORDER_CSS)
     private WebElement approveOrderDetail;
 
     @Action
@@ -157,14 +157,14 @@ public class PendingApprovalPageView extends PageObject {
     @Action
     public boolean clickOnApproveOrderDetail() {
         if (isApproveOrderDetailEnabled()) {
-            _logger.info("Approve Order Button is displayed");
-            technicalApproval.click();
+            _logger.info("Approve Order Button is displayed after clicking on technical and Financial Approval ");
+            approveOrderDetail.click();
             return true;
         }
         return false;
     }
 
-    @FindBy(className = APPROVE_SUCCESS_CSS)
+    @FindBy(css = APPROVE_SUCCESS_CSS)
     private WebElement orderApproveSuccessMessage;
 
     @Action
@@ -184,7 +184,7 @@ public class PendingApprovalPageView extends PageObject {
         return orderApproveSuccess;
     }
 
-    @FindBy(className = APPROVE_OK_CSS)
+    @FindBy(css = APPROVE_OK_CSS)
     private WebElement approveOKButton;
 
     @Action

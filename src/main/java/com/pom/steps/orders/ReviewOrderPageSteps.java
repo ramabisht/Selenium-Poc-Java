@@ -32,9 +32,24 @@ public class ReviewOrderPageSteps extends AbstractHomeSteps {
     }
 
     @Step
+    public void navigateToCatalogPage(){
+        Assert.assertTrue(reviewOrderPage.clickOnServiceCatalogPresent());
+    }
+
+
+    @Step
     public String submittedOrderNumber(){
         verifyOrderSubmitMessage();
-        return getOrderNumber();
+        String orderId =  getOrderNumber();
+       // navigateToCatalogPage();
+        return orderId;
     }
+
+    @Step
+    public void navigateToCatalogAfterOrderSubmission() {
+        navigateToCatalogPage();
+    }
+
+
 }
 

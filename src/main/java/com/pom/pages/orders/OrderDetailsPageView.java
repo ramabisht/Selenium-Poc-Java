@@ -7,12 +7,14 @@ import com.autoui.fwk.core.BaseTest;
 import com.autoui.fwk.core.PageObject;
 import com.autoui.fwk.reporting.Logger;
 import com.pom.utils.LoadData;
+import io.qameta.allure.Link;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.testng.Assert;
 import com.autoui.fwk.utils.StringUtils;
 
 import java.util.LinkedHashMap;
+import java.util.Map;
 
 
 public class OrderDetailsPageView extends PageObject {
@@ -87,26 +89,32 @@ public class OrderDetailsPageView extends PageObject {
     }
 
     @Action
-    public void fillMainParameterPage(String providerName) {
+    public String fillMainParameterPage(String providerName) {
+        String serviceInstanceName = "";
         try {
             _logger.info("Starting filling values in main parameter page");
             Assert.assertTrue(placeOrderPageView.verifyLandedToMainParameterPage(), "Main Parameter page opened");
-            ((LinkedHashMap) ((LinkedHashMap) getOrderParameters(providerName)).get(MAIN_PARAMETERS)).forEach((key, value) -> {
-                _logger.info("Filling details for " + key + " parameter in Main parameter page to value " + value);
-                LinkedHashMap<String, Object> mainParamsValue = (LinkedHashMap<String, Object>) value;
+            //((LinkedHashMap) ((LinkedHashMap) getOrderParameters(providerName)).get(MAIN_PARAMETERS)).forEach((key, value) -> {
+            LinkedHashMap<String, Object> items = (LinkedHashMap) ((LinkedHashMap) getOrderParameters(providerName)).get(MAIN_PARAMETERS);
+            for (Map.Entry<String, Object> item : items.entrySet()) {
+                _logger.info("Filling details for " + item.getKey() + " parameter in Main parameter page to value " + item.getValue());
+                LinkedHashMap<String, Object> mainParamsValue = (LinkedHashMap<String, Object>) item.getValue();
                 String paramId = (String) mainParamsValue.get("id");
                 String paramType = (String) mainParamsValue.get("type");
                 String paramValue = (String) mainParamsValue.get("value");
-                if (key.equals("Service Instance Name")) {
+                if (item.getKey().equals("Service Instance Name")) {
                     paramValue = paramValue + StringUtils.getAlphaNumericString();
+                    serviceInstanceName = paramValue;
                 }
                 _logger.info("Outer Param id :" + paramId + ", Param type :" + paramType + ", Param Value :" + paramValue);
                 orderDetailsDataView.fillOrderDetails(paramId, paramValue, paramType);
-            });
+                //});
+            }
         } catch (Exception ex) {
             _logger.error("Exception:" + ex);
             Assert.fail("Filling Main parameter page failed because of " + ex.getMessage());
         }
+        return serviceInstanceName;
     }
 
     // Put logic to click on the next button in the steps

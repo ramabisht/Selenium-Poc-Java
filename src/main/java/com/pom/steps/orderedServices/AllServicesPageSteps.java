@@ -3,6 +3,7 @@ package com.pom.steps.orderedServices;
 import com.autoui.fwk.annotations.Pages;
 import com.autoui.fwk.annotations.Step;
 import com.autoui.fwk.reporting.Logger;
+import com.pom.pages.catalog.CatalogPageView;
 import com.pom.pages.orderedServices.AllServicesPageView;
 import com.pom.pages.orders.OrderDetailsPageView;
 import com.pom.steps.AbstractHomeSteps;
@@ -14,6 +15,9 @@ public class AllServicesPageSteps extends AbstractHomeSteps {
 
     @Pages
     public AllServicesPageView allServicesPageView;
+
+    @Pages
+    CatalogPageView catalogPageView;
 
     @Step
     public void searchServiceInstanceName(String serviceInstanceName) {
@@ -36,7 +40,12 @@ public class AllServicesPageSteps extends AbstractHomeSteps {
     }
 
     @Step
-    public void clickDeleteServiceConfirm(){
+    public void clickOnDeleteServiceWarning(){
+        Assert.assertTrue(allServicesPageView.clickOnDeleteServiceConfirmCheckBox(), "Click on Delete service warning");
+    }
+
+    @Step
+    public void clickDeleteServiceOk(){
         Assert.assertTrue(allServicesPageView.clickOnDeleteServiceConfirmOk(), "Click on delete service Ok");
     }
 
@@ -44,11 +53,13 @@ public class AllServicesPageSteps extends AbstractHomeSteps {
 
     @Step
     public void deleteServiceInstance(String serviceInstanceName){
+        //Assert.assertTrue(catalogPageView.switchToCatalogIFrame(), "switch iframe");
         searchServiceInstanceName(serviceInstanceName);
         clickInstanceActionIcon();
         clickDeleteServiceButton();
         clickOnDeleteServiceConfirm();
-        clickDeleteServiceConfirm();
+        clickOnDeleteServiceWarning();
+        clickDeleteServiceOk();
 
     }
 }

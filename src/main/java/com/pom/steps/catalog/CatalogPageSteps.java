@@ -32,8 +32,8 @@ public class CatalogPageSteps extends AbstractHomeSteps {
     }
 
     @Step
-    private void switchToMCMPIFrame() {
-        Assert.assertTrue(catalogPageView.switchToCatalogIFrame(), "Switch to catalog iFrame completed");
+    public void switchToMCMPIFrame() {
+        Assert.assertTrue(catalogPageView.switchToIFrame(), "Switch to iFrame completed");
     }
 
     @Step
@@ -94,7 +94,7 @@ public class CatalogPageSteps extends AbstractHomeSteps {
 
 
     @Step
-    public void switchToDefaultContent() {
+    public void switchDefaultContent() {
         switchToDefaultContent();
     }
 }

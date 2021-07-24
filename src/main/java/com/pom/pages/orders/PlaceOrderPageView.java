@@ -18,7 +18,7 @@ public class PlaceOrderPageView extends PageObject {
     private static final String REVIEW_ORDER_PARAMETERS_PAGE_XPATH = ".//*[contains(text(),'Review Order')]";
     private static final String NEXT_BUTTON_XPATH = "//button[contains(@id,'next-button')]";
     private static final String PREVIOUS_BUTTON_XPATH = "//button[contains(@id,'previous')]";
-    private static final String SUBMIT_BUTTON_CSS = "button[id$='primary-btn-review-order']";
+    private static final String SUBMIT_BUTTON_XPATH = "//button[@id='primary-btn-review-order']";
 
 
     private static final Logger _logger = Logger.getLogger(OrderDetailsPageView.class);
@@ -102,12 +102,12 @@ public class PlaceOrderPageView extends PageObject {
         return false;
     }
 
-    @FindBy(xpath = SUBMIT_BUTTON_CSS)
+    @FindBy(xpath = SUBMIT_BUTTON_XPATH)
     private WebElement submitButton;
 
     @Action
     private boolean isSubmitButtonEnabled() {
-        ThreadUtils.sleepFor(80);
+        //ThreadUtils.sleepFor(80);
         return isElementFound(submitButton) && isClickableElementFound(submitButton);
     }
 

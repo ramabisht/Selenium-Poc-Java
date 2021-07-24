@@ -5,6 +5,7 @@ import com.autoui.fwk.annotations.Step;
 import com.autoui.fwk.core.BaseTest;
 import com.autoui.fwk.core.PageObject;
 import com.autoui.fwk.reporting.Logger;
+import com.autoui.fwk.utils.ThreadUtils;
 import com.pom.pages.orders.OrderDetailsPageView;
 import com.pom.utils.LoadData;
 import org.openqa.selenium.WebElement;
@@ -18,8 +19,8 @@ public class AllServicesPageView extends PageObject {
     private static final String SERVICE_NOT_FOUND_CSS =".bx--table-row.bx--table-row-empty--default"; // if this locator is present means there is ot service found and get test and check with "No Data Available"
     private static final String INSTANCE_TABLE_ACTION_ICON_CSS =".bx--table-overflow";
     //private static final String SERVICE_INSTANCE_LOADED_XPATH ="//span[contains(text(),"+"'"+String orderId+"')]";
-    private static final String DELETE_SERVICE_CSS ="//button[@class='bx--overflow-menu-options__btn' and normalize-space(.)='Delete Service']";
-    private static final String DELETE_SERVICE_DIALOG_CSS ="//div[@role = 'dialog']//h2[contains(text(),'Delete Service')]";
+    private static final String DELETE_SERVICE_XPATH ="//button[@class='bx--overflow-menu-options__btn' and normalize-space(.)='Delete Service']";
+    private static final String DELETE_SERVICE_DIALOG_XPATH ="//div[@role = 'dialog']//h2[contains(text(),'Delete Service')]";
     private static final String DELETE_SERVICE_CONFIRM_CHECK_BOX_CSS ="#checkbox-inventory-listing_action-modal_ConfirmDeleteServiceChecked ~ .bx--checkbox-label";
     private static final String DELETE_SERVICE_CONFIRM_OK_CSS ="#inventory-listing_action-modal_carbon-button_ok";
     @Override
@@ -43,7 +44,7 @@ public class AllServicesPageView extends PageObject {
     }
     // get the service name from the input what we are providing service Id name either from the fill order detail function  or return that value fro the function from the
 
-    @FindBy(className = SEARCH_BOX_CSS)
+    @FindBy(css = SEARCH_BOX_CSS)
     private WebElement searchBox;
 
     @Action
@@ -62,7 +63,7 @@ public class AllServicesPageView extends PageObject {
         return false;
     }
     // if this locator is present the service instance is not visible
-    @FindBy(className = SERVICE_NOT_FOUND_CSS)
+    @FindBy(css = SERVICE_NOT_FOUND_CSS)
     private WebElement serviceNotFound;
 
     @Action
@@ -71,7 +72,7 @@ public class AllServicesPageView extends PageObject {
     }
 // write code here to check if the correct order is listed
 
-    @FindBy(className = INSTANCE_TABLE_ACTION_ICON_CSS)
+    @FindBy(css = INSTANCE_TABLE_ACTION_ICON_CSS)
     private WebElement instanceTableActionIcon;
 
     @Action
@@ -89,7 +90,7 @@ public class AllServicesPageView extends PageObject {
         return false ;
     }
 
-    @FindBy(className = DELETE_SERVICE_CSS)
+    @FindBy(xpath = DELETE_SERVICE_XPATH)
     private WebElement deleteService;
 
     @Action
@@ -108,7 +109,7 @@ public class AllServicesPageView extends PageObject {
         return false;
     }
 
-    @FindBy(className = DELETE_SERVICE_DIALOG_CSS)
+    @FindBy(xpath = DELETE_SERVICE_DIALOG_XPATH)
     private WebElement deleteServiceDialog;
 
     @Action
@@ -116,7 +117,7 @@ public class AllServicesPageView extends PageObject {
         return isElementFound(deleteServiceDialog) && deleteServiceDialog.isDisplayed();
     }
 
-    @FindBy(className = DELETE_SERVICE_CONFIRM_CHECK_BOX_CSS)
+    @FindBy(css = DELETE_SERVICE_CONFIRM_CHECK_BOX_CSS)
     private WebElement deleteServiceConfirmCheckBox;
 
     @Action
@@ -127,15 +128,16 @@ public class AllServicesPageView extends PageObject {
     @Action
     public boolean clickOnDeleteServiceConfirmCheckBox(){
         if (isDeleteServiceConfirmCheckBoxIsPresent()){
+            //ThreadUtils.sleepFor(20);
             _logger.info("Delete Service Confirmation checkbox is visible");
-            deleteService.click();
+            deleteServiceConfirmCheckBox.click();
             return true;
 
         }
         return false;
     }
 
-    @FindBy(className = DELETE_SERVICE_CONFIRM_OK_CSS)
+    @FindBy(css = DELETE_SERVICE_CONFIRM_OK_CSS)
     private WebElement deleteServiceConfirmOk;
 
     @Action
@@ -147,7 +149,7 @@ public class AllServicesPageView extends PageObject {
     public boolean clickOnDeleteServiceConfirmOk(){
         if (isDeleteServiceConfirmOkIsPresent()){
             _logger.info("Delete confirm OK button is present");
-            deleteService.click();
+            deleteServiceConfirmOk.click();
             return true;
 
         }

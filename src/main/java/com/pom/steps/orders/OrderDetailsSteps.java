@@ -22,9 +22,10 @@ public class OrderDetailsSteps extends AbstractHomeSteps  {
 
     // Steps ----------------------------------------------
     @Step
-    public void fillOrderParameterDetailsMainParam(String providerName) {
-        orderDetailsPageView.fillMainParameterPage(providerName);
+    public String fillOrderParameterDetailsMainParam(String providerName) {
+        String serviceInstanceName = orderDetailsPageView.fillMainParameterPage(providerName);
         Assert.assertTrue(placeOrderPageView.clickOnNextButton(),"Next button enabled post filling Main parameters");
+        return serviceInstanceName;
     }
 
     @Step
