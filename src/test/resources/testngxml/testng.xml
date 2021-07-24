@@ -31,7 +31,7 @@
     <parameter name="repeatMode" value="INVOCATION_COUNT" />
 
     <!--To provide max duration for a test to run -->
-    <parameter name="testDurationInSeconds" value="3000" />
+    <parameter name="testDurationInSeconds" value="300000" />
 
     <!-- Works in tandem with Repeat mode we can provide number of iteration a test can repeat -->
     <parameter name="invocationCount" value="1" />
@@ -55,7 +55,7 @@
     <parameter name="scriptTimeoutInSeconds" value="900" />
 
     <!-- Max timeout for page load to be completed -->
-    <parameter name="pageLoadTimeoutInSeconds" value="1900" />
+    <parameter name="pageLoadTimeoutInSeconds" value="900" />
     <parameter name="socketTimeoutInSeconds" value="300" />
 
     <!-- true/false Run the browser in headless mode -->
@@ -89,8 +89,12 @@
     <!-- Add test specific parameters below -->
     <!-- Test configuration below -->
 
+    <!--
     <parameter name="Username" value="uiautomcmpuser@outlook.com" />
     <parameter name="Password" value="Automcmpuser@00" />
+    -->
+    <parameter name="Username" value="${Username}" />
+    <parameter name="Password" value="${Password}" />
 
 
     <test verbose="2" name="com.mcmp.tests.LoginTest" enabled="false">
