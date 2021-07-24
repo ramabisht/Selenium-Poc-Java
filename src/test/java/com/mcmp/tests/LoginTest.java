@@ -27,15 +27,14 @@ public class LoginTest extends BaseTest {
         loginSteps.performLogin(Username, Password);
         loginSteps.checkForLoginErrors();
         loginSteps.acceptPrivacy();
-        homePageSteps.confirmHomePageIsLoaded();
+       // homePageSteps.confirmHomePageIsLoaded();
     }
 
 
     @Test(priority = 0, description = "Login user case with username and password.", testName = "loginTest")
     @Severity(SeverityLevel.BLOCKER)
-    @Parameters({"Username", "Password"})
     //@Repeat
-    public void loginTest(String Username, String Password) {
+    public void loginTest() {
         homePageSteps.confirmHomePageIsLoaded();
         Assert.assertTrue(true);
     }
