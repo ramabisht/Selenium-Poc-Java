@@ -1,26 +1,26 @@
 pipeline {
     agent { node { label 'auto-ui-slave-1' } }
-    parameters{
-        string(name:'suiteXmlFile', defaultValue:'testng.xml', description:'TestNG SuiteFile to run')
-        string(name:'baseUrl', defaultValue:'', description:'Application URL to be loaded')
-        string(name:'Username', defaultValue:'', description:'UserName for logging into the application')
-        string(name:'Password', defaultValue:'', description:'Password for logging into the application')
-        string(name:'browser', defaultValue:'CHROME', description:'Supported browser type are [CHROME,IE,FIREFOX]')
-        string(name:'slackWebHookUrl', defaultValue:'', description:'WebHook url for posting suite result to slack')
-        string(name:'runInHeadlessMode', defaultValue:'true', description:'Invoke the test in headless mode [true/false]')
-        string(name:'harCollectionType', defaultValue:'NOT_ENABLED', description:'For collecting har logs supported values are [ON_FAILURE, AFTER_TEST, NOT_ENABLED]')
+    parameters {
+        string(name: 'suiteXmlFile', defaultValue: 'testng.xml', description: 'TestNG SuiteFile to run')
+        string(name: 'baseUrl', defaultValue: '', description: 'Application URL to be loaded')
+        string(name: 'Username', defaultValue: '', description: 'UserName for logging into the application')
+        string(name: 'Password', defaultValue: '', description: 'Password for logging into the application')
+        string(name: 'browser', defaultValue: 'CHROME', description: 'Supported browser type are [CHROME,IE,FIREFOX]')
+        string(name: 'slackWebHookUrl', defaultValue: '', description: 'WebHook url for posting suite result to slack')
+        string(name: 'runInHeadlessMode', defaultValue: 'true', description: 'Invoke the test in headless mode [true/false]')
+        string(name: 'harCollectionType', defaultValue: 'NOT_ENABLED', description: 'For collecting har logs supported values are [ON_FAILURE, AFTER_TEST, NOT_ENABLED]')
     }
     stages {
-        stage('Init'){
-            steps{
-                script{
+        stage('Init') {
+            steps {
+                script {
                     deleteDir()
                 }
             }
         }
-        stage('Install_Maven'){
-            steps{
-                script{
+        stage('Install_Maven') {
+            steps {
+                script {
                     sh 'wget -P /tmp https://mirrors.estointernet.in/apache/maven/maven-3/3.8.1/binaries/apache-maven-3.8.1-bin.tar.gz'
                     sh 'ls -lrt /tmp'
                     sh 'tar xzvf /tmp/apache-maven-3.8.1-bin.tar.gz -C /tmp'
@@ -32,25 +32,25 @@ pipeline {
                 }
             }
         }
-        stage('Checkout_SCM'){
-            steps{
-                script{
+        stage('Checkout_SCM') {
+            steps {
+                script {
                     git branch: env.Branch, credentialsId: 'nikitha-kyndryl', poll: false, url: 'git@github.kyndryl.net:Rama-Bisht1/Selenium-Java-Poc.git'
                 }
             }
         }
-        stage('Test_Run'){
-            steps{
-                script{
+        stage('Test_Run') {
+            steps {
+                script {
                     run_command = "/tmp/apache-maven-3.8.1/bin/mvn clean install -DsuiteXmlFile=${params.suiteXmlFile} -DbaseUrl=${params.baseUrl} -DUsername=${params.Username} -DPassword=${params.Password} -DrunInHeadlessMode=${params.runInHeadlessMode} -DslackWebHookUrl=${params.slackWebHookUrl} -Dbrowser=${params.browser}"
                     echo "Run command: ${run_command}"
                     sh run_command
                 }
             }
         }
-        stage('Generate_Reports'){
-            steps{
-                script{
+        stage('Generate_Reports') {
+            steps {
+                script {
                     sh 'wget -P /tmp https://mirrors.estointernet.in/apache/maven/maven-3/3.8.1/binaries/apache-maven-3.8.1-bin.tar.gz'
                     sh 'ls -lrt /tmp'
                     sh 'tar xzvf /tmp/apache-maven-3.8.1-bin.tar.gz -C /tmp'
@@ -59,19 +59,24 @@ pipeline {
                 }
             }
         }
-        stage('Send_Notification'){
-            steps{
-                script{
+        stage('Send_Notification') {
+            steps {
+                script {
                     echo ">>>>Notifying the users"
                 }
             }
         }
-        stage('Post_Run'){
-            steps{
-                script{
+        stage('Post_Run') {
+            steps {
+                script {
                     echo "Performing post run cleanups......."
                 }
             }
         }
+    }
+    post {
+        failure { echo "Failure" }
+        success { echo "Success" }
+        aborted { echo "Aborted" }
     }
 }

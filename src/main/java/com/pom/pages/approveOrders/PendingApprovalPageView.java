@@ -22,8 +22,8 @@ public class PendingApprovalPageView extends PageObject {
     private static final String FINANCIAL_APPROVAL_XPATH = "label[for='checkbox-financial']";
     private static final String TECHNICAL_APPROVAL_XPATH = "label[for='checkbox-technical']";
     private static final String APPROVE_ORDER_CSS = "#order_details_approval_approve";
-    private static final String APPROVE_SUCCESS_CSS ="#approve-success-body";
-    private static final String APPROVE_OK_CSS ="button#order_details_approval_ok";
+    private static final String APPROVE_SUCCESS_CSS = "#approve-success-body";
+    private static final String APPROVE_OK_CSS = "button#order_details_approval_ok";
 
     public PageValidation pageValidation() {
         return new PageValidation() {
@@ -168,17 +168,17 @@ public class PendingApprovalPageView extends PageObject {
     private WebElement orderApproveSuccessMessage;
 
     @Action
-    private boolean isOrderApproveSuccessMessagePresent(){
+    private boolean isOrderApproveSuccessMessagePresent() {
         return isElementFound(pendingApprovalTab) && pendingApprovalTab.isDisplayed();
     }
 
     @Action
-    public String verifyApproveSuccessMessage(){  // validate it with input message "Approval Processed"
+    public String verifyApproveSuccessMessage() {  // validate it with input message "Approval Processed"
         String orderApproveSuccess = new String("");
-        if (isOrderApproveSuccessMessagePresent()){
+        if (isOrderApproveSuccessMessagePresent()) {
             _logger.info("Order Approval success message displayed");
             orderApproveSuccess = orderApproveSuccessMessage.getText();
-            _logger.info("Message returned is "+ orderApproveSuccess);
+            _logger.info("Message returned is " + orderApproveSuccess);
             return orderApproveSuccess;
         }
         return orderApproveSuccess;
@@ -193,12 +193,12 @@ public class PendingApprovalPageView extends PageObject {
     }
 
     @Action
-    public boolean clickOnApproveOKButton(){
-        if (isApproveOKPresent()){
+    public boolean clickOnApproveOKButton() {
+        if (isApproveOKPresent()) {
             _logger.info("Approve Ok Button is Displayed");
             approveOKButton.click();
             return true;
         }
-        return false ;
+        return false;
     }
 }

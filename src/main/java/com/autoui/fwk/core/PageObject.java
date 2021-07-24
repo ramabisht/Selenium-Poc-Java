@@ -370,10 +370,9 @@ public abstract class PageObject implements IPageObject {
         WebElement returnElement = null;
         try {
             long startTime = (new Date()).getTime();
-            if(expectedCondition.equals(ExpectedCondition.PRESENCE_OF_ELEMENT_LOCATED_BY)){
+            if (expectedCondition.equals(ExpectedCondition.PRESENCE_OF_ELEMENT_LOCATED_BY)) {
                 returnElement = (WebElement) this.explicitWait(explicitWaitInSeconds).until(ExpectedConditions.elementToBeClickable(by));
-            }
-            else if(expectedCondition.equals(ExpectedCondition.PROXY_ELEMENT_LOCATED)) {
+            } else if (expectedCondition.equals(ExpectedCondition.PROXY_ELEMENT_LOCATED)) {
                 returnElement = (WebElement) this.explicitWait(explicitWaitInSeconds).until(CustomExpectedConditions.proxyElementLocated(element));
             }
 
@@ -535,7 +534,8 @@ public abstract class PageObject implements IPageObject {
 
         protected String title;
 
-        public PageValidation() {}
+        public PageValidation() {
+        }
 
         public PageValidation(String title) {
             this.title = title;
@@ -543,7 +543,8 @@ public abstract class PageObject implements IPageObject {
 
         public abstract void validate();
 
-        public void validate(String... parameters) {}
+        public void validate(String... parameters) {
+        }
 
         ;
     }

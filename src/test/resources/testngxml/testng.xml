@@ -10,81 +10,81 @@
 
     <!-- Scope: suite -->
     <!--Used for sending run data to any Client over Rest interface-->
-    <parameter name="launcherClients" value="restclients.SPARC3RestClient" />
+    <parameter name="launcherClients" value="restclients.SPARC3RestClient"/>
 
     <!-- Can be used for providing unique name to each run-->
-    <parameter name="runName" value="" />
+    <parameter name="runName" value=""/>
 
     <!--For further segregating the runs into a batch-->
-    <parameter name="batchNumber" value="" />
+    <parameter name="batchNumber" value=""/>
 
     <!--ON,OFF used for performing retry to test on failure-->
-    <parameter name="retryMode" value="ON" />
+    <parameter name="retryMode" value="ON"/>
 
     <!--Timeout for any element to load-->
-    <parameter name="timeoutInSeconds" value="20" />
+    <parameter name="timeoutInSeconds" value="20"/>
 
     <!--Provide slowdown between any actions performed on UI-->
-    <parameter name="slowdownDurationInSeconds" value="0" />
+    <parameter name="slowdownDurationInSeconds" value="0"/>
 
     <!-- A Test can be repeated in loop using @Repeat annotation-->
-    <parameter name="repeatMode" value="INVOCATION_COUNT" />
+    <parameter name="repeatMode" value="INVOCATION_COUNT"/>
 
     <!--To provide max duration for a test to run -->
-    <parameter name="testDurationInSeconds" value="300000" />
+    <parameter name="testDurationInSeconds" value="300000"/>
 
     <!-- Works in tandem with Repeat mode we can provide number of iteration a test can repeat -->
-    <parameter name="invocationCount" value="1" />
+    <parameter name="invocationCount" value="1"/>
 
     <!-- Works in tandem with Repeat mode we can provide delay between each iterations-->
-    <parameter name="delayBetweenIterationInSeconds" value="1" />
+    <parameter name="delayBetweenIterationInSeconds" value="1"/>
 
     <!--Can be used for pushing the test logs to a server-->
     <parameter name="debuggerAddress" value=""/>
 
     <!-- Selenium based tests -->
     <!-- Scope: suite -->
-   <!-- <parameter name="chromeDriverLocation" value="C:\\Users\Administrator\\Desktop\\chromedriver_win32\\chromedriver" />
-   -->
+    <!-- <parameter name="chromeDriverLocation" value="C:\\Users\Administrator\\Desktop\\chromedriver_win32\\chromedriver" />
+    -->
     <!-- Driver location if not provided selenium shipped driver will be used -->
-    <parameter name="ieDriverLocation" value="" />
+    <parameter name="ieDriverLocation" value=""/>
     <parameter name="chromeDriverLocation" value=""/>
-    <parameter name="geckoDriverLocation" value="" />
+    <parameter name="geckoDriverLocation" value=""/>
 
     <!-- Max timeout for script to be completed -->
-    <parameter name="scriptTimeoutInSeconds" value="900" />
+    <parameter name="scriptTimeoutInSeconds" value="900"/>
 
     <!-- Max timeout for page load to be completed -->
-    <parameter name="pageLoadTimeoutInSeconds" value="900" />
-    <parameter name="socketTimeoutInSeconds" value="300" />
+    <parameter name="pageLoadTimeoutInSeconds" value="900"/>
+    <parameter name="socketTimeoutInSeconds" value="300"/>
 
     <!-- true/false Run the browser in headless mode -->
-    <parameter name="runInHeadlessMode" value="{runInHeadlessMode}" />
+    <parameter name="runInHeadlessMode" value="{runInHeadlessMode}"/>
 
     <!-- ON_FAILURE, AFTER_TEST, NOT_ENABLED Har collection flags -->
-    <parameter name="harCollectionType" value="{harCollectionType}" />
+    <parameter name="harCollectionType" value="{harCollectionType}"/>
 
     <!-- Provide the slackwebhook url in case users want to post the suite result, empty value will disable this feature -->
     <!--<parameter name="slackWebHookUrl" value="https://hooks.slack.com/services/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" />-->
-    <parameter name="slackWebHookUrl" value="${slackWebHookUrl}" />
+    <parameter name="slackWebHookUrl" value="${slackWebHookUrl}"/>
 
     <!-- scope: test -->
     <!-- OFF, BROWSER_SCREENSHOT, DESKTOP_SCREENSHOT Choose the screenshot type for capturing the screenshot-->
-    <parameter name="screenshotType" value="BROWSER_SCREENSHOT" />
+    <parameter name="screenshotType" value="BROWSER_SCREENSHOT"/>
 
     <!-- ON_FAILURE, AFTER_STEP, BEFORE_STEP, BEFORE_ACTION, AFTER_ACTION Used in tandem with Screenshot Type -->
-    <parameter name="screenshotMode" value="AFTER_ACTION" />
+    <parameter name="screenshotMode" value="AFTER_ACTION"/>
 
     <!--  FAILED_ITERATION, EACH_ITERATION, LAST_ITERATION Used in tandem with screenshotMode for capturing and storing the screenshot -->
-    <parameter name="screenshotModeForIteration" value="LAST_ITERATION" />
+    <parameter name="screenshotModeForIteration" value="LAST_ITERATION"/>
 
     <!--  CHROME, FIREFOX, EDGE, IE browser type supported -->
-    <parameter name="browser" value="{browser}" />
+    <parameter name="browser" value="{browser}"/>
 
     <!-- URL to invoke -->
     <!--<parameter name="baseUrl" value="https://mcmp-dev2fra-release-autoui.multicloud-ibm.com" />-->
     <!--<parameter name="baseUrl" value="https://mcmp-test-fra-emp-non-usd.multicloud-ibm.com1" />-->
-    <parameter name="baseUrl" value="${baseurl}" />
+    <parameter name="baseUrl" value="${baseurl}"/>
 
     <!-- Add test specific parameters below -->
     <!-- Test configuration below -->
@@ -93,21 +93,20 @@
     <parameter name="Username" value="uiautomcmpuser@outlook.com" />
     <parameter name="Password" value="Automcmpuser@00" />
     -->
-    <parameter name="Username" value="${Username}" />
-    <parameter name="Password" value="${Password}" />
+    <parameter name="Username" value="${Username}"/>
+    <parameter name="Password" value="${Password}"/>
 
 
     <test verbose="2" name="com.mcmp.tests.LoginTest" enabled="false">
-        <parameter name="recoveryClasses" value="com.mcmp.tests.recovery.LoginTestRecoverySteps" />
+        <parameter name="recoveryClasses" value="com.mcmp.tests.recovery.LoginTestRecoverySteps"/>
         <classes>
-            <class name="com.mcmp.tests.LoginTest" />
+            <class name="com.mcmp.tests.LoginTest"/>
         </classes>
     </test>
 
 
-
     <test verbose="2" name="com.mcmp.tests.orderIntegration.vra.e2e.e2eCentOS77CompositeVRA82" enabled="true">
-        <parameter name="recoveryClasses" value="com.mcmp.tests.recovery.GeneralRecoverySteps" />
+        <parameter name="recoveryClasses" value="com.mcmp.tests.recovery.GeneralRecoverySteps"/>
         <classes>
             <class name="com.mcmp.tests.orderIntegration.vra.e2e.e2eCentOS77CompositeVRA82"/>
         </classes>

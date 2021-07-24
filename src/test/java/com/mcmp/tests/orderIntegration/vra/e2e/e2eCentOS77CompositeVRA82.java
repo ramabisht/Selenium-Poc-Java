@@ -52,11 +52,11 @@ public class e2eCentOS77CompositeVRA82 extends LoginTest {
     }
 
     @Test
-    public void testApprovalOrder(){
+    public void testApprovalOrder() {
         homePageSteps.clickOnSubMenuItem(APPROVE_ORDERS_PAGE);
-        String orderId = "4SG5XEH7B8" ;
-        String orderApprovedMessage="Approval Processed";
-        approveOrderSteps.approvePendingOrder(orderApprovedMessage,orderId);
+        String orderId = "4SG5XEH7B8";
+        String orderApprovedMessage = "Approval Processed";
+        approveOrderSteps.approvePendingOrder(orderApprovedMessage, orderId);
     }
 
    /*@Test(priority = 0, description = "Navigate VRA Service Page.", testName = "VRA82: CentOS77 - Navigate VRA Service Page")
