@@ -113,9 +113,8 @@
     </test>
 
     <!-- Run command
-    mvn clean install -DsuiteXmlFile=testng.xml -Dbaseurl="https://mcmp-test-fra-emp-non-usd.multicloud-ibm.com" -DrunInHeadlessMode="false" -DslackWebHookUrl="" -Dbrowser="CHROME" -D
-harCollectionType="NOT_ENABLED"
--->
+        mvn clean install -DsuiteXmlFile=testng.xml -DbaseUrl=https://mcmp-test-fra-emp-non-usd.multicloud-ibm.com -DUsername=uiautomcmpuser@outlook.com -DPassword=Automcmpuser@00 -DrunInHeadlessMode=true -DslackWebHookUrl=asasdssd -Dbrowser=CHROME -DharCollectionType=NOT_ENABLED
+    -->
 
 
 </suite>

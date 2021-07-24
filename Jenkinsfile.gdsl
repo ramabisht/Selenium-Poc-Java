@@ -42,7 +42,7 @@ pipeline {
         stage('Test_Run') {
             steps {
                 script {
-                    run_command = "/tmp/apache-maven-3.8.1/bin/mvn clean install -DsuiteXmlFile=${params.suiteXmlFile} -DbaseUrl=${params.baseUrl} -DUsername=${params.Username} -DPassword=${params.Password} -DrunInHeadlessMode=${params.runInHeadlessMode} -DslackWebHookUrl=${params.slackWebHookUrl} -Dbrowser=${params.browser}"
+                    run_command = "/tmp/apache-maven-3.8.1/bin/mvn clean install -DsuiteXmlFile=${params.suiteXmlFile} -DbaseUrl=${params.baseUrl} -DUsername=${params.Username} -DPassword=${params.Password} -DrunInHeadlessMode=${params.runInHeadlessMode} -DslackWebHookUrl=${params.slackWebHookUrl} -Dbrowser=${params.browser} -DharCollectionType=${params.harCollectionType}"
                     echo "Run command: ${run_command}"
                     sh run_command
                 }

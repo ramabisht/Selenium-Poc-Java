@@ -18,9 +18,9 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <autoui.testsuites>${basedir}\src\test\resources\testngxml\</autoui.testsuites>
+        <autoui.testsuites>${basedir}/src/test/resources/testngxml/</autoui.testsuites>
         <autoui.listeners>com.autoui.fwk.listeners.AutoUIListener</autoui.listeners>
-        <autoui.reportdir>${basedir}\target\Reports</autoui.reportdir>
+        <autoui.reportdir>${basedir}/target/Reports</autoui.reportdir>
         <debugMode>INFO</debugMode>
         <failIfNoTests>true</failIfNoTests>
         <skipTests>false</skipTests>

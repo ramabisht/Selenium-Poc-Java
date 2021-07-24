@@ -19,7 +19,7 @@ public class LoadData extends WebTestSteps {
     private static JsonUtils jsonUtils = new JsonUtils();
     private static JacksonUtils jacksonUtils = new JacksonUtils();
     private static final String TEST_DATA_PROPERTIES = "testdata.properties";
-    private static final String RESOURCES = "\\src\\test\\resources\\";
+    private static final String RESOURCES = "/src/test/resources/";
     private static final String MCMP = "mcmp";
     private static final String APPLICATION_URL_DATA = "application.url";
     private static final String APPLICATION_TITLE_DATA = "application.title";
@@ -34,27 +34,27 @@ public class LoadData extends WebTestSteps {
     public JSONObject loadApplicationUrl() {
         loadPropertyData();
         _logger.info("Loading the " + APPLICATION_URL_DATA + " data");
-        return jsonUtils.readJsonFromFile(System.getProperty("user.dir") + RESOURCES + MCMP + "\\" + properties.getProperty(APPLICATION_URL_DATA));
+        return jsonUtils.readJsonFromFile(System.getProperty("user.dir") + RESOURCES + MCMP + "/" + properties.getProperty(APPLICATION_URL_DATA));
     }
 
     @Step
     public JSONObject loadApplicationTitle() {
         loadPropertyData();
         _logger.info("Loading the " + APPLICATION_TITLE_DATA + " data;");
-        return jsonUtils.readJsonFromFile(System.getProperty("user.dir") + RESOURCES + MCMP + "\\" + properties.getProperty(APPLICATION_TITLE_DATA));
+        return jsonUtils.readJsonFromFile(System.getProperty("user.dir") + RESOURCES + MCMP + "/" + properties.getProperty(APPLICATION_TITLE_DATA));
     }
 
     @Step
     public JSONObject loadMCMPUIData() {
         loadPropertyData();
         _logger.info("Loading the " + MCMP_UI_DATA + " data;");
-        return jsonUtils.readJsonFromFile(System.getProperty("user.dir") + RESOURCES + MCMP + "\\" + properties.getProperty(MCMP_UI_DATA));
+        return jsonUtils.readJsonFromFile(System.getProperty("user.dir") + RESOURCES + MCMP + "/" + properties.getProperty(MCMP_UI_DATA));
     }
 
     @Step
     public JSONObject loadTestDataFile(String folderName, String testName) {
         _logger.info("Loading the test data under folder " + folderName + " for Test " + BaseTest.getTestObject().getTestName());
-        return jsonUtils.readJsonFromFile(System.getProperty("user.dir") + RESOURCES + MCMP + "\\" + folderName + "\\" + testName + ".json");
+        return jsonUtils.readJsonFromFile(System.getProperty("user.dir") + RESOURCES + MCMP + "/" + folderName + "/" + testName + ".json");
     }
 
 
@@ -62,7 +62,7 @@ public class LoadData extends WebTestSteps {
     public LinkedHashMap<String, Object> loadTestDataFile(String folderName) {
         _logger.info("Loading the test data under folder " + folderName );
         String testNameOutput =  BaseTest.getTestObject().getTestName().split("\\.")[( BaseTest.getTestObject().getTestName().split("\\.")).length - 1];
-        return jacksonUtils.getJsonMapFromfile(System.getProperty("user.dir") + RESOURCES + MCMP + "\\" + folderName + "\\" + testNameOutput + ".json");
+        return jacksonUtils.getJsonMapFromfile(System.getProperty("user.dir") + RESOURCES + MCMP + "/" + folderName + "/" + testNameOutput + ".json");
     }
 
     @Step
