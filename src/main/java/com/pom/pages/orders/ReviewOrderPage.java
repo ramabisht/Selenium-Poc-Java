@@ -5,7 +5,7 @@ import com.autoui.fwk.core.PageObject;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class VerifyOrderStatus extends PageObject {
+public class ReviewOrderPage extends PageObject {
 
     @Override
     public PageValidation pageValidation() {
@@ -27,7 +27,7 @@ public class VerifyOrderStatus extends PageObject {
     private WebElement orderNumber;
 
     @Action
-    public boolean verifyOderNumber() {
+    public boolean isOderNumberPresent() {
         return isElementFound(orderNumber) && orderNumber.isEnabled();
     }
 

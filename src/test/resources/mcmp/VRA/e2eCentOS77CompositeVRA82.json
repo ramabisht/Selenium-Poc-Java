@@ -1,5 +1,5 @@
 {
-  "bluePrintName": "[IaaSC-8.2] - CentOS77 - Composite",
+  "bluePrintName": "[IaaSC-8.1] - CentOS77 - Composite",
   "provider": "VRA",
   "Category": "Compute",
   "orderSubmittedConfirmationMessage": "Order Submitted !",

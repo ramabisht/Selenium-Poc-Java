@@ -11,7 +11,7 @@ import org.testng.Assert;
 public class CatalogPageSteps extends AbstractHomeSteps {
 
     String CategoryList = "All Categories";
-    private static final String MCMP_IFRAME = "mcmp-iframe";
+    //private static final String MCMP_IFRAME = "mcmp-iframe";
 
 
     private static Logger _logger = Logger.getLogger(CatalogPageSteps.class);
@@ -33,7 +33,6 @@ public class CatalogPageSteps extends AbstractHomeSteps {
 
     @Step
     private void switchToMCMPIFrame() {
-        //switchToIFrame(MCMP_IFRAME);
         Assert.assertTrue(catalogPageView.switchToCatalogIFrame(), "Switch to catalog iFrame completed");
     }
 

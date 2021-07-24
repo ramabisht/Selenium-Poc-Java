@@ -107,8 +107,8 @@ public class PlaceOrderPageView extends PageObject {
 
     @Action
     private boolean isSubmitButtonEnabled() {
-        ThreadUtils.sleepFor(10);
-        return isElementFound(submitButton) && submitButton.isEnabled();
+        ThreadUtils.sleepFor(80);
+        return isElementFound(submitButton) && isClickableElementFound(submitButton);
     }
 
     @Action

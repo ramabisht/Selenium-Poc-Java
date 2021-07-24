@@ -22,6 +22,8 @@ public class PendingApprovalPageView extends PageObject {
     private static final String FINANCIAL_APPROVAL_XPATH = "label[for='checkbox-financial']";
     private static final String TECHNICAL_APPROVAL_XPATH = "label[for='checkbox-technical']";
     private static final String APPROVE_ORDER_CSS = "#order_details_approval_approve";
+    private static final String APPROVE_SUCCESS_CSS ="#approve-success-body";
+    private static final String APPROVE_OK_CSS ="button#order_details_approval_ok";
 
     public PageValidation pageValidation() {
         return new PageValidation() {
@@ -37,7 +39,7 @@ public class PendingApprovalPageView extends PageObject {
                         "Page title validation failed");
                 Assert.assertEquals(driver.getCurrentUrl(), BaseTest.getTestObject().getBaseUrl() +
                         loadData.getParamValue(loadData.loadApplicationUrl(), "ordersPageUrl"), "Page title validation failed");
-                _logger.info("Ordered Services page load validation completed...");
+                _logger.info("Order Approval page load validation completed...");
             }
         };
     }
@@ -54,16 +56,16 @@ public class PendingApprovalPageView extends PageObject {
     private WebElement searchBox;
 
     @Action
-    public boolean isSearchBoxPresent() {
+    private boolean isSearchBoxPresentInPendingApprovalPage() {
         return isElementFound(searchBox) && searchBox.isDisplayed();
     }
 
     @Action
-    public boolean searchForOrder(String orderId) {
-        if (isSearchBoxPresent()) {
+    public boolean searchForOrderInPage(String orderId) {
+        if (isSearchBoxPresentInPendingApprovalPage()) {
             searchBox.clear();
             searchBox.sendKeys(orderId);
-            _logger.info("Searching for " + orderId + " in Pending Approvals");
+            _logger.info("Searching for " + orderId);
             return true;
         }
         return false;
@@ -78,7 +80,7 @@ public class PendingApprovalPageView extends PageObject {
     }
 
     @Action
-    public String getOrderIdIsDisplayed() {
+    public String getOrderIdIsDisplayed() { //use this text for order id validation
         return displayOrderId.getText();
     }
 
@@ -93,6 +95,7 @@ public class PendingApprovalPageView extends PageObject {
     @Action
     public boolean clickOnApproveButton() {
         if (isApproveButtonEnabled()) {
+            _logger.info("Approve Button is displayed");
             approveButton.click();
             return true;
         }
@@ -118,6 +121,7 @@ public class PendingApprovalPageView extends PageObject {
     @Action
     public boolean clickOnFinancialApproval() {
         if (isFinancialApprovalEnabled()) {
+            _logger.info("Financial Approval checkbox is displayed");
             financialApproval.click();
             return true;
         }
@@ -135,13 +139,14 @@ public class PendingApprovalPageView extends PageObject {
     @Action
     public boolean clickOnTechnicalApproval() {
         if (isTechnicalApprovalEnabled()) {
+            _logger.info("Technical Approval checkbox is displayed");
             technicalApproval.click();
             return true;
         }
         return false;
     }
 
-    @FindBy(xpath = APPROVE_ORDER_CSS)
+    @FindBy(className = APPROVE_ORDER_CSS)
     private WebElement approveOrderDetail;
 
     @Action
@@ -152,9 +157,48 @@ public class PendingApprovalPageView extends PageObject {
     @Action
     public boolean clickOnApproveOrderDetail() {
         if (isApproveOrderDetailEnabled()) {
+            _logger.info("Approve Order Button is displayed");
             technicalApproval.click();
             return true;
         }
         return false;
+    }
+
+    @FindBy(className = APPROVE_SUCCESS_CSS)
+    private WebElement orderApproveSuccessMessage;
+
+    @Action
+    private boolean isOrderApproveSuccessMessagePresent(){
+        return isElementFound(pendingApprovalTab) && pendingApprovalTab.isDisplayed();
+    }
+
+    @Action
+    public String verifyApproveSuccessMessage(){  // validate it with input message "Approval Processed"
+        String orderApproveSuccess = new String("");
+        if (isOrderApproveSuccessMessagePresent()){
+            _logger.info("Order Approval success message displayed");
+            orderApproveSuccess = orderApproveSuccessMessage.getText();
+            _logger.info("Message returned is "+ orderApproveSuccess);
+            return orderApproveSuccess;
+        }
+        return orderApproveSuccess;
+    }
+
+    @FindBy(className = APPROVE_OK_CSS)
+    private WebElement approveOKButton;
+
+    @Action
+    private boolean isApproveOKPresent() {
+        return isElementFound(approveOKButton) && isClickableElementFound(approveOKButton);
+    }
+
+    @Action
+    public boolean clickOnApproveOKButton(){
+        if (isApproveOKPresent()){
+            _logger.info("Approve Ok Button is Displayed");
+            approveOKButton.click();
+            return true;
+        }
+        return false ;
     }
 }
