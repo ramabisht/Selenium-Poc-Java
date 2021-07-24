@@ -241,13 +241,16 @@ public class AutoUIListener extends TestListenerAdapter
     @Override
     public void onExecutionFinish() {
         _logger.info("Finish tests onExecutionFinish() invoked");
-        testResult.put("Pass", passedTest);
-        testResult.put("Fail", failedTest);
-        testResult.put("Skip", skippedTest);
-        String slackBody = Slack.getSlackText(testResult);
-        HashMap<String, String> slackBodyMap = new HashMap<>();
-        slackBodyMap.put("text", slackBody);
-        //Slack.postRequestToSlack(BaseTest.getTestObject().getSlackWebHookUrl(), slackBodyMap);
+        if (!BaseTest.getTestObject().getSlackWebHookUrl().equals("") &&
+                !BaseTest.getTestObject().getSlackWebHookUrl().equals(" ")) {
+            testResult.put("Pass", passedTest);
+            testResult.put("Fail", failedTest);
+            testResult.put("Skip", skippedTest);
+            String slackBody = Slack.getSlackText(testResult);
+            HashMap<String, String> slackBodyMap = new HashMap<>();
+            slackBodyMap.put("text", slackBody);
+            Slack.postRequestToSlack(BaseTest.getTestObject().getSlackWebHookUrl(), slackBodyMap);
+        }
         FileUtils.cleanTempDirectory();
     }
 

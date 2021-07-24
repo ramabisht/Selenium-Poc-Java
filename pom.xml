@@ -18,13 +18,12 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <autoui.testsuites>src\test\resources\testng.xml</autoui.testsuites>
+        <autoui.testsuites>${basedir}\src\test\resources\testngxml\</autoui.testsuites>
         <autoui.listeners>com.autoui.fwk.listeners.AutoUIListener</autoui.listeners>
-        <autoui.reportdir>${basedir}/target/Report</autoui.reportdir>
+        <autoui.reportdir>${basedir}\target\Reports</autoui.reportdir>
         <debugMode>INFO</debugMode>
         <failIfNoTests>true</failIfNoTests>
         <skipTests>false</skipTests>
-        <suiteFile>${basedir}\src\test\resources\testng.xml</suiteFile>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <webdriver.version>3.141.59</webdriver.version>
         <webdrivermanager.version>3.8.1</webdrivermanager.version>
@@ -428,7 +427,11 @@
                     <failIfNoTests>${failIfNoTests}</failIfNoTests>
                     <skipTests>${skipTests}</skipTests>
                     <suiteXmlFiles>
+                        <!--
                         <suiteXmlFile>${autoui.testsuites}</suiteXmlFile>
+                        -->
+                        <!--suppress UnresolvedMavenProperty -->
+                        <suiteXmlFile>${autoui.testsuites}${suiteXmlFile}</suiteXmlFile>
                     </suiteXmlFiles>
                     <properties>
                         <property>
@@ -446,8 +449,14 @@
                         <debugMode>${debugMode}</debugMode>
                         <autoui.reportdir>${autoui.reportdir}</autoui.reportdir>
                         <autoui.listeners>${autoui.listeners}</autoui.listeners>
-                        <!--suppress UnresolvedMavenProperty -->
-                        <!--<app.baseurl>${app.baseurl}</app.baseurl> -->
+                        <!--
+                        <app.baseurl>${app.baseurl}</app.baseurl>
+                        <chromeDriverLocation>${chromeDriverLocation}</chromeDriverLocation>
+                        <timeoutInSeconds>${timeoutInSeconds}</timeoutInSeconds>
+                        <runInHeadlessMode>${runInHeadlessMode}</runInHeadlessMode>
+                        <slackWebHookUrl>${slackWebHookUrl}</slackWebHookUrl>
+                        <browser>${browser}</browser>
+                        -->
                     </systemPropertyVariables>
                 </configuration>
             </plugin>
