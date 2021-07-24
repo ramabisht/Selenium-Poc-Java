@@ -112,5 +112,10 @@
         </classes>
     </test>
 
+    <!-- Run command
+    mvn clean install -DsuiteXmlFile=testng.xml -Dbaseurl="https://mcmp-test-fra-emp-non-usd.multicloud-ibm.com" -DrunInHeadlessMode="false" -DslackWebHookUrl="" -Dbrowser="CHROME" -D
+harCollectionType="NOT_ENABLED"
+-->
+
 
 </suite>
