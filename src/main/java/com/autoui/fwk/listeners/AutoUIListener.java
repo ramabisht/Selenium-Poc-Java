@@ -106,6 +106,7 @@ public class AutoUIListener extends TestListenerAdapter
         setDefaultParameters(parameters, "screenshotMode", ScreenshotMode.ON_FAILURE.name());
         setDefaultParameters(parameters, "screenshotModeForIteration",
                 ScreenshotModeForIteration.LAST_ITERATION.name());
+
         setDefaultParameters(parameters, "baseUrl", "");
         setDefaultParameters(parameters, "runInHeadlessMode", "");
         setDefaultParameters(parameters, "harCollectionType", HarType.getDefault().name());
@@ -117,11 +118,6 @@ public class AutoUIListener extends TestListenerAdapter
 
     @Override
     public void onFinish(ISuite iSuite) {
-        _logger.info("Finish tests invoked results");
-        iSuite.getResults().forEach((k, v) -> {
-            _logger.info("Key >>" + k + " value >>" + v);
-        });
-
     }
 
     /**
@@ -136,7 +132,6 @@ public class AutoUIListener extends TestListenerAdapter
             ExecutionLogManager.logTestSkip(testResult);
         else
             ExecutionLogManager.logListenerFailure(testResult);
-        _logger.info("onTestFailure invoked");
         super.onTestFailure(testResult);
     }
 
@@ -149,7 +144,6 @@ public class AutoUIListener extends TestListenerAdapter
         Throwable throwable = testResult.getThrowable() == null ? new TestOrConfigurationSkipException()
                 : testResult.getThrowable();
         testResult.setThrowable(throwable);
-        _logger.info("onTestSkipped invoked");
         ExecutionLogManager.logTestSkip(testResult);
         super.onTestSkipped(testResult);
     }
@@ -177,26 +171,26 @@ public class AutoUIListener extends TestListenerAdapter
         ExecutionLogManager.logIterationDetails();
         ReportingTools.wipeScreenshotEntryInReports();
         LauncherClientManager.getManager().stopTest();
-        _logger.info("Finish tests invoked");
+        if (BaseTest.getTestObject().getSlackWebHookUrl() != null &&
+                !BaseTest.getTestObject().getSlackWebHookUrl().trim().equals("")) {
+            for (ITestResult result : testContext.getPassedTests().getAllResults()) {
+                passedTest.add(new HashMap<String, Object>() {{
+                    put(result.getTestContext().getName(), result);
+                }});
+            }
 
-        for (ITestResult result : testContext.getPassedTests().getAllResults()) {
-            passedTest.add(new HashMap<String, Object>() {{
-                put(result.getTestContext().getName(), result);
-            }});
+            for (ITestResult result : testContext.getFailedTests().getAllResults()) {
+                failedTest.add(new HashMap<String, Object>() {{
+                    put(result.getTestContext().getName(), result);
+                }});
+            }
+
+            for (ITestResult result : testContext.getSkippedTests().getAllResults()) {
+                skippedTest.add(new HashMap<String, Object>() {{
+                    put(result.getTestContext().getName(), result);
+                }});
+            }
         }
-
-        for (ITestResult result : testContext.getFailedTests().getAllResults()) {
-            failedTest.add(new HashMap<String, Object>() {{
-                put(result.getTestContext().getName(), result);
-            }});
-        }
-
-        for (ITestResult result : testContext.getSkippedTests().getAllResults()) {
-            skippedTest.add(new HashMap<String, Object>() {{
-                put(result.getTestContext().getName(), result);
-            }});
-        }
-
         super.onFinish(testContext);
     }
 
@@ -231,7 +225,6 @@ public class AutoUIListener extends TestListenerAdapter
      */
     @Override
     public void onExecutionStart() {
-        _logger.info("OnExecution tests onExecutionStart() invoked");
         FileUtils.cleanTempDirectory();
     }
 
@@ -240,10 +233,8 @@ public class AutoUIListener extends TestListenerAdapter
      */
     @Override
     public void onExecutionFinish() {
-        _logger.info("Finish tests onExecutionFinish() invoked");
         if (BaseTest.getTestObject().getSlackWebHookUrl() != null &&
-                !BaseTest.getTestObject().getSlackWebHookUrl().equals("") &&
-                !BaseTest.getTestObject().getSlackWebHookUrl().equals(" ")) {
+                !BaseTest.getTestObject().getSlackWebHookUrl().trim().equals("")) {
             testResult.put("Pass", passedTest);
             testResult.put("Fail", failedTest);
             testResult.put("Skip", skippedTest);

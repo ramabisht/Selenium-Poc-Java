@@ -89,15 +89,12 @@
     <!-- Add test specific parameters below -->
     <!-- Test configuration below -->
 
-    <!--
     <parameter name="Username" value="uiautomcmpuser@outlook.com" />
     <parameter name="Password" value="Automcmpuser@00" />
-    -->
-    <parameter name="Username" value="${Username}"/>
-    <parameter name="Password" value="${Password}"/>
 
 
-    <test verbose="2" name="com.mcmp.tests.LoginTest" enabled="true">
+
+    <test verbose="2" name="com.mcmp.tests.LoginTest" enabled="false">
         <parameter name="recoveryClasses" value="com.mcmp.tests.recovery.LoginTestRecoverySteps"/>
         <classes>
             <class name="com.mcmp.tests.LoginTest"/>
@@ -105,7 +102,7 @@
     </test>
 
 
-    <test verbose="2" name="com.mcmp.tests.orderIntegration.vra.e2e.e2eCentOS77CompositeVRA82" enabled="false">
+    <test verbose="2" name="com.mcmp.tests.orderIntegration.vra.e2e.e2eCentOS77CompositeVRA82" enabled="true">
         <parameter name="recoveryClasses" value="com.mcmp.tests.recovery.GeneralRecoverySteps"/>
         <classes>
             <class name="com.mcmp.tests.orderIntegration.vra.e2e.e2eCentOS77CompositeVRA82"/>
@@ -113,8 +110,7 @@
     </test>
 
     <!-- Run command
-        mvn clean install -DsuiteXmlFile=testng.xml -DbaseUrl=https://mcmp-test-fra-emp-non-usd.multicloud-ibm.com -DUsername=uiautomcmpuser@outlook.com -DPassword=Automcmpuser@00 -DrunInHeadlessMode=true -DslackWebHookUrl=asasdssd -Dbrowser=CHROME -DharCollectionType=NOT_ENABLED
+        mvn clean install -DsuiteXmlFile=testng.xml -DbaseUrl=https://mcmp-test-fra-emp-non-usd.multicloud-ibm.com -DrunInHeadlessMode=true -DslackWebHookUrl=asasdssd -Dbrowser=CHROME -DharCollectionType=NOT_ENABLED
     -->
-
 
 </suite>

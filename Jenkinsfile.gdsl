@@ -3,8 +3,6 @@ pipeline {
     parameters {
         string(name: 'suiteXmlFile', defaultValue: 'testng.xml', description: 'TestNG SuiteFile to run')
         string(name: 'baseUrl', defaultValue: '', description: 'Application URL to be loaded')
-        string(name: 'Username', defaultValue: '', description: 'UserName for logging into the application')
-        string(name: 'Password', defaultValue: '', description: 'Password for logging into the application')
         string(name: 'browser', defaultValue: 'CHROME', description: 'Supported browser type are [CHROME,IE,FIREFOX]')
         string(name: 'slackWebHookUrl', defaultValue: '', description: 'WebHook url for posting suite result to slack')
         string(name: 'runInHeadlessMode', defaultValue: 'true', description: 'Invoke the test in headless mode [true/false]')
@@ -42,7 +40,7 @@ pipeline {
         stage('Test_Run') {
             steps {
                 script {
-                    run_command = "/tmp/apache-maven-3.8.1/bin/mvn clean install -DsuiteXmlFile=${params.suiteXmlFile} -DbaseUrl=${params.baseUrl} -DUsername=${params.Username} -DPassword=${params.Password} -DrunInHeadlessMode=${params.runInHeadlessMode} -DslackWebHookUrl=${params.slackWebHookUrl} -Dbrowser=${params.browser} -DharCollectionType=${params.harCollectionType}"
+                    run_command = "/tmp/apache-maven-3.8.1/bin/mvn clean install -DsuiteXmlFile=${params.suiteXmlFile} -DbaseUrl=${params.baseUrl} -DrunInHeadlessMode=${params.runInHeadlessMode} -DslackWebHookUrl=${params.slackWebHookUrl} -Dbrowser=${params.browser} -DharCollectionType=${params.harCollectionType}"
                     echo "Run command: ${run_command}"
                     sh run_command
                 }

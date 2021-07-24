@@ -1,5 +1,6 @@
 package com.autoui.fwk.core;
 
+import com.autoui.fwk.annotations.Action;
 import com.autoui.fwk.enums.ExpectedCondition;
 import com.autoui.fwk.selenium.AutoUIWebDriverWait;
 import com.autoui.fwk.selenium.CustomExpectedConditions;
@@ -8,7 +9,7 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Action;
+
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -19,10 +20,14 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.TimeoutException;
 
+
 import com.autoui.fwk.reporting.Logger;
 
+import java.time.Duration;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
+import java.util.function.Predicate;
+
 
 /**
  * Base class for Page/View. All Page/View classes must extend this class.
@@ -239,12 +244,20 @@ public abstract class PageObject implements IPageObject {
         getJavascriptExecutor().executeScript(command, elements);
     }
 
+    protected boolean executeJavascript(String command, String expectedOutput) {
+        return getJavascriptExecutor().executeScript(command).equals(expectedOutput);
+    }
+
+    protected boolean executeJavascript(String command, int expectedOutput) {
+        return (int) getJavascriptExecutor().executeScript(command) == expectedOutput;
+    }
+
     /**
      * Perform JavaScript click
      *
      * @param element {@link WebElement} on which click has to be performed
      */
-    @com.autoui.fwk.annotations.Action
+    @Action
     protected void javascriptClick(WebElement element) {
         executeJavascript("arguments[0].click()", element);
     }
@@ -254,9 +267,22 @@ public abstract class PageObject implements IPageObject {
      *
      * @param element {@link WebElement} to scroll into view
      */
-    @com.autoui.fwk.annotations.Action
+    @Action
     protected void scrollElementToViewUsingJs(WebElement element) {
         executeJavascript("arguments[0].scrollIntoView(true)", element);
+    }
+
+    /**
+     * Wait for the page load to complete waitUntilPageIsLoaded() JavaScript function
+     */
+    @Action
+    public void waitUntilPageIsLoaded() {
+        new WebDriverWait(driver, (long) getExplicitWaitInSeconds()).until(new org.openqa.selenium.support.ui.ExpectedCondition<Boolean>() {
+            public Boolean apply(WebDriver webDriver) {
+                return executeJavascript("return document.readyState", "complete");
+            }
+        });
+        _logger.info("Page load completed.");
     }
 
     /**
@@ -264,7 +290,7 @@ public abstract class PageObject implements IPageObject {
      *
      * @param element {@link WebElement}
      */
-    @com.autoui.fwk.annotations.Action
+    @Action
     protected void javascriptClearField(WebElement element) {
         executeJavascript("arguments[0].value = ''", element);
     }
@@ -275,7 +301,7 @@ public abstract class PageObject implements IPageObject {
      * @param element The {@link WebElement} to which keys have to be sent
      * @param keys    Keys to be sent
      */
-    @com.autoui.fwk.annotations.Action
+    @Action
     protected void javascriptSendKeys(WebElement element, String keys) {
         executeJavascript(String.format("arguments[0].value = '%s'", keys), element);
     }
@@ -305,7 +331,7 @@ public abstract class PageObject implements IPageObject {
      *
      * @param element {@link WebElement} to scroll into view
      */
-    @com.autoui.fwk.annotations.Action
+    @Action
     protected void scrollElementToViewUsingMouse(WebElement element) {
         performMouseAction(mouse().moveToElement(element));
     }
@@ -318,14 +344,14 @@ public abstract class PageObject implements IPageObject {
      * @param x       x-axis to move
      * @param y       y-axis to move
      */
-    @com.autoui.fwk.annotations.Action
+    @Action
     protected void moveRelativeToElementAndClick(WebElement element, int x, int y) {
         Actions actions = new Actions(driver);
         actions.moveToElement(element).moveByOffset(x, y);
         actions.perform();
         actions.click();
 
-        Action action = actions.build();
+        org.openqa.selenium.interactions.Action action = actions.build();
         action.perform();
     }
 
@@ -354,11 +380,29 @@ public abstract class PageObject implements IPageObject {
         return explicitWait(getExplicitWaitInSeconds());
     }
 
-
-    private FluentWait fluentWait(int explicitWaitInSeconds) {
-        return (new FluentWait(this.component)).withTimeout((long) explicitWaitInSeconds, TimeUnit.SECONDS)
-                .pollingEvery(100L, TimeUnit.MILLISECONDS).ignoring(NoSuchElementException.class);
+    /**
+     * Fluent wait
+     *
+     * @param explicitWaitInSeconds
+     * @return
+     */
+    protected FluentWait fluentWait(int explicitWaitInSeconds) {
+        return new FluentWait(this.driver).withTimeout(Duration.ofSeconds(explicitWaitInSeconds))
+                .pollingEvery(Duration.ofMillis(100))
+                .ignoring(NoSuchElementException.class);
     }
+
+    /**
+     * Fluent wait with implicit max wait duration
+     *
+     * @return
+     */
+    protected FluentWait fluentWait() {
+        return new FluentWait(this.driver).withTimeout(Duration.ofSeconds(getExplicitWaitInSeconds()))
+                .pollingEvery(Duration.ofMillis(100))
+                .ignoring(NoSuchElementException.class);
+    }
+
 
     private void setImplicitWaitToOneSecond() {
         _logger.debug("Setting implicit wait to 1");
@@ -367,30 +411,29 @@ public abstract class PageObject implements IPageObject {
 
     private WebElement waitUntil(ExpectedCondition expectedCondition, By by, WebElement element, int explicitWaitInSeconds) {
         this.setImplicitWaitToOneSecond();
+        waitUntilPageIsLoaded();
         WebElement returnElement = null;
         try {
             long startTime = (new Date()).getTime();
             if (expectedCondition.equals(ExpectedCondition.PRESENCE_OF_ELEMENT_LOCATED_BY)) {
-                returnElement = (WebElement) this.explicitWait(explicitWaitInSeconds).until(ExpectedConditions.elementToBeClickable(by));
+               // returnElement = (WebElement) this.explicitWait(explicitWaitInSeconds).until(ExpectedConditions.elementToBeClickable(by));
+                returnElement = (WebElement) this.fluentWait(explicitWaitInSeconds).until(ExpectedConditions.elementToBeClickable(by));
             } else if (expectedCondition.equals(ExpectedCondition.PROXY_ELEMENT_LOCATED)) {
-                returnElement = (WebElement) this.explicitWait(explicitWaitInSeconds).until(CustomExpectedConditions.proxyElementLocated(element));
+                //returnElement = (WebElement) this.explicitWait(explicitWaitInSeconds).until(CustomExpectedConditions.proxyElementLocated(element));
+                returnElement = (WebElement) this.fluentWait(explicitWaitInSeconds).until(CustomExpectedConditions.proxyElementLocated(element));
             }
-
         } catch (Exception var11) {
             throw var11;
         } finally {
             _logger.debug(String.format("Setting wait until implicit wait to %s seconds", BaseTest.getTestObject().getTimeoutInSeconds()));
             this.driver.manage().timeouts().implicitlyWait(BaseTest.getTestObject().getTimeoutInSeconds(), TimeUnit.SECONDS);
         }
-
         return returnElement;
     }
 
-
-    protected boolean waitUntillInvisibilityOfElement(By by) {
+    protected boolean waitUntilInvisibilityOfElement(By by) {
         this.setImplicitWaitToOneSecond();
         boolean returnValue = false;
-
         try {
             returnValue = (Boolean) this.explicitWait(this.explicitWaitInSeconds)
                     .until(ExpectedConditions.invisibilityOfElementLocated(by));
@@ -431,7 +474,6 @@ public abstract class PageObject implements IPageObject {
 
     protected boolean isElementFound(By by, int explicitWaitInSeconds) {
         boolean isFound = false;
-
         try {
             WebElement returnElement = this.waitUntil(ExpectedCondition.PRESENCE_OF_ELEMENT_LOCATED_BY, by,
                     (WebElement) null, explicitWaitInSeconds);
@@ -441,7 +483,6 @@ public abstract class PageObject implements IPageObject {
         } catch (NoSuchElementException | TimeoutException var5) {
             _logger.info(String.format("Element not found. %s", var5.getMessage()));
         }
-
         return isFound;
     }
 
@@ -496,7 +537,6 @@ public abstract class PageObject implements IPageObject {
      * @return {@link PageValidation}
      */
 
-
     private boolean waitUntilElementIsClickable(WebElement element, int explicitWaitInSeconds) {
         boolean isFound = false;
         this.setImplicitWaitToOneSecond();
@@ -518,7 +558,6 @@ public abstract class PageObject implements IPageObject {
         return isFound;
     }
 
-
     protected boolean isClickableElementFound(WebElement element) {
         return this.waitUntilElementIsClickable(element, this.getExplicitWaitInSeconds());
     }
@@ -526,7 +565,6 @@ public abstract class PageObject implements IPageObject {
     protected boolean isClickableElementFound(WebElement element, int explicitWaitInSeconds) {
         return this.waitUntilElementIsClickable(element, explicitWaitInSeconds);
     }
-
 
     public abstract PageValidation pageValidation();
 

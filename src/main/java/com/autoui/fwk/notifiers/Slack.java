@@ -1,6 +1,7 @@
 package com.autoui.fwk.notifiers;
 
 
+import com.autoui.fwk.core.BaseTest;
 import com.autoui.fwk.reporting.Logger;
 import com.autoui.fwk.rest.Client;
 import org.testng.ITestResult;
@@ -55,7 +56,6 @@ public class Slack {
                     }
 
                     outputDirectory = result.getTestContext().getOutputDirectory();
-
                     suiteName = result.getTestContext().getSuite().getName();
 
                     /*
@@ -73,10 +73,17 @@ public class Slack {
         }
 
 
-      String slackText = "* Result for Suite :" + suiteName + "* \n";
+        String slackText = "* Result for Suite :" + suiteName + "* \n";
+
+        slackText += "Instance url: <" + BaseTest.getTestObject().getBaseUrl() + ">\n";
         slackText += "Total Test count :" + totalTest + "\n";
-        if (passTest > 0)
+
+        if (passTest > 0) {
             slackText += "Pass Test count :" + passTest + " (" + passPercentage + "%)" + "\n";
+        } else {
+            slackText += "Pass Test count : 0 (0.0%)" + "\n";
+        }
+
         if (failTest > 0) {
             slackText += "Fail Test count :" + failTest + " (" + failPercentage + "%)" + "\n";
             slackText += "Failed Test list [";
@@ -84,7 +91,10 @@ public class Slack {
                 slackText += testName + ",";
             }
             slackText += "]\n";
+        } else {
+            slackText += "Fail Test count : 0 (0.0%)" + "\n";
         }
+
         if (skipTest > 0) {
             slackText += "Skip Test count :" + skipTest + " (" + skipPercentage + "% )" + "\n";
             slackText += "Skipped Test list [";
@@ -92,8 +102,11 @@ public class Slack {
                 slackText += testName + ",";
             }
             slackText += "]\n";
+        } else {
+            slackText += "Skip Test count : 0 (0.0%)" + "\n";
         }
-        slackText += "Output directory [" + outputDirectory + "]\n";
+
+        //slackText += "Output directory [" + outputDirectory + "]\n";
         slackText += "*Ends*";
 
         _logger.info("Text formed :" + slackText);
