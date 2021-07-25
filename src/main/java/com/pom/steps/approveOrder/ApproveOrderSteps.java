@@ -92,7 +92,7 @@ public class ApproveOrderSteps extends AbstractHomeSteps {
 
     @Step
     public void validateProvisioningIsCompleted(String expectedOrderStatus, String orderId) {
-        Assert.assertTrue(allOrdersPageView.verifyOrderIsCompleted(expectedOrderStatus, orderId), "Provisioning has been completed");
+        Assert.assertEquals(allOrdersPageView.verifyOrderIsCompleted(expectedOrderStatus, orderId), expectedOrderStatus,"Provisioning has been completed");
     }
 
 
@@ -105,12 +105,10 @@ public class ApproveOrderSteps extends AbstractHomeSteps {
         //verifyLandedOnPendingApprovalTab();
         //Assert.assertTrue(catalogPageView.switchToCatalogIFrame(), "switch iframe");
         _logger.info("Searching for order in pending approval page");
-        //ThreadUtils.sleepFor(5);
         searchForOrderId(orderId);
         verifyOrderIdIsDisplayedAfterSearch(orderId);
         clickOnTheApproveButton();
         verifyOrderApprovalDialogueIsDisplayed();
-        //ThreadUtils.sleepFor(30);
         clickOnFinancialAndTechnicalApproval();
         approveOrderInDialogue();
         validateApproveSuccessMessage(orderApprovedMessage);
@@ -120,7 +118,6 @@ public class ApproveOrderSteps extends AbstractHomeSteps {
     @Step
     public void verifyProvisioningIsCompleted(String expectedOrderStatus, String orderId) {
         _logger.info("Navigate to all orders tab");
-        //Assert.assertTrue(catalogPageView.switchToCatalogIFrame(), "switch iframe");
         navigateToAllOrdersTab();
         _logger.info("Searching for order in All Services approval page");
         searchForOrderId(orderId);

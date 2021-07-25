@@ -29,19 +29,19 @@ public class AllOrdersPageView extends PageObject {
     private WebElement allOrdersTab;
 
     @Action
-    private boolean isAllOrdersTabIsPresent(){
+    private boolean isAllOrdersTabIsPresent() {
         return isElementFound(allOrdersTab) && isClickableElementFound(allOrdersTab);
     }
 
     @Action
-    public boolean clickOnAllOrdersTab(){
-        if(isAllOrdersTabIsPresent()){
+    public boolean clickOnAllOrdersTab() {
+        if (isAllOrdersTabIsPresent()) {
             _logger.info("All Orders Tab is visible");
             allOrdersTab.click();
             _logger.info("clicked on All Orders Tab");
-            return true ;
+            return true;
         }
-        return false ;
+        return false;
     }
     //search for orders use the same locator same as pending approval tab and search for the service name there
 
@@ -60,13 +60,14 @@ public class AllOrdersPageView extends PageObject {
     private boolean isNoOrderFoundPresent() {
         return isElementFound(noOrderFound) && noOrderFound.isDisplayed();
     }
+
     //Validate with above messages (message == "No Orders Found" || message == "No Pending Orders") {
     @Action
     public String getTextNoOrderFoundStatus() {
         String searchOrderStatus = new String("");
         if (isNoOrderFoundPresent()) {
             searchOrderStatus = noOrderFound.getText();
-            _logger.info("After search order status returned is "+ searchOrderStatus);
+            _logger.info("After search order status returned is " + searchOrderStatus);
             return searchOrderStatus;
         }
         return searchOrderStatus;
@@ -81,26 +82,22 @@ public class AllOrdersPageView extends PageObject {
     }
 
     @Action
-    public boolean verifyOrderIsCompleted(String expectedOrderStatus, String orderId){
-        String finalOrderStatus  = new String("");
+    public String verifyOrderIsCompleted(String expectedOrderStatus, String orderId) {
+        String finalOrderStatus = "";
         int maxCount = 20;
-        int counter = 0 ;
-        while (counter<=maxCount){
-            finalOrderStatus = oderStatus.getText();
-            if (finalOrderStatus.equals(expectedOrderStatus)){
-                _logger.info("Order has been completed with expected status as "+ finalOrderStatus);
-                return true;
+        int counter = 0;
+        while (counter <= maxCount) {
+            finalOrderStatus = oderStatus.getText().trim();
+            if (finalOrderStatus.equals(expectedOrderStatus) || finalOrderStatus.equals("Failed")) {
+                _logger.info("Order has been completed with expected status as " + finalOrderStatus);
+                return finalOrderStatus;
             }
-            else{
-                ThreadUtils.sleepFor(60);
-                pendingApprovalPageView.searchForOrderInPage(orderId);
-                _logger.info("Waiting for "+ finalOrderStatus + " to be " + expectedOrderStatus + " for " + counter + " times ");
-                counter+=1;
-
-            }
-
+            ThreadUtils.sleepFor(60);
+            pendingApprovalPageView.searchForOrderInPage(orderId);
+            _logger.info("Waiting for " + finalOrderStatus + " to be " + expectedOrderStatus + " for " + counter + " times ");
+            counter += 1;
         }
-        return false;
+        return "Order Provisioning Timed Out";
     }
 
 }

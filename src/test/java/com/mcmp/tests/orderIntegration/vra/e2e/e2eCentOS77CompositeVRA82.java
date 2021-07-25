@@ -66,18 +66,6 @@ public class e2eCentOS77CompositeVRA82 extends LoginTest {
         homePageSteps.clickOnMenuItem(ENTERPRISE_MARKET);
     }
 
-    /*@Test
-    public void testApprovalOrder() {
-        //homePageSteps.clickOnSubMenuItem(APPROVE_ORDERS_PAGE);
-        String orderId = "K64WGW2YH1";
-        String serviceInstanceName = "TestAutomationcetos90";
-        String orderApprovedMessage = "Approval Processed";
-        //approveOrderSteps.approvePendingOrder(orderApprovedMessage, orderId);
-        //approveOrderSteps.verifyProvisioningIsCompleted(EXPECTED_ORDER_STATUS,orderId);
-        homePageSteps.clickOnSubMenuItem(ORDERED_SERVICES_PAGE);
-        allServicesPageSteps.deleteServiceInstance(serviceInstanceName) ;
-    }*/
-
    @Test(priority = 0, description = "Navigate VRA Service Page.", testName = "VRA82: CentOS77 - Navigate VRA Service Page")
     @Severity(SeverityLevel.CRITICAL)
     //@Repeat
@@ -88,6 +76,7 @@ public class e2eCentOS77CompositeVRA82 extends LoginTest {
         catalogPageSteps.selectCategory((String) loadData.getParamValue(loadTestData, "Category"));
         catalogPageSteps.selectProvider((String) loadData.getParamValue(loadTestData, "provider"));
     }
+
 
     @Test(dependsOnMethods = {"openServiceTemplate"}, priority = 0, description = "Verify Provisioning of service.", testName = "VRA82: CentOS77 - Verify Composite-Main Parameters page")
     @Severity(SeverityLevel.CRITICAL)
@@ -103,7 +92,7 @@ public class e2eCentOS77CompositeVRA82 extends LoginTest {
         reviewOrderPageSteps.navigateToCatalogAfterOrderSubmission();
         catalogPageSteps.switchDefaultContent();
         homePageSteps.clickHamburgerButton();
-        homePageSteps.clickOnMenuItem(ENTERPRISE_MARKET);
+        //ThreadUtils.sleepFor(10);
         homePageSteps.clickOnSubMenuItem(APPROVE_ORDERS_PAGE);
         catalogPageView.switchToIFrame();
         approveOrderSteps.approvePendingOrder(APPROVAL_MESSAGE, orderId);

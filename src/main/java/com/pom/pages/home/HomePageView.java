@@ -117,8 +117,10 @@ public class HomePageView extends PageObject {
     private WebElement getSubMenuItem(String elementName) {
         WebElement leftNavigationClickableElement = null;
         for (WebElement element : leftNavigationPage) {
-            if (element.getText().equals(elementName)) {
+            _logger.info("get text output:"+ element.getText().trim() + " expected name "+ elementName);
+            if (element.getText().trim().equals(elementName)) {
                 leftNavigationClickableElement = element;
+                break;
             }
         }
         Assert.assertNotNull(leftNavigationClickableElement, "SubMenu Item found :" + elementName);
