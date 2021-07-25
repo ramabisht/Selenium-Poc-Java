@@ -48,6 +48,16 @@ public class AutoUIListener extends TestListenerAdapter
         _logger.debug("Starting timekeeper " + IterationManager.getManager().getElapsedTimeInMilliSeconds());
         LauncherClientManager.getManager().enableClient();
         LauncherClientManager.getManager().startTest(testContext);
+
+        try {
+            if (BaseTest.getTestObject().getHarType() != null
+                    && BaseTest.getTestObject().getDriverManager().getBrowserMobProxy() != null
+                    && BaseTest.getTestObject().getHarType().equals(HarType.AFTER_TEST))
+                ReportingTools.startHarCapture();
+        } catch (Exception ex) {
+            _logger.error("Har capturing enablement failed logTestStart() reason " + ex);
+        }
+
         super.onStart(testContext);
     }
 
@@ -191,6 +201,16 @@ public class AutoUIListener extends TestListenerAdapter
                 }});
             }
         }
+
+        try {
+            if (BaseTest.getTestObject().getHarType() != null
+                    && BaseTest.getTestObject().getDriverManager().getBrowserMobProxy() != null
+                    && BaseTest.getTestObject().getHarType().equals(HarType.ON_FAILURE)) {
+                ReportingTools.dumpCurrentHarLogs();
+            }
+        } catch (Exception ex) {
+            _logger.error("Har capturing dump and stop failed logTestFailure() reason " + ex);
+        }
         super.onFinish(testContext);
     }
 
@@ -244,6 +264,17 @@ public class AutoUIListener extends TestListenerAdapter
             slackBodyMap.put("text", slackBody);
             Slack.postRequestToSlack(BaseTest.getTestObject().getSlackWebHookUrl(), slackBodyMap);
         }
+
+        try {
+            if (BaseTest.getTestObject().getHarType() != null
+                    && BaseTest.getTestObject().getDriverManager().getBrowserMobProxy() != null
+                    && BaseTest.getTestObject().getHarType().equals(HarType.ON_FAILURE)) {
+                ReportingTools.dumpCurrentHarLogs();
+            }
+        } catch (Exception ex) {
+            _logger.error("Har capturing dump and stop failed logTestFailure() reason " + ex);
+        }
+
         FileUtils.cleanTempDirectory();
     }
 

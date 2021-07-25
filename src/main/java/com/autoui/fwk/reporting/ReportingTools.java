@@ -432,28 +432,4 @@ public class ReportingTools {
             _logger.error("Har collection failed because:" + harCollection);
         }
     }
-
-    public static void endHarCollection() {
-        try {
-            _logger.info("Ending and Collecting Har......");
-            int iteration = IterationManager.getManager().getIteration();
-            _logger.info("Iterations " + iteration);
-            Har gethar = BaseTest.getTestObject().getDriverManager().getBrowserMobProxy().getHar();
-            String harDirectory = String.format("screenshots%sitr_%s_%s", File.separator,
-                    BaseTest.getTestObject().getTestName(), iteration);
-            _logger.info("Directory " + harDirectory);
-            String harDirectoryPath = String.format("%s%s%s", System.getProperty("autoui.reportdir"),
-                    File.separator, harDirectory);
-            _logger.info("Path " + harDirectoryPath);
-            String fileName = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
-            String harFileName = String.format("Har_%s.har", fileName);
-            String harFile = String.format("%s%s%s", harDirectoryPath, File.separator, harFileName);
-            _logger.info("Har log :" + gethar.getLog().getVersion() + ", writing to file at:" + harFile);
-            FileOutputStream harOutputStream = new FileOutputStream(harFile);
-            gethar.writeTo(harOutputStream);
-            _logger.info("Har Collected Successfully");
-        } catch (Exception harCollection) {
-            _logger.error("Har collection failed because:" + harCollection);
-        }
-    }
 }
