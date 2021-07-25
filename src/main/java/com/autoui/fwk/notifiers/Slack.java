@@ -27,7 +27,7 @@ public class Slack {
         new Client().validatePostResponseCode(client.postRequestByUrlAndHeadersAndBodyObject(webHookUrl, client.getDefaultHeader(), (Object) body));
     }
 
-    public static String getSlackText(HashMap<String, Object> testData, String baseUrl) {
+    public static String getSlackText(HashMap<String, Object> testData) {
         int passTest = ((List) testData.get("Pass")).size();
         int failTest = ((List) testData.get("Fail")).size();
         int skipTest = ((List) testData.get("Skip")).size();
@@ -58,16 +58,16 @@ public class Slack {
                     outputDirectory = result.getTestContext().getOutputDirectory();
                     suiteName = result.getTestContext().getSuite().getName();
 
-                    /*
+
                     _logger.info("Failed Test Name:" + result.getName() + "Name " + result.getTestName()
                             + "Name " + result.getTestContext().getName() + ", Status " + result.getStatus()
-                            + ", Start Time: " + result.getStartMillis() + ", End time " + result.getEndMillis() +
+                            + ", Start Time: " + result.getStartMillis() + ", End time " + result.getEndMillis()
                             + ", " + result.getHost() + ", " + result.getInstanceName() + ", " + result.getAttributeNames().toString()
                             + ", " + result.getTestContext().getHost() +
                             ", " + result.getTestContext().getOutputDirectory() + ", "
                             + result.getTestContext().getStartDate().toString() + ", "
                              + result.getTestContext().getEndDate().toString());
-                    */
+
                 }
             }
         }
@@ -75,7 +75,7 @@ public class Slack {
 
         String slackText = "* Result for Suite :" + suiteName + "* \n";
 
-        slackText += "Instance url: <" + baseUrl + ">\n";
+        slackText += "Instance url: <" + "" + ">\n";
         slackText += "Total Test count :" + totalTest + "\n";
 
         if (passTest > 0) {

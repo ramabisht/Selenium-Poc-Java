@@ -51,11 +51,11 @@ public class AutoUIListener extends TestListenerAdapter
 
         try {
             if (BaseTest.getTestObject().getHarType() != null
-                    && BaseTest.getTestObject().getDriverManager().getBrowserMobProxy() != null
-                    && BaseTest.getTestObject().getHarType().equals(HarType.AFTER_TEST))
+                 && !BaseTest.getTestObject().getHarType().equals(HarType.NOT_ENABLED))
                 ReportingTools.startHarCapture();
+                _logger.error("Har capturing started...");
         } catch (Exception ex) {
-            _logger.error("Har capturing enablement failed logTestStart() reason " + ex);
+            _logger.error("Har capturing enablement failed onStart() reason " + ex);
         }
 
         super.onStart(testContext);
@@ -204,8 +204,7 @@ public class AutoUIListener extends TestListenerAdapter
 
         try {
             if (BaseTest.getTestObject().getHarType() != null
-                    && BaseTest.getTestObject().getDriverManager().getBrowserMobProxy() != null
-                    && BaseTest.getTestObject().getHarType().equals(HarType.ON_FAILURE)) {
+                && !BaseTest.getTestObject().getHarType().equals(HarType.NOT_ENABLED)) {
                 ReportingTools.dumpCurrentHarLogs();
             }
         } catch (Exception ex) {
@@ -258,8 +257,9 @@ public class AutoUIListener extends TestListenerAdapter
             testResult.put("Pass", passedTest);
             testResult.put("Fail", failedTest);
             testResult.put("Skip", skippedTest);
-            _logger.info("Test Url " + BaseTest.getTestObject().getBaseUrl());
-            String slackBody = Slack.getSlackText(testResult, BaseTest.getTestObject().getBaseUrl());
+           // _logger.info("Test Url " + BaseTest.getTestObject().getBaseUrl());
+           // String slackBody = Slack.getSlackText(testResult, BaseTest.getTestObject().getBaseUrl());
+            String slackBody = Slack.getSlackText(testResult);
             HashMap<String, String> slackBodyMap = new HashMap<>();
             slackBodyMap.put("text", slackBody);
             Slack.postRequestToSlack(BaseTest.getTestObject().getSlackWebHookUrl(), slackBodyMap);
@@ -267,12 +267,11 @@ public class AutoUIListener extends TestListenerAdapter
 
         try {
             if (BaseTest.getTestObject().getHarType() != null
-                    && BaseTest.getTestObject().getDriverManager().getBrowserMobProxy() != null
-                    && BaseTest.getTestObject().getHarType().equals(HarType.ON_FAILURE)) {
+                && !BaseTest.getTestObject().getHarType().equals(HarType.NOT_ENABLED)) {
                 ReportingTools.dumpCurrentHarLogs();
             }
         } catch (Exception ex) {
-            _logger.error("Har capturing dump and stop failed logTestFailure() reason " + ex);
+            _logger.error("Har capturing dump and stop failed onExecutionFinish() reason " + ex);
         }
 
         FileUtils.cleanTempDirectory();
