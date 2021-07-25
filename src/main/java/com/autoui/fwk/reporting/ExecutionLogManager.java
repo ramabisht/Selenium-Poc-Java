@@ -94,10 +94,10 @@ public class ExecutionLogManager {
         try {
             if (BaseTest.getTestObject().getHarType() != null
                     && BaseTest.getTestObject().getDriverManager().getBrowserMobProxy() != null
-                    && !BaseTest.getTestObject().getHarType().equals(HarType.NOT_ENABLED))
+                    && BaseTest.getTestObject().getHarType().equals(HarType.AFTER_TEST))
                 ReportingTools.startHarCapture();
         } catch (Exception ex) {
-            _logger.error("Har capturing enablement failed reason " + ex);
+            _logger.error("Har capturing enablement failed logTestStart() reason " + ex);
         }
 
     }
@@ -122,10 +122,10 @@ public class ExecutionLogManager {
         try {
             if (BaseTest.getTestObject().getHarType() != null
                     && BaseTest.getTestObject().getDriverManager().getBrowserMobProxy() != null
-                    && !BaseTest.getTestObject().getHarType().equals(HarType.NOT_ENABLED))
+                    && BaseTest.getTestObject().getHarType().equals(HarType.AFTER_TEST))
                 ReportingTools.dumpCurrentHarLogs();
         } catch (Exception ex) {
-            _logger.error("Har capturing dump failed reason " + ex);
+            _logger.error("Har capturing dump failed logTestSuccess() reason " + ex);
         }
 
 
@@ -162,12 +162,11 @@ public class ExecutionLogManager {
         try {
             if (BaseTest.getTestObject().getHarType() != null
                     && BaseTest.getTestObject().getDriverManager().getBrowserMobProxy() != null
-                    && BaseTest.getTestObject().getHarType().equals(HarType.ON_FAILURE) ||
-                    !BaseTest.getTestObject().getHarType().equals(HarType.NOT_ENABLED)) {
+                    && BaseTest.getTestObject().getHarType().equals(HarType.ON_FAILURE)) {
                 ReportingTools.endHarCollection();
             }
         } catch (Exception ex) {
-            _logger.error("Har capturing dump and stop failed reason " + ex);
+            _logger.error("Har capturing dump and stop failed logTestFailure() reason " + ex);
         }
 
         if (methodType.equals(MethodType.TEST) && !BaseTest.getTestObject().getRepeatMode().equals(RepeatMode.OFF))
