@@ -445,43 +445,12 @@ public class Driver {
             webDriver.manage().deleteAllCookies();
             _logger.info("Cookies deleted");
         }
-
-        /*
-        if (enableHarCollection && browserMobProxyServer != null && seleniumProxy != null) {
-            browserMobProxyServer.newHar();
-            _logger.info("Started the Har capturing with proxy : {}".format(String.valueOf(browserMobProxyServer)));
-        }
-        */
     }
 
     /**
      * Close and quit driver
      */
-    public void terminateDriver() throws IOException {
-
-        /*
-        if (enableHarCollection && browserMobProxyServer != null) {
-            try {
-                _logger.info("Collecting Har before closing the browser");
-                Har gethar = browserMobProxyServer.getHar();
-                String screenShotDirectoryPath = String.format("%s", System.getProperty("autoui.reportdir"));
-                String fileName = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
-                String harfileName = String.format("Har_%s.har", fileName);
-                String harFile = String.format("%s%s%s", screenShotDirectoryPath, File.separator, harfileName);
-                _logger.info("Har log :" + gethar.getLog().getVersion() + ", writing to file at:" + harFile);
-                FileOutputStream harOutputStream = new FileOutputStream(harFile);
-                gethar.writeTo(harOutputStream);
-                _logger.info("Har Collected Successfully");
-            } catch (Exception harCollection) {
-                _logger.error("Har collection failed because:" + harCollection);
-            }
-            try {
-                browserMobProxyServer.stop();
-            } catch (Exception ex) {
-                _logger.error("Failed to stop the proxy server running on port " + browserMobProxyServer.getPort() + " reason " + ex.getMessage());
-            }
-        }*/
-
+    public void terminateDriver() {
         if (browserMobProxyServer != null) {
             try {
                 browserMobProxyServer.stop();

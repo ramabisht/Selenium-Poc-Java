@@ -27,7 +27,7 @@ public class Slack {
         new Client().validatePostResponseCode(client.postRequestByUrlAndHeadersAndBodyObject(webHookUrl, client.getDefaultHeader(), (Object) body));
     }
 
-    public static String getSlackText(HashMap<String, Object> testData) {
+    public static String getSlackText(HashMap<String, Object> testData, String baseUrl) {
         int passTest = ((List) testData.get("Pass")).size();
         int failTest = ((List) testData.get("Fail")).size();
         int skipTest = ((List) testData.get("Skip")).size();
@@ -75,7 +75,7 @@ public class Slack {
 
         String slackText = "* Result for Suite :" + suiteName + "* \n";
 
-        slackText += "Instance url: <" + BaseTest.getTestObject().getBaseUrl() + ">\n";
+        slackText += "Instance url: <" + baseUrl + ">\n";
         slackText += "Total Test count :" + totalTest + "\n";
 
         if (passTest > 0) {

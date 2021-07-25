@@ -94,7 +94,7 @@
 
 
 
-    <test verbose="2" name="com.mcmp.tests.LoginTest" enabled="false">
+    <test verbose="2" name="com.mcmp.tests.LoginTest" enabled="true">
         <parameter name="recoveryClasses" value="com.mcmp.tests.recovery.LoginTestRecoverySteps"/>
         <classes>
             <class name="com.mcmp.tests.LoginTest"/>
@@ -102,7 +102,7 @@
     </test>
 
 
-    <test verbose="2" name="com.mcmp.tests.orderIntegration.vra.e2e.e2eCentOS77CompositeVRA82" enabled="true">
+    <test verbose="2" name="com.mcmp.tests.orderIntegration.vra.e2e.e2eCentOS77CompositeVRA82" enabled="false">
         <parameter name="recoveryClasses" value="com.mcmp.tests.recovery.GeneralRecoverySteps"/>
         <classes>
             <class name="com.mcmp.tests.orderIntegration.vra.e2e.e2eCentOS77CompositeVRA82"/>

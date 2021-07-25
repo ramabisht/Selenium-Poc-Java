@@ -72,7 +72,6 @@ public abstract class BaseTestSelenium extends BaseTest {
      * @param screenshotModeForIteration {@link ScreenshotModeForIteration}
      * @param baseUrl                    Base URL of the application
      * @param testContext                testNg {@link ITestContext}
-     * @param harType                    {@link HarType}
      */
     @BeforeTest
     @Parameters({
@@ -81,8 +80,7 @@ public abstract class BaseTestSelenium extends BaseTest {
             "screenshotType",
             "screenshotMode",
             "screenshotModeForIteration",
-            "baseUrl",
-            "harCollectionType"
+            "baseUrl"
     })
     public void autouiInternalSetWebTestParameters(
             DriverManagerType browser,
@@ -91,8 +89,7 @@ public abstract class BaseTestSelenium extends BaseTest {
             String screenshotMode,
             ScreenshotModeForIteration screenshotModeForIteration,
             String baseUrl,
-            ITestContext testContext,
-            String harType) {
+            ITestContext testContext) {
         if (baseUrl.trim().isEmpty())
             throw new SetupFailedFatalException("Please provide baseUrl Parameter, baseUrl, is empty");
 
@@ -104,7 +101,6 @@ public abstract class BaseTestSelenium extends BaseTest {
         testObject.setScreenshotModes(screenshotMode);
         testObject.setScreenshotModeForIteration(screenshotModeForIteration);
         testObject.setBaseUrl(baseUrl);
-        testObject.setHarType(harType);
     }
 
     /**

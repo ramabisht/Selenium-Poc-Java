@@ -92,7 +92,9 @@ public class ExecutionLogManager {
                         AspectJUtils.getArguments(point)), methodType);
 
         try {
-            if (!BaseTest.getTestObject().getHarType().equals(HarType.NOT_ENABLED))
+            if (BaseTest.getTestObject().getHarType() != null
+                    && BaseTest.getTestObject().getDriverManager().getBrowserMobProxy() != null
+                    && !BaseTest.getTestObject().getHarType().equals(HarType.NOT_ENABLED))
                 ReportingTools.startHarCapture();
         } catch (Exception ex) {
             _logger.error("Har capturing enablement failed reason " + ex);
@@ -118,7 +120,9 @@ public class ExecutionLogManager {
                         AspectJUtils.getArguments(point)), methodType, TestStatus.PASS, duration, null);
 
         try {
-            if (!BaseTest.getTestObject().getHarType().equals(HarType.NOT_ENABLED))
+            if (BaseTest.getTestObject().getHarType() != null
+                    && BaseTest.getTestObject().getDriverManager().getBrowserMobProxy() != null
+                    && !BaseTest.getTestObject().getHarType().equals(HarType.NOT_ENABLED))
                 ReportingTools.dumpCurrentHarLogs();
         } catch (Exception ex) {
             _logger.error("Har capturing dump failed reason " + ex);
@@ -156,16 +160,15 @@ public class ExecutionLogManager {
                         AspectJUtils.getArguments(point)), methodType, TestStatus.FAIL, duration, e);
 
         try {
-            if (BaseTest.getTestObject().getHarType().equals(HarType.ON_FAILURE) ||
+            if (BaseTest.getTestObject().getHarType() != null
+                    && BaseTest.getTestObject().getDriverManager().getBrowserMobProxy() != null
+                    && BaseTest.getTestObject().getHarType().equals(HarType.ON_FAILURE) ||
                     !BaseTest.getTestObject().getHarType().equals(HarType.NOT_ENABLED)) {
                 ReportingTools.endHarCollection();
             }
         } catch (Exception ex) {
             _logger.error("Har capturing dump and stop failed reason " + ex);
         }
- /*
-        ReportingTools.captureSeleniumLogs("TEXT");
-         */
 
         if (methodType.equals(MethodType.TEST) && !BaseTest.getTestObject().getRepeatMode().equals(RepeatMode.OFF))
             return;
@@ -219,9 +222,6 @@ public class ExecutionLogManager {
 
         LauncherClientManager.getManager().logStart(
                 String.format("Iteration %s", IterationManager.getManager().getIteration()), MethodType.ITERATION);
-
-        //if (!BaseTest.getTestObject().getHarType().equals(HarType.NOT_ENABLED))
-        //   ReportingTools.startHarCapture();
     }
 
     /**
@@ -271,9 +271,6 @@ public class ExecutionLogManager {
                 String.format("Iteration %s", IterationManager.getManager().getIteration()), MethodType.ITERATION,
                 TestStatus.FAIL, duration, e);
 
-        // if (BaseTest.getTestObject().getHarType().equals(HarType.ON_FAILURE)) {
-        //    ReportingTools.endHarCollection();
-        // }
     }
 
     /**

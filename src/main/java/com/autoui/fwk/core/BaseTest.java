@@ -3,6 +3,7 @@ package com.autoui.fwk.core;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.autoui.fwk.enums.HarType;
 import com.autoui.fwk.enums.RepeatMode;
 import com.autoui.fwk.enums.RetryMode;
 import com.autoui.fwk.launcher.LauncherClientManager;
@@ -84,10 +85,12 @@ public abstract class BaseTest {
      * services which can update test run result to a custom dashboard. These
      * parameters are set for the whole Test suite
      *
-     * @param launcherClients Comma seperated list of fully qualified launcher
-     *                        client class names
-     * @param runName         Run Name in the logger application
-     * @param batchNumber     Batch number in the logger application
+     * @param launcherClients   Comma separated list of fully qualified launcher
+     *                          client class names
+     * @param runName           Run Name in the logger application
+     * @param batchNumber       Batch number in the logger application
+     * @param slackWebHookUrl   SlackWebHook Url
+     * @param harCollectionType {@link HarType}
      */
     @BeforeSuite
     @Parameters({
@@ -95,17 +98,24 @@ public abstract class BaseTest {
             "runName",
             "batchNumber",
             "slackWebHookUrl",
+            "harCollectionType"
     })
     public void autouiInternalSetLauncherClients(
             String launcherClients,
             String runName,
             String batchNumber,
-            String slackWebHookUrl) {
+            String slackWebHookUrl,
+            String harCollectionType) {
         LauncherClientManager.getManager().generateLauncherClientMasterMap(launcherClients);
         if (slackWebHookUrl != null)
             BaseTest.getTestObject().setSlackWebHookUrl(slackWebHookUrl);
         else
             BaseTest.getTestObject().setSlackWebHookUrl("");
+
+        if(harCollectionType != null)
+            BaseTest.getTestObject().setHarType(harCollectionType);
+        else
+            BaseTest.getTestObject().setHarType(HarType.getDefault().toString());
     }
 
     /**

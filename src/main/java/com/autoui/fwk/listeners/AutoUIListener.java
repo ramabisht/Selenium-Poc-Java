@@ -238,7 +238,7 @@ public class AutoUIListener extends TestListenerAdapter
             testResult.put("Pass", passedTest);
             testResult.put("Fail", failedTest);
             testResult.put("Skip", skippedTest);
-            String slackBody = Slack.getSlackText(testResult);
+            String slackBody = Slack.getSlackText(testResult, BaseTest.getTestObject().getBaseUrl());
             HashMap<String, String> slackBodyMap = new HashMap<>();
             slackBodyMap.put("text", slackBody);
             Slack.postRequestToSlack(BaseTest.getTestObject().getSlackWebHookUrl(), slackBodyMap);
