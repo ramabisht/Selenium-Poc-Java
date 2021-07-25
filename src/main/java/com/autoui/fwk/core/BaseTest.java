@@ -107,6 +107,7 @@ public abstract class BaseTest {
             String slackWebHookUrl,
             String harCollectionType) {
         LauncherClientManager.getManager().generateLauncherClientMasterMap(launcherClients);
+
         if (slackWebHookUrl != null)
             BaseTest.getTestObject().setSlackWebHookUrl(slackWebHookUrl);
         else

@@ -399,19 +399,28 @@ public class ReportingTools {
     /*------------------------ Har Actions ----------------------------------------*/
 
     public static void startHarCapture() {
-        BaseTest.getTestObject().getDriverManager().getBrowserMobProxy().newHar(String.format("Har_%s_for_%s",
-                IterationManager.getManager().getIteration(), MethodType.TEST.name()));
+        try {
+            _logger.info("Enabling har for iteration " + IterationManager.getManager().getIteration());
+            _logger.info("TestNames " + MethodType.TEST.name());
+            BaseTest.getTestObject().getDriverManager().getBrowserMobProxy().newHar(String.format("Har_%s_for_%s",
+                    IterationManager.getManager().getIteration(), MethodType.TEST.name()));
+        }catch(Exception ex){
+            _logger.error("Failed to start the har capture enablement " + ex);
+        }
     }
 
     public static void dumpCurrentHarLogs() {
         try {
             _logger.info("Dumping Collecting Har......");
             int iteration = IterationManager.getManager().getIteration();
+            _logger.info("Iterations " + iteration);
             Har gethar = BaseTest.getTestObject().getDriverManager().getBrowserMobProxy().getHar();
             String harDirectory = String.format("screenshots%sitr_%s_%s", File.separator,
                     BaseTest.getTestObject().getTestName(), iteration);
+            _logger.info("Directory " + harDirectory);
             String harDirectoryPath = String.format("%s%s%s", System.getProperty("autoui.reportdir"),
                     File.separator, harDirectory);
+            _logger.info("Path " + harDirectoryPath);
             String fileName = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
             String harFileName = String.format("Har_%s.har", fileName);
             String harFile = String.format("%s%s%s", harDirectoryPath, File.separator, harFileName);
@@ -428,11 +437,14 @@ public class ReportingTools {
         try {
             _logger.info("Ending and Collecting Har......");
             int iteration = IterationManager.getManager().getIteration();
+            _logger.info("Iterations " + iteration);
             Har gethar = BaseTest.getTestObject().getDriverManager().getBrowserMobProxy().getHar();
             String harDirectory = String.format("screenshots%sitr_%s_%s", File.separator,
                     BaseTest.getTestObject().getTestName(), iteration);
+            _logger.info("Directory " + harDirectory);
             String harDirectoryPath = String.format("%s%s%s", System.getProperty("autoui.reportdir"),
                     File.separator, harDirectory);
+            _logger.info("Path " + harDirectoryPath);
             String fileName = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
             String harFileName = String.format("Har_%s.har", fileName);
             String harFile = String.format("%s%s%s", harDirectoryPath, File.separator, harFileName);
