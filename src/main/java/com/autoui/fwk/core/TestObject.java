@@ -498,8 +498,8 @@ public class TestObject {
      */
     public void setHarType(String harType) {
         try {
-            _logger.info(String.format("HarType set to %s", harType));
-            if (harType.isEmpty()) {
+            //_logger.info(String.format("HarType set to %s", harType));
+            if (harType == null || harType == "") {
                 this.harType = HarType.getDefault();
             } else {
                 this.harType = HarType.valueOf(harType);

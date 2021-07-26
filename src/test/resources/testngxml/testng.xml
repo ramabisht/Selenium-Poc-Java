@@ -22,7 +22,7 @@
     <parameter name="retryMode" value="ON"/>
 
     <!--Timeout for any element to load-->
-    <parameter name="timeoutInSeconds" value="50"/>
+    <parameter name="timeoutInSeconds" value="30"/>
 
     <!--Provide slowdown between any actions performed on UI-->
     <parameter name="slowdownDurationInSeconds" value="0"/>
@@ -31,10 +31,10 @@
     <parameter name="repeatMode" value="INVOCATION_COUNT"/>
 
     <!--To provide max duration for a test to run -->
-    <parameter name="testDurationInSeconds" value="300000"/>
+    <parameter name="testDurationInSeconds" value="3000"/>
 
     <!-- Works in tandem with Repeat mode we can provide number of iteration a test can repeat -->
-    <parameter name="invocationCount" value="1"/>
+    <parameter name="invocationCount" value="0"/>
 
     <!-- Works in tandem with Repeat mode we can provide delay between each iterations-->
     <parameter name="delayBetweenIterationInSeconds" value="1"/>

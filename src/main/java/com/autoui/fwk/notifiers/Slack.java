@@ -1,7 +1,6 @@
 package com.autoui.fwk.notifiers;
 
 
-import com.autoui.fwk.core.BaseTest;
 import com.autoui.fwk.reporting.Logger;
 import com.autoui.fwk.rest.Client;
 import org.testng.ITestResult;
@@ -14,12 +13,6 @@ import java.util.Map;
 public class Slack {
 
     private static final Logger _logger = Logger.getLogger(Slack.class);
-
-    public static void postRequestToSlack(String webHookUrl, String body) {
-        Client client = new Client();
-        _logger.info("Posting slack message to url :" + webHookUrl + ", content :" + body);
-        client.validatePostResponseCode(client.postRequestByUrlAndHeadersAndBodyContent(webHookUrl, client.getDefaultHeader(), body));
-    }
 
     public static void postRequestToSlack(String webHookUrl, HashMap<String, String> body) {
         Client client = new Client();
@@ -44,38 +37,42 @@ public class Slack {
 
         for (Map.Entry<String, Object> eachData : testData.entrySet()) {
             _logger.info("Status :" + eachData.getKey());
-            for (Object testResult : (ArrayList) eachData.getValue()) {
-                HashMap<String, Object> resultMap = (HashMap) testResult;
-                for (Map.Entry<String, Object> eachTestData : resultMap.entrySet()) {
-                    _logger.info("Test Name :" + eachTestData.getKey());
-                    ITestResult result = (ITestResult) eachTestData.getValue();
-                    if (eachData.getKey().equals("Fail")) {
-                        failedTests.add(result.getTestContext().getName() + "." + result.getName());
-                    } else if (eachData.getKey().equals("Skip")) {
-                        skippedTests.add(result.getTestContext().getName() + "." + result.getName());
-                    }
+            try {
+                for (Object testResult : (ArrayList) eachData.getValue()) {
+                    HashMap<String, Object> resultMap = (HashMap) testResult;
+                    for (Map.Entry<String, Object> eachTestData : resultMap.entrySet()) {
+                        _logger.info("Test Name :" + eachTestData.getKey());
+                        ITestResult result = (ITestResult) eachTestData.getValue();
+                        if (eachData.getKey().equals("Fail")) {
+                            failedTests.add(result.getTestContext().getName() + "." + result.getName());
+                        } else if (eachData.getKey().equals("Skip")) {
+                            skippedTests.add(result.getTestContext().getName() + "." + result.getName());
+                        }
 
-                    outputDirectory = result.getTestContext().getOutputDirectory();
-                    suiteName = result.getTestContext().getSuite().getName();
+                        outputDirectory = result.getTestContext().getOutputDirectory();
+                        suiteName = result.getTestContext().getSuite().getName();
 
 
-                    _logger.info("Failed Test Name:" + result.getName() + "Name " + result.getTestName()
+                    /*_logger.info("Failed Test Name:" + result.getName() + "Name " + result.getTestName()
                             + "Name " + result.getTestContext().getName() + ", Status " + result.getStatus()
                             + ", Start Time: " + result.getStartMillis() + ", End time " + result.getEndMillis()
                             + ", " + result.getHost() + ", " + result.getInstanceName() + ", " + result.getAttributeNames().toString()
                             + ", " + result.getTestContext().getHost() +
                             ", " + result.getTestContext().getOutputDirectory() + ", "
                             + result.getTestContext().getStartDate().toString() + ", "
-                             + result.getTestContext().getEndDate().toString());
+                             + result.getTestContext().getEndDate().toString());*/
 
+                    }
                 }
+            } catch (Exception ex) {
+                _logger.info("Skipping key :" + eachData.getKey());
             }
         }
 
 
         String slackText = "* Result for Suite :" + suiteName + "* \n";
 
-        slackText += "Instance url: <" + "" + ">\n";
+        slackText += "Instance url: " + testData.get("Url") + "\n";
         slackText += "Total Test count :" + totalTest + "\n";
 
         if (passTest > 0) {

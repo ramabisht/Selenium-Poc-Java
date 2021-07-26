@@ -343,6 +343,7 @@ public class Driver {
     public void startDriver(DriverManagerType driverManagerType) {
         try {
             DesiredCapabilities capabilities = new DesiredCapabilities();
+            _logger.info("Start driver getHarType status :" +BaseTest.getTestObject().getHarType() );
             if (BaseTest.getTestObject().getHarType() != null &&
                     !BaseTest.getTestObject().getHarType().equals(HarType.NOT_ENABLED)) {
                 try {

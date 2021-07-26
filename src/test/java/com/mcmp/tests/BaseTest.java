@@ -17,6 +17,7 @@ public abstract class BaseTest extends BaseTestSelenium {
         startBrowser();
         getActiveDriver().get(getTestObject().getBaseUrl());
         WebUtils.handleCertificateError(getActiveDriver());
+        startHarCollection();
     }
 
 

@@ -8,6 +8,7 @@ import com.autoui.fwk.enums.RepeatMode;
 import com.autoui.fwk.enums.RetryMode;
 import com.autoui.fwk.launcher.LauncherClientManager;
 import com.autoui.fwk.recovery.RecoveryManager;
+import com.autoui.fwk.reporting.ReportingTools;
 import com.autoui.fwk.utils.ThreadUtils;
 import org.testng.ITestContext;
 import org.testng.annotations.BeforeClass;
@@ -69,6 +70,23 @@ public abstract class BaseTest {
         BaseTest.getTestObject().addTestParameter(key, value);
     }
 
+
+    /**
+     * Add test parameter. If the parameter with key already exists, the value is
+     * overwritten
+     */
+    protected void startHarCollection() {
+        try {
+            if (BaseTest.getTestObject().getHarType() != null
+                    && !BaseTest.getTestObject().getHarType().equals(HarType.NOT_ENABLED)) {
+                ReportingTools.startHarCapture();
+                _logger.info("Har capturing started...");
+            }
+        } catch (Exception ex) {
+            _logger.error("Har capturing enablement failed onStart() reason " + ex);
+        }
+    }
+
     /**
      * Append test parameter. this method will get the test parameter with the given
      * key and append the provided value as comma seperated String
@@ -113,7 +131,7 @@ public abstract class BaseTest {
         else
             BaseTest.getTestObject().setSlackWebHookUrl("");
 
-        if(harCollectionType != null)
+        if (harCollectionType != null)
             BaseTest.getTestObject().setHarType(harCollectionType);
         else
             BaseTest.getTestObject().setHarType(HarType.getDefault().toString());
@@ -154,6 +172,7 @@ public abstract class BaseTest {
             "slowdownDurationInSeconds",
             "retryMode",
             "recoveryClasses",
+            "harCollectionType"
     })
     public void autouiInternalSetParameters(
             RepeatMode repeatMode,
@@ -164,7 +183,8 @@ public abstract class BaseTest {
             long slowdownDurationInSeconds,
             RetryMode retryMode,
             String recoveryClasses,
-            ITestContext testContext) {
+            ITestContext testContext,
+            String harCollectionType) {
         System.setProperty("org.uncommons.reportng.escape-output", "false");
         TestObject testObject = BaseTest.getTestObject();
         testObject.setTestContext(testContext);
@@ -176,5 +196,10 @@ public abstract class BaseTest {
         testObject.setSlowdownDurationInSeconds(slowdownDurationInSeconds);
         testObject.setRetryMode(retryMode);
         testObject.setRecoveryManager(new RecoveryManager(recoveryClasses));
+
+        if (harCollectionType != null)
+            testObject.setHarType(harCollectionType);
+        else
+            testObject.setHarType(HarType.getDefault().toString());
     }
 }

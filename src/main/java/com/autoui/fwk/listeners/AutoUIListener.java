@@ -49,11 +49,20 @@ public class AutoUIListener extends TestListenerAdapter
         LauncherClientManager.getManager().enableClient();
         LauncherClientManager.getManager().startTest(testContext);
 
+        /*
+        _logger.info("Har value non-default onStart()" + BaseTest.getTestObject().getHarType());
+        _logger.info("Base value non-default onStart()" + BaseTest.getTestObject().getBaseUrl());
+        _logger.info("Slack value non-default onStart()" + BaseTest.getTestObject().getSlackWebHookUrl());
+        */
+
+
         try {
+            //_logger.info("Har value " + BaseTest.getTestObject().getHarType());
             if (BaseTest.getTestObject().getHarType() != null
-                 && !BaseTest.getTestObject().getHarType().equals(HarType.NOT_ENABLED))
+                    && !BaseTest.getTestObject().getHarType().equals(HarType.NOT_ENABLED)) {
                 ReportingTools.startHarCapture();
-                _logger.error("Har capturing started...");
+                _logger.info("Har capturing started...");
+            }
         } catch (Exception ex) {
             _logger.error("Har capturing enablement failed onStart() reason " + ex);
         }
@@ -122,6 +131,11 @@ public class AutoUIListener extends TestListenerAdapter
         setDefaultParameters(parameters, "harCollectionType", HarType.getDefault().name());
         setDefaultParameters(parameters, "slackWebHookUrl", "");
 
+        /*
+        _logger.info("Har value onStart()" + BaseTest.getTestObject().getHarType());
+        _logger.info("Base value onStart()" + BaseTest.getTestObject().getBaseUrl());
+        _logger.info("Slack value onStart()" + BaseTest.getTestObject().getSlackWebHookUrl());
+        */
         _logger.info("Setup default framework parameters completed");
         suite.getXmlSuite().setParameters(parameters);
     }
@@ -181,30 +195,33 @@ public class AutoUIListener extends TestListenerAdapter
         ExecutionLogManager.logIterationDetails();
         ReportingTools.wipeScreenshotEntryInReports();
         LauncherClientManager.getManager().stopTest();
-        if (BaseTest.getTestObject().getSlackWebHookUrl() != null &&
-                !BaseTest.getTestObject().getSlackWebHookUrl().trim().equals("")) {
-            for (ITestResult result : testContext.getPassedTests().getAllResults()) {
-                passedTest.add(new HashMap<String, Object>() {{
-                    put(result.getTestContext().getName(), result);
-                }});
-            }
-
-            for (ITestResult result : testContext.getFailedTests().getAllResults()) {
-                failedTest.add(new HashMap<String, Object>() {{
-                    put(result.getTestContext().getName(), result);
-                }});
-            }
-
-            for (ITestResult result : testContext.getSkippedTests().getAllResults()) {
-                skippedTest.add(new HashMap<String, Object>() {{
-                    put(result.getTestContext().getName(), result);
-                }});
-            }
+        for (ITestResult result : testContext.getPassedTests().getAllResults()) {
+            passedTest.add(new HashMap<String, Object>() {{
+                put(result.getTestContext().getName(), result);
+            }});
         }
+
+        for (ITestResult result : testContext.getFailedTests().getAllResults()) {
+            failedTest.add(new HashMap<String, Object>() {{
+                put(result.getTestContext().getName(), result);
+            }});
+        }
+
+        for (ITestResult result : testContext.getSkippedTests().getAllResults()) {
+            skippedTest.add(new HashMap<String, Object>() {{
+                put(result.getTestContext().getName(), result);
+            }});
+        }
+        /*
+        testResult.put("Url onFinish()", BaseTest.getTestObject().getBaseUrl());
+        _logger.info("Har value onFinish()" + BaseTest.getTestObject().getHarType());
+        _logger.info("Base value onFinish()" + BaseTest.getTestObject().getBaseUrl());
+        _logger.info("Slack value onFinish()" + BaseTest.getTestObject().getSlackWebHookUrl());
+        */
 
         try {
             if (BaseTest.getTestObject().getHarType() != null
-                && !BaseTest.getTestObject().getHarType().equals(HarType.NOT_ENABLED)) {
+                    && !BaseTest.getTestObject().getHarType().equals(HarType.NOT_ENABLED)) {
                 ReportingTools.dumpCurrentHarLogs();
             }
         } catch (Exception ex) {
@@ -245,6 +262,12 @@ public class AutoUIListener extends TestListenerAdapter
     @Override
     public void onExecutionStart() {
         FileUtils.cleanTempDirectory();
+        /*
+        _logger.info("Har value onExecutionStart()" + BaseTest.getTestObject().getHarType());
+        _logger.info("Base value onExecutionStart()" + BaseTest.getTestObject().getBaseUrl());
+        _logger.info("Slack value onExecutionStart()" + BaseTest.getTestObject().getSlackWebHookUrl());
+
+         */
     }
 
     /**
@@ -257,17 +280,21 @@ public class AutoUIListener extends TestListenerAdapter
             testResult.put("Pass", passedTest);
             testResult.put("Fail", failedTest);
             testResult.put("Skip", skippedTest);
-           // _logger.info("Test Url " + BaseTest.getTestObject().getBaseUrl());
-           // String slackBody = Slack.getSlackText(testResult, BaseTest.getTestObject().getBaseUrl());
             String slackBody = Slack.getSlackText(testResult);
             HashMap<String, String> slackBodyMap = new HashMap<>();
             slackBodyMap.put("text", slackBody);
             Slack.postRequestToSlack(BaseTest.getTestObject().getSlackWebHookUrl(), slackBodyMap);
         }
+        /*
+        _logger.info("Har value onExecutionFinish()" + BaseTest.getTestObject().getHarType());
+        _logger.info("Har value onExecutionFinish()" + BaseTest.getTestObject().getHarType());
+        _logger.info("Base value onExecutionFinish()" + BaseTest.getTestObject().getBaseUrl());
+        _logger.info("Slack value onExecutionFinish()" + BaseTest.getTestObject().getSlackWebHookUrl());
 
+         */
         try {
             if (BaseTest.getTestObject().getHarType() != null
-                && !BaseTest.getTestObject().getHarType().equals(HarType.NOT_ENABLED)) {
+                    && !BaseTest.getTestObject().getHarType().equals(HarType.NOT_ENABLED)) {
                 ReportingTools.dumpCurrentHarLogs();
             }
         } catch (Exception ex) {
